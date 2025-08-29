@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#fee140;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Card gradient -->
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.9);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.7);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Browser window gradient -->
+    <linearGradient id="browserGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D3748;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A202C;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Accent gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGradient)"/>
+  
+  <!-- Geometric shapes for visual interest -->
+  <circle cx="650" cy="80" r="60" fill="rgba(255,255,255,0.1)"/>
+  <polygon points="50,350 120,300 190,350 190,400 50,400" fill="rgba(255,255,255,0.05)"/>
+  <rect x="700" y="300" width="80" height="80" rx="8" fill="rgba(255,255,255,0.08)"/>
+  
+  <!-- Main content card -->
+  <rect x="100" y="80" width="600" height="290" rx="16" fill="url(#cardGradient)" filter="drop-shadow(0 10px 25px rgba(0,0,0,0.15))"/>
+  
+  <!-- Browser window mockup -->
+  <rect x="140" y="120" width="520" height="200" rx="8" fill="url(#browserGradient)"/>
+  
+  <!-- Browser controls -->
+  <circle cx="160" cy="140" r="6" fill="#FF5F56"/>
+  <circle cx="180" cy="140" r="6" fill="#FFBD2E"/>
+  <circle cx="200" cy="140" r="6" fill="#27CA3F"/>
+  
+  <!-- URL bar -->
+  <rect x="230" y="130" width="200" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+  <text x="240" y="143" font-family="Monaco, monospace" font-size="10" fill="#9CA3AF">localhost:3000/reddit-post-hider.svg</text>
+  
+  <!-- Content area in browser -->
+  <rect x="150" y="160" width="500" height="150" rx="4" fill="rgba(255,255,255,0.95)"/>
+  
+  <!-- Icon representation based on type -->
+  <!-- Browser extension UI -->
+  <rect x="180" y="180" width="400" height="110" rx="6" fill="#1A202C"/>
+  
+  <!-- Simulated Reddit posts being filtered -->
+  <g opacity="0.7">
+    <rect x="200" y="200" width="350" height="20" rx="4" fill="#2D3748"/>
+    <rect x="210" y="205" width="100" height="10" rx="2" fill="#4A5568"/>
+    <line x1="530" y1="205" x2="530" y2="215" stroke="#E53E3E" stroke-width="2"/>
+    <line x1="525" y1="210" x2="535" y2="210" stroke="#E53E3E" stroke-width="2"/>
+  </g>
+  
+  <g opacity="0.4">
+    <rect x="200" y="230" width="350" height="20" rx="4" fill="#2D3748"/>
+    <rect x="210" y="235" width="150" height="10" rx="2" fill="#4A5568"/>
+    <line x1="530" y1="235" x2="530" y2="245" stroke="#E53E3E" stroke-width="2"/>
+    <line x1="525" y1="240" x2="535" y2="240" stroke="#E53E3E" stroke-width="2"/>
+  </g>
+  
+  <rect x="200" y="260" width="350" height="20" rx="4" fill="#4A5568"/>
+  <rect x="210" y="265" width="200" height="10" rx="2" fill="#68D391"/>
+  <circle cx="530" cy="270" r="8" fill="#38A169"/>
+  <text x="530" y="274" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">✓</text>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="white" text-anchor="middle">Reddit Post Hider</text>
+  
+  <!-- Category badge -->
+  <rect x="320" y="390" width="160" height="30" rx="15" fill="rgba(255,255,255,0.2)"/>
+  <text x="400" y="410" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="white" text-anchor="middle">Browser Extension</text>
+  
+  <!-- Accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#accentGradient)"/>
+  
+</svg>

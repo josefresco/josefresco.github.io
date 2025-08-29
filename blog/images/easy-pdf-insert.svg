@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f5576c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Card gradient -->
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.9);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.7);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Browser window gradient -->
+    <linearGradient id="browserGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D3748;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A202C;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Accent gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGradient)"/>
+  
+  <!-- Geometric shapes for visual interest -->
+  <circle cx="650" cy="80" r="60" fill="rgba(255,255,255,0.1)"/>
+  <polygon points="50,350 120,300 190,350 190,400 50,400" fill="rgba(255,255,255,0.05)"/>
+  <rect x="700" y="300" width="80" height="80" rx="8" fill="rgba(255,255,255,0.08)"/>
+  
+  <!-- Main content card -->
+  <rect x="100" y="80" width="600" height="290" rx="16" fill="url(#cardGradient)" filter="drop-shadow(0 10px 25px rgba(0,0,0,0.15))"/>
+  
+  <!-- Browser window mockup -->
+  <rect x="140" y="120" width="520" height="200" rx="8" fill="url(#browserGradient)"/>
+  
+  <!-- Browser controls -->
+  <circle cx="160" cy="140" r="6" fill="#FF5F56"/>
+  <circle cx="180" cy="140" r="6" fill="#FFBD2E"/>
+  <circle cx="200" cy="140" r="6" fill="#27CA3F"/>
+  
+  <!-- URL bar -->
+  <rect x="230" y="130" width="200" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+  <text x="240" y="143" font-family="Monaco, monospace" font-size="10" fill="#9CA3AF">localhost:3000/easy-pdf-insert.svg</text>
+  
+  <!-- Content area in browser -->
+  <rect x="150" y="160" width="500" height="150" rx="4" fill="rgba(255,255,255,0.95)"/>
+  
+  <!-- Icon representation based on type -->
+  <!-- WordPress elements -->
+  <rect x="180" y="190" width="300" height="80" rx="4" fill="#F7FAFC"/>
+  <rect x="190" y="200" width="280" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="190" y="220" width="200" height="8" rx="4" fill="#CBD5E0"/>
+  <rect x="190" y="235" width="150" height="8" rx="4" fill="#CBD5E0"/>
+  
+  <!-- PDF icon -->
+  <rect x="420" y="200" width="40" height="50" rx="4" fill="#E53E3E"/>
+  <text x="440" y="230" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">PDF</text>
+  
+  <circle cx="500" cy="225" r="15" fill="url(#accentGradient)"/>
+  <text x="500" y="230" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">+</text>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="white" text-anchor="middle">Easy PDF Insert</text>
+  
+  <!-- Category badge -->
+  <rect x="320" y="390" width="160" height="30" rx="15" fill="rgba(255,255,255,0.2)"/>
+  <text x="400" y="410" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="white" text-anchor="middle">WordPress</text>
+  
+  <!-- Accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#accentGradient)"/>
+  
+</svg>
