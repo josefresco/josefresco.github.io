@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://josefresco.com/sitemap.xml
+
+# Allow crawling of all blog content
+Allow: /blog/
+Allow: /blog/*
+
+# Standard restrictions
+Disallow: /admin/
+Disallow: /.htaccess
+Disallow: /error/

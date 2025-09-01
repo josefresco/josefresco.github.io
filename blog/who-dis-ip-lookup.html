@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick IP Lookups with Browser Extensions - Jose Fresco</title>
+    <meta name="description" content="Streamlining network security workflows with a simple right-click IP lookup extension, and the importance of maintaining vigilance in security practices">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Quick IP Lookups with Browser Extensions</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">August 2025</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <img src="images/who-dis-ip-lookup.png" alt="Who Dis IP Lookup security tool interface showing IP analysis" class="blog-hero-image">
+                </div>
+
+                <div class="blog-post-content">
+                    <p>In cybersecurity and network administration, speed matters. When you encounter an unfamiliar IP address in logs, emails, or web content, every second spent switching between tabs and copying addresses is time that could be spent analyzing threats. The <strong>Who Dis? IP Lookup Extension</strong> eliminates this friction entirely.</p>
+
+                    <h2>The Workflow Problem</h2>
+                    <p>The traditional IP lookup process is surprisingly tedious:</p>
+                    <ol>
+                        <li>Spot an IP address on a webpage</li>
+                        <li>Select and copy the IP</li>
+                        <li>Open a new tab</li>
+                        <li>Navigate to an IP lookup service</li>
+                        <li>Paste the IP and search</li>
+                        <li>Wait for results</li>
+                    </ol>
+
+                    <p>For security professionals who might investigate dozens of IPs daily, this process becomes a significant productivity drain.</p>
+
+                    <h2>The Right-Click Solution</h2>
+                    <p>Who Dis? simplifies this entire workflow to a single right-click. When you encounter an IP address on any webpage, simply right-click on it and select "Look up IP address" from the context menu. The extension automatically detects both IPv4 and IPv6 addresses and opens the lookup results in a new tab.</p>
+
+                    <blockquote>
+                        <p>"The best security tools are the ones that get out of your way and let you focus on the analysis, not the process."</p>
+                    </blockquote>
+
+                    <h2>Security-First Design</h2>
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ What Works Well</h3>
+                            <ul>
+                                <li><strong>Look up IPs easier</strong> - Streamlined workflow saves time and reduces context switching</li>
+                                <li><strong>Preventing complacency</strong> - Quick lookups encourage regular IP verification instead of ignoring unknown addresses</li>
+                                <li><strong>IPv4 & IPv6 support</strong> - Handles both address formats seamlessly</li>
+                                <li><strong>Zero data collection</strong> - Extension processes everything locally</li>
+                                <li><strong>Security focused</strong> - Minimal permissions and transparent operation</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Limitations</h3>
+                            <ul>
+                                <li><strong>Relies on third party website</strong> - Dependent on external IP lookup service availability</li>
+                                <li><strong>Specific URL format dependency</strong> - Changes to the lookup service could break functionality</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>Technical Implementation</h2>
+                    <p>Built using Chrome's Manifest V3 specification, the extension uses the <code>contextMenus</code> API to add the lookup option when right-clicking on selected text. The extension validates the selected text against IP address patterns before showing the context menu option, ensuring it only appears when relevant.</p>
+
+                    <p>The privacy-conscious design means no IP addresses are logged or transmitted through the extension itself—all lookups go directly to the third-party service.</p>
+
+                    <h2>Beyond Basic Lookups</h2>
+                    <p>While the current version focuses on simplicity, future enhancements could include:</p>
+                    <ul>
+                        <li>Multiple lookup service options</li>
+                        <li>Cached results for recently queried IPs</li>
+                        <li>Integration with threat intelligence feeds</li>
+                        <li>Bulk IP analysis capabilities</li>
+                    </ul>
+
+                    <h2>The Bigger Picture</h2>
+                    <p>Who Dis? represents a philosophy of security tooling: <strong>reduce friction to increase security practice adoption</strong>. When security tasks are easy and fast, people are more likely to perform them regularly. By eliminating the small barriers to IP investigation, we encourage a more security-conscious browsing and analysis workflow.</p>
+
+                    <p>The extension works perfectly for network administrators, security professionals, and anyone who regularly encounters IP addresses in their digital work and wants to maintain awareness of their network environment.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/who-dis" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Security Tools & Extensions</h2>
+                <p class="cta-description">
+                    Need custom security tools or network utilities? I can build browser extensions and 
+                    web applications that streamline your cybersecurity workflows.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Security Tool Development&body=Hi Jose,%0D%0A%0D%0AI saw your IP lookup extension and need help with security tool development.%0D%0A%0D%0AWhat I need:%0D%0A- [Your security tool requirements]%0D%0A%0D%0ALet's discuss how you can help.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Let's Build It
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

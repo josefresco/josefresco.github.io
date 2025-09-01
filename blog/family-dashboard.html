@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Shared Family Dashboard - Jose Fresco</title>
+    <meta name="description" content="Building a centralized hub for family scheduling and weather information, and the challenges of integrating multiple data sources reliably">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Creating a Shared Family Dashboard</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Family Tech</span>
+                        <span class="blog-date">August 2025</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <img src="images/family-dashboard.png" alt="Family Dashboard interface showing calendar, weather, and task widgets" class="blog-hero-image">
+                </div>
+
+                <div class="blog-post-content">
+                    <p>Every family has that moment of chaos: "What time is soccer practice?" "Is it going to rain?" "Wait, didn't we have dinner plans tonight?" The <strong>Family Dashboard</strong> was born from these everyday coordination challenges, designed to be the central nervous system of family logistics.</p>
+
+                    <h2>The Problem</h2>
+                    <p>Modern families juggle multiple calendars, weather apps, and scheduling systems. Information is scattered across phones, computers, and sticky notes on the refrigerator. I wanted to create a single, always-visible display that could serve as the family's information hub.</p>
+
+                    <h2>Building the Solution</h2>
+                    <p>The dashboard pulls from multiple data sources to create a comprehensive family view:</p>
+                    <ul>
+                        <li><strong>CalDAV integration</strong> for syncing multiple family calendars</li>
+                        <li><strong>Weather API</strong> for local forecasts and conditions</li>
+                        <li><strong>Tide data</strong> for coastal families who surf, fish, or beach-walk</li>
+                        <li><strong>Sunrise/sunset times</strong> for planning outdoor activities</li>
+                    </ul>
+
+                    <p>The interface is optimized for older iPads, making it perfect for mounting on the kitchen wall or leaving on the counter. The large, readable text and intuitive layout ensure that everyone from kids to grandparents can quickly understand what's happening.</p>
+
+                    <blockquote>
+                        <p>"The goal was creating a room-readable display that answers the most common family questions at a glance."</p>
+                    </blockquote>
+
+                    <h2>Real-World Implementation</h2>
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ What Works</h3>
+                            <ul>
+                                <li><strong>Family coordination</strong> - Everyone can see what's on the schedule for the day and plan accordingly</li>
+                                <li><strong>Multi-calendar sync</strong> - Aggregates events from different family members' calendars</li>
+                                <li><strong>Weather narratives</strong> - Contextual weather information helps with planning</li>
+                                <li><strong>Mobile responsive</strong> - Works on phones for on-the-go reference</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Ongoing Challenges</h3>
+                            <ul>
+                                <li><strong>Weather forecasting can be wonky</strong> - API inconsistencies affect reliability</li>
+                                <li><strong>All day events sometimes appear on wrong day</strong> - Timezone handling complexities</li>
+                                <li><strong>Weather UI isn't great</strong> - Visual design could be more intuitive</li>
+                                <li><strong>Weather jokes are terrible</strong> - Attempted humor mostly falls flat</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>Technical Lessons</h2>
+                    <p>Working with multiple external APIs taught me valuable lessons about error handling and graceful degradation. When the weather service is down, the calendar should still work. When CalDAV sync fails, the weather information remains available.</p>
+
+                    <p>The biggest challenge was <strong>timezone handling</strong> for all-day events. Different calendar systems interpret "all day" differently, leading to events appearing on the wrong date depending on the user's timezone settings.</p>
+
+                    <h2>Future Improvements</h2>
+                    <p>Version 4.0 is in development with plans to:</p>
+                    <ul>
+                        <li>Redesign the weather interface with better visual hierarchy</li>
+                        <li>Implement smarter timezone handling for all-day events</li>
+                        <li>Add customizable family member colors and icons</li>
+                        <li>Include traffic data for commuting family members</li>
+                    </ul>
+
+                    <p>The dashboard continues to evolve based on real family usage patterns, proving that the best software solutions come from solving your own problems first.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready for Your Custom Dashboard?</h2>
+                <p class="cta-description">
+                    Family coordination got you down? I can build custom dashboards that integrate with your existing 
+                    tools and make life easier for everyone.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Custom Dashboard Inquiry&body=Hi Jose,%0D%0A%0D%0AI saw your family dashboard project and would like something similar for my needs.%0D%0A%0D%0AWhat I need:%0D%0A- [Your requirements]%0D%0A%0D%0ALet's chat about making this happen.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Build My Dashboard
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

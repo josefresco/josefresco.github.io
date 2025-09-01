@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Card gradient -->
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.9);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.7);stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Browser window gradient -->
+    <linearGradient id="browserGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D3748;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A202C;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Accent gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#4F46E5;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGradient)"/>
+  
+  <!-- Geometric shapes for visual interest -->
+  <circle cx="650" cy="80" r="60" fill="rgba(255,255,255,0.1)"/>
+  <polygon points="50,350 120,300 190,350 190,400 50,400" fill="rgba(255,255,255,0.05)"/>
+  <rect x="700" y="300" width="80" height="80" rx="8" fill="rgba(255,255,255,0.08)"/>
+  
+  <!-- Main content card -->
+  <rect x="100" y="80" width="600" height="290" rx="16" fill="url(#cardGradient)" filter="drop-shadow(0 10px 25px rgba(0,0,0,0.15))"/>
+  
+  <!-- Browser window mockup -->
+  <rect x="140" y="120" width="520" height="200" rx="8" fill="url(#browserGradient)"/>
+  
+  <!-- Browser controls -->
+  <circle cx="160" cy="140" r="6" fill="#FF5F56"/>
+  <circle cx="180" cy="140" r="6" fill="#FFBD2E"/>
+  <circle cx="200" cy="140" r="6" fill="#27CA3F"/>
+  
+  <!-- URL bar -->
+  <rect x="230" y="130" width="200" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+  <text x="240" y="143" font-family="Monaco, monospace" font-size="10" fill="#9CA3AF">localhost:3000/breeze-time-tracker.svg</text>
+  
+  <!-- Content area in browser -->
+  <rect x="150" y="160" width="500" height="150" rx="4" fill="rgba(255,255,255,0.95)"/>
+  
+  <!-- Icon representation based on type -->
+  <!-- Dashboard elements -->
+  <rect x="170" y="180" width="120" height="60" rx="4" fill="#E2E8F0"/>
+  <rect x="175" y="185" width="110" height="8" rx="4" fill="url(#accentGradient)"/>
+  <rect x="175" y="200" width="80" height="6" rx="3" fill="#CBD5E0"/>
+  <rect x="175" y="215" width="90" height="6" rx="3" fill="#CBD5E0"/>
+  
+  <rect x="310" y="180" width="120" height="60" rx="4" fill="#E2E8F0"/>
+  <circle cx="370" cy="210" r="20" stroke="url(#accentGradient)" stroke-width="3" fill="none"/>
+  <circle cx="370" cy="210" r="12" fill="url(#accentGradient)"/>
+  
+  <rect x="450" y="180" width="180" height="100" rx="4" fill="#E2E8F0"/>
+  <polyline points="460,260 480,240 500,250 520,230 540,245 560,225 580,235 600,220 620,230" stroke="url(#accentGradient)" stroke-width="2" fill="none"/>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="white" text-anchor="middle">Breeze Time Tracker</text>
+  
+  <!-- Category badge -->
+  <rect x="320" y="390" width="160" height="30" rx="15" fill="rgba(255,255,255,0.2)"/>
+  <text x="400" y="410" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="white" text-anchor="middle">Time Tracking</text>
+  
+  <!-- Accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#accentGradient)"/>
+  
+</svg>

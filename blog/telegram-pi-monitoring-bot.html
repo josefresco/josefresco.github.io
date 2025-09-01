@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Telegram Bot for Raspberry Pi Monitoring and Remote Control</title>
+    <meta name="description" content="How I built a comprehensive Telegram bot to monitor my Raspberry Pi's vitals and execute remote commands using Python and Claude Code for rapid development">
+    <meta name="keywords" content="Telegram Bot, Raspberry Pi, Monitoring, Python, Remote Control, Claude Code, IoT, System Administration">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <div class="container">
+                <header class="blog-post-header">
+                    <h1>Building a Telegram Bot for Raspberry Pi Monitoring and Remote Control</h1>
+                    <div class="blog-post-meta">
+                        <time datetime="2025-09-01">September 1, 2025</time>
+                        <span class="reading-time">8 min read</span>
+                    </div>
+                    <p class="blog-post-excerpt">
+                        How I leveraged Claude Code to rapidly develop a comprehensive Telegram bot that monitors my Raspberry Pi's vital stats and allows remote system administration through push notifications and natural language commands.
+                    </p>
+                </header>
+
+                <div class="blog-post-content">
+                    <h2>The Problem: Monitoring Without Constant SSH</h2>
+                    
+                    <p>Running a Raspberry Pi as a home server comes with its own set of challenges. You need to monitor system health, check if services are running, and sometimes perform maintenance tasks—all while being away from your computer. Traditional monitoring solutions often require complex setups, web dashboards, or constant SSH access.</p>
+
+                    <p>I wanted something simpler: <strong>push notifications when things go wrong and the ability to run commands remotely through a familiar interface</strong>. That's where Telegram bots come in.</p>
+
+                    <h2>Why Telegram Bots are Perfect for IoT Monitoring</h2>
+
+                    <p>Telegram bots offer several advantages over traditional monitoring solutions:</p>
+
+                    <ul>
+                        <li><strong>Push Notifications:</strong> Instant alerts delivered to your phone anywhere in the world</li>
+                        <li><strong>Simple API:</strong> Just HTTP POST requests - no complex frameworks needed</li>
+                        <li><strong>Bidirectional Communication:</strong> Not just monitoring, but remote control too</li>
+                        <li><strong>Mobile-First:</strong> Perfect for quick checks and emergency responses</li>
+                        <li><strong>Free:</strong> No monthly fees for monitoring services</li>
+                        <li><strong>Secure:</strong> Built-in user authentication and encrypted messages</li>
+                    </ul>
+
+                    <h2>The Solution: A Comprehensive Monitoring Bot</h2>
+
+                    <p>I built a two-part system that runs via cron jobs every minute:</p>
+
+                    <ol>
+                        <li><strong>Monitoring Script</strong> - Continuously checks system vitals and sends alerts</li>
+                        <li><strong>Command Handler</strong> - Processes incoming Telegram messages for remote control</li>
+                    </ol>
+
+                    <h3>System Monitoring Features</h3>
+
+                    <p>The monitoring script tracks multiple system metrics with intelligent alerting:</p>
+
+                    <ul>
+                        <li><strong>Temperature:</strong> Critical for Pi longevity (alerts above 75°C)</li>
+                        <li><strong>CPU Usage:</strong> Detects runaway processes (alerts above 90%)</li>
+                        <li><strong>Memory Usage:</strong> Prevents out-of-memory crashes (alerts above 85%)</li>
+                        <li><strong>Disk Space:</strong> Early warning for full drives (alerts below 10% free)</li>
+                        <li><strong>Web Services:</strong> Monitors nginx and application health</li>
+                        <li><strong>Security Events:</strong> Tracks failed SSH attempts and suspicious activity</li>
+                    </ul>
+
+                    <p>Each metric uses <em>sustained monitoring</em> - issues must persist for 5+ minutes before triggering alerts, preventing spam from temporary spikes.</p>
+
+                    <h3>Remote Control Commands</h3>
+
+                    <p>The command handler transforms your phone into a remote terminal with over 20 built-in commands:</p>
+
+                    <div class="code-block">
+                        <h4>System Information</h4>
+                        <pre><code>/status    - Complete system health report
+/temp      - Current CPU temperature  
+/uptime    - System uptime and load
+/processes - Top running processes
+/disk      - Disk usage breakdown
+/network   - Network interface status</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <h4>Service Management</h4>
+                        <pre><code>/nginx status   - Check web server status
+/nginx restart  - Restart nginx service
+/pidash restart - Restart custom dashboard
+/update         - System package updates</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <h4>Claude Code Integration</h4>
+                        <pre><code>/claude read [file]      - View file contents
+/claude grep [term]      - Search within files
+/claude search [term]    - Find files containing term
+/claude analyze [file]   - Get file statistics</code></pre>
+                    </div>
+
+                    <h2>Claude Code: The Development Game-Changer</h2>
+
+                    <p>The most impressive part of this project was <strong>how quickly I built it using Claude Code</strong>. What typically would take days of research, coding, and debugging was completed in a few hours:</p>
+
+                    <h3>Rapid Prototyping</h3>
+                    <p>Claude Code helped me quickly iterate on the monitoring logic. I could describe what I wanted ("monitor temperature with sustained alerts") and get working Python code instantly, then refine it through natural language.</p>
+
+                    <h3>Error Handling and Edge Cases</h3>
+                    <p>Security and reliability were crucial. Claude Code helped implement proper error handling, input validation, and security measures like path restrictions for file operations.</p>
+
+                    <h3>Integration and Testing</h3>
+                    <p>Setting up cron jobs, testing the Telegram API integration, and handling different message formats was streamlined with Claude Code's understanding of system administration tasks.</p>
+
+                    <h2>Technical Implementation</h2>
+
+                    <h3>Core Architecture</h3>
+
+                    <div class="code-block">
+                        <pre><code># Monitoring Script (runs every minute via cron)
+*/1 * * * * python3 /home/josefresco/pi_monitor_comprehensive.py
+
+# Command Handler (runs every minute via cron)  
+*/1 * * * * python3 /home/josefresco/telegram_command_handler.py</code></pre>
+                    </div>
+
+                    <h3>Key Libraries Used</h3>
+                    <ul>
+                        <li><strong>requests</strong> - Telegram API communication</li>
+                        <li><strong>psutil</strong> - System statistics and process monitoring</li>
+                        <li><strong>subprocess</strong> - System command execution</li>
+                        <li><strong>json</strong> - State persistence and API responses</li>
+                    </ul>
+
+                    <h3>Security Considerations</h3>
+
+                    <p>Security was paramount since this provides remote access to my system:</p>
+
+                    <ul>
+                        <li><strong>User Authentication:</strong> Only authorized Telegram user IDs can execute commands</li>
+                        <li><strong>Path Restrictions:</strong> File operations limited to safe directories</li>
+                        <li><strong>Command Timeouts:</strong> 30-second limits prevent hanging processes</li>
+                        <li><strong>Restart Confirmation:</strong> Dangerous operations require explicit confirmation</li>
+                        <li><strong>Log Monitoring:</strong> Track unauthorized access attempts</li>
+                    </ul>
+
+                    <h2>Real-World Usage Examples</h2>
+
+                    <h3>Emergency Response</h3>
+                    <p>Last week, I received a temperature alert at 2 AM showing my Pi was running at 82°C. Using the bot, I quickly checked running processes, identified a runaway Python script, and killed it - all from my phone while half-asleep.</p>
+
+                    <h3>Proactive Maintenance</h3>
+                    <p>Daily status checks help me spot trends before they become problems. I noticed memory usage slowly climbing over several days and discovered a memory leak in a custom service.</p>
+
+                    <h3>Remote Troubleshooting</h3>
+                    <p>When someone reported my website was down, I used the bot to restart nginx and check error logs, resolving the issue in under two minutes without needing to boot up my computer.</p>
+
+                    <h2>Lessons Learned</h2>
+
+                    <h3>The Power of Push Notifications</h3>
+                    <p>Having alerts delivered instantly to my phone has prevented several major issues. The sustained monitoring approach eliminates false alarms while ensuring real problems get attention quickly.</p>
+
+                    <h3>Mobile-First Administration</h3>
+                    <p>80% of my Pi administration now happens through Telegram. The convenience of handling issues immediately, regardless of location, has been transformative.</p>
+
+                    <h3>Claude Code as a Force Multiplier</h3>
+                    <p>This project showcased how AI-assisted development can accelerate everything from initial prototyping to production deployment. Complex system administration tasks became approachable and implementable in hours rather than days.</p>
+
+                    <h2>Future Enhancements</h2>
+
+                    <p>I'm planning several improvements:</p>
+
+                    <ul>
+                        <li><strong>Historical Data:</strong> Store metrics in a lightweight database for trend analysis</li>
+                        <li><strong>Automated Responses:</strong> Self-healing for common issues like high memory usage</li>
+                        <li><strong>Multi-Pi Support:</strong> Extend to monitor multiple Raspberry Pis</li>
+                        <li><strong>Integration Hub:</strong> Connect with other home automation systems</li>
+                        <li><strong>Custom Dashboards:</strong> Generate visual reports on demand</li>
+                    </ul>
+
+                    <h2>Getting Started</h2>
+
+                    <p>If you want to build something similar:</p>
+
+                    <ol>
+                        <li>Create a Telegram bot using @BotFather</li>
+                        <li>Get your chat ID by messaging the bot and checking the API</li>
+                        <li>Install required Python packages: <code>pip install requests psutil</code></li>
+                        <li>Start with basic temperature monitoring and expand from there</li>
+                        <li>Use Claude Code to accelerate development and handle edge cases</li>
+                    </ol>
+
+                    <h2>Conclusion</h2>
+
+                    <p>This Telegram bot has transformed how I manage my Raspberry Pi infrastructure. The combination of proactive monitoring, instant notifications, and remote control capabilities provides peace of mind and rapid response capabilities.</p>
+
+                    <p>More importantly, this project demonstrated the incredible productivity gains possible with AI-assisted development. Claude Code didn't just help me write code - it helped me think through architecture decisions, implement security measures, and handle edge cases I might have missed.</p>
+
+                    <p>For anyone running IoT devices or home servers, I highly recommend exploring Telegram bots as a monitoring and control solution. They're simple to implement, powerful in practice, and with tools like Claude Code, surprisingly quick to build.</p>
+
+                    <div class="blog-post-footer">
+                        <p>Have questions about this implementation or want to share your own monitoring solutions? Feel free to <a href="mailto:josefresco@gmail.com">reach out</a> - I'd love to hear about your projects!</p>
+                    </div>
+                </div>
+
+                <nav class="blog-post-nav">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <div class="blog-post-share">
+                        <span>Share this post:</span>
+                        <a href="https://twitter.com/intent/tweet?text=Building%20a%20Telegram%20Bot%20for%20Raspberry%20Pi%20Monitoring%20and%20Remote%20Control&url=https://josefresco.com/blog/telegram-pi-monitoring-bot" target="_blank" rel="noopener">Twitter</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://josefresco.com/blog/telegram-pi-monitoring-bot" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </nav>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/#about">About</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/#contact">Contact</a>
+                </div>
+                <p class="footer-copyright">&copy; 2025 Jose Fresco. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

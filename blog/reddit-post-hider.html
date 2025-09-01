@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curating Your Reddit Feed with Smart Filtering - Jose Fresco</title>
+    <meta name="description" content="Building a browser extension to hide repetitive Reddit posts and block unwanted subreddits, plus the technical challenges of different post formats">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Curating Your Reddit Feed with Smart Filtering</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">August 2025</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <img src="images/reddit-post-hider.png" alt="Reddit Post Hider browser extension interface showing filtered posts" class="blog-hero-image">
+                </div>
+
+                <div class="blog-post-content">
+                    <p>Reddit's algorithm is designed to keep you scrolling, not necessarily to show you the most valuable content. The <strong>Reddit Post Hider</strong> puts control back in your hands, allowing you to curate a more intentional browsing experience by hiding repetitive posts and blocking entire subreddits that don't add value to your feed.</p>
+
+                    <h2>The Infinite Scroll Problem</h2>
+                    <p>Anyone who browses Reddit's popular feeds has experienced this frustration: the same posts appearing repeatedly, recycled content flooding the home page, and subreddits that consistently generate noise rather than signal. The default Reddit experience prioritizes engagement over user satisfaction.</p>
+
+                    <p>The problem is particularly acute for users who prefer browsing <strong>r/popular</strong> or <strong>r/all</strong> to discover new content, but find themselves seeing the same posts multiple times or being bombarded with content from subreddits that don't match their interests.</p>
+
+                    <blockquote>
+                        <p>"A good content filter should be invisible when it works and obvious when it doesn't."</p>
+                    </blockquote>
+
+                    <h2>Building a Seamless Solution</h2>
+                    <p>The extension implements several key features to improve Reddit browsing:</p>
+                    <ul>
+                        <li><strong>One-click post hiding</strong> - Click any post to hide it permanently</li>
+                        <li><strong>Subreddit blocking</strong> - Block entire subreddits from appearing in your feed</li>
+                        <li><strong>Persistent storage</strong> - Hidden posts stay hidden across browser sessions</li>
+                        <li><strong>Keyboard shortcuts</strong> - Ctrl+H to hide/unhide posts quickly</li>
+                        <li><strong>No account required</strong> - Works without Reddit login credentials</li>
+                    </ul>
+
+                    <h2>Technical Implementation Challenges</h2>
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ What Works Well</h3>
+                            <ul>
+                                <li><strong>Hide repetitive posts</strong> - Prevents seeing the same posts again and again during home/popular browsing</li>
+                                <li><strong>Easy subreddit blocking</strong> - Further prune the global feed to match interests</li>
+                                <li><strong>No Reddit account required</strong> - Works for logged-out browsing</li>
+                                <li><strong>One-click hiding</strong> - Immediate feedback and action</li>
+                                <li><strong>Persistent storage</strong> - Settings and hidden posts survive browser restarts</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Technical Limitations</h3>
+                            <ul>
+                                <li><strong>Doesn't work well on subreddits</strong> - DOM structure differences cause inconsistent behavior</li>
+                                <li><strong>Link format posts sometimes problematic</strong> - Different post types have varying HTML structures</li>
+                                <li><strong>Still flashes some hidden posts</strong> - Brief visibility before the extension can process and hide them</li>
+                                <li><strong>Keyboard shortcuts aren't really used</strong> - Users prefer clicking over keyboard combinations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>The Challenge of Reddit's Dynamic DOM</h2>
+                    <p>Reddit's web interface presents unique challenges for browser extensions. The site uses different HTML structures for different post types (text posts, link posts, image posts) and different layouts for various pages (home feed vs. individual subreddits).</p>
+
+                    <p>The extension works best on the main feeds where post structure is most consistent. Individual subreddits often have custom CSS and layouts that interfere with the extension's ability to identify and hide posts reliably.</p>
+
+                    <h2>User Experience Insights</h2>
+                    <p>Version 2.0 revealed interesting insights about user behavior:</p>
+                    <ul>
+                        <li><strong>Clicking is preferred over keyboard shortcuts</strong> - Despite implementing Ctrl+H shortcuts, most users prefer the visual clicking interaction</li>
+                        <li><strong>Flash prevention is critical</strong> - Even brief visibility of "hidden" posts breaks the illusion of a curated feed</li>
+                        <li><strong>Subreddit blocking is more valuable than individual post hiding</strong> - Users prefer broad filters over granular content curation</li>
+                    </ul>
+
+                    <h2>Technical Architecture</h2>
+                    <p>The extension uses Chrome's local storage to maintain lists of hidden posts and blocked subreddits. It employs mutation observers to detect new posts as they're loaded by Reddit's infinite scroll, applying filters in real-time.</p>
+
+                    <p>The challenge lies in balancing performance with completeness—processing every DOM change is expensive, but missing newly loaded posts breaks the user experience.</p>
+
+                    <h2>Future Improvements</h2>
+                    <p>Version 3.0 development focuses on:</p>
+                    <ul>
+                        <li><strong>Better subreddit compatibility</strong> - Improved detection for various page layouts</li>
+                        <li><strong>Reduced flash visibility</strong> - Faster initial hiding before posts become visible</li>
+                        <li><strong>Smart keyword filtering</strong> - Hide posts based on title content, not just subreddit</li>
+                        <li><strong>Export/import settings</strong> - Sync preferences across devices</li>
+                    </ul>
+
+                    <h2>The Philosophy of Intentional Browsing</h2>
+                    <p>Reddit Post Hider represents a larger movement toward <strong>intentional digital consumption</strong>. Rather than passively consuming whatever algorithm-driven feeds present, users can actively curate their information diet.</p>
+
+                    <p>The extension succeeds not by adding features, but by giving users control. In an attention economy designed to maximize engagement, tools that help users consume content more deliberately serve an important purpose.</p>
+
+                    <p>The project continues to evolve based on real user feedback, proving that the best browser extensions solve genuine daily frustrations rather than theoretical problems.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/reddit-post-hider" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Browser Extension?</h2>
+                <p class="cta-description">
+                    Have an idea for a browser extension that could improve your daily workflow? 
+                    I specialize in building Chrome and Firefox extensions that solve real problems.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Browser Extension Development&body=Hi Jose,%0D%0A%0D%0AI read about your Reddit Post Hider extension and have an idea for a browser extension.%0D%0A%0D%0AMy extension idea:%0D%0A- [Description of your extension idea]%0D%0A%0D%0ALet's discuss how to bring this to life.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Build My Extension
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

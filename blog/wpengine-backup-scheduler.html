@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated WordPress Backups Beyond Daily - Jose Fresco</title>
+    <meta name="description" content="Extending WP Engine's backup capabilities to support hourly intervals, and managing the complexity of setup and email notifications">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+    
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Automated WordPress Backups Beyond Daily</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">August 2025</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <img src="images/wpengine-backup-scheduler.png" alt="WP Engine Backup Scheduler automation interface" class="blog-hero-image">
+                </div>
+
+                <div class="blog-post-content">
+                    <p>WP Engine provides excellent hosting infrastructure, but their default backup schedule—once every 24 hours—doesn't always match the needs of high-frequency content sites or development environments where changes happen throughout the day. The <strong>WP Engine Backup Scheduler</strong> plugin bridges this gap by enabling hourly backups.</p>
+
+                    <h2>The Backup Frequency Problem</h2>
+                    <p>For many WordPress sites, daily backups provide adequate protection. But consider these scenarios:</p>
+                    <ul>
+                        <li><strong>E-commerce sites</strong> with frequent order and inventory updates</li>
+                        <li><strong>News sites</strong> publishing multiple articles per day</li>
+                        <li><strong>Development environments</strong> with constant code deployments</li>
+                        <li><strong>Community sites</strong> with active user-generated content</li>
+                    </ul>
+
+                    <p>In these cases, losing up to 24 hours of data isn't just inconvenient—it's potentially catastrophic for business operations.</p>
+
+                    <blockquote>
+                        <p>"The best backup strategy is the one that matches your actual risk tolerance, not just the default settings."</p>
+                    </blockquote>
+
+                    <h2>Technical Implementation</h2>
+                    <p>The plugin leverages WP Engine's native backup API to schedule backups at intervals from 1 to 23 hours. It integrates with WordPress's cron system for reliable scheduling and includes comprehensive error handling for API failures.</p>
+
+                    <p>Key features include:</p>
+                    <ul>
+                        <li><strong>Flexible scheduling</strong> from 1-23 hour intervals</li>
+                        <li><strong>WP-CLI integration</strong> for command-line management</li>
+                        <li><strong>REST API endpoints</strong> for programmatic control</li>
+                        <li><strong>Comprehensive debugging tools</strong> for troubleshooting</li>
+                        <li><strong>Guided setup process</strong> to minimize configuration errors</li>
+                    </ul>
+
+                    <h2>Real-World Challenges</h2>
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ Valuable Benefits</h3>
+                            <ul>
+                                <li><strong>More frequent backups</strong> - Reduces potential data loss from 24 hours to as little as 1 hour</li>
+                                <li><strong>Automated scheduling</strong> - Set it once and forget it, no manual intervention required</li>
+                                <li><strong>WP-CLI integration</strong> - Enables backup management from the command line</li>
+                                <li><strong>REST API</strong> - Allows integration with external monitoring systems</li>
+                                <li><strong>Debug tools</strong> - Comprehensive logging helps troubleshoot issues</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Implementation Challenges</h3>
+                            <ul>
+                                <li><strong>Setup can be finicky</strong> - API credentials and permissions require careful configuration</li>
+                                <li><strong>Email generated for every backup</strong> - Requires backend filtering to prevent inbox overflow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>The Email Notification Dilemma</h2>
+                    <p>One unexpected challenge was WP Engine's backup API behavior: it sends an email notification for every successful backup. While this is helpful for daily backups, hourly backups generate 24 emails per day, quickly overwhelming most inboxes.</p>
+
+                    <p>The solution requires backend email filtering or forwarding rules to manage the notification volume. Future versions of the plugin may include built-in notification management to handle this more gracefully.</p>
+
+                    <h2>Setup Complexity</h2>
+                    <p>The plugin's biggest hurdle is initial configuration. Users need to:</p>
+                    <ol>
+                        <li>Generate WP Engine API credentials</li>
+                        <li>Configure proper permissions</li>
+                        <li>Set up email filtering for notifications</li>
+                        <li>Test the backup schedule</li>
+                    </ol>
+
+                    <p>While the guided setup process helps, the interdependence of these steps means that a mistake in one area can cause the entire system to fail silently.</p>
+
+                    <h2>Lessons in Enterprise Plugin Development</h2>
+                    <p>Developing this plugin taught valuable lessons about enterprise WordPress development:</p>
+                    <ul>
+                        <li><strong>API reliability</strong> varies even with premium hosting providers</li>
+                        <li><strong>Error handling</strong> is more important than features</li>
+                        <li><strong>Documentation quality</strong> directly correlates with user success rates</li>
+                        <li><strong>Email management</strong> should be designed into API-heavy plugins from the start</li>
+                    </ul>
+
+                    <h2>Future Enhancements</h2>
+                    <p>Version 2.0 plans include:</p>
+                    <ul>
+                        <li>Smart email notification management</li>
+                        <li>Backup verification and integrity checking</li>
+                        <li>Integration with popular monitoring services</li>
+                        <li>Simplified setup wizard with automatic credential testing</li>
+                    </ul>
+
+                    <p>The WP Engine Backup Scheduler proves that even managed hosting solutions sometimes need custom extensions to meet specific business requirements. The key is building bridges between platforms thoughtfully and sustainably.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/wpengine-hourly-backup" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Automation & WordPress Solutions</h2>
+                <p class="cta-description">
+                    Tired of manual processes? I specialize in building automation tools and WordPress 
+                    solutions that save time and reduce errors.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Automation & WordPress Development&body=Hi Jose,%0D%0A%0D%0AI read about your backup scheduler plugin and need help with WordPress automation.%0D%0A%0D%0AMy automation needs:%0D%0A- [What you want to automate]%0D%0A%0D%0ALet's discuss how to streamline this.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Automate This
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
