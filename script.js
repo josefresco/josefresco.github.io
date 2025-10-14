@@ -418,18 +418,18 @@ class PersonalWebsite {
 
     // Parallax Effects
     setupParallaxEffects() {
-        const parallaxElements = document.querySelectorAll('.code-editor, .terminal, .stats-grid');
-        
+        const parallaxElements = document.querySelectorAll('.code-editor, .stats-grid');
+
         const updateParallax = () => {
             const scrolled = window.pageYOffset;
-            
+
             parallaxElements.forEach((element, index) => {
                 const rate = scrolled * (0.1 + index * 0.05);
                 const yPos = -(rate / 2);
                 element.style.transform = `translate3d(0, ${yPos}px, 0)`;
             });
         };
-        
+
         window.addEventListener('scroll', updateParallax, { passive: true });
     }
 
