@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Post Hider v3.0: Major Refactor for Reliability - Jose Fresco</title>
+    <meta name="description" content="Version 3.0 brings a complete refactor with dedicated hide buttons, improved post detection, performance optimizations, and better subreddit blocking">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Reddit Post Hider v3.0: Major Refactor for Reliability</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">November 2024</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <p>After several months of user feedback and identifying pain points in v2.0, I rebuilt <strong>Reddit Post Hider</strong> from the ground up. Version 3.0 represents a complete refactor focused on reliability, performance, and user experience.</p>
+
+                    <h2>What Changed and Why</h2>
+                    <p>Version 2.0 had a simple interaction model: click anywhere on a post to hide it. While elegant in concept, this created several problems:</p>
+                    <ul>
+                        <li><strong>Accidental clicks</strong> - Users often hid posts unintentionally while trying to interact with other elements</li>
+                        <li><strong>Unreliable post detection</strong> - Different post formats (text, images, videos) had varying HTML structures</li>
+                        <li><strong>Flash on load</strong> - Hidden posts would briefly appear before the extension could hide them</li>
+                        <li><strong>Performance issues</strong> - Processing every post immediately caused lag on large feeds</li>
+                    </ul>
+
+                    <blockquote>
+                        <p>"The best user interfaces feel predictable. If users can't anticipate what a click will do, they lose trust in the tool."</p>
+                    </blockquote>
+
+                    <h2>Key Improvements in v3.0</h2>
+
+                    <h3>1. Dedicated Hide Buttons</h3>
+                    <p>The biggest UX change: replacing click-anywhere functionality with explicit hide buttons in the corner of each post. This eliminates accidental hiding while making the action discoverable and intentional.</p>
+                    <ul>
+                        <li>Clear visual affordance with '×' button</li>
+                        <li>Appears in top-right corner of every post</li>
+                        <li>Changes to "UNHIDE POST" button on hidden posts</li>
+                        <li>Prevents misclicks on links or images</li>
+                    </ul>
+
+                    <h3>2. Bulletproof Post Detection</h3>
+                    <p>Reddit's HTML structure varies significantly between old Reddit, new Reddit, and different post types. Version 3.0 implements a prioritized selector strategy:</p>
+                    <pre><code>const selectors = [
+    'shreddit-post',                    // New Reddit (most reliable)
+    '[data-testid="post-container"]',   // New Reddit alternative
+    '.thing[data-fullname^="t3_"]',     // Old Reddit
+    'div[id^="t3_"]'                    // Old Reddit fallback
+];</code></pre>
+
+                    <p>Each selector is tried in order, ensuring posts are detected regardless of Reddit's layout. The extension also validates posts by checking for comment links - the most reliable indicator that an element is actually a post.</p>
+
+                    <h3>3. Performance Optimization with IntersectionObserver</h3>
+                    <p>Instead of processing every post immediately, v3.0 uses the <strong>IntersectionObserver API</strong> to process posts only when they're about to become visible:</p>
+                    <ul>
+                        <li>200px rootMargin - posts are processed slightly before they scroll into view</li>
+                        <li>WeakSet tracking prevents duplicate processing</li>
+                        <li>Debounced mutation observer (150ms) reduces unnecessary recalculations</li>
+                        <li>Significant performance improvement on r/all and r/popular</li>
+                    </ul>
+
+                    <h3>4. Intelligent Retry Logic</h3>
+                    <p>Reddit's single-page architecture means content often loads after initial page load. Version 3.0 implements strategic retry logic:</p>
+                    <pre><code>// Initial processing with retries
+setTimeout(() => this.processAllPosts(), 500);
+this.config.TIMEOUTS.RETRY_DELAYS.forEach(delay => {
+    setTimeout(() => this.processAllPosts(), delay);
+});</code></pre>
+                    <p>This ensures posts are caught even if they load asynchronously, eliminating the flash-on-load problem.</p>
+
+                    <h3>5. Enhanced Subreddit Blocking</h3>
+                    <p>Subreddit blocking now happens earlier in the processing pipeline and completely removes blocked posts from the DOM (display: none) rather than just fading them:</p>
+                    <ul>
+                        <li>Blocked posts are checked before individual post processing</li>
+                        <li>Completely hidden from view (not just faded)</li>
+                        <li>Better performance by skipping processing entirely</li>
+                        <li>Real-time updates when blocklist changes via storage listener</li>
+                    </ul>
+
+                    <h3>6. Better Page Navigation Detection</h3>
+                    <p>Reddit's SPA navigation doesn't trigger traditional page loads. Version 3.0 detects navigation by monitoring both:</p>
+                    <ul>
+                        <li><strong>popstate events</strong> - Browser back/forward navigation</li>
+                        <li><strong>Title element mutations</strong> - Reddit updates the title on navigation</li>
+                    </ul>
+                    <p>This ensures the extension reprocesses posts when you navigate between feeds without full page reloads.</p>
+
+                    <h2>Technical Architecture Deep Dive</h2>
+                    <p>The extension is now built around a single <code>RedditPostHider</code> class that encapsulates all functionality. Key architectural decisions:</p>
+
+                    <h3>State Management</h3>
+                    <ul>
+                        <li><strong>Map for hidden posts</strong> - Allows O(1) lookups and stores timestamps for cleanup</li>
+                        <li><strong>Set for blocked subreddits</strong> - Case-insensitive matching</li>
+                        <li><strong>WeakSet for processed posts</strong> - Memory-efficient tracking that doesn't prevent garbage collection</li>
+                    </ul>
+
+                    <h3>Configuration System</h3>
+                    <p>Centralized config object makes tuning performance characteristics easy:</p>
+                    <pre><code>this.config = {
+    TIMEOUTS: {
+        INITIAL_LOAD: 500,
+        RETRY_DELAYS: [1000, 2000],
+        MUTATION_DEBOUNCE: 150,
+        MESSAGE_DISPLAY: 2000
+    },
+    STORAGE: {
+        CLEANUP_DAYS: 7
+    },
+    VISUAL: {
+        HIDDEN_OPACITY: 0.08,
+        BUTTON_SIZE: 64
+    },
+    DEBUG: false
+};</code></pre>
+
+                    <h3>Cleanup and Memory Management</h3>
+                    <p>When navigating away from feed pages, the extension removes all buttons and clears state to prevent memory leaks. Hidden posts older than 7 days are automatically cleaned from storage.</p>
+
+                    <h2>User Feedback and Real-World Testing</h2>
+                    <p>Version 3.0 has been tested extensively across multiple Reddit browsing patterns:</p>
+                    <ul>
+                        <li><strong>r/popular and r/all</strong> - High-volume feeds with diverse content</li>
+                        <li><strong>Individual subreddits</strong> - Various custom layouts and styles</li>
+                        <li><strong>Old vs. New Reddit</strong> - Completely different DOM structures</li>
+                        <li><strong>Mobile responsive layout</strong> - Works on narrow viewports</li>
+                    </ul>
+
+                    <h2>What's Next</h2>
+                    <p>Future improvements being considered:</p>
+                    <ul>
+                        <li><strong>Keyword filtering</strong> - Hide posts based on title content, not just subreddit</li>
+                        <li><strong>Export/import settings</strong> - Sync blocklists and hidden posts across browsers</li>
+                        <li><strong>Statistics dashboard</strong> - See how many posts you've hidden over time</li>
+                        <li><strong>Custom CSS injection</strong> - Allow users to customize hidden post appearance</li>
+                    </ul>
+
+                    <h2>Lessons Learned</h2>
+                    <p>This refactor reinforced several important lessons about browser extension development:</p>
+                    <ol>
+                        <li><strong>Explicit is better than clever</strong> - Dedicated buttons beat click-anywhere elegance</li>
+                        <li><strong>Performance matters</strong> - IntersectionObserver is essential for feed-based interfaces</li>
+                        <li><strong>Plan for variability</strong> - Reddit's DOM varies wildly; multiple detection strategies are necessary</li>
+                        <li><strong>User feedback drives features</strong> - V3.0 addresses real pain points from actual usage</li>
+                    </ol>
+
+                    <h2>Try It Out</h2>
+                    <p>Reddit Post Hider v3.0 is available now on GitHub. The extension works on all Chromium-based browsers (Chrome, Edge, Brave, etc.) and requires no Reddit account to function.</p>
+
+                    <p>If you're tired of seeing the same recycled content or want to block subreddits from cluttering your feed, give it a try. The code is open source and contributions are welcome.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/reddit-post-hider" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Browser Extension Built?</h2>
+                <p class="cta-description">
+                    I specialize in building reliable, performant browser extensions that solve real problems.
+                    From content filtering to automation tools, let's build something useful together.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Browser Extension Development&body=Hi Jose,%0D%0A%0D%0AI read about your Reddit Post Hider v3.0 and have an idea for a browser extension.%0D%0A%0D%0AMy extension idea:%0D%0A- [Description of your extension idea]%0D%0A%0D%0ALet's discuss how to bring this to life.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start Your Project
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
