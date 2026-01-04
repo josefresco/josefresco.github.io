@@ -37,175 +37,67 @@ class PersonalWebsite {
         this.setupPerformanceOptimizations();
     }
 
-    // Neural Network Background Animation
+    // Neural Network Background Animation - DISABLED for performance
     setupNeuralNetwork() {
-        const neuralNodes = document.querySelector('.neural-nodes');
-        if (!neuralNodes) return;
-
-        // Create dynamic neural connections
-        this.createNeuralConnections(neuralNodes);
-        
-        // Add mouse interaction
-        this.setupMouseInteraction(neuralNodes);
+        // Disabled heavy animations for better performance on low-power devices
+        return;
     }
 
     createNeuralConnections(container) {
-        const connections = [];
-        const nodeCount = 15;
-        
-        for (let i = 0; i < nodeCount; i++) {
-            const node = document.createElement('div');
-            node.className = 'neural-node';
-            node.style.cssText = `
-                position: absolute;
-                width: 4px;
-                height: 4px;
-                background: var(--neural-primary);
-                border-radius: 50%;
-                left: ${Math.random() * 100}%;
-                top: ${Math.random() * 100}%;
-                opacity: ${Math.random() * 0.5 + 0.3};
-                animation: pulse ${2 + Math.random() * 3}s ease-in-out infinite;
-                animation-delay: ${Math.random() * 2}s;
-            `;
-            
-            container.appendChild(node);
-            connections.push(node);
-        }
-
-        // Animate connections between nodes
-        this.animateConnections(connections);
+        // Disabled for performance
+        return;
     }
 
     animateConnections(nodes) {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.2;
-        `;
-        
-        document.querySelector('.neural-bg').appendChild(svg);
-
-        setInterval(() => {
-            svg.innerHTML = '';
-            
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const node1 = nodes[i];
-                    const node2 = nodes[j];
-                    
-                    const rect1 = node1.getBoundingClientRect();
-                    const rect2 = node2.getBoundingClientRect();
-                    
-                    const distance = Math.sqrt(
-                        Math.pow(rect2.left - rect1.left, 2) + 
-                        Math.pow(rect2.top - rect1.top, 2)
-                    );
-                    
-                    if (distance < 200 && Math.random() > 0.7) {
-                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                        line.setAttribute('x1', rect1.left + rect1.width / 2);
-                        line.setAttribute('y1', rect1.top + rect1.height / 2);
-                        line.setAttribute('x2', rect2.left + rect2.width / 2);
-                        line.setAttribute('y2', rect2.top + rect2.height / 2);
-                        line.setAttribute('stroke', 'var(--neural-primary)');
-                        line.setAttribute('stroke-width', '1');
-                        line.setAttribute('opacity', '0.3');
-                        
-                        svg.appendChild(line);
-                    }
-                }
-            }
-        }, 3000);
+        // Disabled for performance
+        return;
     }
 
     setupMouseInteraction(container) {
-        let mouseX = 0;
-        let mouseY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Create ripple effect
-            if (Math.random() > 0.98) {
-                this.createRipple(mouseX, mouseY);
-            }
-        });
-
-        // Parallax effect for neural nodes
-        const nodes = container.querySelectorAll('.neural-node');
-        
-        document.addEventListener('mousemove', (e) => {
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const deltaX = (e.clientX - centerX) * 0.01;
-            const deltaY = (e.clientY - centerY) * 0.01;
-            
-            nodes.forEach((node, index) => {
-                const factor = (index + 1) * 0.1;
-                node.style.transform = `translate(${deltaX * factor}px, ${deltaY * factor}px)`;
-            });
-        });
+        // Disabled for performance
+        return;
     }
 
     createRipple(x, y) {
-        const ripple = document.createElement('div');
-        ripple.style.cssText = `
-            position: fixed;
-            left: ${x}px;
-            top: ${y}px;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, var(--neural-primary) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            animation: rippleExpand 1s ease-out forwards;
-            pointer-events: none;
-            z-index: 9999;
-        `;
-        
-        document.body.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 1000);
+        // Disabled for performance
+        return;
     }
 
-    // Scroll Effects
+    // Scroll Effects - Optimized for performance
     setupScrollEffects() {
+        // Disabled parallax effects for better performance
+        // Only keep essential header opacity change with throttling
+        let lastScroll = 0;
         let ticking = false;
-        
+
         const updateScrollEffects = () => {
             const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            
-            // Parallax background
-            const neuralBg = document.querySelector('.neural-bg');
-            if (neuralBg) {
-                neuralBg.style.transform = `translate3d(0, ${rate}px, 0)`;
+
+            // Only update if scroll changed significantly (more than 10px)
+            if (Math.abs(scrolled - lastScroll) < 10 && lastScroll !== 0) {
+                ticking = false;
+                return;
             }
-            
-            // Header background opacity
+
+            lastScroll = scrolled;
+
+            // Header background opacity only
             const header = document.querySelector('.header');
             if (header) {
                 const opacity = Math.min(scrolled / 100, 0.95);
                 header.style.background = `rgba(10, 11, 15, ${opacity})`;
             }
-            
+
             ticking = false;
         };
-        
+
         const requestScrollUpdate = () => {
             if (!ticking) {
                 requestAnimationFrame(updateScrollEffects);
                 ticking = true;
             }
         };
-        
+
         window.addEventListener('scroll', requestScrollUpdate, { passive: true });
     }
 
@@ -266,31 +158,15 @@ class PersonalWebsite {
         });
     }
 
-    // Typewriter Effect
+    // Typewriter Effect - DISABLED for performance
     setupTypewriterEffect() {
-        const codeLines = document.querySelectorAll('.code-line .code-text');
-        
-        codeLines.forEach((line, index) => {
-            const text = line.innerHTML;
-            line.innerHTML = '';
-            
-            setTimeout(() => {
-                this.typeText(line, text, 50);
-            }, index * 600);
-        });
+        // Disabled for performance - text displays immediately
+        return;
     }
 
     typeText(element, text, speed) {
-        let i = 0;
-        const timer = setInterval(() => {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-            } else {
-                clearInterval(timer);
-                element.classList.add('typing-complete');
-            }
-        }, speed);
+        // Disabled for performance
+        return;
     }
 
     // Terminal Animation
@@ -351,46 +227,11 @@ class PersonalWebsite {
         });
     }
 
-    // Project Card Effects
+    // Project Card Effects - DISABLED tilt effects for performance
     setupProjectCardEffects() {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        projectCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-8px) scale(1.02)';
-                
-                // Add glow effect
-                const glowElements = card.querySelectorAll('.project-icon, .project-version');
-                glowElements.forEach(el => {
-                    el.style.filter = 'drop-shadow(0 0 10px var(--neural-primary))';
-                });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-                
-                // Remove glow effect
-                const glowElements = card.querySelectorAll('.project-icon, .project-version');
-                glowElements.forEach(el => {
-                    el.style.filter = 'none';
-                });
-            });
-            
-            // Add tilt effect
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                card.style.transform = `translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-        });
+        // Disabled heavy mouse tracking and tilt effects
+        // Basic hover effects handled by CSS only
+        return;
     }
 
     // Intersection Observer for Animations
@@ -416,21 +257,10 @@ class PersonalWebsite {
         });
     }
 
-    // Parallax Effects
+    // Parallax Effects - DISABLED for performance
     setupParallaxEffects() {
-        const parallaxElements = document.querySelectorAll('.code-editor, .stats-grid');
-
-        const updateParallax = () => {
-            const scrolled = window.pageYOffset;
-
-            parallaxElements.forEach((element, index) => {
-                const rate = scrolled * (0.1 + index * 0.05);
-                const yPos = -(rate / 2);
-                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-            });
-        };
-
-        window.addEventListener('scroll', updateParallax, { passive: true });
+        // Disabled parallax effects for better performance on low-power devices
+        return;
     }
 
     // Performance Optimizations

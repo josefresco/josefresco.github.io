@@ -77,13 +77,13 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: 
+    background-image:
         radial-gradient(2px 2px at 20% 30%, var(--neural-primary), transparent),
         radial-gradient(2px 2px at 40% 70%, var(--neural-secondary), transparent),
         radial-gradient(1px 1px at 90% 40%, var(--neural-accent), transparent);
     background-size: 200px 200px;
-    animation: float 20s ease-in-out infinite;
     opacity: 0.3;
+    /* Animation disabled for performance */
 }
 
 @keyframes float {
@@ -1216,13 +1216,14 @@ section {
     display: flex;
     align-items: center;
     margin-bottom: 0.8rem;
-    animation: type 0.5s ease-in-out;
+    /* Animation disabled for performance */
 }
 
-.terminal-line:nth-child(1) { animation-delay: 0.5s; }
-.terminal-line:nth-child(2) { animation-delay: 1s; }
-.terminal-line:nth-child(3) { animation-delay: 1.5s; }
-.terminal-line:nth-child(4) { animation-delay: 2s; }
+/* Disabled for performance */
+/* .terminal-line:nth-child(1) { animation-delay: 0.5s; } */
+/* .terminal-line:nth-child(2) { animation-delay: 1s; } */
+/* .terminal-line:nth-child(3) { animation-delay: 1.5s; } */
+/* .terminal-line:nth-child(4) { animation-delay: 2s; } */
 
 @keyframes type {
     from {
@@ -1376,7 +1377,7 @@ section {
     }
 }
 
-/* Smooth entrance animations */
+/* Smooth entrance animations - DISABLED for performance */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1410,8 +1411,8 @@ section {
     }
 }
 
-/* Apply entrance animations on scroll */
-.hero-content {
+/* Apply entrance animations on scroll - DISABLED for performance */
+/* .hero-content {
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -1425,7 +1426,7 @@ section {
 
 .project-card:nth-child(1) { animation-delay: 0.1s; }
 .project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; } */
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
