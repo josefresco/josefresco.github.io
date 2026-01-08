@@ -13,7 +13,7 @@ This repository contains the source code for my personal website and blog, [jose
 ## Tech Stack
 
 *   **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
-*   **Deployment:** The site is deployed to a standard web server using the `website-sync.sh` script.
+*   **Deployment:** The site is deployed to a standard web server using the `website-sync.sh` script. See [DEPLOYMENT.md](DEPLOYMENT.md) for full deployment documentation.
 *   **Tooling:** Git
 
 ## Development
