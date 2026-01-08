@@ -1,2 +1,5 @@
 .claude-session-log
 .claude-state.json
+.claude/
+website-sync.log
+analytics/
