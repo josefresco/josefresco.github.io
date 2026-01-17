@@ -12,33 +12,33 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div class="neural-bg">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg" aria-hidden="true">
         <div class="neural-nodes"></div>
     </div>
-    
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <a href="/" style="text-decoration: none; color: inherit;">
-                    <span class="nav-logo">JF</span>
-                    <span class="nav-name">Jose Fresco</span>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="/#about" class="nav-link">About</a>
-                <a href="/#projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link active">Blog</a>
-                <a href="/#contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+
+    <header class="header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="/" class="nav-brand" aria-label="Jose Fresco - Home">
+                <span class="nav-logo" aria-hidden="true">JF</span>
+                <span class="nav-name">Jose Fresco</span>
+            </a>
+            <div class="nav-links" role="menubar">
+                <a href="/#about" class="nav-link" role="menuitem">About</a>
+                <a href="/#projects" class="nav-link" role="menuitem">Projects</a>
+                <a href="/blog" class="nav-link active" role="menuitem">Blog</a>
+                <a href="/#contact" class="nav-link" role="menuitem">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav" aria-label="Hire me - Send an email to discuss working together">Hire Me</a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <article class="blog-post">
+    <main id="main-content" role="main">
+        <article class="blog-post" aria-labelledby="post-title">
             <div class="container">
                 <header class="blog-post-header">
-                    <h1>Building a Telegram Bot for Raspberry Pi Monitoring and Remote Control</h1>
+                    <h1 id="post-title">Building a Telegram Bot for Raspberry Pi Monitoring and Remote Control</h1>
                     <div class="blog-post-meta">
                         <time datetime="2025-09-01">September 1, 2025</time>
                         <span class="reading-time">8 min read</span>
@@ -226,27 +226,27 @@
                     </div>
                 </div>
 
-                <nav class="blog-post-nav">
-                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                <nav class="blog-post-nav" aria-label="Blog post navigation">
+                    <a href="/blog" class="btn-secondary"><span aria-hidden="true">←</span> Back to Blog</a>
                     <div class="blog-post-share">
                         <span>Share this post:</span>
-                        <a href="https://twitter.com/intent/tweet?text=Building%20a%20Telegram%20Bot%20for%20Raspberry%20Pi%20Monitoring%20and%20Remote%20Control" target="_blank" rel="noopener">Twitter</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://twitter.com/intent/tweet?text=Building%20a%20Telegram%20Bot%20for%20Raspberry%20Pi%20Monitoring%20and%20Remote%20Control" target="_blank" rel="noopener" aria-label="Share on Twitter (opens in new tab)">Twitter</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/" target="_blank" rel="noopener" aria-label="Share on LinkedIn (opens in new tab)">LinkedIn</a>
                     </div>
                 </nav>
             </div>
         </article>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-links">
+                <nav class="footer-links" aria-label="Footer navigation">
                     <a href="/#about">About</a>
                     <a href="/#projects">Projects</a>
                     <a href="/blog">Blog</a>
                     <a href="/#contact">Contact</a>
-                </div>
+                </nav>
                 <p class="footer-copyright">&copy; 2025 Jose Fresco. All rights reserved.</p>
             </div>
         </div>

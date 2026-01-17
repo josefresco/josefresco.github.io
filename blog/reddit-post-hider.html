@@ -11,33 +11,33 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div class="neural-bg">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg" aria-hidden="true">
         <div class="neural-nodes"></div>
     </div>
-    
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <a href="/" style="text-decoration: none; color: inherit;">
-                    <span class="nav-logo">JF</span>
-                    <span class="nav-name">Jose Fresco</span>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="/#about" class="nav-link">About</a>
-                <a href="/#projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link">Blog</a>
-                <a href="/#contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+
+    <header class="header" role="banner">
+        <nav class="nav" aria-label="Main navigation">
+            <a href="/" class="nav-brand" aria-label="Jose Fresco - Home">
+                <span class="nav-logo" aria-hidden="true">JF</span>
+                <span class="nav-name">Jose Fresco</span>
+            </a>
+            <div class="nav-links" role="menubar">
+                <a href="/#about" class="nav-link" role="menuitem">About</a>
+                <a href="/#projects" class="nav-link" role="menuitem">Projects</a>
+                <a href="/blog" class="nav-link" role="menuitem">Blog</a>
+                <a href="/#contact" class="nav-link" role="menuitem">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav" aria-label="Hire me - Send an email to discuss working together">Hire Me</a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <section class="blog-post">
+    <main id="main-content" role="main">
+        <article class="blog-post" aria-labelledby="post-title">
             <div class="container">
                 <div class="blog-post-header">
-                    <h1 class="blog-post-title">Curating Your Reddit Feed with Smart Filtering</h1>
+                    <h1 id="post-title" class="blog-post-title">Curating Your Reddit Feed with Smart Filtering</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Browser Extension</span>
                         <span class="blog-date">August 2025</span>
@@ -128,18 +128,18 @@
                     <p>The project continues to evolve based on real user feedback, proving that the best browser extensions solve genuine daily frustrations rather than theoretical problems.</p>
                 </div>
 
-                <div class="blog-navigation">
-                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="https://github.com/josefresco/reddit-post-hider" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
-                </div>
+                <nav class="blog-navigation" aria-label="Blog post navigation">
+                    <a href="/blog" class="btn-secondary"><span aria-hidden="true">←</span> Back to Blog</a>
+                    <a href="https://github.com/josefresco/reddit-post-hider" target="_blank" rel="noopener" class="btn-primary" aria-label="View Reddit Post Hider project on GitHub (opens in new tab)">View Project <span aria-hidden="true">→</span></a>
+                </nav>
             </div>
-        </section>
+        </article>
     </main>
 
-    <section class="cta-section">
+    <section class="cta-section" aria-labelledby="post-cta-title">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Need a Browser Extension?</h2>
+                <h2 id="post-cta-title" class="cta-title">Need a Browser Extension?</h2>
                 <p class="cta-description">
                     Have an idea for a browser extension that could improve your daily workflow? 
                     I specialize in building Chrome and Firefox extensions that solve real problems.
@@ -154,13 +154,13 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Jose Fresco. Built with modern web technologies.</p>
-                <div class="footer-links">
-                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
-                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener" aria-label="Visit GitHub profile (opens in new tab)">GitHub</a>
+                </nav>
             </div>
         </div>
     </footer>
