@@ -4,7 +4,7 @@
 # Syncs website files from /var/www/html to GitHub, excluding Pi-hole admin
 # Created by Claude Code
 
-cd /home/josefresco/github/josefresco.github.io
+cd /home/josefresco/repos/agent-managed/josefresco.github.io
 
 echo "$(date): Starting website sync..."
 
