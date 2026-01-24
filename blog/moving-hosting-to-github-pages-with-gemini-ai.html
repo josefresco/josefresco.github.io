@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Hosting from Raspberry Pi to GitHub Pages with Gemini AI - Jose Fresco</title>
+    <meta name="description" content="How I moved my website hosting from a Raspberry Pi Model B to GitHub Pages using Gemini Chat AI instead of Claude Code">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest Regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Moving Hosting from Raspberry Pi to GitHub Pages with Gemini AI</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Hosting</span>
+                        <span class="blog-date">January 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: #f5f5f5; padding: 1rem; margin: 1rem 0; border-left: 4px solid #333;">
+                        <strong>TL;DR:</strong> I migrated my website hosting from a Raspberry Pi Model B to GitHub Pages after my AI experiments polluted the Pi. Instead of using Claude Code, I turned to Gemini Chat AI for guidance, which helped me set up a fresh installation with the assistance of both ChatGPT and Gemini.
+                    </div>
+
+                    <p>After years of hosting my website on a Raspberry Pi Model B, I decided it was time for a change. The little Pi had served me well, but recent experiments with AI agents had unfortunately "polluted" the system, requiring a complete fresh start. Rather than reinstall everything on the Pi, I decided to migrate to GitHub Pages for better reliability and performance.</p>
+
+                    <h2>The Raspberry Pi Era</h2>
+                    <p>My Raspberry Pi Model B had been faithfully serving my website for quite some time. It was a fun learning experience setting up a home server, configuring nginx, and managing SSL certificates. However, the hardware limitations became apparent over time, especially when I started experimenting with AI tools and agents that consumed significant resources.</p>
+
+                    <p>The Pi served as both my development playground and production server, which wasn't ideal from a security standpoint. When I began creating AI agents, I inadvertently introduced conflicting dependencies and configurations that made the system unstable.</p>
+
+                    <h2>AI Experiment Gone Wrong</h2>
+                    <p>In my enthusiasm to create an AI agent, I installed numerous packages and frameworks that weren't compatible with my existing setup. The experiment polluted my Raspberry Pi's environment with conflicting Python versions, CUDA libraries, and other dependencies that broke my web server configuration.</p>
+
+                    <p>Instead of spending hours troubleshooting and cleaning up the mess, I realized it was the perfect opportunity to reconsider my hosting approach. The Pi Model B, while nostalgic, was showing its age and limitations for running modern web applications alongside AI workloads.</p>
+
+                    <h2>Choosing GitHub Pages</h2>
+                    <p>GitHub Pages offered several advantages over self-hosting:</p>
+                    <ul>
+                        <li><strong>Reliability</strong> - No need to worry about power outages or internet connectivity issues at home</li>
+                        <li><strong>Performance</strong> - CDN distribution for faster global access</li>
+                        <li><strong>Scalability</strong> - Can handle traffic spikes without resource constraints</li>
+                        <li><strong>Maintenance</strong> - No server maintenance, updates, or security patches to manage</li>
+                        <li><strong>Cost</strong> - Free for public repositories</li>
+                    </ul>
+
+                    <h2>Getting Help from Gemini AI</h2>
+                    <p>Instead of relying on Claude Code as I had in the past, I decided to try Google's Gemini Chat AI for this migration. I was curious to compare different AI assistants and see how Gemini would handle the technical challenges of migrating to GitHub Pages.</p>
+
+                    <p>Gemini proved to be quite helpful in guiding me through the process. It provided clear instructions for converting my existing static site to be compatible with Jekyll (the default static site generator for GitHub Pages) and helped me troubleshoot various configuration issues.</p>
+
+                    <h2>Collaborative AI Approach</h2>
+                    <p>Interestingly, I found that using both ChatGPT and Gemini together yielded the best results. When one AI struggled with a particular aspect of the migration, the other often provided a different perspective or solution. This collaborative approach to using AI tools was more effective than relying on a single assistant.</p>
+
+                    <p>ChatGPT excelled at explaining the broader architectural concepts and providing context about GitHub Actions workflows, while Gemini was particularly good at specific code snippets and configuration details.</p>
+
+                    <h2>The Migration Process</h2>
+                    <p>The migration involved several key steps:</p>
+                    <ol>
+                        <li>Converting my existing HTML/CSS/JS site to Jekyll format</li>
+                        <li>Setting up a new GitHub repository for the site</li>
+                        <li>Configuring the _config.yml file for GitHub Pages</li>
+                        <li>Testing the site locally with Jekyll</li>
+                        <li>Pushing to GitHub and enabling GitHub Pages</li>
+                    </ol>
+
+                    <p>Gemini helped me understand the differences between my current setup and what GitHub Pages required, particularly around URL structures and asset paths.</p>
+
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ Benefits of Migration</h3>
+                            <ul>
+                                <li><strong>Improved uptime</strong> - No more worrying about home internet or power outages</li>
+                                <li><strong>Better performance</strong> - Global CDN delivers content faster</li>
+                                <li><strong>Reduced maintenance</strong> - No server management tasks</li>
+                                <li><strong>Enhanced security</strong> - No exposed home server vulnerabilities</li>
+                                <li><strong>Automatic scaling</strong> - Handles traffic spikes effortlessly</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Trade-offs</h3>
+                            <ul>
+                                <li><strong>Less control</strong> - Limited to GitHub Pages features and restrictions</li>
+                                <li><strong>Dependency on GitHub</strong> - Tied to GitHub's platform decisions</li>
+                                <li><strong>Build limitations</strong> - Cannot run arbitrary code during builds</li>
+                                <li><strong>Learning curve</strong> - Had to learn Jekyll and Liquid templating</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>Working with AI Assistants</h2>
+                    <p>Using AI assistants like Gemini and ChatGPT for technical migrations has become an invaluable part of my workflow. They excel at:</p>
+                    <ul>
+                        <li>Providing quick solutions to configuration problems</li>
+                        <li>Explaining complex technical concepts in simpler terms</li>
+                        <li>Generating boilerplate code and configuration files</li>
+                        <li>Offering multiple approaches to the same problem</li>
+                        <li>Debugging configuration issues with detailed explanations</li>
+                    </ul>
+
+                    <p>However, it's important to maintain a critical eye and verify the suggestions, as AI can sometimes provide outdated or incorrect information.</p>
+
+                    <h2>Lessons Learned</h2>
+                    <p>This migration taught me several valuable lessons:</p>
+                    <ul>
+                        <li>Separate development/experimentation environments from production systems</li>
+                        <li>Consider the trade-offs between self-hosting and managed services</li>
+                        <li>Different AI assistants have different strengths and weaknesses</li>
+                        <li>Combining multiple AI tools can yield better results than using just one</li>
+                        <li>Always have backups before major system changes</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>Moving from my Raspberry Pi to GitHub Pages has been a positive change. The site now loads faster globally, has better uptime, and requires significantly less maintenance. While I miss the hands-on learning experience of managing my own server, the benefits of GitHub Pages outweigh the drawbacks for my use case.</p>
+
+                    <p>The experience of using Gemini AI for this migration was enlightening. Different AI assistants bring unique perspectives and strengths to technical challenges. By leveraging multiple tools and maintaining a healthy skepticism, I was able to successfully complete the migration with minimal downtime.</p>
+
+                    <p>For anyone considering a similar migration, I recommend evaluating your specific needs carefully. Self-hosting offers learning opportunities and complete control, but managed services like GitHub Pages offer reliability and convenience that may be worth the trade-offs.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="/#projects" class="btn-primary">View Projects →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Help with Your Web Hosting?</h2>
+                <p class="cta-description">
+                    Whether you're considering moving from self-hosting to managed services or need help with AI integration,
+                    I can help you navigate the technical challenges and make the right choice for your needs.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Hosting Consultation&body=Hi Jose,%0D%0A%0D%0AI read your blog post about moving hosting from Raspberry Pi to GitHub Pages and would like to discuss my hosting situation.%0D%0A%0D%0ADetails:%0D%0A- [Current hosting setup]%0D%0A- [Goals for the new setup]%0D%0A%0D%0ALet's schedule a call to discuss.%0D%0A%0D%0ABest Regards," class="btn-cta">
+                        Get Consultation
+                    </a>
+                    <a href="/#projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
