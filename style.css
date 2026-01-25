@@ -1447,7 +1447,7 @@ section {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-    
+
     .neural-nodes {
         animation: none;
     }
@@ -1455,6 +1455,13 @@ section {
     html {
         scroll-behavior: auto;
     }
+}
+
+/* Separator between sections */
+.section-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    margin: 2rem 0;
 }
 
 /* Premium Promotion Cards */

@@ -1,0 +1,67 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+  <defs>
+    <style>
+      .bg { fill: #0a0b0f; }
+      .text-primary { fill: #ffffff; }
+      .text-secondary { fill: #94a3b8; }
+      .text-muted { fill: #64748b; }
+      .neural-primary { fill: #00d4ff; }
+      .neural-secondary { fill: #7c3aed; }
+      .prompt { fill: #f59e0b; }
+      .command { fill: #10b981; }
+      .header-bg { fill: rgba(26, 29, 41, 0.8); }
+      .terminal-bg { fill: rgba(26, 29, 41, 0.9); }
+      .line { stroke-linecap: round; }
+    </style>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" class="bg"/>
+
+  <!-- Neural Network Background -->
+  <g opacity="0.3">
+    <circle cx="50" cy="50" r="3" class="neural-primary" />
+    <circle cx="150" cy="350" r="2" class="neural-secondary" />
+    <circle cx="750" cy="80" r="3" class="neural-primary" />
+    <circle cx="680" cy="340" r="2" class="neural-secondary" />
+    <path d="M 50 50 Q 400 200 750 80" stroke="url(#grad1)" stroke-width="1" fill="none" class="line"/>
+    <path d="M 150 350 Q 400 200 680 340" stroke="url(#grad1)" stroke-width="1" fill="none" class="line" stroke-dasharray="5 5"/>
+  </g>
+  
+  <!-- Content -->
+  <g transform="translate(150, 80)">
+    <!-- Terminal Window -->
+    <rect width="500" height="240" rx="12" class="terminal-bg" stroke="#ffffff" stroke-opacity="0.1"/>
+    <rect width="500" height="40" rx="12" ry="12" class="header-bg"/>
+    <g transform="translate(15, 15)">
+      <circle cx="5" cy="5" r="5" fill="#ff5f57"/>
+      <circle cx="25" cy="5" r="5" fill="#ffbd2e"/>
+      <circle cx="45" cy="5" r="5" fill="#28ca42"/>
+    </g>
+    <text x="250" y="27" class="text-secondary" text-anchor="middle" font-size="14">/bin/bash</text>
+
+    <!-- Terminal Text -->
+    <g font-family="'SF Mono', 'Monaco', 'Consolas', monospace" font-size="14" transform="translate(20, 60)">
+      <text y="0" class="prompt">pi@rpi4</text>
+      <text x="60" y="0" class="text-muted">~ $</text>
+      <text x="95" y="0" class="text-primary">qwen --prompt </text>
+      <text x="220" y="0" class="command">"New blog post about my Pi workflow..."</text>
+      
+      <text y="40" class="text-secondary">Generating response...</text>
+      
+      <text y="80" class="text-primary">&lt;!DOCTYPE html&gt;</text>
+      <text y="100" class="text-primary">&lt;html lang="en"&gt;</text>
+      <text y="120" class="text-primary">  &lt;head&gt;</text>
+      <text y="140" class="text-primary">    &lt;title&gt;My Raspberry Pi's New Job...&lt;/title&gt;</text>
+      <text y="160" class="text-primary">  &lt;/head&gt;</text>
+    </g>
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="360" text-anchor="middle" class="text-primary" font-size="24" font-weight="600">Raspberry Pi + AI CLI</text>
+  <text x="400" y="385" text-anchor="middle" class="text-secondary" font-size="16">The New AI-Powered Workflow</text>
+</svg>
