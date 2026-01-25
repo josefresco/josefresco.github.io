@@ -70,7 +70,12 @@
                     <span class="nav-name">Jose Fresco</span>
                 </a>
             </div>
-            <div class="nav-links">
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
                 <a href="/#about" class="nav-link">About</a>
                 <a href="/#projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link active">Blog</a>
@@ -93,6 +98,34 @@
         <section class="blog-posts">
             <div class="container">
                 <div class="blog-grid">
+                    <article class="blog-card featured">
+                        <div class="blog-card-header">
+                            <div class="blog-meta">
+                                <span class="blog-category">Web Development & Security</span>
+                                <span class="blog-date">January 2026</span>
+                            </div>
+                            <h2 class="blog-title">
+                                <a href="/blog/why-uptime-is-not-enough.html">Your Website Is 'Up,' But Is It Yours? Why Uptime Monitoring Isn't Enough</a>
+                            </h2>
+                        </div>
+                        <div class="blog-card-image">
+                            <picture>
+                                <source srcset="images/jf-website-monitor-promo.svg" type="image/svg+xml">
+                                <img src="images/jf-website-monitor-promo.png" alt="A diagram showing a checkmark for an uptime monitor but an alert for a content-change monitor, indicating a silent issue." class="blog-preview-image">
+                            </picture>
+                        </div>
+                        <p class="blog-excerpt">
+                            Discover the critical flaw in traditional uptime monitoring and how content-based 'diff' checking can protect you from silent outages and malicious code injections.
+                        </p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Monitoring</span>
+                            <span class="blog-tag">Security</span>
+                            <span class="blog-tag">Uptime</span>
+                            <span class="blog-tag">DevTools</span>
+                        </div>
+                        <a href="/blog/why-uptime-is-not-enough.html" class="blog-read-more">Read More →</a>
+                    </article>
+
                     <article class="blog-card featured">
                         <div class="blog-card-header">
                             <div class="blog-meta">

@@ -377,3 +377,33 @@ keyboardStyle.textContent = `
     }
 `;
 document.head.appendChild(keyboardStyle);
+
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (!mobileMenuToggle || !navLinks) return;
+
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    const navLinksList = navLinks.querySelectorAll('a');
+    navLinksList.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!mobileMenuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        }
+    });
+});

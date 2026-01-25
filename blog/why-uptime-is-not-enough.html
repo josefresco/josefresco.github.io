@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Is 'Up,' But Is It Yours? Why Uptime Monitoring Isn't Enough - Jose Fresco</title>
+    <meta name="description" content="Discover the critical flaw in traditional uptime monitoring and how content-based 'diff' checking can protect you from silent outages and malicious code injections.">
+    
+    <!-- SEO and Social Sharing Tags -->
+    <link rel="canonical" href="https://josefresco.com/blog/why-uptime-is-not-enough.html">
+    <meta property="og:title" content="Your Website Is 'Up,' But Is It Yours? Why Uptime Monitoring Isn't Enough">
+    <meta property="og:description" content="Discover the critical flaw in traditional uptime monitoring and how content-based 'diff' checking can protect you from silent outages and malicious code injections.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/why-uptime-is-not-enough.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/jf-website-monitor-promo.png"> <!-- Placeholder image -->
+    <meta property="article:published_time" content="2026-01-24T12:00:00Z">
+    <meta property="article:author" content="Jose Fresco">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+    <div class="neural-bg"><div class="neural-nodes"></div></div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Your Website Is "Up," But Is It Yours?</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development & Security</span>
+                        <span class="blog-date">January 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-website-monitor-promo.svg" type="image/svg+xml">
+                        <img src="images/jf-website-monitor-promo.png" alt="A diagram showing a checkmark for an uptime monitor but an alert for a content-change monitor, indicating a silent issue." class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Simply checking if your website returns a "200 OK" status isn't enough. Many sites go down but show a hosting provider's landing page, fooling uptime monitors. True monitoring requires checking if your site's *content* is the same. **JF Website Monitor** does exactly this, detecting silent outages and even malicious code insertions.
+                    </div>
+
+                    <h2>The Lie of the "200 OK"</h2>
+                    <p>As a website owner, you do the responsible thing: you set up an uptime monitor. Every few minutes, it "pings" your site. As long as it gets a "200 OK" HTTP status code back, it reports everything as green. You sleep well at night, confident that your site is online. But you might be overlooking a silent killer.</p>
+                    <p>What happens when your site *does* go down? In a perfect world, your server would return a clear error code like "500 Internal Server Error" or "503 Service Unavailable." Your uptime monitor would catch this instantly and alert you. Unfortunately, we don't live in a perfect world.</p>
+                    <p>More often than not, something else happens. Your hosting provider, instead of showing an error, helpfully replaces your website with a generic landing page. It might say:</p>
+                    <ul>
+                        <li>"This Account Has Been Suspended"</li>
+                        <li>"Bandwidth Limit Exceeded"</li>
+                        <li>A generic "Coming Soon" or parked domain page.</li>
+                    </ul>
+                    <p>The status code for this landing page? A friendly "200 OK." Your uptime monitor sees this and reports your site as perfectly healthy. Meanwhile, your actual website is completely gone, and you have no idea.</p>
+
+                    <h2>A Better Way: Monitoring for "Sameness"</h2>
+                    <p>If checking for an "up" signal is unreliable, what's the solution? You need to check if your website is not just up, but if it's **the same** as it was when you last knew it was working correctly. This is the principle behind content-based monitoring.</p>
+                    
+                    <p>This is precisely why I built **<a href="/projects/jf-website-monitor.html">JF Website Monitor</a>**. It goes beyond primitive uptime checks:</p>
+                    <ol>
+                        <li><strong>It takes a snapshot:</strong> When you add a site, it captures the HTML of the page when it's in a known good state.</li>
+                        <li><strong>It compares (diffs):</strong> On every check, it downloads the current page and compares it to the original snapshot.</li>
+                        <li><strong>It alerts on change:</strong> If a single character is different—whether it's a full hosting provider landing page or a small, injected script—it triggers an alert.</li>
+                    </ol>
+                    <p>With this "same/diff" approach, the silent killer scenario is eliminated. If your site is replaced by a landing page, the content is different, and you get an alert. You get notified about the *real* status of your site, not a misleading one.</p>
+
+                    <h2>Your First Line of Defense Against Malicious Code</h2>
+                    <p>This content-checking approach has a powerful and critical side effect: **it acts as a security watchdog.**</p>
+                    <p>Hackers and malicious bots often don't take your site down. Instead, they do something far more subtle. They inject small snippets of code:</p>
+                    <ul>
+                        <li>Hidden spammy links to damage your SEO.</li>
+                        <li>Malicious JavaScript for crypto-mining on your visitors' browsers.</li>
+                        <li>Unauthorized ads or redirects.</li>
+                        <li>A complete but subtle defacement of your content.</li>
+                    </ul>
+                    <p>A traditional uptime monitor will never catch this. It sees a "200 OK" and moves on. But **JF Website Monitor** will catch it instantly. The moment that malicious code is added, the HTML of your site is no longer the "same." A "diff" is detected, and you receive an immediate notification that your site's content has changed unexpectedly, allowing you to react before major damage is done.</p>
+
+                    <h2>True Peace of Mind</h2>
+                    <p>Knowing your website is "up" is one thing. Knowing it's up *and* that it's exactly as you left it is true peace of mind. By moving from simple status checks to comprehensive content verification, you gain a far more robust and secure monitoring setup.</p>
+                    <p>If you're ready to stop relying on misleading uptime checks and get real insight into your website's status and integrity, give it a try. There's a free tier available with no credit card required to get started.</p>
+                    <div class="cta-buttons" style="justify-content: center; margin-top: 2rem;">
+                         <a href="https://jf-monitor.vercel.app/" target="_blank" rel="noopener" class="btn-primary">Try JF Website Monitor Now</a>
+                         <a href="/projects/jf-website-monitor.html" class="btn-secondary">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="/#projects" class="btn-primary">View All Projects →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
