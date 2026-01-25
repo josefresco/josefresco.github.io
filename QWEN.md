@@ -10,6 +10,10 @@ This is a personal portfolio and blog website for Jose Fresco (josefresco.com), 
 - AI-optimized content structure with semantic HTML, schema markup, and TL;DR summaries
 - Project portfolio showcasing various web applications, browser extensions, and WordPress plugins
 - Technical blog platform with structured content for AI agents
+- Responsive mobile menu with hamburger toggle for mobile devices
+- Comprehensive Schema.org structured data and Open Graph tags for SEO and social sharing
+- Service worker implementation for offline access and improved performance
+- WebP image format support with PNG fallback for better performance
 
 ### Tech Stack
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
@@ -26,12 +30,19 @@ josefresco.github.io/
 ├── index.html              # Main landing page with portfolio
 ├── style.css               # Global stylesheet with neural-inspired design
 ├── script.js               # JavaScript functionality with performance optimizations
+├── sw.js                   # Service worker for offline functionality and caching
 ├── robots.txt              # Search engine directives
 ├── sitemap.xml             # Site structure for SEO
+├── favicon.ico             # Website icon
+├── images/                 # Global images including Open Graph image
 ├── blog/                   # Blog posts directory
 │   ├── index.html          # Blog listing page
 │   └── *.html              # Individual blog post files
 │   └── images/             # Blog post images
+├── blog/blog.css           # Blog-specific styles
+├── projects/               # Project landing pages directory
+│   ├── jf-website-monitor.html        # JF Website Monitor landing page
+│   └── telegram-notifier-gravity-forms.html  # Telegram Notifier landing page
 ├── css/                    # Additional stylesheets
 ├── admin/                  # Pi-hole admin (excluded from sync)
 ├── website-sync.sh         # Automated deployment script
@@ -41,6 +52,10 @@ josefresco.github.io/
 ├── DEPLOYMENT.md           # Deployment documentation
 ├── CONTRIBUTING.md         # Contribution guidelines
 ├── AI_OPTIMIZATION_INSTRUCTIONS.md  # AI content guidelines
+├── WCAG1.md                # Accessibility review report
+├── SPEED1.md               # Performance test report
+├── PROJECT_GUIDE.md        # Project guide documentation
+├── QWEN.md                 # Project context for AI assistants
 └── CHANGELOG.md            # Version history
 ```
 
@@ -71,18 +86,21 @@ The website will be available at `http://localhost:8000`.
 1. Create a new HTML file in the `blog/` directory with a descriptive slug (e.g., `my-project-name.html`)
 2. Use the HTML template provided in PROCESS.md
 3. Include TL;DR summary, proper heading hierarchy, and schema markup
-4. Run the AI optimization checklist:
+4. Add Open Graph and Twitter Card tags for social sharing
+5. Add mobile menu structure to the header
+6. Run the AI optimization checklist:
    ```bash
    ./update_content_for_ai.sh
    ```
-5. Add a blog card entry to `blog/index.html`
-6. Deploy using `./website-sync.sh`
+7. Add a blog card entry to `blog/index.html`
+8. Deploy using `./website-sync.sh`
 
 #### Adding a New Project
 1. Open `index.html` in the root directory
 2. Locate the `<section id="projects" class="projects">` section
 3. Copy an existing project card and update with your project details
-4. Deploy changes using `./website-sync.sh`
+4. Optionally create a dedicated landing page in the `projects/` directory
+5. Deploy changes using `./website-sync.sh`
 
 ## AI Optimization Features
 
@@ -94,6 +112,43 @@ The website implements several AI optimization techniques:
 - **Structured Lists:** Bullet points and numbered lists for key information
 - **External Citations:** Links to authoritative sources
 - **Meta Descriptions:** Concise 150-160 character descriptions
+
+## Mobile Menu Implementation
+
+The website includes a responsive mobile menu that appears on screens ≤ 768px:
+
+- **Structure:** Hamburger menu with animated lines that transforms to a cross
+- **Functionality:** Slides in from the right side of the screen
+- **Features:**
+  - Backdrop blur effect for visual separation
+  - Smooth animations and transitions
+  - Auto-close when clicking on navigation links
+  - Auto-close when clicking outside the menu
+- **Implementation:** Automatically applies to all pages that include the header structure
+- **Styling:** Located in `style.css` under the "Mobile Hamburger Menu" section
+- **JavaScript:** Handled by the `setupMobileMenu()` function in `script.js`
+
+## Schema.org and Open Graph Tags
+
+The website includes structured data and social sharing tags:
+
+- **Schema.org:** Provides structured data for search engines (Person, Blog, BlogPosting, SoftwareApplication)
+- **Open Graph:** Controls how content appears when shared on social media
+- **Twitter Cards:** Optimizes content for Twitter sharing
+- **Implementation:** Added to the `<head>` section of all pages
+- **Benefits:** Improved SEO, rich snippets, and better social sharing previews
+
+## Performance Optimizations
+
+The website implements several performance optimizations:
+
+- **Resource Hints:** DNS prefetch and preconnect hints for external resources
+- **Script Preloading:** Preload hints for critical JavaScript files
+- **Deferred Loading:** Non-critical features are deferred using `requestIdleCallback`
+- **Service Worker:** Caching strategy for offline access and repeat visits
+- **WebP Images:** Modern image format with PNG fallback for better compression
+- **Font Optimization:** Preloaded fonts with fallback strategies
+- **Critical CSS:** Above-the-fold styles inlined for faster rendering
 
 ## Deployment Process
 
@@ -120,6 +175,7 @@ For manual deployment, copy files to the web server and push to GitHub separatel
 - Performance-first JavaScript with intersection observers and lazy loading
 - Mobile-responsive design using CSS Grid and Flexbox
 - Accessibility considerations with keyboard navigation and reduced motion support
+- WCAG 2.1 AA compliance for color contrast and link identification
 
 ## Special Scripts
 

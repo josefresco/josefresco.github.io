@@ -66,22 +66,38 @@ To add a new blog post to the site:
 3. **Add metadata:**
    - Set appropriate title and meta description in the head section
    - Include relevant categories and tags
+   - Add Open Graph and Twitter Card tags for social sharing
+   - Include Schema.org structured data for rich snippets
 
-4. **Optimize for AI:**
+4. **Add mobile menu:**
+   - Include the mobile menu structure in the header:
+     ```html
+     <div class="nav-menu-toggle" id="mobile-menu-toggle">
+         <span class="hamburger-line"></span>
+         <span class="hamburger-line"></span>
+         <span class="hamburger-line"></span>
+     </div>
+     <div class="nav-links" id="nav-links">
+         <!-- Navigation links here -->
+     </div>
+     ```
+
+5. **Optimize for AI:**
    - Run the AI optimization checklist:
      ```bash
      ./update_content_for_ai.sh
      ```
 
-5. **Add to blog index:**
+6. **Add to blog index:**
    - Add a blog card entry to `blog/index.html` following the existing pattern
    - Include title, excerpt, publication date, category, tags, and link to the post
 
-6. **Add images (optional):**
+7. **Add images (optional):**
    - Place any images in the `blog/images/` directory
    - Reference them appropriately in your blog post and index card
+   - Consider using WebP format with PNG fallback for better performance
 
-7. **Deploy:**
+8. **Deploy:**
    - Deploy changes using `./website-sync.sh`
 
 ## Adding New Projects
@@ -99,6 +115,31 @@ To add a new project to the main page:
    - Links to source code and/or live demo
 
 4. **Deploy:** Deploy changes using `./website-sync.sh`
+
+## Mobile Menu Implementation
+
+The website includes a responsive mobile menu that appears on screens ≤ 768px:
+
+- **Structure:** Hamburger menu with animated lines that transforms to a cross
+- **Functionality:** Slides in from the right side of the screen
+- **Features:**
+  - Backdrop blur effect for visual separation
+  - Smooth animations and transitions
+  - Auto-close when clicking on navigation links
+  - Auto-close when clicking outside the menu
+- **Implementation:** Automatically applies to all pages that include the header structure
+- **Styling:** Located in `style.css` under the "Mobile Hamburger Menu" section
+- **JavaScript:** Handled by the `setupMobileMenu()` function in `script.js`
+
+## Schema.org and Open Graph Tags
+
+The website includes structured data and social sharing tags:
+
+- **Schema.org:** Provides structured data for search engines (Person, Blog, BlogPosting, SoftwareApplication)
+- **Open Graph:** Controls how content appears when shared on social media
+- **Twitter Cards:** Optimizes content for Twitter sharing
+- **Implementation:** Added to the `<head>` section of all pages
+- **Benefits:** Improved SEO, rich snippets, and better social sharing previews
 
 ## Running a Local Preview
 

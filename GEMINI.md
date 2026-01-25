@@ -2,15 +2,25 @@
 
 This document provides a comprehensive overview of the `josefresco.github.io` project, its structure, conventions, and operational procedures. It is intended to be used as a primary context source for AI-assisted development.
 
+**Last Updated:** January 24, 2026
+
 ## Project Overview
 
 This is the personal website, portfolio, and blog of Jose Fresco. It is a static website built with vanilla **HTML5**, **CSS3**, and **JavaScript (ES6+)**. The project is designed with a strong emphasis on:
 
-*   **Performance:** Optimized for speed, especially on low-power devices like the Raspberry Pi. This is achieved through inlined critical CSS, deferred script loading, and a conscious decision to disable performance-heavy animations.
+*   **Performance:** Optimized for speed, with fast server response times confirmed by network tests (see `SPEED1.md`). This is achieved through inlined critical CSS, deferred asset loading, and a conscious decision to disable performance-heavy animations.
 *   **Responsiveness:** Mobile-first design that adapts to all screen sizes.
-*   **AI Optimization (AIO):** The content and structure are specifically tailored for discoverability and citability by AI agents and web crawlers, following modern AIO guidelines.
+*   **AI Optimization (AIO):** The content and structure are specifically tailored for discoverability and citability by AI agents and web crawlers.
+*   **PWA-Ready:** Includes a service worker (`sw.js`) for caching and offline capabilities.
 
-The project does not use any frontend frameworks (like React or Vue) or static site generators (like Jekyll or Hugo). There is no build step; files are edited directly.
+The project does not use any frontend frameworks or static site generators. There is no build step; files are edited directly. The homepage also promotes premium projects like **JF Website Monitor**.
+
+## Known Issues & Improvement Areas
+
+A WCAG accessibility review was conducted and saved in `WCAG1.md`. Key findings include:
+
+*   **(Critical Fail) WCAG 1.4.1 - Use of Color:** Links within blog post paragraphs are not visually distinct from regular text without hovering. They **must** be styled with an underline or other non-color indicator.
+*   **(Recommendation) WCAG 1.4.3 - Contrast (Minimum):** The `--text-muted` color (`#64748b`) has borderline contrast against the dark background. It is recommended to increase its brightness for better readability.
 
 ## Building and Running
 
@@ -39,68 +49,62 @@ The project follows a strict set of development conventions outlined in `CONTRIB
 Refer to **`PROCESS.md`** for detailed workflows.
 
 **Adding a New Blog Post:**
-1.  Create a new `.html` file in the `/blog` directory.
-2.  Use the standard HTML template provided in `PROCESS.md`.
-3.  Add content, ensuring it follows the AI Optimization guidelines (see below).
-4.  Run the AI optimization checklist script: `./update_content_for_ai.sh`.
-5.  Add a new blog card to `blog/index.html` pointing to the new file.
+1.  Create a new `.html` file in the `/blog` directory (e.g., `my-new-post.html`).
+2.  Add HTML content following the site's structure.
+3.  **Create a new SVG hero image** in `/blog/images/` that visually represents the post. This is the preferred format.
+4.  Update the blog post HTML to use a `<picture>` element, pointing to the new `.svg` and a `.png` fallback.
+5.  Add a new `<article>` card to `blog/index.html` for the new post.
 
-**Adding a New Project:**
-1.  Edit `index.html`.
-2.  Locate the `<section id="projects">`.
-3.  Duplicate an existing `<article class="project-card">` and update its content.
-
-### AI Optimization (AIO)
-
-Refer to **`AI_OPTIMIZATION_INSTRUCTIONS.md`**. This is a key feature of the project.
-*   **TL;DR Summaries:** Each blog post must start with a 50-60 word "Too Long; Didn't Read" summary.
-*   **Semantic HTML:** Use a logical heading hierarchy (one `<h1>` per page, followed by `<h2>`, `<h3>`, etc.).
-*   **Structured Data:** Use JSON-LD `BlogPosting` schema markup.
-*   **Checklist:** Use the `./update_content_for_ai.sh` script to verify compliance.
-
-### Code Style
+### Code Style & Structure
 
 Refer to **`CONTRIBUTING.md`** for detailed style guides.
 
-*   **HTML:** Use semantic HTML5 elements (`<article>`, `<section>`, etc.). Class names are `kebab-case`.
-*   **CSS:** The project uses a dark, "neural"-inspired theme. Styles are primarily in `style.css`.
+*   **CSS:** The project uses a dark, "neural"-inspired theme.
+    *   Global styles are in `style.css`.
+    *   Blog-specific styles are in `blog.css`.
     *   Utilize the CSS custom properties (variables) defined in `:root`.
-    *   Follow a mobile-first approach.
-    *   Be mindful of performance; prefer CSS transitions over JS-heavy animations.
-*   **JavaScript:** All custom code is in `script.js`.
-    *   Use modern, performance-conscious ES6+ vanilla JavaScript.
-    *   The code is organized into a `PersonalWebsite` class.
-    *   Many potential features (e.g., complex animations, parallax) are explicitly **disabled** in the code for performance reasons. Do not re-enable them without a strong justification.
+*   **JavaScript:** All custom code is in `script.js` and organized into a `PersonalWebsite` class. Performance-heavy animations are intentionally disabled.
+*   **Service Worker:** A service worker is active in `sw.js` for caching static assets. When adding new pages or key assets, consider updating the `ASSETS_TO_CACHE` list in this file.
 
 ### Version Control & Commits
 
 *   **Branching:** Use feature branches (`feature/...`, `fix/...`).
-*   **Commits:** Follow the **Conventional Commits** specification (e.g., `feat: Add dark mode toggle`, `fix: Correct header z-index`). This is detailed in `CONTRIBUTING.md`.
+*   **Commits:** Follow the **Conventional Commits** specification (e.g., `feat: Add dark mode toggle`, `fix: Correct header z-index`).
 
 ## Deployment
 
 The project has two deployment targets, documented in **`DEPLOYMENT.md`**.
 
 1.  **Primary: Automated Sync (`website-sync.sh`)**
-    *   This is the main deployment method. The `website-sync.sh` script is designed to be run on the production web server (likely via a cron job).
-    *   It `rsync`s files from the web root (`/var/www/html/`) into the git repository, commits any changes, and pushes them to GitHub.
-    *   It also pulls any remote changes back to the web server.
-    *   **Crucially, it excludes the `admin/` directory**, which contains the Pi-hole admin interface and should not be in the public repository.
+    *   The main deployment method, run on the production server. It syncs files from the web root to the Git repo and pushes to GitHub.
+    *   **Crucially, it excludes the `admin/` directory.**
 
 2.  **Secondary: GitHub Pages**
-    *   The repository is also configured to be served directly via GitHub Pages from the `master` branch.
+    *   The repository is also configured to be served directly via GitHub Pages.
 
 ## Key Files Summary
 
-*   `index.html`: The main portfolio landing page.
+*   `index.html`: The main portfolio landing page. Promotes key projects.
 *   `blog/index.html`: The blog listing page.
 *   `blog/*.html`: Individual blog posts.
-*   `style.css`: The primary stylesheet. Contains all theme variables and styles.
-*   `script.js`: The primary JavaScript file.
+*   `/projects/*.html`: Landing pages for specific projects.
+
+**Styles & Scripts:**
+*   `style.css`: The primary global stylesheet.
+*   `blog.css`: Styles specific to the blog section.
+*   `script.js`: The primary JavaScript file, including PWA service worker registration.
+*   `sw.js`: The service worker file, configured to cache the site's static assets for offline use and faster loads.
+
+**Documentation & Reports:**
 *   `README.md`: High-level project overview.
 *   `CONTRIBUTING.md`: **Crucial.** Contains detailed coding standards, testing requirements, and commit conventions.
 *   `PROCESS.md`: **Crucial.** Explains how to add and update content.
-*   `DEPLOYMENT.md`: Explains the deployment process and `website-sync.sh` script.
-*   `AI_OPTIMIZATION_INSTRUCTIONS.md`: **Crucial.** Details the forward-looking strategy for making content AI-friendly.
-*   `website-sync.sh`: The automated deployment script for the production server.
-*   `update_content_for_ai.sh`: A shell script that provides a checklist for content creators.
+*   `DEPLOYMENT.md`: Explains the deployment process.
+*   `AI_OPTIMIZATION_INSTRUCTIONS.md`: Details the strategy for making content AI-friendly.
+*   `IMPROVEMENTS1.md`: A report detailing potential site improvements (now largely implemented).
+*   `WCAG1.md`: A report detailing accessibility findings, including a critical failure that needs to be addressed.
+*   `SPEED1.md`: A network performance report confirming excellent server response times.
+
+**Automation:**
+*   `website-sync.sh`: Automated deployment script for the production server.
+*   `update_content_for_ai.sh`: A shell script providing a content creation checklist.
