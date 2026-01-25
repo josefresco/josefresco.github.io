@@ -7,8 +7,10 @@
     <meta name="description" content="How I moved my website hosting from a Raspberry Pi Model B to GitHub Pages using Gemini Chat AI instead of Claude Code">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body>
     <div class="neural-bg">
@@ -45,7 +47,10 @@
                 </div>
 
                 <div class="blog-post-image">
-                    <img src="images/moving-hosting-gemini-ai.png" alt="Moving Hosting from Raspberry Pi to GitHub Pages with Gemini AI" class="blog-hero-image">
+                    <picture>
+                        <source srcset="images/moving-hosting-gemini-ai.webp" type="image/webp">
+                        <img src="images/moving-hosting-gemini-ai.png" alt="Diagram showing migration from Raspberry Pi to GitHub Pages with Gemini AI assistance" class="blog-hero-image">
+                    </picture>
                 </div>
 
                 <div class="blog-post-content">
