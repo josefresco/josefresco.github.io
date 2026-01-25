@@ -3,58 +3,109 @@
   <!-- Main Pages -->
   <url>
     <loc>https://josefresco.com/</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
+
+  <!-- Project Landing Pages -->
+  <url>
+    <loc>https://josefresco.com/projects/jf-website-monitor.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://josefresco.com/projects/telegram-notifier-gravity-forms.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog Pages -->
   <url>
     <loc>https://josefresco.com/blog/</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+
   <!-- Featured Blog Posts - Higher Priority -->
   <url>
     <loc>https://josefresco.com/blog/breeze-time-tracker-dashboard.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <url>
     <loc>https://josefresco.com/blog/family-dashboard.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
+  <url>
+    <loc>https://josefresco.com/blog/family-dashboard-evolution.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Technical Blog Posts - Standard Priority -->
   <url>
     <loc>https://josefresco.com/blog/who-dis-ip-lookup.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <url>
     <loc>https://josefresco.com/blog/easy-pdf-insert.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <url>
     <loc>https://josefresco.com/blog/wpengine-backup-scheduler.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <url>
     <loc>https://josefresco.com/blog/reddit-post-hider.html</loc>
-    <lastmod>2025-08-28</lastmod>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://josefresco.com/blog/reddit-post-hider-v3.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://josefresco.com/blog/save-to-my-blog.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://josefresco.com/blog/telegram-pi-monitoring-bot.html</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://josefresco.com/blog/moving-hosting-to-github-pages-with-gemini-ai.html</loc>
+    <lastmod>2026-01-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

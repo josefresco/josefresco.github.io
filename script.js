@@ -2,12 +2,28 @@
 
 class PersonalWebsite {
     constructor() {
+        // Optimize loading by deferring non-critical features
         this.init();
-        this.setupNeuralNetwork();
-        this.setupScrollEffects();
+
+        // Defer heavy initialization until after initial render
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                this.setupNeuralNetwork();
+                this.setupScrollEffects();
+                this.setupParallaxEffects();
+            });
+        } else {
+            // Fallback for browsers that don't support requestIdleCallback
+            setTimeout(() => {
+                this.setupNeuralNetwork();
+                this.setupScrollEffects();
+                this.setupParallaxEffects();
+            }, 1);
+        }
+
+        // Setup critical features immediately
         this.setupNavigationEffects();
         this.setupTypewriterEffect();
-        this.setupParallaxEffects();
         this.setupIntersectionObserver();
     }
 

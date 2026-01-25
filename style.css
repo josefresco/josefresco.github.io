@@ -17,7 +17,7 @@
     /* Text Colors */
     --text-primary: #ffffff;
     --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-muted: #7689a1; /* Increased brightness for better contrast */
     --text-accent: var(--neural-primary);
     
     /* Interactive Colors */
@@ -1462,6 +1462,19 @@ section {
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
     margin: 2rem 0;
+}
+
+/* Links in blog post content should be clearly identifiable */
+.blog-post-content a {
+    text-decoration: underline;
+    text-decoration-color: var(--neural-primary);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.blog-post-content a:hover {
+    text-decoration-color: var(--text-accent); /* Brighter underline on hover */
 }
 
 /* Premium Promotion Cards */
