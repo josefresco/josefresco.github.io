@@ -1,5 +1,37 @@
 <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-    <rect fill="#1a1a1a" width="800" height="400" />
-    <text x="50%" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="48" font-weight="700" fill="#fff">JF Website Monitor</text>
-    <text x="50%" y="200" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#bbb">Uptime & Content Change Monitoring</text>
+    <style>
+        .bg { fill: #1a1a1a; }
+        .text { font-family: 'Inter', sans-serif; fill: #fff; }
+        .title { font-size: 48px; font-weight: 700; }
+        .subtitle { font-size: 24px; fill: #bbb; }
+        .icon { fill: #fff; }
+        .check { fill: #28a745; }
+        .alert { fill: #dc3545; }
+        .diff { fill: #ffc107; }
+    </style>
+    <rect class="bg" width="800" height="400" />
+    <text x="50%" y="80" text-anchor="middle" class="text title">JF Website Monitor</text>
+    <text x="50%" y="120" text-anchor="middle" class="text subtitle">Uptime & Content Change Detection</text>
+
+    <!-- Monitor Screen -->
+    <rect x="150" y="150" width="500" height="200" rx="10" ry="10" fill="#333" stroke="#555" stroke-width="2"/>
+    <rect x="160" y="160" width="480" height="180" rx="5" ry="5" fill="#1a1a1a"/>
+
+    <!-- Uptime Graph -->
+    <polyline points="170,300 220,250 270,280 320,230 370,260 420,210 470,240 520,190 570,220 620,170"
+              stroke="#28a745" stroke-width="4" fill="none"/>
+    <circle cx="620" cy="170" r="8" class="check"/>
+
+    <!-- Content Change Alert (Magnifying Glass with Diff) -->
+    <g transform="translate(200, 200)">
+        <circle cx="0" cy="0" r="30" fill="#ffc107"/>
+        <path d="M-15,-5 L15,-5 M-15,5 L15,5" stroke="#1a1a1a" stroke-width="4"/>
+        <path d="M35 35 L50 50" stroke="#ffc107" stroke-width="4"/>
+    </g>
+
+    <!-- Alert Icon -->
+    <g transform="translate(600, 280)">
+        <circle cx="0" cy="0" r="30" fill="#dc3545"/>
+        <text x="0" y="10" text-anchor="middle" font-family="Inter, sans-serif" font-size="30" fill="#fff">!</text>
+    </g>
 </svg>
