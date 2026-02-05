@@ -27,6 +27,21 @@
     margin: 2rem 0;
 }
 
+/* Link styles for blog content */
+.blog-post-content a {
+    color: var(--neural-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--neural-primary);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.blog-post-content a:hover {
+    color: var(--text-accent);
+    text-decoration-color: var(--text-accent);
+}
+
 /* Responsive adjustments for blog */
 @media (max-width: 768px) {
     .blog-post {
