@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving JF Website Monitor from Vercel to Self-Hosting - Cost & Control</title>
+    <meta name="description" content="How I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid high costs, Prisma DB limits, and cron-job.org dependence, with plans for future VPS deployment.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//linkedin.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Moving JF Website Monitor from Vercel to Self-Hosting - Cost & Control">
+    <meta property="og:description" content="How I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid high costs, Prisma DB limits, and cron-job.org dependence, with plans for future VPS deployment.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/jf-website-monitor-self-hosting.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-02-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-07T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moving JF Website Monitor from Vercel to Self-Hosting - Cost & Control">
+    <meta name="twitter:description" content="How I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid high costs, Prisma DB limits, and cron-job.org dependence, with plans for future VPS deployment.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/jf-website-monitor-self-hosting.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html"
+      },
+      "headline": "Moving JF Website Monitor from Vercel to Self-Hosting - Cost & Control",
+      "description": "How I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid high costs, Prisma DB limits, and cron-job.org dependence, with plans for future VPS deployment.",
+      "image": "https://josefresco.com/images/jf-website-monitor-self-hosting.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-02-07T00:00:00+00:00",
+      "dateModified": "2026-02-07T00:00:00+00:00",
+      "keywords": "Vercel, Self-Hosting, VPS, JF Website Monitor, Prisma, Database, Cron Jobs, Cost Optimization, DevOps"
+    }
+    </script>
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest Regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Moving JF Website Monitor from Vercel to Self-Hosting - Cost & Control</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">February 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-website-monitor-self-hosting.svg" type="image/svg+xml">
+                        <img src="images/jf-website-monitor-self-hosting.svg" alt="Diagram showing JF Website Monitor migration from Vercel to self-hosting with Cloudflare Tunneling and future VPS deployment" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid escalating costs from serverless function overages, Prisma database limits, cron-job.org dependencies, and high payment processor fees. This includes moving from Lemon Squeezy to direct Stripe integration due to verification delays and 5% transaction fees. This intermediate step provides full control while I validate growth, with plans to deploy to a VPS once we exceed local hosting capabilities.
+                    </div>
+
+                    <p>When I first launched JF Website Monitor, Vercel seemed like the perfect platform: easy deployment, automatic scaling, and a generous free tier. However, as the service grew and user adoption increased, I began encountering limitations that made the platform less sustainable for a bootstrapped project. This article details the migration journey from Vercel to local hosting, and why a VPS will be our next destination.</p>
+
+                    <h2>The Vercel Honeymoon Phase</h2>
+                    <p>Initially, Vercel provided everything I needed to get JF Website Monitor off the ground quickly:</p>
+                    <ul>
+                        <li><strong>Zero configuration deployment</strong> - Push to Git and the site was live</li>
+                        <li><strong>Automatic SSL certificates</strong> - No manual certificate management</li>
+                        <li><strong>Global CDN</strong> - Fast response times for users worldwide</li>
+                        <li><strong>Serverless functions</strong> - Perfect for API endpoints and scheduled tasks</li>
+                    </ul>
+
+                    <p>For the first few months, everything worked perfectly. The free tier was sufficient, and the platform handled our modest traffic without issues. However, as monitoring needs grew, so did the challenges.</p>
+
+                    <h2>The Breaking Point: Three Key Issues</h2>
+                    <p>As JF Website Monitor gained traction, three critical pain points emerged that made Vercel increasingly unsustainable:</p>
+
+                    <h3>1. Serverless Function Costs</h3>
+                    <p>Vercel's pricing model charges based on serverless function execution time and invocations. For a monitoring service that runs frequent checks across multiple websites, these costs add up quickly:</p>
+                    <ul>
+                        <li><strong>Function execution time:</strong> Each website check requires API calls, database queries, and response time measurements</li>
+                        <li><strong>Invocation volume:</strong> Monitoring hundreds of sites every few minutes generates thousands of function calls daily</li>
+                        <li><strong>Unpredictable billing:</strong> Usage spikes during incidents could lead to unexpected cost increases</li>
+                    </ul>
+
+                    <p>The Pro plan at $20/month per team member was reasonable, but usage-based overages could quickly multiply this cost. For a bootstrapped project, predictable expenses are essential.</p>
+
+                    <h3>2. Prisma Database Limitations</h3>
+                    <p>JF Website Monitor uses Prisma ORM with a PostgreSQL database for data management. While Vercel integrates well with various database providers, we encountered several constraints:</p>
+                    <ul>
+                        <li><strong>Connection limits:</strong> Serverless functions create new database connections for each invocation, quickly exhausting connection pools</li>
+                        <li><strong>Cold starts:</strong> Database connections add to function cold start times, impacting monitoring reliability</li>
+                        <li><strong>Query performance:</strong> Complex analytics queries for SLA reporting timed out in serverless environments</li>
+                        <li><strong>Cost scaling:</strong> Managed database services like Neon or Supabase charge based on usage, adding another layer of variable costs</li>
+                    </ul>
+
+                    <p>The combination of Vercel function limits and database constraints created a bottleneck that hindered both performance and budget predictability.</p>
+
+                    <h3>3. Cron-Job.org Dependence</h3>
+                    <p>For scheduled monitoring tasks, JF Website Monitor initially relied on cron-job.org to trigger Vercel serverless functions. This introduced several vulnerabilities:</p>
+                    <ul>
+                        <li><strong>External dependency:</strong> Service outages at cron-job.org would halt all monitoring operations</li>
+                        <li><strong>Limited scheduling flexibility:</strong> Complex monitoring schedules were difficult to configure</li>
+                        <li><strong>No retry logic:</strong> Failed cron jobs required manual intervention</li>
+                        <li><strong>Rate limiting:</strong> Free tier restrictions on job frequency conflicted with monitoring requirements</li>
+                    </ul>
+
+                    <p>Relying on a third-party service for core functionality created an unacceptable single point of failure for a monitoring platform.</p>
+
+                    <h3>4. Payment Processor Issues: Lemon Squeezy to Stripe</h3>
+                    <p>Beyond the technical infrastructure challenges, JF Website Monitor also faced significant issues with its payment processing setup. The platform initially used Lemon Squeezy as a merchant of record, but two critical problems emerged:</p>
+                    <ul>
+                        <li><strong>Verification delays:</strong> Account verification took an unreasonably long time, delaying the ability to accept payments and launch premium features</li>
+                        <li><strong>High transaction fees:</strong> At 5% per transaction, Lemon Squeezy's fees were significantly higher than direct payment processors, cutting into already thin margins for a bootstrapped project</li>
+                    </ul>
+
+                    <p>For a service with modest pricing tiers, losing 5% of every transaction to processing fees adds up quickly. When combined with the verification delays that prevented timely access to the platform, the decision to migrate to direct Stripe integration became clear:</p>
+                    <ul>
+                        <li><strong>Lower fees:</strong> Stripe's standard 2.9% + $0.30 per transaction saves approximately 2% compared to Lemon Squeezy</li>
+                        <li><strong>Immediate verification:</strong> Stripe account verification completed within days, not weeks</li>
+                        <li><strong>Direct control:</strong> Full visibility and control over subscription management and billing</li>
+                        <li><strong>Better integration:</strong> Direct API access enables custom billing workflows and dunning management</li>
+                    </ul>
+
+                    <p>The migration from Lemon Squeezy to Stripe required additional development work to implement subscription management, webhook handling, and customer portal features, but the long-term cost savings and operational control made it worthwhile. For bootstrapped projects, every percentage point in fees matters, and the verification delays were simply unacceptable when trying to launch time-sensitive features.</p>
+
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ Vercel Benefits (Initially)</h3>
+                            <ul>
+                                <li><strong>Rapid deployment:</strong> Zero-config Git-based deployments</li>
+                                <li><strong>Global CDN:</strong> Excellent performance out of the box</li>
+                                <li><strong>Developer experience:</strong> Excellent tooling and documentation</li>
+                                <li><strong>Automatic scaling:</strong> Handles traffic spikes automatically</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ Vercel Challenges for Monitoring</h3>
+                            <ul>
+                                <li><strong>Unpredictable costs:</strong> Usage-based pricing scales with success</li>
+                                <li><strong>Function timeouts:</strong> Long-running monitoring tasks hit limits</li>
+                                <li><strong>Database connection issues:</strong> Serverless model conflicts with persistent connections</li>
+                                <li><strong>External dependencies:</strong> Required cron-job.org for scheduling</li>
+                                <li><strong>Payment processor issues:</strong> Lemon Squeezy verification delays and high fees</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>The Migration Strategy</h2>
+                    <p>Rather than rushing to a paid VPS immediately, I decided on a phased approach: first migrate to local hosting to validate the architecture and understand resource requirements, then move to a VPS once we've proven the model and understand our needs.</p>
+
+                    <h3>Phase 1: Local Hosting (Current)</h3>
+                    <p>Moving to a locally hosted solution provided several immediate benefits:</p>
+                    <ul>
+                        <li><strong>Complete control:</strong> Full access to server configuration and environment</li>
+                        <li><strong>Predictable costs:</strong> Fixed electricity costs instead of variable usage fees</li>
+                        <li><strong>No function timeouts:</strong> Long-running monitoring tasks execute without interruption</li>
+                        <li><strong>Direct database connections:</strong> Persistent connections improve query performance</li>
+                        <li><strong>Built-in scheduling:</strong> Native cron jobs replace external dependencies</li>
+                    </ul>
+
+                    <h3>Technical Implementation</h3>
+                    <p>The migration involved several key architectural changes:</p>
+                    <ol>
+                        <li><strong>Express.js server:</strong> Replaced serverless functions with a traditional Node.js application</li>
+                        <li><strong>Native cron jobs:</strong> Implemented Node.js cron scheduler for monitoring tasks</li>
+                        <li><strong>Database connection pooling:</strong> Configured Prisma for persistent connections</li>
+                        <li><strong>Process management:</strong> Used PM2 for application reliability and auto-restart</li>
+                        <li><strong>Reverse proxy:</strong> Configured nginx for SSL termination and request routing</li>
+                    </ol>
+
+                    <h3>Exposing the Service: Cloudflare Tunneling</h3>
+                    <p>One of the biggest challenges with local hosting is making the service accessible from the internet without compromising security. Traditional port forwarding on a home router introduces significant security risks and requires exposing your home IP address. Instead, I implemented Cloudflare Tunneling (formerly Argo Tunnel) to securely expose the locally hosted service:</p>
+                    <ul>
+                        <li><strong>No port forwarding required:</strong> Cloudflare Tunnel creates an outbound-only connection from the local server to Cloudflare's edge network, eliminating the need to open inbound ports on the router</li>
+                        <li><strong>Hidden origin IP:</strong> The home IP address remains completely hidden from the public internet, reducing attack surface</li>
+                        <li><strong>Automatic HTTPS:</strong> Cloudflare manages SSL certificates automatically, providing secure HTTPS connections without manual certificate management</li>
+                        <li><strong>DDoS protection:</strong> Cloudflare's global network absorbs and mitigates distributed denial-of-service attacks before they reach the home server</li>
+                        <li><strong>Zero Trust security:</strong> Optional Cloudflare Access policies can restrict access to specific users or IP ranges for admin interfaces</li>
+                    </ul>
+
+                    <p>The setup process was straightforward:</p>
+                    <ol>
+                        <li>Install the <code>cloudflared</code> daemon on the Raspberry Pi</li>
+                        <li>Authenticate the daemon with your Cloudflare account</li>
+                        <li>Create a tunnel configuration pointing to the local nginx reverse proxy</li>
+                        <li>Configure DNS records in Cloudflare to route traffic through the tunnel</li>
+                    </ol>
+
+                    <p>This approach provides the best of both worlds: the cost control of local hosting with the security and accessibility benefits of a professional CDN. The tunnel maintains a persistent, encrypted connection to Cloudflare's edge, ensuring reliable access without exposing the home network to direct internet traffic.</p>
+
+                    <h2>Benefits of the Local Hosting Approach</h2>
+                    <p>The migration to local hosting has provided immediate tangible benefits:</p>
+
+                    <h3>Cost Predictability</h3>
+                    <p>Instead of worrying about function invocations and execution time, I now have fixed costs:</p>
+                    <ul>
+                        <li>Electricity for running the local server</li>
+                        <li>Internet connection (already paid for other purposes)</li>
+                        <li>Domain registration and SSL certificates (free via Let's Encrypt)</li>
+                    </ul>
+
+                    <p>This predictability is invaluable for a bootstrapped project where every dollar counts.</p>
+
+                    <h3>Performance Improvements</h3>
+                    <p>Running on dedicated hardware has eliminated several performance bottlenecks:</p>
+                    <ul>
+                        <li><strong>No cold starts:</strong> The application is always running and ready to respond</li>
+                        <li><strong>Faster database queries:</strong> Persistent connections eliminate connection overhead</li>
+                        <li><strong>Longer execution time:</strong> Monitoring tasks can run as long as needed</li>
+                        <li><strong>Better resource utilization:</strong> Dedicated CPU and memory for monitoring operations</li>
+                    </ul>
+
+                    <h3>Operational Control</h3>
+                    <p>Full control over the infrastructure enables better monitoring and debugging:</p>
+                    <ul>
+                        <li><strong>Direct log access:</strong> Real-time visibility into application behavior</li>
+                        <li><strong>Custom monitoring:</strong> Implemented detailed metrics collection</li>
+                        <li><strong>Quick debugging:</strong> No waiting for log aggregation services</li>
+                        <li><strong>Flexible configuration:</strong> Adjust server settings as needed</li>
+                    </ul>
+
+                    <h2>Limitations of Local Hosting</h2>
+                    <p>While local hosting solves immediate problems, it's not a permanent solution for a growing service:</p>
+
+                    <h3>Reliability Concerns</h3>
+                    <ul>
+                        <li><strong>Power outages:</strong> Local power failures take the service offline</li>
+                        <li><strong>Internet connectivity:</strong> Residential internet lacks enterprise reliability</li>
+                        <li><strong>Hardware failures:</strong> No redundancy if the server fails</li>
+                        <li><strong>No automatic failover:</strong> Manual intervention required for outages</li>
+                    </ul>
+
+                    <h3>Scalability Limits</h3>
+                    <ul>
+                        <li><strong>Fixed resources:</strong> Limited by local hardware capabilities</li>
+                        <li><strong>Bandwidth constraints:</strong> Residential upload speeds limit concurrent checks</li>
+                        <li><strong>Single location:</strong> All monitoring originates from one geographic point</li>
+                        <li><strong>Manual scaling:</strong> Requires hardware upgrades to increase capacity</li>
+                    </ul>
+
+                    <h3>Security Considerations</h3>
+                    <ul>
+                        <li><strong>Home network exposure:</strong> Server accessible from the internet (mitigated by Cloudflare Tunnel)</li>
+                        <li><strong>DDoS vulnerability:</strong> Residential connections easily overwhelmed (protected by Cloudflare's DDoS mitigation)</li>
+                        <li><strong>Physical security:</strong> Hardware physically accessible</li>
+                        <li><strong>Backup complexity:</strong> Must implement own backup strategy</li>
+                    </ul>
+
+                    <h2>The Path Forward: VPS Migration</h2>
+                    <p>Local hosting serves as an intermediate step while JF Website Monitor validates its business model and growth trajectory. Once we reach the limits of local hosting, migrating to a VPS will provide the best of both worlds:</p>
+
+                    <h3>When to Move to VPS</h3>
+                    <p>I'll consider migrating to a VPS when we hit any of these thresholds:</p>
+                    <ul>
+                        <li><strong>User growth:</strong> 500+ active monitoring targets</li>
+                        <li><strong>Reliability requirements:</strong> Need for 99.9%+ uptime SLA</li>
+                        <li><strong>Geographic distribution:</strong> Need monitoring from multiple locations</li>
+                        <li><strong>Resource constraints:</strong> Local hardware at capacity</li>
+                        <li><strong>Revenue milestone:</strong> Consistent monthly revenue covers VPS costs</li>
+                    </ul>
+
+                    <h3>VPS Advantages</h3>
+                    <p>A Virtual Private Server will address local hosting limitations while maintaining cost control:</p>
+                    <ul>
+                        <li><strong>Enterprise reliability:</strong> Data center power and network redundancy</li>
+                        <li><strong>Predictable pricing:</strong> Fixed monthly costs ($5-20/month for starter VPS)</li>
+                        <li><strong>Scalability:</strong> Easy resource upgrades as needed</li>
+                        <li><strong>Professional infrastructure:</strong> Enterprise-grade hardware and networking</li>
+                        <li><strong>Geographic flexibility:</strong> Choose data center location for optimal performance</li>
+                    </ul>
+
+                    <h3>Potential VPS Providers</h3>
+                    <p>I'm evaluating several VPS providers based on price, performance, and features:</p>
+                    <ul>
+                        <li><strong>DigitalOcean:</strong> Developer-friendly, excellent documentation, $6-12/month droplets</li>
+                        <li><strong>Linode (Akamai):</strong> Competitive pricing, good performance, $5-10/month plans</li>
+                        <li><strong>Vultr:</strong> Global locations, hourly billing, $6-12/month instances</li>
+                        <li><strong>Hetzner:</strong> Budget-friendly European provider, excellent value</li>
+                    </ul>
+
+                    <div class="pros-cons-grid">
+                        <div class="pros-cons-section pros">
+                            <h3>✅ VPS Benefits (Future)</h3>
+                            <ul>
+                                <li><strong>High availability:</strong> Data center redundancy and uptime</li>
+                                <li><strong>Professional networking:</strong> Better bandwidth and DDoS protection</li>
+                                <li><strong>Remote management:</strong> Full control without physical access</li>
+                                <li><strong>Easy backups:</strong> Snapshot and backup capabilities</li>
+                            </ul>
+                        </div>
+                        <div class="pros-cons-section cons">
+                            <h3>⚠️ VPS Considerations</h3>
+                            <ul>
+                                <li><strong>Monthly cost:</strong> Fixed expense regardless of usage</li>
+                                <li><strong>System administration:</strong> Responsible for server maintenance</li>
+                                <li><strong>Security hardening:</strong> Must implement own security measures</li>
+                                <li><strong>Learning curve:</strong> Requires Linux server management skills</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>Lessons Learned</h2>
+                    <p>This migration journey taught several valuable lessons about building and scaling a SaaS application:</p>
+
+                    <h3>1. Start Simple, But Plan for Growth</h3>
+                    <p>Vercel was perfect for getting started quickly, but I should have considered long-term costs and limitations earlier in the planning process.</p>
+
+                    <h3>2. Understand Your Cost Drivers</h3>
+                    <p>For a monitoring service, frequent API calls and database queries are fundamental to the product. These operations have direct cost implications on serverless platforms.</p>
+
+                    <h3>3. Control Core Dependencies</h3>
+                    <p>Relying on external services like cron-job.org for critical functionality creates unnecessary risk. Building core capabilities in-house provides better control and reliability.</p>
+
+                    <h3>4. Security Can Be Achieved with Self-Hosting</h3>
+                    <p>Using Cloudflare Tunneling eliminates the need for port forwarding and hides the origin IP address, providing enterprise-grade security features like DDoS protection and automatic HTTPS without exposing the home network. This makes local hosting viable from a security perspective while maintaining full control over the infrastructure.</p>
+
+                    <h3>5. Phased Migration Reduces Risk</h3>
+                    <p>Moving to local hosting first allowed me to validate the architecture and understand resource requirements before committing to a VPS. This intermediate step reduced both technical and financial risk.</p>
+
+                    <h3>5. Bootstrapping Requires Cost Predictability</h3>
+                    <p>Variable costs make financial planning difficult for bootstrapped projects. Fixed costs, even if slightly higher initially, provide peace of mind and enable better decision-making.</p>
+
+                    <h3>6. Choose Payment Processors Carefully</h3>
+                    <p>Payment processing is critical for any SaaS business. The experience with Lemon Squeezy highlighted two important factors:</p>
+                    <ul>
+                        <li><strong>Verification speed matters:</strong> Delays in account verification can block product launches and revenue generation</li>
+                        <li><strong>Fee structures impact margins:</strong> A 5% fee vs 2.9% + $0.30 makes a significant difference in long-term profitability</li>
+                    </ul>
+                    <p>For bootstrapped projects, direct Stripe integration offers better control, lower fees, and faster setup—though it requires more development work for subscription management and compliance.</p>
+
+                    <h3>7. Security Can Be Achieved with Self-Hosting</h3>
+                    <p>Using Cloudflare Tunneling eliminates the need for port forwarding and hides the origin IP address, providing enterprise-grade security features like DDoS protection and automatic HTTPS without exposing the home network. This makes local hosting viable from a security perspective while maintaining full control over the infrastructure.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>Migrating JF Website Monitor from Vercel to local hosting was driven by the need for cost predictability, performance improvements, and operational control. While Vercel provided an excellent launchpad, the combination of serverless function costs, Prisma database limitations, cron-job.org dependencies, and payment processor challenges made it unsustainable for a growing monitoring service.</p>
+
+                    <p>The migration encompassed more than just infrastructure: moving from Vercel to local hosting, from cron-job.org to native cron jobs, from Lemon Squeezy to direct Stripe integration, and using Cloudflare Tunneling to securely expose the service without port forwarding. Each transition was driven by the need for cost control, operational efficiency, and independence from third-party limitations.</p>
+
+                    <p>Local hosting serves as a practical intermediate solution, providing full control and fixed costs while we validate the business model and understand resource requirements. Once we reach the limits of local hosting—whether through user growth, reliability requirements, or resource constraints—we'll migrate to a VPS to gain enterprise-grade infrastructure while maintaining predictable monthly costs.</p>
+
+                    <p>This phased approach balances the need for rapid iteration and cost control with long-term scalability and reliability goals. For other developers building similar services, I recommend carefully evaluating platform choices based on your specific use case, understanding cost drivers early, and being willing to migrate when platform limitations hinder growth.</p>
+
+                    <p>The journey from Vercel to local hosting (with Cloudflare Tunneling) to eventual VPS deployment reflects a common pattern for bootstrapped SaaS applications: start with managed services for speed, gain control as you grow, and invest in professional infrastructure when the business can support it. The key is knowing when to make each transition and having a clear plan for the next step.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener" class="btn-primary">Try JF Website Monitor →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Reliable Website Monitoring?</h2>
+                <p class="cta-description">
+                    JF Website Monitor provides comprehensive uptime monitoring, content change detection, and SLA reporting. 
+                    Built on a cost-effective infrastructure that prioritizes reliability and performance.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener" class="btn-cta">
+                        Start Monitoring Free
+                    </a>
+                    <a href="/#projects" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
