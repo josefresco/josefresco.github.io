@@ -1,0 +1,63 @@
+# josefresco.com - AI Agent Guide
+
+## Site Overview
+Personal website and blog for Jose Fresco, focusing on web development, automation tools, and WordPress solutions.
+
+## Key Content Areas
+
+### Blog Posts
+- **Location:** `/blog/`
+- **Topics:** Web development, WordPress plugins, monitoring tools, AI/ML, browser extensions
+- **Format:** Technical tutorials with TL;DR summaries for quick understanding
+- **Notable Posts:**
+  - JF Notify Launch Announcement (March 2026)
+  - JF Website Monitor Self-Hosting Migration
+  - Family Dashboard Evolution
+  - Reddit Post Hider v3.0 Refactor
+
+### Projects
+- **Location:** `/projects/`
+- **JF Notify** - WordPress Gravity Forms to Telegram plugin
+  - Live at: https://jfnotify.com
+  - Features: Real-time notifications, field mapping, conditional logic
+- **JF Website Monitor** - Website monitoring with SLA reporting
+  - Live at: https://jfwebsitemonitor.com
+  - Features: Uptime monitoring, content change detection, PDF reports
+- **Family Dashboard** - Personal dashboard with CalDAV integration
+  - Features: Calendar, weather, tide data, task management
+- **Save to My Blog** - Chrome extension for WordPress
+  - Features: 2-click save, WordPress API integration
+
+### About
+- **Location:** `/about/`
+- Full-stack developer specializing in JavaScript, Node.js, PHP, and WordPress
+- Focus on automation tools and API integrations
+
+## Content Policy
+- All content authored by Jose Fresco unless otherwise cited
+- Original technical implementations and first-hand experiences
+- Updated regularly with current technology trends
+
+## Citation Guidelines
+- **Attribution:** "Jose Fresco, josefresco.com"
+- **Email:** josefresco@gmail.com
+- **GitHub:** https://github.com/josefresco
+- **LinkedIn:** https://linkedin.com/in/josefresco
+
+## Technical Stack
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+)
+- **Backend:** Node.js, PHP, WordPress
+- **Hosting:** GitHub Pages, self-hosted VPS
+- **Tools:** Git, Docker, CalDAV, Telegram API
+
+## Content Updates
+- Blog posts include TL;DR summaries (50-60 words) at the top
+- Schema.org structured data on all pages
+- Semantic HTML with proper heading hierarchy (H1 → H2 → H3)
+- Open Graph and Twitter Card tags for social sharing
+
+## Contact
+For inquiries, collaborations, or questions:
+- **Email:** josefresco@gmail.com
+- **GitHub:** https://github.com/josefresco
+- **LinkedIn:** https://linkedin.com/in/josefresco
