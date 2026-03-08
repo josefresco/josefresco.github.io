@@ -4,6 +4,9 @@ Allow: /
 # Sitemap
 Sitemap: https://josefresco.com/sitemap.xml
 
+# RSS Feed
+Allow: /feed.xml
+
 # Allow crawling of all blog content
 Allow: /blog/
 Allow: /blog/*
