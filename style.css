@@ -1648,10 +1648,36 @@ section {
     }
 }
 
+/* Contact Section */
+.contact {
+    padding: 160px 0 80px;
+    background: rgba(26, 29, 41, 0.5);
+}
+
 /* Page Hero (for Skills, Now, Speaking pages) */
 .page-hero {
-    padding: 140px 0 60px;
+    padding: 180px 0 60px;
     background: rgba(26, 29, 41, 0.5);
+}
+
+/* Main content padding for pages without hero */
+main > section:first-of-type {
+    padding-top: 120px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .page-hero {
+        padding-top: 140px;
+    }
+    
+    .contact {
+        padding-top: 140px;
+    }
+    
+    main > section:first-of-type {
+        padding-top: 100px;
+    }
 }
 
 .page-title {
