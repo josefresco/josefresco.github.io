@@ -42,7 +42,7 @@ josefresco.github.io/
 ├── blog/blog.css           # Blog-specific styles
 ├── projects/               # Project landing pages directory
 │   ├── jf-website-monitor.html        # JF Website Monitor landing page
-│   └── telegram-notifier-gravity-forms.html  # Telegram Notifier landing page
+│   └── jf-notify.html                 # JF Notify (Telegram Notifier) landing page
 ├── css/                    # Additional stylesheets
 ├── admin/                  # Pi-hole admin (excluded from sync)
 ├── website-sync.sh         # Automated deployment script

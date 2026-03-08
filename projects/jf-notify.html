@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Notifier for Gravity Forms - WordPress Plugin</title>
-    <meta name="description" content="WordPress plugin that sends instant notifications to Telegram when Gravity Forms entries are submitted">
+    <title>JF Notify - WordPress Gravity Forms to Telegram Plugin</title>
+    <meta name="description" content="JF Notify sends instant Telegram notifications when Gravity Forms entries are submitted. Now live at jfnotify.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -16,21 +16,22 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//github.com">
     <link rel="dns-prefetch" href="//linkedin.com">
+    <link rel="dns-prefetch" href="//jfnotify.com">
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Telegram Notifier for Gravity Forms - WordPress Plugin">
-    <meta property="og:description" content="WordPress plugin that sends instant notifications to Telegram when Gravity Forms entries are submitted">
+    <meta property="og:title" content="JF Notify - WordPress Gravity Forms to Telegram Plugin">
+    <meta property="og:description" content="JF Notify sends instant Telegram notifications when Gravity Forms entries are submitted. Now live at jfnotify.com">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://josefresco.com/projects/telegram-notifier-gravity-forms.html">
+    <meta property="og:url" content="https://josefresco.com/projects/jf-notify.html">
     <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Telegram Notifier for Gravity Forms - WordPress Plugin">
-    <meta name="twitter:description" content="WordPress plugin that sends instant notifications to Telegram when Gravity Forms entries are submitted">
+    <meta name="twitter:title" content="JF Notify - WordPress Gravity Forms to Telegram Plugin">
+    <meta name="twitter:description" content="JF Notify sends instant Telegram notifications when Gravity Forms entries are submitted. Now live at jfnotify.com">
     <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
 
     <!-- Schema.org Structured Data -->
@@ -38,9 +39,10 @@
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Telegram Notifier for Gravity Forms",
+      "name": "JF Notify",
+      "alternateName": "Telegram Notifier for Gravity Forms",
       "description": "WordPress plugin that sends instant notifications to Telegram when Gravity Forms entries are submitted",
-      "url": "https://josefresco.com/projects/telegram-notifier-gravity-forms.html",
+      "url": "https://josefresco.com/projects/jf-notify.html",
       "applicationCategory": "Plugin",
       "operatingSystem": "WordPress",
       "offers": {
@@ -82,7 +84,7 @@
                 <a href="/#projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
                 <a href="/#contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Telegram Notifier for Gravity Forms - Inquiry&body=Hi Jose,%0D%0A%0D%0AI'm interested in the Telegram Notifier for Gravity Forms.%0D%0A%0D%0APlease let me know more details.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Get Early Access</a>
+                <a href="https://jfnotify.com" target="_blank" rel="noopener" class="btn-cta btn-cta-nav">Visit JF Notify</a>
             </div>
         </nav>
     </header>
@@ -92,8 +94,8 @@
             <div class="container">
                 <div class="hero-content">
                     <h1 class="hero-title">
-                        <span class="hero-greeting">Instant Form Notifications</span>
-                        <span class="hero-name">Telegram Notifier for Gravity Forms</span>
+                        <span class="hero-greeting">🚀 Now Live</span>
+                        <span class="hero-name">JF Notify</span>
                         <span class="hero-subtitle">WordPress Plugin</span>
                     </h1>
                     <p class="hero-description">
@@ -101,7 +103,10 @@
                         Never miss an important lead or customer inquiry again.
                     </p>
                     <div class="hero-cta">
-                        <a href="mailto:josefresco@gmail.com?subject=Telegram Notifier for Gravity Forms - Early Access&body=Hi Jose,%0D%0A%0D%0AI'm interested in early access to the Telegram Notifier for Gravity Forms.%0D%0A%0D%0APlease let me know when it becomes available and any details about pricing.%0D%0A%0D%0ABest regards," class="btn-primary">Request Early Access</a>
+                        <a href="https://jfnotify.com" target="_blank" rel="noopener" class="btn-primary">
+                            <span>Visit jfnotify.com</span>
+                            <span>↗</span>
+                        </a>
                         <a href="/#projects" class="btn-secondary">View Other Projects</a>
                     </div>
                 </div>
@@ -113,7 +118,7 @@
                                 <span class="dot yellow"></span>
                                 <span class="dot green"></span>
                             </div>
-                            <span class="editor-title">tekegran-notifier.php</span>
+                            <span class="editor-title">jf-notify.php</span>
                         </div>
                         <div class="editor-content">
                             <div class="code-line">
@@ -122,7 +127,7 @@
                             </div>
                             <div class="code-line">
                                 <span class="line-number">2</span>
-                                <span class="code-text">  <span class="comment">// Send to Tekegran</span></span>
+                                <span class="code-text">  <span class="comment">// Send to Telegram</span></span>
                             </div>
                             <div class="code-line">
                                 <span class="line-number">3</span>
@@ -130,7 +135,7 @@
                             </div>
                             <div class="code-line">
                                 <span class="line-number">4</span>
-                                <span class="code-text">  <span class="property">tekegran</span>: <span class="string">"Notified"</span></span>
+                                <span class="code-text">  <span class="property">telegram</span>: <span class="string">"Notified"</span></span>
                             </div>
                             <div class="code-line">
                                 <span class="line-number">5</span>
@@ -152,6 +157,7 @@
                     </p>
                     <div class="cta-buttons">
                         <a href="#features" class="btn-secondary">Learn More</a>
+                        <a href="https://jfnotify.com" target="_blank" rel="noopener" class="btn-primary">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -161,22 +167,22 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Seamless Integration Features</h2>
-                    <p class="section-subtitle">Connecting Gravity Forms to Tekegran has never been easier</p>
+                    <p class="section-subtitle">Connecting Gravity Forms to Telegram has never been easier</p>
                 </div>
                 <div class="about-grid">
                     <div class="about-text">
                         <p>
-                            The Telegram Notifier for Gravity Forms seamlessly integrates two powerful tools.
+                            JF Notify seamlessly integrates two powerful tools.
                             When a form is submitted, an instant notification is sent to your Telegram account,
                             ensuring your team responds quickly to new leads and inquiries.
                         </p>
-                        
+
                         <div class="tech-stack">
                             <h3>Key Features</h3>
                             <div class="tech-tags">
                                 <span class="tech-tag">Real-time Notifications</span>
                                 <span class="tech-tag">Gravity Forms Integration</span>
-                                <span class="tech-tag">Tekegran API</span>
+                                <span class="tech-tag">Telegram API</span>
                                 <span class="tech-tag">Customizable Messages</span>
                                 <span class="tech-tag">Field Mapping</span>
                                 <span class="tech-tag">Conditional Logic</span>
@@ -184,13 +190,13 @@
                                 <span class="tech-tag">Error Handling</span>
                             </div>
                         </div>
-                        
-                        <h3>Why Choose Telegram Notifier?</h3>
+
+                        <h3>Why Choose JF Notify?</h3>
                         <p>
-                            Unlike generic notification plugins, our solution is specifically designed for the Gravity Forms and Telegram ecosystem.
+                            Unlike generic notification plugins, JF Notify is specifically designed for the Gravity Forms and Telegram ecosystem.
                             We focus on reliability and customization to fit your specific workflow needs.
                         </p>
-                        
+
                         <div class="pros-cons-grid">
                             <div class="pros-cons-section pros">
                                 <h3>✅ What Makes Us Different</h3>
@@ -206,7 +212,7 @@
                                 <h3>🎯 Perfect For</h3>
                                 <ul>
                                     <li>Businesses using Gravity Forms for lead capture</li>
-                                    <li>Teams relying on Tekegran for customer communication</li>
+                                    <li>Teams relying on Telegram for customer communication</li>
                                     <li>Organizations needing immediate response to form submissions</li>
                                     <li>Agencies managing multiple client websites</li>
                                     <li>Companies with complex notification workflows</li>
@@ -249,7 +255,7 @@
                             </div>
                         </div>
                         <p class="project-description">
-                            Send immediate notifications to Tekegran when forms are submitted.
+                            Send immediate notifications to Telegram when forms are submitted.
                             Configure which forms trigger notifications and customize message content.
                         </p>
                         <div class="project-features">
@@ -268,7 +274,7 @@
                             </div>
                         </div>
                         <p class="project-description">
-                            Map specific Gravity Forms fields to Tekegran message content.
+                            Map specific Gravity Forms fields to Telegram message content.
                             Include form data like name, email, phone number, and custom fields.
                         </p>
                         <div class="project-features">
@@ -301,17 +307,36 @@
             </div>
         </section>
 
+        <section class="cta-section" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">🚀 Exciting Updates Coming Soon</h2>
+                    <p class="cta-description">
+                        JF Notify is just getting started! New features and enhancements are in development,
+                        including advanced analytics, team collaboration tools, and enhanced customization options.
+                        Stay tuned for updates!
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="https://jfnotify.com" target="_blank" rel="noopener" class="btn-cta">
+                            Learn More at JF Notify
+                        </a>
+                        <a href="/blog" class="btn-secondary">Read the Blog</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="pricing" class="cta-section">
             <div class="container">
                 <div class="cta-content">
                     <h2 class="cta-title">Ready to Connect Gravity Forms to Telegram?</h2>
                     <p class="cta-description">
-                        Join the waitlist for early access to the Telegram Notifier for Gravity Forms.
-                        Be among the first to streamline your form-to-notification workflow.
+                        JF Notify is now live and ready to streamline your form-to-notification workflow.
+                        Visit jfnotify.com to get started today.
                     </p>
                     <div class="cta-buttons">
-                        <a href="mailto:josefresco@gmail.com?subject=Telegram Notifier for Gravity Forms - Early Access Request&body=Hi Jose,%0D%0A%0D%0AI'd like to join the early access program for Telegram Notifier for Gravity Forms.%0D%0A%0D%0ADetails:%0D%0A- Company/Organization: [Your company]%0D%0A- Number of forms to connect: [Estimate]%0D%0A- Specific requirements: [Any special needs]%0D%0A%0D%0AThank you,%0D%0A[Your name]" class="btn-cta">
-                            Join Waitlist
+                        <a href="https://jfnotify.com" target="_blank" rel="noopener" class="btn-cta">
+                            Visit JF Notify
                         </a>
                         <a href="/#projects" class="btn-secondary">View Other Projects</a>
                     </div>
@@ -323,9 +348,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2026 Jose Fresco. Telegram Notifier for Gravity Forms - WordPress Plugin.</p>
+                <p>&copy; 2026 Jose Fresco. JF Notify - WordPress Gravity Forms to Telegram Plugin.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://jfnotify.com" target="_blank" rel="noopener">JF Notify</a>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ const ASSETS_TO_CACHE = [
   '/blog/jf-website-monitor-launch.html',
   '/blog/moving-hosting-to-github-pages-with-gemini-ai.html',
   '/projects/jf-website-monitor.html',
-  '/projects/telegram-notifier-gravity-forms.html'
+  '/projects/jf-notify.html'
 ];
 
 self.addEventListener('install', event => {
