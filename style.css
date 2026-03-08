@@ -2187,3 +2187,156 @@ body.light-theme .newsletter-form input[type="email"] {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.1);
 }
+
+/* ============================================
+   ACCESSIBILITY STYLES - WCAG 2.1 AA Compliance
+   ============================================ */
+
+/* Skip Link - Must be first focusable element */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--neural-primary);
+    color: var(--primary-bg);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 10000;
+    border-radius: 0 0 8px 8px;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+/* Visually Hidden - For screen reader only content */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Global Focus Styles - WCAG 2.4.7 Focus Visible */
+*:focus {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+}
+
+/* Focus Styles for Buttons */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-cta:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
+}
+
+/* Focus Styles for Navigation Links */
+.nav-link:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Focus Styles for Form Inputs */
+input[type="email"]:focus-visible,
+input[type="text"]:focus-visible,
+input[type="password"]:focus-visible,
+input[type="search"]:focus-visible,
+input[type="tel"]:focus-visible,
+input[type="url"]:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+    border-color: var(--neural-primary);
+}
+
+/* Focus Styles for Contact Links */
+.contact-link:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+}
+
+/* Focus Styles for Theme Toggle */
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
+}
+
+/* Focus Styles for Project Cards */
+.project-card:focus-within {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+}
+
+/* Focus Styles for Blog Cards */
+.blog-card:focus-within {
+    outline: 2px solid var(--neural-primary);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --card-bg: rgba(26, 29, 41, 0.95);
+        --text-secondary: #cbd5e1;
+    }
+
+    .project-card,
+    .contact-link,
+    .stat-item {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    *:focus-visible {
+        outline-width: 3px;
+    }
+}
+
+/* Reduced Motion Support - Enhanced */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .neural-nodes {
+        animation: none;
+        opacity: 0;
+    }
+
+    .skip-link {
+        transition: none;
+    }
+}
