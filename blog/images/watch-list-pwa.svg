@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1d29;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e50914;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b20710;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="poster1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2340;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0d1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="poster2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f3a1f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1a0d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="poster3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a0d0d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="poster4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a1a3a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#150d20;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2130;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#12141e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="phoneClip">
+      <rect x="220" y="30" width="240" height="520" rx="28"/>
+    </clipPath>
+    <clipPath id="poster1Clip"><rect x="238" y="235" width="97" height="130" rx="6"/></clipPath>
+    <clipPath id="poster2Clip"><rect x="345" y="235" width="97" height="130" rx="6"/></clipPath>
+    <clipPath id="poster3Clip"><rect x="238" y="375" width="97" height="130" rx="6"/></clipPath>
+    <clipPath id="poster4Clip"><rect x="345" y="375" width="97" height="130" rx="6"/></clipPath>
+  </defs>
+
+  <!-- Page background -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Subtle dot grid -->
+  <g opacity="0.06">
+    <circle cx="80" cy="80" r="1.5" fill="#e50914"/>
+    <circle cx="160" cy="60" r="1.5" fill="#fff"/>
+    <circle cx="720" cy="100" r="1.5" fill="#e50914"/>
+    <circle cx="680" cy="200" r="1.5" fill="#fff"/>
+    <circle cx="60" cy="300" r="1.5" fill="#fff"/>
+    <circle cx="740" cy="400" r="1.5" fill="#e50914"/>
+    <circle cx="100" cy="500" r="1.5" fill="#fff"/>
+    <circle cx="700" cy="540" r="1.5" fill="#fff"/>
+  </g>
+
+  <!-- Left label panel -->
+  <g transform="translate(40, 180)">
+    <!-- App title -->
+    <g filter="url(#glow)">
+      <polygon points="0,10 16,18 0,26" fill="#e50914"/>
+    </g>
+    <text x="24" y="23" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="1">WL</text>
+
+    <text x="0" y="60" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="white">Watch List</text>
+    <text x="0" y="85" font-family="Inter, Arial, sans-serif" font-size="13" fill="#94a3b8">Your private streaming guide</text>
+
+    <!-- Feature pills -->
+    <g transform="translate(0, 110)">
+      <rect x="0" y="0" width="130" height="28" rx="14" fill="rgba(229,9,20,0.15)" stroke="rgba(229,9,20,0.4)" stroke-width="1"/>
+      <text x="14" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e50914">●</text>
+      <text x="28" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e2e8f0">No ads</text>
+    </g>
+    <g transform="translate(0, 148)">
+      <rect x="0" y="0" width="130" height="28" rx="14" fill="rgba(229,9,20,0.15)" stroke="rgba(229,9,20,0.4)" stroke-width="1"/>
+      <text x="14" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e50914">●</text>
+      <text x="28" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e2e8f0">No tracking</text>
+    </g>
+    <g transform="translate(0, 186)">
+      <rect x="0" y="0" width="130" height="28" rx="14" fill="rgba(229,9,20,0.15)" stroke="rgba(229,9,20,0.4)" stroke-width="1"/>
+      <text x="14" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e50914">●</text>
+      <text x="28" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e2e8f0">Faster</text>
+    </g>
+    <g transform="translate(0, 224)">
+      <rect x="0" y="0" width="130" height="28" rx="14" fill="rgba(229,9,20,0.15)" stroke="rgba(229,9,20,0.4)" stroke-width="1"/>
+      <text x="14" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e50914">●</text>
+      <text x="28" y="19" font-family="Inter, Arial, sans-serif" font-size="11" fill="#e2e8f0">Installable PWA</text>
+    </g>
+
+    <!-- TMDB badge -->
+    <g transform="translate(0, 280)">
+      <text x="0" y="14" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">Powered by</text>
+      <rect x="0" y="22" width="90" height="24" rx="5" fill="#01b4e4" opacity="0.15" stroke="#01b4e4" stroke-width="1" stroke-opacity="0.5"/>
+      <text x="10" y="38" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#01b4e4">TMDB</text>
+    </g>
+  </g>
+
+  <!-- Phone frame -->
+  <rect x="218" y="28" width="244" height="524" rx="30" fill="#0d0e14" filter="url(#shadow)"/>
+  <rect x="220" y="30" width="240" height="520" rx="28" fill="url(#phoneGrad)"/>
+
+  <!-- Status bar -->
+  <rect x="220" y="30" width="240" height="30" rx="28" fill="#111318" clip-path="url(#phoneClip)"/>
+  <rect x="220" y="44" width="240" height="16" fill="#111318"/>
+
+  <!-- Notch -->
+  <rect x="300" y="30" width="80" height="22" rx="11" fill="#0a0b0f"/>
+
+  <!-- App chrome - nav bar -->
+  <rect x="220" y="60" width="240" height="40" fill="#111318"/>
+  <!-- WL logo in nav -->
+  <polygon points="234,72 244,78 234,84" fill="#e50914"/>
+  <text x="248" y="82" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="white">WL</text>
+  <!-- Nav tabs -->
+  <text x="298" y="82" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">My List</text>
+  <text x="343" y="82" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600" fill="white">Search</text>
+  <!-- Dice icon -->
+  <rect x="430" y="68" width="22" height="22" rx="5" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <circle cx="436" cy="74" r="1.5" fill="white"/>
+  <circle cx="441" cy="74" r="1.5" fill="white"/>
+  <circle cx="441" cy="79" r="1.5" fill="white"/>
+  <circle cx="436" cy="84" r="1.5" fill="white"/>
+
+  <!-- Search bar -->
+  <rect x="228" y="108" width="146" height="28" rx="8" fill="#1e2130" stroke="#2d3148" stroke-width="1"/>
+  <text x="240" y="126" font-family="Inter, Arial, sans-serif" font-size="9" fill="#4b5563">Search movies...</text>
+  <rect x="382" y="108" width="70" height="28" rx="8" fill="url(#redGrad)"/>
+  <text x="417" y="126" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600" fill="white" text-anchor="middle">Search</text>
+
+  <!-- Browse by genre label -->
+  <text x="228" y="154" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="1">BROWSE BY GENRE</text>
+
+  <!-- Genre pills row 1 -->
+  <rect x="228" y="162" width="46" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="251" y="176" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Action</text>
+  <rect x="280" y="162" width="56" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="308" y="176" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Adventure</text>
+  <rect x="342" y="162" width="58" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="371" y="176" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Animation</text>
+  <!-- Genre pills row 2 -->
+  <rect x="228" y="188" width="46" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="251" y="202" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Comedy</text>
+  <rect x="280" y="188" width="38" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="299" y="202" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Crime</text>
+  <rect x="324" y="188" width="76" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+  <text x="362" y="202" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Documentary</text>
+
+  <!-- Trending label -->
+  <text x="228" y="226" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="1">TRENDING THIS WEEK</text>
+
+  <!-- Movie poster 1 (dark blue - War Machine style) -->
+  <rect x="238" y="235" width="97" height="130" rx="6" fill="url(#poster1)"/>
+  <!-- Poster 1 accent lines suggesting a movie poster -->
+  <rect x="238" y="235" width="97" height="130" rx="6" fill="none" stroke="#1e3a5f" stroke-width="1"/>
+  <line x1="255" y1="290" x2="320" y2="290" stroke="#1e4a7f" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <line x1="255" y1="300" x2="305" y2="300" stroke="#1e4a7f" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <!-- Red glow effect at top of poster 1 -->
+  <ellipse cx="286" cy="250" rx="30" ry="15" fill="#e50914" opacity="0.15"/>
+  <text x="287" y="344" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" fill="white" text-anchor="middle">War Machine</text>
+  <text x="287" y="356" font-family="Inter, Arial, sans-serif" font-size="7" fill="#64748b" text-anchor="middle">2026</text>
+  <!-- In List button -->
+  <rect x="238" y="360" width="97" height="18" rx="4" fill="#166534"/>
+  <text x="287" y="372" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" fill="#4ade80" text-anchor="middle">In List</text>
+
+  <!-- Movie poster 2 (colorful - Zootopia style) -->
+  <rect x="345" y="235" width="97" height="130" rx="6" fill="url(#poster2)"/>
+  <rect x="345" y="235" width="97" height="130" rx="6" fill="none" stroke="#1a4a2a" stroke-width="1"/>
+  <!-- Teal city-sign style element -->
+  <rect x="370" y="255" width="48" height="30" rx="4" fill="#0d9488" opacity="0.5"/>
+  <text x="394" y="275" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">2</text>
+  <text x="394" y="344" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" fill="white" text-anchor="middle">Zootopia 2</text>
+  <text x="394" y="356" font-family="Inter, Arial, sans-serif" font-size="7" fill="#64748b" text-anchor="middle">2025</text>
+  <!-- Add button -->
+  <rect x="345" y="360" width="97" height="18" rx="4" fill="url(#redGrad)"/>
+  <text x="394" y="372" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" fill="white" text-anchor="middle">+ Add</text>
+
+  <!-- Movie poster 3 -->
+  <rect x="238" y="385" width="97" height="115" rx="6" fill="url(#poster3)"/>
+  <rect x="238" y="385" width="97" height="115" rx="6" fill="none" stroke="#4a1a1a" stroke-width="1"/>
+  <line x1="255" y1="430" x2="320" y2="430" stroke="#7f1a1a" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="255" y1="440" x2="300" y2="440" stroke="#7f1a1a" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Movie poster 4 -->
+  <rect x="345" y="385" width="97" height="115" rx="6" fill="url(#poster4)"/>
+  <rect x="345" y="385" width="97" height="115" rx="6" fill="none" stroke="#2a1a4a" stroke-width="1"/>
+  <line x1="362" y1="430" x2="427" y2="430" stroke="#4a2a7f" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="362" y1="440" x2="410" y2="440" stroke="#4a2a7f" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Bottom nav bar of phone -->
+  <rect x="220" y="518" width="240" height="32" rx="0" fill="#111318"/>
+  <rect x="220" y="530" width="240" height="20" rx="0" fill="#111318"/>
+  <rect x="220" y="538" width="240" height="12" rx="28" fill="#111318" clip-path="url(#phoneClip)"/>
+  <!-- Home bar -->
+  <rect x="300" y="542" width="80" height="4" rx="2" fill="#374151"/>
+
+  <!-- Right side: feature callouts -->
+  <g transform="translate(490, 100)">
+    <!-- Streaming providers callout -->
+    <rect x="0" y="0" width="240" height="100" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(229,9,20,0.25)" stroke-width="1"/>
+    <text x="16" y="24" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.5">STREAMING AVAILABILITY</text>
+    <!-- Netflix icon simulation -->
+    <rect x="16" y="36" width="38" height="38" rx="8" fill="#e50914"/>
+    <text x="35" y="61" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="white" text-anchor="middle">N</text>
+    <!-- Prime icon simulation -->
+    <rect x="62" y="36" width="38" height="38" rx="8" fill="#00a8e0"/>
+    <text x="81" y="59" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">prime</text>
+    <!-- Disney+ icon simulation -->
+    <rect x="108" y="36" width="38" height="38" rx="8" fill="#0d3b8e"/>
+    <text x="127" y="59" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">D+</text>
+    <!-- Hulu icon simulation -->
+    <rect x="154" y="36" width="38" height="38" rx="8" fill="#1ce783"/>
+    <text x="173" y="59" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#0a0a0a" text-anchor="middle">hulu</text>
+    <text x="16" y="88" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">All major services via TMDB API</text>
+
+    <!-- Watchlist callout -->
+    <rect x="0" y="116" width="240" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(229,9,20,0.25)" stroke-width="1"/>
+    <text x="16" y="140" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.5">PERSONAL WATCHLIST</text>
+    <text x="16" y="162" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="white">35 titles saved</text>
+    <text x="16" y="180" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">Stored locally · No account needed</text>
+
+    <!-- PWA callout -->
+    <rect x="0" y="212" width="240" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(229,9,20,0.25)" stroke-width="1"/>
+    <text x="16" y="236" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.5">PROGRESSIVE WEB APP</text>
+    <text x="16" y="258" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="white">Install on any device</text>
+    <text x="16" y="276" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">No App Store · Works offline</text>
+
+    <!-- Filter callout -->
+    <rect x="0" y="308" width="240" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(229,9,20,0.25)" stroke-width="1"/>
+    <text x="16" y="332" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#64748b" letter-spacing="0.5">SMART FILTERS</text>
+    <!-- Filter pills -->
+    <rect x="16" y="342" width="36" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+    <text x="34" y="356" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">All</text>
+    <rect x="58" y="342" width="46" height="20" rx="10" fill="url(#redGrad)"/>
+    <text x="81" y="356" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="600" fill="white" text-anchor="middle">Stream</text>
+    <rect x="110" y="342" width="36" height="20" rx="10" fill="#1e2130" stroke="#374151" stroke-width="1"/>
+    <text x="128" y="356" font-family="Inter, Arial, sans-serif" font-size="8" fill="#e2e8f0" text-anchor="middle">Free</text>
+    <text x="16" y="374" font-family="Inter, Arial, sans-serif" font-size="10" fill="#64748b">Genre · Sort · View mode</text>
+
+    <!-- Bottom tag line -->
+    <text x="0" y="430" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#e50914">JustWatch, without the baggage.</text>
+  </g>
+</svg>
