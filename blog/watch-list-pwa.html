@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch List: A Private JustWatch Alternative PWA Powered by TMDB - Jose Fresco</title>
+    <meta name="description" content="I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Watch List: A Private JustWatch Alternative PWA Powered by TMDB - Jose Fresco">
+    <meta property="og:description" content="I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/watch-list-pwa.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/watch-list-pwa.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-15T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Watch List: A Private JustWatch Alternative PWA Powered by TMDB - Jose Fresco">
+    <meta name="twitter:description" content="I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/watch-list-pwa.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/watch-list-pwa.html"
+      },
+      "headline": "Watch List: A Private JustWatch Alternative PWA Powered by TMDB",
+      "description": "I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.",
+      "image": "https://josefresco.com/blog/images/watch-list-pwa.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-15T00:00:00+00:00",
+      "dateModified": "2026-03-15T00:00:00+00:00",
+      "keywords": "PWA, Progressive Web App, TMDB, JustWatch, Movie Tracker, Streaming, JavaScript, Privacy"
+    }
+    </script>
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Watch List: A Private JustWatch Alternative PWA Powered by TMDB</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                    <p><strong>TLDR:</strong> I got tired of JustWatch's ads, tracking, and bloat, so I built my own replacement. Watch List is a private Progressive Web App that uses the TMDB API to search movies and TV shows, find where to stream them, and keep a personal watchlist — with no ads, no tracking, and a much faster experience.</p>
+                </div>
+
+                <div class="blog-post-content">
+                    <p>I use <strong>JustWatch</strong> all the time. It's genuinely useful — one place to search across every streaming service and find out where a title is available. But using it has become increasingly frustrating. Ads everywhere, slow load times, tracking pixels, dark-pattern upsells, and a UI that seems to grow heavier with every visit. I just want to look up a movie.</p>
+
+                    <p>So I built my own. <strong>Watch List</strong> is a private Progressive Web App that does what JustWatch does — minus everything I don't need.</p>
+
+                    <h2>The Problem with JustWatch</h2>
+                    <p>JustWatch is a great idea executed with too much commercial overhead. Here's what I was running into daily:</p>
+                    <ul>
+                        <li><strong>Ads and promoted content</strong> — results are influenced by what services pay to promote</li>
+                        <li><strong>Tracking</strong> — browsing history, clicks, and behavior all feeding into ad profiles</li>
+                        <li><strong>Slow performance</strong> — heavy JavaScript bundles, third-party scripts, and lazy-loaded ads all fighting for bandwidth</li>
+                        <li><strong>Noise</strong> — recommendations, "trending" rows, email prompts, and push notification requests cluttering a simple lookup task</li>
+                    </ul>
+
+                    <blockquote>
+                        <p>"The best tool is the one that does exactly what you need and nothing else."</p>
+                    </blockquote>
+
+                    <p>The core feature — "what's streaming where?" — is simple. The TMDB API provides all the data needed to replicate it cleanly. So I did.</p>
+
+                    <h2>What Watch List Does</h2>
+                    <p>The app covers the full JustWatch core loop:</p>
+                    <ul>
+                        <li><strong>Search</strong> — find any movie or TV show via the TMDB API</li>
+                        <li><strong>Streaming availability</strong> — see which services have the title (Netflix, Hulu, Prime, Disney+, etc.)</li>
+                        <li><strong>Movie &amp; TV details</strong> — cast, synopsis, ratings, release year, runtime</li>
+                        <li><strong>Personal watchlist</strong> — save titles to watch later, stored locally</li>
+                        <li><strong>Installable PWA</strong> — add to home screen, use it like a native app on any device</li>
+                    </ul>
+
+                    <p>What it does <em>not</em> do: collect data, serve ads, track anything, or ask for an account.</p>
+
+                    <h2>Why TMDB?</h2>
+                    <p>The Movie Database (TMDB) is a community-built, open API covering virtually every movie and TV show. It provides:</p>
+                    <ul>
+                        <li>Rich metadata — titles, posters, ratings, cast, crew, overviews</li>
+                        <li><strong>Watch providers endpoint</strong> — streaming availability by country, sourced from JustWatch's own data (the irony is not lost on me)</li>
+                        <li>Generous free tier for personal projects</li>
+                        <li>Stable, well-documented API that's been around for years</li>
+                    </ul>
+
+                    <p>The watch provider data is the key piece. TMDB exposes it via <code>/movie/{id}/watch/providers</code> and <code>/tv/{id}/watch/providers</code>, returning flatrate, rent, and buy options with provider logos — everything needed to replicate the core JustWatch feature.</p>
+
+                    <h2>Building It as a PWA</h2>
+                    <p>Making Watch List a Progressive Web App was a deliberate choice. The goal was something that feels native on mobile without the overhead of an app store submission or a backend.</p>
+
+                    <h3>Service Worker for Offline Support</h3>
+                    <p>A service worker caches the app shell — HTML, CSS, JS, and static assets — so the interface loads instantly even on a slow connection. API results are cached with a short TTL so recently searched titles don't need a fresh network request every time.</p>
+
+                    <h3>Web App Manifest</h3>
+                    <p>The manifest enables "Add to Home Screen" on both iOS and Android. The installed app launches in standalone mode with no browser chrome — full-screen, icon on the home screen, indistinguishable from a native app at a glance.</p>
+
+                    <h3>Local Storage for the Watchlist</h3>
+                    <p>The watchlist is stored entirely in <code>localStorage</code>. No account, no server, no sync across devices (yet). For a private single-user app, this is exactly the right level of complexity. The data is yours, on your device, gone when you want it gone.</p>
+
+                    <h2>Performance by Default</h2>
+                    <p>Without ads, tracking scripts, or third-party tag managers, the app is fast by default. A few intentional decisions keep it that way:</p>
+                    <ul>
+                        <li><strong>No framework overhead</strong> — vanilla JavaScript, no React or Vue build pipeline to bundle</li>
+                        <li><strong>TMDB images via CDN</strong> — poster and backdrop images served directly from TMDB's image CDN, sized appropriately</li>
+                        <li><strong>Debounced search</strong> — input is debounced before hitting the API, reducing unnecessary requests as you type</li>
+                        <li><strong>Minimal dependencies</strong> — the entire app is a few files; nothing to audit, nothing to update, nothing to break</li>
+                    </ul>
+
+                    <p>The difference in feel compared to JustWatch is immediate. No layout shift from ads loading in. No spinner while a consent management platform initializes. Just the app.</p>
+
+                    <h2>Private by Design</h2>
+                    <p>This isn't an anti-JustWatch screed — it's a recognition that commercial products optimize for their business model, not your preferences. Watch List optimizes for mine:</p>
+                    <ul>
+                        <li>Self-hosted or run locally — no third party sees your searches</li>
+                        <li>No analytics, no error tracking, no telemetry</li>
+                        <li>TMDB API key stays in your environment — your usage, your account</li>
+                        <li>The watchlist never leaves your browser</li>
+                    </ul>
+
+                    <p>The trade-off is that it's not going to get new features driven by A/B tests and product managers. That's fine. It does what I need.</p>
+
+                    <h2>What I'd Add Next</h2>
+                    <p>A few things on the list for future iterations:</p>
+                    <ul>
+                        <li><strong>Filter by streaming service</strong> — show only titles available on services I subscribe to</li>
+                        <li><strong>Watchlist sync</strong> — optional export/import or sync via a simple self-hosted endpoint</li>
+                        <li><strong>Watched history</strong> — mark titles as watched, separate from the watchlist</li>
+                        <li><strong>Person search</strong> — look up an actor or director and browse their filmography</li>
+                        <li><strong>Notifications</strong> — alert when a watchlisted title becomes available on a specific service</li>
+                    </ul>
+
+                    <h2>Lessons from the Build</h2>
+                    <p>A few things stood out building this:</p>
+                    <ol>
+                        <li><strong>The TMDB API is excellent</strong> — well-documented, reliable, and the watch provider data is surprisingly comprehensive for most countries</li>
+                        <li><strong>PWAs are underused</strong> — for personal tools and internal apps, the install experience is good enough and the deployment story (static files) is dramatically simpler than native apps</li>
+                        <li><strong>Constraints improve focus</strong> — no backend, no accounts, no framework forced clean decisions at every step</li>
+                        <li><strong>Speed is a feature</strong> — removing the things that slow down a page isn't just a performance optimization, it changes how the app feels to use</li>
+                    </ol>
+
+                    <h2>Try It Yourself</h2>
+                    <p>Watch List is a private project, but the approach is straightforward to replicate. A free TMDB API key, a few hundred lines of JavaScript, and a service worker is all it takes to have a personal streaming guide that works exactly the way you want.</p>
+
+                    <p>If you're tired of being the product on sites you use purely as tools, building your own version is a satisfying exercise — and often less work than it sounds.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://www.themoviedb.org/documentation/api" target="_blank" rel="noopener" class="btn-primary">TMDB API Docs →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom PWA Built?</h2>
+                <p class="cta-description">
+                    I build fast, focused Progressive Web Apps that do exactly what you need — without the bloat.
+                    From API integrations to offline-capable tools, let's build something useful together.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=PWA Development&body=Hi Jose,%0D%0A%0D%0AI read about Watch List and have an idea for a Progressive Web App.%0D%0A%0D%0AMy project idea:%0D%0A- [Description of your project]%0D%0A%0D%0ALet's discuss how to bring this to life.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start Your Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
