@@ -28,6 +28,19 @@
         </nav>
     `;
 
+    const globalFooter = `
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; ${new Date().getFullYear()} Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    `;
+
     function setActiveNav() {
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
@@ -55,10 +68,22 @@
         }
     }
 
+    function initGlobalFooter() {
+        const footer = document.querySelector('.footer');
+        if (footer) {
+            // Replace footer content with global footer
+            footer.innerHTML = globalFooter;
+        }
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initGlobalHeader);
+        document.addEventListener('DOMContentLoaded', () => {
+            initGlobalHeader();
+            initGlobalFooter();
+        });
     } else {
         initGlobalHeader();
+        initGlobalFooter();
     }
 })();
