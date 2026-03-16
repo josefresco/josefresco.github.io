@@ -2531,6 +2531,237 @@ body.light-theme .theme-toggle:focus-visible {
     margin-top: 1rem;
 }
 
+/* AI Tools Page Styles */
+.ai-tools-section {
+    padding: 60px 0;
+}
+
+.ai-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.ai-intro p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.tool-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all var(--transition-smooth);
+}
+
+.tool-card:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-4px);
+}
+
+.tool-card.featured {
+    border-color: rgba(0, 212, 255, 0.4);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tool-icon {
+    font-size: 2.5rem;
+}
+
+.tool-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    flex: 1;
+}
+
+.tool-badge {
+    background: var(--btn-primary);
+    color: var(--text-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tool-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.tool-uses {
+    margin-bottom: 1.5rem;
+}
+
+.tool-uses h3 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.tool-uses ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tool-uses li {
+    padding: 0.4rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.tool-uses li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--neural-primary);
+    font-weight: bold;
+}
+
+.tool-links {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-link {
+    color: var(--neural-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+}
+
+.tool-link:hover {
+    color: var(--text-accent);
+}
+
+/* Workflow Section */
+.workflow-section {
+    margin: 4rem 0;
+    padding: 3rem;
+    background: rgba(26, 29, 41, 0.5);
+    border-radius: 16px;
+}
+
+.workflow-section .section-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.workflow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.workflow-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 48px;
+    height: 48px;
+    background: var(--btn-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Why Multiple Tools Section */
+.why-multiple {
+    margin: 4rem 0;
+}
+
+.why-multiple .section-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.reason-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all var(--transition-smooth);
+}
+
+.reason-card:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.reason-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.reason-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .workflow-section {
+        padding: 2rem 1rem;
+    }
+
+    .reasons-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .newsletter-form {
         flex-direction: column;
