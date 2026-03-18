@@ -131,7 +131,7 @@
                     <p>Getting started with Arpy Assist is straightforward:</p>
 
                     <h3>1. Install Dependencies</h3>
-                    <pre><code>cd /home/josefresco/Projects/arpy-assist
+                    <pre><code>cd /path/to/arpy-assist
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt</code></pre>
@@ -142,14 +142,14 @@ pip install -r requirements.txt</code></pre>
                     <h3>3. Access the Interface</h3>
                     <ul>
                         <li><strong>Local:</strong> http://localhost:5000</li>
-                        <li><strong>Internet:</strong> https://arpy.colewebdev.com (via Cloudflare Tunnel)</li>
+                        <li><strong>Remote:</strong> Via Cloudflare Tunnel (configure your own domain)</li>
                     </ul>
 
                     <h2>Usage</h2>
 
                     <h3>Chat Interface</h3>
                     <p>Simply type your requests naturally, just like you would in a conversation:</p>
-                    <pre><code>Clone safe-share and add a joke to README</code></pre>
+                    <pre><code>Clone my-repo and add a joke to README</code></pre>
 
                     <h3>Smart Buttons</h3>
                     <p>Quick action buttons for common tasks:</p>
@@ -168,12 +168,12 @@ pip install -r requirements.txt</code></pre>
   timeout: 120
 
 repos:
-  - josefresco/family-dash
-  - josefresco/safe-share</code></pre>
+  - your-username/your-repo-1
+  - your-username/your-repo-2</code></pre>
 
                     <h2>Cloudflare Tunnel Integration</h2>
                     <p>One of the standout features is the Cloudflare Tunnel integration. This allows secure access to Arpy Assist from anywhere without exposing your home network or dealing with port forwarding.</p>
-                    <p>The tunnel is already configured and accessible at <strong>https://arpy.colewebdev.com</strong>. Tunnel configuration lives at <code>/etc/cloudflared/config.yml</code>.</p>
+                    <p>Configure your own domain by setting up a Cloudflare Tunnel pointing to your local Flask server. Tunnel configuration typically lives at <code>/etc/cloudflared/config.yml</code>.</p>
 
                     <h2>Logging</h2>
                     <p>For debugging and monitoring:</p>
