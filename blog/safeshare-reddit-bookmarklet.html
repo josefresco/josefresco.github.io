@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco</title>
+    <meta name="description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="dns-prefetch" href="//linkedin.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco">
+    <meta property="og:description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/safeshare-reddit-bookmarklet.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/safeshare-reddit.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-20T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco">
+    <meta name="twitter:description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/safeshare-reddit.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/safeshare-reddit-bookmarklet.html"
+      },
+      "headline": "SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet",
+      "description": "Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.",
+      "image": "https://josefresco.com/blog/images/safeshare-reddit.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-20T00:00:00+00:00",
+      "dateModified": "2026-03-20T00:00:00+00:00",
+      "keywords": "Reddit, Bookmarklet, Next.js, Vercel, Redis, Share Links, Clean Reader, Web Development"
+    }
+    </script>
+</head>
+<body>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="#contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/safeshare-reddit.svg" type="image/svg+xml">
+                        <img src="images/safeshare-reddit.svg" alt="SafeShare interface showing Reddit post sharing with bookmarklet" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> SafeShare creates clean, shareable views of Reddit posts — no login walls, no app install prompts, no ads. Built with Next.js 16 and Vercel Redis, it features a one-click bookmarklet for instant link generation. Perfect for sharing with family and friends who just want to read the content.
+                    </div>
+
+                    <h2>The Problem</h2>
+                    <p>We've all been there: you find a great Reddit post and want to share it with a friend or family member. But when they click the link, they're hit with:</p>
+                    <ul>
+                        <li><strong>Login walls</strong> — "Sign in to continue"</li>
+                        <li><strong>App install prompts</strong> — "Open in the Reddit app"</li>
+                        <li><strong>Ads and promoted content</strong> — Cluttering the reading experience</li>
+                        <li><strong>Endless scrolling</strong> — Recommended posts, trending content, noise everywhere</li>
+                    </ul>
+                    <p>For a simple act of sharing, the experience is frustrating — especially for less tech-savvy users who just want to read what you sent them.</p>
+
+                    <h2>Enter SafeShare</h2>
+                    <p><strong>SafeShare</strong> is my solution to this problem. It's a clean reader view for Reddit posts that strips away everything except what matters: the post content and top comments.</p>
+                    <p>Here's how it works:</p>
+                    <ol>
+                        <li>Paste a Reddit URL into SafeShare</li>
+                        <li>Get a clean, shareable link (e.g., <code>safeshare.vercel.app/view/abc123</code>)</li>
+                        <li>Anyone who visits sees the post content and comments — nothing else</li>
+                    </ol>
+                    <p>Snapshots are stored for 90 days, giving you plenty of time to share before they expire.</p>
+
+                    <h2>Supported Content</h2>
+                    <p>SafeShare handles all the common Reddit post types:</p>
+                    <ul>
+                        <li><strong>Text posts</strong> — Full self-post content with formatting</li>
+                        <li><strong>Image posts</strong> — Single images and galleries</li>
+                        <li><strong>Videos</strong> — Reddit-hosted videos (note: no audio due to Reddit's streaming format)</li>
+                        <li><strong>External links</strong> — Link posts with preview images</li>
+                    </ul>
+
+                    <h2>The Bookmarklet Feature</h2>
+                    <p>The real magic happens with the bookmarklet. Instead of copying a Reddit URL, pasting it into SafeShare, and then sharing the generated link — you can do it all in one click.</p>
+                    <p><strong>How to use the bookmarklet:</strong></p>
+                    <ol>
+                        <li>Drag the "SafeShare" button to your browser's bookmarks bar</li>
+                        <li>Navigate to any Reddit post</li>
+                        <li>Click the bookmarklet</li>
+                        <li>Your clean SafeShare link is automatically copied to clipboard</li>
+                        <li>Paste and share!</li>
+                    </ol>
+                    <p>The bookmarklet fetches the post data directly from Reddit's API (client-side to avoid CORS issues), sends it to the SafeShare backend, and returns a shareable link — all in under a second.</p>
+
+                    <h2>Tech Stack</h2>
+                    <p>SafeShare is built with modern, serverless technologies:</p>
+                    <ul>
+                        <li><strong><a href="https://nextjs.org" target="_blank" rel="noopener">Next.js 16</a></strong> — App Router, React Server Components, optimized performance</li>
+                        <li><strong><a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a></strong> — Hosting, edge functions, and automatic deployments</li>
+                        <li><strong>Vercel Redis</strong> — Fast, ephemeral storage for post snapshots (90-day TTL)</li>
+                        <li><strong><a href="https://tailwindcss.com" target="_blank" rel="noopener">Tailwind CSS</a></strong> — Clean, responsive UI</li>
+                        <li><strong>TypeScript</strong> — Type-safe development</li>
+                    </ul>
+
+                    <h2>Architecture Notes</h2>
+                    <p>One interesting challenge: Reddit's API blocks server-side requests from datacenter IPs (like Vercel's). To work around this, SafeShare fetches Reddit data directly in the browser, then stores it server-side. This means:</p>
+                    <ul>
+                        <li>No Reddit API credentials are required</li>
+                        <li>No server-side rate limiting issues</li>
+                        <li>The backend only stores data — it never talks to Reddit</li>
+                    </ul>
+                    <p>This architecture keeps the project simple and free to host, while still providing a reliable sharing experience.</p>
+
+                    <h2>Local Development</h2>
+                    <p>Want to run SafeShare locally? Here's how:</p>
+                    <pre><code># Clone the repository
+git clone https://github.com/josefresco/safe-share.git
+cd safe-share
+
+# Install dependencies
+npm install
+
+# Pull environment variables from Vercel
+vercel env pull .env.local
+
+# Start dev server
+npm run dev</code></pre>
+                    <p>Open <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> and you're ready to go.</p>
+
+                    <h2>Environment Variables</h2>
+                    <p>SafeShare requires just one environment variable:</p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Variable</th>
+                                <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 0.75rem; font-family: monospace; color: var(--neural-primary);">REDIS_URL</td>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">Vercel Redis connection URL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Deployment</h2>
+                    <p>SafeShare is connected to GitHub — any push to <code>master</code> triggers an automatic Vercel deployment. This means:</p>
+                    <ul>
+                        <li>Zero-config deployments</li>
+                        <li>Preview URLs for every branch</li>
+                        <li>Automatic SSL certificates</li>
+                        <li>Global edge caching</li>
+                    </ul>
+
+                    <h2>What's Next</h2>
+                    <p>SafeShare is already useful in its current form, but there are plenty of ideas for future improvements:</p>
+                    <ul>
+                        <li><strong>Custom themes</strong> — Dark mode (already there!), light mode, or fun color schemes</li>
+                        <li><strong>Comment depth options</strong> — Choose how many levels of nested comments to display</li>
+                        <li><strong>Export options</strong> — Download posts as PDF or Markdown</li>
+                        <li><strong>Analytics</strong> — Track how many times your shared links are viewed (privacy-respecting, of course)</li>
+                    </ul>
+
+                    <h2>Try It Out</h2>
+                    <p>SafeShare is live and ready to use:</p>
+                    <ul>
+                        <li><strong>Web App:</strong> <a href="https://safe-share-gamma.vercel.app" target="_blank" rel="noopener">safe-share-gamma.vercel.app</a></li>
+                        <li><strong>Bookmarklet:</strong> <a href="https://safe-share-gamma.vercel.app/bookmarklet.html" target="_blank" rel="noopener">Get the bookmarklet</a></li>
+                        <li><strong>Source Code:</strong> <a href="https://github.com/josefresco/safe-share" target="_blank" rel="noopener">github.com/josefresco/safe-share</a></li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>SafeShare solves a real problem I encountered daily: sharing Reddit content without the friction. Whether you're sharing a funny post with family, a technical discussion with colleagues, or news with friends, SafeShare makes it clean and simple.</p>
+                    <p>The one-click bookmarklet is the killer feature — it turns a multi-step process into a single click. Once you start using it, you'll wonder how you ever shared Reddit links any other way.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="/projects" class="btn-primary">View Projects →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
