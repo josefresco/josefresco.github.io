@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streamlining Content Curation with 2-Click Blog Saving - Jose Fresco</title>
-    <meta name="description" content="Building a Chrome extension to save URLs to WordPress with just 2 clicks, eliminating the friction in content curation">
+    <title>Save to My Blog: 2-Click WordPress Content Curation Chrome Extension - Jose Fresco</title>
+    <meta name="description" content="Save to My Blog is a Chrome extension that publishes any URL to your WordPress blog in 2 clicks — using the REST API and Application Passwords for secure, frictionless content curation.">
+    <link rel="canonical" href="https://josefresco.com/blog/save-to-my-blog.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="blog.css">
 
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -20,22 +21,22 @@
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Streamlining Content Curation with 2-Click Blog Saving - Jose Fresco">
-    <meta property="og:description" content="Building a Chrome extension to save URLs to WordPress with just 2 clicks, eliminating the friction in content curation">
+    <meta property="og:title" content="Save to My Blog: 2-Click WordPress Content Curation Chrome Extension - Jose Fresco">
+    <meta property="og:description" content="Save to My Blog is a Chrome extension that publishes any URL to your WordPress blog in 2 clicks — using the REST API and Application Passwords for secure, frictionless content curation.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/save-to-my-blog.html">
     <meta property="og:image" content="https://josefresco.com/blog/images/save-to-my-blog.svg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2025-10-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-21T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Browser Extension">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Streamlining Content Curation with 2-Click Blog Saving - Jose Fresco">
-    <meta name="twitter:description" content="Building a Chrome extension to save URLs to WordPress with just 2 clicks, eliminating the friction in content curation">
+    <meta name="twitter:title" content="Save to My Blog: 2-Click WordPress Content Curation Chrome Extension - Jose Fresco">
+    <meta name="twitter:description" content="Save to My Blog is a Chrome extension that publishes any URL to your WordPress blog in 2 clicks — using the REST API and Application Passwords for secure, frictionless content curation.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/save-to-my-blog.svg">
 
     <!-- Schema.org Structured Data -->
@@ -47,8 +48,8 @@
         "@type": "WebPage",
         "@id": "https://josefresco.com/blog/save-to-my-blog.html"
       },
-      "headline": "Streamlining Content Curation with 2-Click Blog Saving",
-      "description": "Building a Chrome extension to save URLs to WordPress with just 2 clicks, eliminating the friction in content curation",
+      "headline": "Save to My Blog: 2-Click WordPress Content Curation Chrome Extension",
+      "description": "Save to My Blog is a Chrome extension that publishes any URL to your WordPress blog in 2 clicks — using the REST API and Application Passwords for secure, frictionless content curation.",
       "image": "https://josefresco.com/blog/images/save-to-my-blog.svg",
       "author": {
         "@type": "Person",
@@ -65,12 +66,14 @@
         }
       },
       "datePublished": "2025-10-01T00:00:00+00:00",
-      "dateModified": "2025-10-01T00:00:00+00:00",
-      "keywords": "Chrome Extension, WordPress, Content Curation, Productivity, JavaScript"
+      "dateModified": "2026-03-21T00:00:00+00:00",
+      "keywords": "Chrome Extension, WordPress, Content Curation, Productivity, JavaScript, WordPress REST API, Application Passwords, Manifest V3"
     }
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="neural-bg">
         <div class="neural-nodes"></div>
     </div>
@@ -98,22 +101,28 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
-                    <h1 class="blog-post-title">Streamlining Content Curation with 2-Click Blog Saving</h1>
+                    <h1 class="blog-post-title">Save to My Blog: 2-Click WordPress Content Curation Chrome Extension</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Browser Extension</span>
-                        <span class="blog-date">October 2025</span>
+                        <span class="blog-date">October 2025 <span style="color: var(--neural-primary); font-size: 0.85em;">(Updated March 2026)</span></span>
                     </div>
                 </div>
 
-                <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                    <p><strong>TLDR:</strong> "Save to My Blog" is a Chrome extension that reduces the process of saving a URL to a WordPress blog to just two clicks. It uses the WordPress REST API and Application Passwords for secure and seamless posting. The extension is designed to eliminate the friction of traditional content curation workflows, making it easier to maintain a link blog or research collection.</p>
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/save-to-my-blog.svg" type="image/svg+xml">
+                        <img src="images/save-to-my-blog.svg" alt="Save to My Blog Chrome extension popup showing 2-click save to WordPress" class="blog-hero-image">
+                    </picture>
                 </div>
 
                 <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Save to My Blog is a Chrome extension that reduces the process of saving a URL to a WordPress blog to just two clicks. It uses the WordPress REST API and Application Passwords for secure, seamless posting — no login required after setup. Recently updated in March 2026 with draft mode support and improved error handling.
+                    </div>
                     <p>Content curation is valuable, but traditional bookmarking workflows create too much friction. The <strong>Save to My Blog</strong> Chrome extension eliminates the barriers between discovering interesting content and preserving it, reducing the entire process to just two clicks.</p>
 
                     <h2>The Content Curation Problem</h2>
@@ -218,7 +227,16 @@
                     <p>Not every project needs to be complex. Sometimes the most valuable tools are the simplest ones—small utilities that do one thing exceptionally well.</p>
 
                     <p>Save to My Blog doesn't have dozens of features or complex workflows. It saves links to WordPress with 2 clicks. That's the entire value proposition, and that's enough.</p>
-                </div>
+
+                    <h2>March 2026 Update</h2>
+                    <p>The extension received a meaningful update in March 2026 based on several months of daily use. Key changes:</p>
+                    <ul>
+                        <li><strong>Draft mode</strong> — A toggle now lets you save as a draft instead of publishing immediately. Useful when you want to add context before the post goes live.</li>
+                        <li><strong>Improved error handling</strong> — Authentication failures and network errors now surface clear messages in the popup rather than silently failing.</li>
+                        <li><strong>Selected text as excerpt</strong> — Highlighted text on the page is automatically used as the post excerpt, not just appended to the body.</li>
+                        <li><strong>Config validation</strong> — The settings screen now validates your WordPress URL and Application Password before you save, catching setup issues early.</li>
+                    </ul>
+                    <p>The core workflow remains identical: two clicks from discovery to saved post. These improvements make the edge cases cleaner without adding complexity to the happy path.</p>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>

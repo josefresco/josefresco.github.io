@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Backups: Automating Offsite Backups for Raspberry Pi Applications - Jose Fresco</title>
+    <meta name="description" content="How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-raspberry-pi.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Pi Backups: Automating Offsite Backups for Raspberry Pi Applications - Jose Fresco">
+    <meta property="og:description" content="How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-raspberry-pi.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/pi-backups.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-23T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pi Backups: Automating Offsite Backups for Raspberry Pi Applications - Jose Fresco">
+    <meta name="twitter:description" content="How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/pi-backups.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-raspberry-pi.html"
+      },
+      "headline": "Pi Backups: Automating Offsite Backups for Raspberry Pi Applications",
+      "description": "How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.",
+      "image": "https://josefresco.com/blog/images/pi-backups.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-23T00:00:00+00:00",
+      "dateModified": "2026-03-23T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Backup, Shell Script, rsync, cron, SSH, Automation, Linux, Self-hosting"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Pi Backups: Automating Offsite Backups for Raspberry Pi Applications</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups.svg" type="image/svg+xml">
+                        <img src="images/pi-backups.svg" alt="Pi Backups diagram showing Raspberry Pi syncing application data to a remote server via rsync and SSH" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> My Raspberry Pi runs a growing collection of self-hosted applications — and all of their data lived exclusively on a single SD card. I wrote <code>pi-backups</code>, a set of shell scripts that rsync application data to a remote server nightly via SSH, with logging and optional Telegram alerts. SD card dies? Restore in minutes, not hours.
+                    </div>
+
+                    <h2>The Problem with SD Cards</h2>
+                    <p>Raspberry Pi is an incredible platform for self-hosting. It's cheap, quiet, and low-power enough to run 24/7 without guilt. Over the past year my Pi has accumulated a serious workload:</p>
+                    <ul>
+                        <li><a href="/blog/arpy-assist-qwen-web-interface.html">Arpy Assist</a> — web interface for my local AI assistant</li>
+                        <li><a href="/blog/telegram-pi-monitoring-bot.html">Telegram Pi Bot</a> — system monitoring and remote control</li>
+                        <li>Home automation configs and custom scripts</li>
+                        <li>Database files for various self-hosted apps</li>
+                    </ul>
+                    <p>All of it was sitting on a single microSD card. SD cards have a finite write cycle life — they fail, often without warning, and usually at the worst possible moment. Losing everything and rebuilding from memory would take days.</p>
+                    <p>I needed backups. And I needed them to just happen, automatically, without me thinking about it.</p>
+
+                    <h2>Why Shell Scripts?</h2>
+                    <p>I briefly considered more elaborate solutions: Restic, BorgBackup, even spinning up a dedicated backup service. But the Pi's workload is straightforward enough that complexity would be a liability, not an asset.</p>
+                    <p>Shell scripts with <code>rsync</code> are:</p>
+                    <ul>
+                        <li><strong>Universally available</strong> — no package installs, no runtime dependencies</li>
+                        <li><strong>Transparent</strong> — you can read exactly what the script does in under 50 lines</li>
+                        <li><strong>Battle-tested</strong> — rsync has been doing this reliably for 30 years</li>
+                        <li><strong>Composable</strong> — easy to add new backup targets with one more line</li>
+                    </ul>
+                    <p>The right tool for a job isn't always the most powerful one — it's the one with the best ratio of capability to complexity for your specific situation.</p>
+
+                    <h2>How It Works</h2>
+                    <p>The backup system has three components:</p>
+
+                    <h3>1. The Backup Script</h3>
+                    <p>A single shell script defines what to back up and where to send it:</p>
+                    <pre><code>#!/bin/bash
+# pi-backups: nightly offsite backup for Pi applications
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_PATH="/backups/pi"
+LOG_FILE="/var/log/pi-backups.log"
+DATE=$(date +%Y-%m-%d)
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+log "Starting backup..."
+
+# Sync each application directory
+rsync -avz --delete \
+    /home/pi/apps/ \
+    "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/apps/${DATE}/" \
+    >> "$LOG_FILE" 2>&1
+
+rsync -avz \
+    /etc/crontab /home/pi/.bashrc \
+    "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/configs/${DATE}/" \
+    >> "$LOG_FILE" 2>&1
+
+if [ $? -eq 0 ]; then
+    log "Backup complete ✓"
+else
+    log "Backup FAILED ✗"
+    exit 1
+fi</code></pre>
+                    <p>The <code>--delete</code> flag on the apps sync ensures the remote copy mirrors the source exactly — deleted files on the Pi won't linger indefinitely on the remote.</p>
+
+                    <h3>2. Cron Scheduling</h3>
+                    <p>The script runs automatically at 2:00 AM every night via cron, when the Pi is idle and network traffic is minimal:</p>
+                    <pre><code># /etc/crontab or crontab -e
+0 2 * * * pi /home/pi/scripts/backup.sh</code></pre>
+                    <p>Cron is simple and reliable. No daemon to manage, no service to monitor — if the Pi is on at 2 AM, the backup runs.</p>
+
+                    <h3>3. SSH Key Authentication</h3>
+                    <p>The backup runs unattended, so it uses SSH key-based authentication — no password prompts, no interactive login. The Pi's public key is added to the remote server's <code>authorized_keys</code> file once, and rsync handles the rest transparently.</p>
+                    <pre><code># One-time setup: copy Pi's public key to remote
+ssh-copy-id backup@your-remote-server.com
+
+# Test the connection
+ssh backup@your-remote-server.com "echo 'Connection OK'"</code></pre>
+
+                    <h2>What Gets Backed Up</h2>
+                    <p>The script is organized into logical backup targets:</p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Target</th>
+                                <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Path</th>
+                                <th style="text-align: left; padding: 0.75rem; color: var(--text-primary);">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">Application data</td>
+                                <td style="padding: 0.75rem; font-family: monospace; color: var(--neural-primary);">/home/pi/apps/</td>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">All self-hosted app directories</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">System configs</td>
+                                <td style="padding: 0.75rem; font-family: monospace; color: var(--neural-primary);">/etc/</td>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">crontab, network, service configs</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">User scripts</td>
+                                <td style="padding: 0.75rem; font-family: monospace; color: var(--neural-primary);">/home/pi/scripts/</td>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">Backup scripts, automations, tools</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">Shell config</td>
+                                <td style="padding: 0.75rem; font-family: monospace; color: var(--neural-primary);">~/.bashrc, ~/.bash_aliases</td>
+                                <td style="padding: 0.75rem; color: var(--text-secondary);">Aliases and environment setup</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Retention Strategy</h2>
+                    <p>Each nightly backup lands in a date-stamped directory on the remote server: <code>/backups/pi/apps/2026-03-22/</code>. This means you don't just have the current state — you have a rolling history you can restore from.</p>
+                    <p>I keep 30 days of backups. A cleanup script runs weekly to prune older snapshots:</p>
+                    <pre><code># Remove backup directories older than 30 days
+find /backups/pi -maxdepth 2 -type d -mtime +30 -exec rm -rf {} +</code></pre>
+                    <p>30 days covers the realistic "I deleted something important last week" scenario, without consuming unlimited remote storage.</p>
+
+                    <h2>Optional: Telegram Alerts</h2>
+                    <p>Since I already run a <a href="/blog/telegram-pi-monitoring-bot.html">Telegram Pi Bot</a>, wiring up backup notifications was straightforward. A short function at the end of the backup script fires a message on success or failure:</p>
+                    <pre><code>send_telegram() {
+    local message="$1"
+    curl -s -X POST \
+        "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+        -d "chat_id=${CHAT_ID}&text=${message}" \
+        > /dev/null
+}
+
+# At the end of the script:
+if [ $exit_code -eq 0 ]; then
+    send_telegram "✅ Pi backup complete (${DATE})"
+else
+    send_telegram "❌ Pi backup FAILED — check logs"
+fi</code></pre>
+                    <p>Now I get a quiet daily confirmation that the backup ran — and an immediate alert if anything goes wrong.</p>
+
+                    <h2>Remote Storage Options</h2>
+                    <p>The scripts assume SSH access to a remote server, which gives you several hosting options:</p>
+                    <ul>
+                        <li><strong>A cheap VPS</strong> — $5–$6/month gets you a Hetzner or DigitalOcean droplet with more than enough storage</li>
+                        <li><strong>Another machine at home</strong> — rsync over LAN, though this doesn't protect against house fires or theft</li>
+                        <li><strong>A NAS with SSH enabled</strong> — Synology or QNAP units work great as backup targets</li>
+                        <li><strong>rclone instead of rsync</strong> — if you prefer S3, Backblaze B2, or Google Drive, swap rsync for rclone</li>
+                    </ul>
+                    <p>The scripts are intentionally generic — swapping the remote destination requires changing two variables.</p>
+
+                    <h2>Setup: Getting Started</h2>
+                    <pre><code># Clone the repo
+git clone https://github.com/josefresco/pi-backups.git
+cd pi-backups
+
+# Copy and configure
+cp backup.conf.example backup.conf
+nano backup.conf   # Set your REMOTE_HOST, paths, etc.
+
+# Make scripts executable
+chmod +x *.sh
+
+# Test run (dry-run flag to preview without transferring)
+./backup.sh --dry-run
+
+# Add to cron when ready
+crontab -e
+# Add: 0 2 * * * /home/pi/pi-backups/backup.sh</code></pre>
+
+                    <h2>Lessons Learned</h2>
+                    <p>Running this for the first week surfaced a few things worth knowing:</p>
+                    <ul>
+                        <li><strong>Test your restores.</strong> A backup you've never restored is a backup you don't actually have. I do a restore drill monthly — pick a directory, delete it, restore from backup, verify it's intact.</li>
+                        <li><strong>Log verbosely at first.</strong> The full rsync output in the log file feels excessive, but it's invaluable the first time something goes wrong.</li>
+                        <li><strong>Exclude volatile data.</strong> Temp files, cache directories, and log files don't need to be offsite. Add an <code>--exclude</code> patterns file to skip them and keep backups lean.</li>
+                        <li><strong>Watch the first few runs.</strong> Cron silently swallows failures unless you've set up <code>MAILTO</code> or notifications. Check the log manually for the first week.</li>
+                    </ul>
+
+                    <h2>What This Doesn't Do</h2>
+                    <p>To be clear about scope: <code>pi-backups</code> backs up <em>application data and configs</em> — not a full system image. If the Pi's SD card dies, you'll need to:</p>
+                    <ol>
+                        <li>Flash a fresh Raspberry Pi OS onto a new card</li>
+                        <li>Install the required packages (<code>apt install ...</code>)</li>
+                        <li>Restore your data from the backup</li>
+                    </ol>
+                    <p>This is the right tradeoff for my setup. A full image backup is gigabytes per snapshot and overkill when the OS itself can be reinstalled in 10 minutes. What takes hours to rebuild is the <em>data and configuration</em> — and that's exactly what this protects.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The Pi had been running without backups for too long. Every time an SD card corruption story popped up online, I felt a pang of anxiety about the data I'd lose if mine failed that day.</p>
+                    <p>The backup scripts took about two hours to write and test. They've been running unattended every night since, confirming success with a Telegram message I barely notice anymore. That's exactly how infrastructure should work — invisible until you need it, and reliable when you do.</p>
+                    <p>The full source is available on GitHub. It's intentionally simple — read it, understand it, and adapt it to your own Pi's layout.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Help Automating Your Infrastructure?</h2>
+                <p class="cta-description">
+                    From backup scripts to full monitoring dashboards, I build automation tools that run quietly
+                    in the background — so you don't have to think about them until you need them.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your Pi Backups post and have a similar automation project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
