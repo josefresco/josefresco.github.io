@@ -16,8 +16,6 @@
     <link rel="preconnect" href="https://linkedin.com" crossorigin>
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="/style.css?v=1756732569" as="style">
     <link rel="preload" href="/script.js?v=1756062132" as="script">
 
     <!-- DNS Prefetch for analytics and external resources -->
@@ -130,6 +128,10 @@
         .btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:rgba(255, 255, 255, 0.1);color:var(--text-primary);text-decoration:none;border-radius:12px;font-weight:600;transition:all var(--transition-smooth);border:1px solid rgba(255, 255, 255, 0.2)}
         .btn-cta{background:var(--btn-cta);color:var(--text-primary);display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 1.5rem;text-decoration:none;border-radius:8px;font-weight:600;transition:all var(--transition-smooth);border:none;cursor:pointer;font-size:0.9rem}
     </style>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+    <link rel="stylesheet" href="style.css?v=1756732569">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -408,12 +410,8 @@
     </footer>
 
     <!-- Non-blocking font loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
 
     <!-- Defer non-critical CSS -->
-    <link rel="preload" href="style.css?v=1756732569" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css?v=1756732569"></noscript>
 
     <!-- Global Header -->
     <script src="global-header.js" defer></script>
