@@ -64,14 +64,14 @@ josefresco.github.io/
 │   ├── index.html          # Blog listing page
 │   └── *.html              # Individual blog post files
 ├── css/                    # Additional stylesheets
-├── admin/                  # Pi-hole admin (excluded from sync)
 ├── website-sync.sh         # Automated deployment script
 ├── update_content_for_ai.sh # AI optimization checklist
+├── optimize-images.sh      # Image optimization script
 ├── README.md               # This file
-├── PROCESS.md              # Content management guide
+├── CONTENT_MANAGEMENT.md   # Content management guide
 ├── DEPLOYMENT.md           # Deployment documentation
 ├── CONTRIBUTING.md         # Contribution guidelines
-├── AI_OPTIMIZATION_INSTRUCTIONS.md  # AI content guidelines
+├── PERFORMANCE.md          # Performance optimization guide
 └── CHANGELOG.md            # Version history
 ```
 
@@ -80,7 +80,7 @@ josefresco.github.io/
 ### Adding a New Blog Post
 
 1. Create a new HTML file in the `blog/` directory with a descriptive slug (e.g., `my-project-name.html`)
-2. Use the HTML template provided in [PROCESS.md](PROCESS.md)
+2. Use the HTML template provided in [CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md)
 3. Include TL;DR summary, proper heading hierarchy, and schema markup
 4. Run the AI optimization checklist:
    ```bash
@@ -89,7 +89,7 @@ josefresco.github.io/
 5. Add a blog card entry to `blog/index.html`
 6. Deploy using `./website-sync.sh`
 
-See [PROCESS.md](PROCESS.md) for detailed step-by-step instructions.
+See [CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md) for detailed step-by-step instructions.
 
 ### Adding a New Project
 
@@ -98,7 +98,7 @@ See [PROCESS.md](PROCESS.md) for detailed step-by-step instructions.
 3. Copy an existing project card and update with your project details
 4. Deploy changes using `./website-sync.sh`
 
-See [PROCESS.md](PROCESS.md) for the complete process.
+See [CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md) for the complete process.
 
 ## AI Optimization
 
@@ -111,7 +111,7 @@ This website follows specific guidelines to ensure content is easily discoverabl
 - **External Citations:** Links to authoritative sources
 - **Meta Descriptions:** Concise 150-160 character descriptions
 
-Run `./update_content_for_ai.sh` to see the full checklist. See [AI_OPTIMIZATION_INSTRUCTIONS.md](AI_OPTIMIZATION_INSTRUCTIONS.md) for comprehensive guidelines.
+Run `./update_content_for_ai.sh` to see the full checklist. See [CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md) for comprehensive guidelines.
 
 ## Deployment
 
@@ -156,10 +156,10 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 ## Documentation
 
 - **[README.md](README.md)** - Project overview and quick start (you are here)
-- **[PROCESS.md](PROCESS.md)** - Content management workflows
+- **[CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md)** - Content management workflows and AI optimization guide
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guide and troubleshooting
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
-- **[AI_OPTIMIZATION_INSTRUCTIONS.md](AI_OPTIMIZATION_INSTRUCTIONS.md)** - AI content optimization guide
+- **[PERFORMANCE.md](PERFORMANCE.md)** - Performance optimization guide
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ## License

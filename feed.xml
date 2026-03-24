@@ -5,9 +5,41 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
-    
+
+    <item>
+      <title>Pi Backups: Automating Offsite Backups for Raspberry Pi Applications</title>
+      <link>https://josefresco.com/blog/pi-backups-raspberry-pi.html</link>
+      <description>How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.</description>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-raspberry-pi.html</guid>
+    </item>
+
+    <item>
+      <title>SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet</title>
+      <link>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</link>
+      <description>Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.</description>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</guid>
+    </item>
+
+    <item>
+      <title>Arpy Assist: Qwen CLI Web Interface for Raspberry Pi</title>
+      <link>https://josefresco.com/blog/arpy-assist-qwen-web-interface.html</link>
+      <description>Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/arpy-assist-qwen-web-interface.html</guid>
+    </item>
+
+    <item>
+      <title>Watch List: A Private JustWatch Alternative PWA Powered by TMDB</title>
+      <link>https://josefresco.com/blog/watch-list-pwa.html</link>
+      <description>I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.</description>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/watch-list-pwa.html</guid>
+    </item>
+
     <item>
       <title>JF Notify Launches - Instant Telegram Notifications for Gravity Forms</title>
       <link>https://josefresco.com/blog/jf-notify-launch-announcement.html</link>
@@ -15,7 +47,7 @@
       <pubDate>Sat, 07 Mar 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/jf-notify-launch-announcement.html</guid>
     </item>
-    
+
     <item>
       <title>Moving JF Website Monitor from Vercel to Self-Hosting - Cost &amp; Control</title>
       <link>https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html</link>
@@ -23,7 +55,7 @@
       <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html</guid>
     </item>
-    
+
     <item>
       <title>SLA Reporting with JF Website Monitor: Comprehensive Uptime Analytics</title>
       <link>https://josefresco.com/blog/sla-reporting-jf-website-monitor.html</link>
@@ -31,61 +63,29 @@
       <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/sla-reporting-jf-website-monitor.html</guid>
     </item>
-    
+
     <item>
-      <title>Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery</title>
-      <link>https://josefresco.com/blog/family-dashboard-evolution.html</link>
-      <description>From v3.7 to v3.26: How humorous weather narratives, 2000+ lines of code removal, and CalDAV mastery transformed a functional dashboard into a delightful application.</description>
-      <pubDate>Fri, 01 Nov 2024 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/family-dashboard-evolution.html</guid>
+      <title>Geekworm P173 Case: How This Aluminum Alloy Housing Dropped My Pi's CPU Temp by 20°C</title>
+      <link>https://josefresco.com/blog/geekworm-p173-raspberry-pi-case-cooling-solution.html</link>
+      <description>Discover how the Geekworm P173 heavy-duty aluminum alloy case dramatically improved my Raspberry Pi's thermal performance, dropping CPU temperatures by 20°C and extending its lifespan.</description>
+      <pubDate>Fri, 30 Jan 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/geekworm-p173-raspberry-pi-case-cooling-solution.html</guid>
     </item>
-    
+
     <item>
-      <title>Reddit Post Hider v3.0: Major Refactor for Reliability</title>
-      <link>https://josefresco.com/blog/reddit-post-hider-v3.html</link>
-      <description>A complete rebuild focused on reliability and performance. Dedicated hide buttons, intelligent post detection, IntersectionObserver optimization, and enhanced subreddit blocking.</description>
-      <pubDate>Fri, 01 Nov 2024 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/reddit-post-hider-v3.html</guid>
+      <title>My Raspberry Pi's New Job: From Web Host to AI Command Center</title>
+      <link>https://josefresco.com/blog/pi-qwen-cli-workflow.html</link>
+      <description>How I'm using a Raspberry Pi 4 with the Qwen CLI and Gemini CLI to manage my website hosted on GitHub Pages.</description>
+      <pubDate>Sun, 25 Jan 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-qwen-cli-workflow.html</guid>
     </item>
-    
-    <item>
-      <title>Streamlining Content Curation with 2-Click Blog Saving</title>
-      <link>https://josefresco.com/blog/save-to-my-blog.html</link>
-      <description>Introducing a Chrome extension that streamlines content curation by saving the current URL to your WordPress blog with just 2 clicks.</description>
-      <pubDate>Tue, 01 Oct 2024 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/save-to-my-blog.html</guid>
-    </item>
-    
+
     <item>
       <title>Moving Hosting from Raspberry Pi to GitHub Pages with Gemini AI</title>
       <link>https://josefresco.com/blog/moving-hosting-to-github-pages-with-gemini-ai.html</link>
       <description>How I migrated my website from a Raspberry Pi Model B to GitHub Pages after AI experiments polluted my Pi. Using Gemini Chat AI instead of Claude Code for guidance.</description>
       <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/moving-hosting-to-github-pages-with-gemini-ai.html</guid>
-    </item>
-    
-    <item>
-      <title>JF Website Monitor Launch - Free Website Monitoring with Change Detection</title>
-      <link>https://josefresco.com/blog/jf-website-monitor-launch.html</link>
-      <description>Announcing the launch of JF Website Monitor - a free website monitoring service with uptime tracking, content change detection, and instant notifications.</description>
-      <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-website-monitor-launch.html</guid>
-    </item>
-    
-    <item>
-      <title>Creating a Shared Family Dashboard</title>
-      <link>https://josefresco.com/blog/family-dashboard.html</link>
-      <description>Building a centralized family dashboard for schedules, weather, and key information with CalDAV calendar integration and various API integrations.</description>
-      <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/family-dashboard.html</guid>
-    </item>
-    
-    <item>
-      <title>Why Uptime Monitoring Alone is Not Enough</title>
-      <link>https://josefresco.com/blog/why-uptime-is-not-enough.html</link>
-      <description>Exploring why modern website monitoring needs to go beyond simple uptime checks to include content change detection, performance monitoring, and more.</description>
-      <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/why-uptime-is-not-enough.html</guid>
     </item>
   </channel>
 </rss>

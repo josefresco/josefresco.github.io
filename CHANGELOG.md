@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-03-24
+
+### Added
+- Watch List PWA blog post — private JustWatch alternative powered by TMDB API
+- Arpy Assist blog post — Qwen CLI web interface for Raspberry Pi via Cloudflare Tunnel
+- SafeShare blog post — clean Reddit post sharing with one-click bookmarklet
+- Pi Backups blog post — automating offsite backups for Raspberry Pi applications
+
+### Updated
+- `sitemap.xml` with new blog posts and current lastmod dates
+- `feed.xml` with new blog posts (now includes 10 most recent, in chronological order)
+
+### Removed
+- `index.nginx-debian.html` — default nginx welcome page (not part of site)
+- `test-agent.html` — local development test file
+- `agent-ui.html` — localhost redirect page (not suitable for production)
+
 ## [1.3.0] - 2026-03-07
 
 ### Added
