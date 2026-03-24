@@ -36,6 +36,10 @@
     <meta name="twitter:description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/safeshare-reddit.png">
 
+    <!-- Canonical & RSS -->
+    <link rel="canonical" href="https://josefresco.com/blog/safeshare-reddit-bookmarklet.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -63,12 +67,14 @@
         }
       },
       "datePublished": "2026-03-20T00:00:00+00:00",
-      "dateModified": "2026-03-20T00:00:00+00:00",
+      "dateModified": "2026-03-24T00:00:00+00:00",
       "keywords": "Reddit, Bookmarklet, Next.js, Vercel, Redis, Share Links, Clean Reader, Web Development"
     }
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="neural-bg">
         <div class="neural-nodes"></div>
     </div>
@@ -91,12 +97,12 @@
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="#contact" class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
@@ -234,7 +240,7 @@ npm run dev</code></pre>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="/projects" class="btn-primary">View Projects →</a>
+                    <a href="https://github.com/josefresco/safe-share" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
                 </div>
             </div>
         </section>
@@ -242,17 +248,38 @@ npm run dev</code></pre>
 
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
 
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Want a Cleaner Web Experience?</h2>
+                <p class="cta-description">
+                    From browser bookmarklets to full web apps, I build tools that cut through the noise
+                    and make sharing content simple and friction-free.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Tool Project&body=Hi Jose,%0D%0A%0D%0AI read your SafeShare post and have a similar project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

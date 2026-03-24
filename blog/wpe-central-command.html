@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites - Jose Fresco</title>
+    <meta name="description" content="How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place.">
+    <link rel="canonical" href="https://josefresco.com/blog/wpe-central-command.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites - Jose Fresco">
+    <meta property="og:description" content="How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/wpe-central-command.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/wpe-central-command.png">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-24T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="WordPress">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites - Jose Fresco">
+    <meta name="twitter:description" content="How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/wpe-central-command.png">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/wpe-central-command.html"
+      },
+      "headline": "WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites",
+      "description": "How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place.",
+      "image": "https://josefresco.com/blog/images/wpe-central-command.png",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-24T00:00:00+00:00",
+      "dateModified": "2026-03-24T00:00:00+00:00",
+      "keywords": "WP Engine, WordPress, Dashboard, Site Management, PHP, JavaScript, Automation, DevOps, WordPress Agency"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/wpe-central-command.png" type="image/png">
+                        <img src="images/wpe-central-command.png" alt="WPE Central Command dashboard showing multiple WP Engine sites with status indicators and bulk action controls" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Managing a portfolio of WP Engine WordPress sites means context-switching between dozens of dashboard tabs for routine tasks. I built <code>wpe-central-command</code> — a JavaScript web app paired with a lightweight PHP helper plugin — that puts all your WP Engine sites on one screen with bulk operations, environment control, and at-a-glance health monitoring.
+                    </div>
+
+                    <h2>The Multi-Site Management Problem</h2>
+                    <p>If you manage more than a handful of WordPress sites on WP Engine, you know the friction. Every routine task — checking backup status, switching a site to maintenance mode, confirming which PHP version is running, triggering a cache flush — requires logging into the WP Engine portal, hunting for the right install, navigating to the right panel, and repeating for every site.</p>
+                    <p>For an agency managing 20 or 30 client sites, this isn't just annoying. It's time that compounds. Tasks that should take seconds take minutes. And with the WP Engine dashboard optimized for individual site management rather than fleet-level operations, there's no built-in way to answer simple questions like:</p>
+                    <ul>
+                        <li>Which of my sites didn't complete their last backup?</li>
+                        <li>Which installs are still running PHP 8.1 when I've standardized on 8.3?</li>
+                        <li>Which sites have WordPress core updates pending?</li>
+                        <li>Can I flush the cache on all dev environments at once?</li>
+                    </ul>
+                    <p>WP Engine does expose a REST API, but stitching together that API with meaningful cross-site views requires custom tooling. That's what WPE Central Command is.</p>
+
+                    <h2>What It Does</h2>
+                    <p>WPE Central Command is a two-part system:</p>
+                    <ul>
+                        <li><strong>wpe-central-command</strong> — The JavaScript web app (the "command center") that talks to the WP Engine API and renders your fleet of sites</li>
+                        <li><strong>wpe-central-command-helper</strong> — A lightweight PHP plugin installed on each managed WordPress site that exposes additional site-level data not available through the WP Engine API alone</li>
+                    </ul>
+                    <p>Together they give you a unified view of all your WP Engine installs with actions you can take without ever opening the WP Engine portal.</p>
+
+                    <h2>The Dashboard</h2>
+                    <p>The main interface is a grid of site cards — one per WP Engine install. Each card shows:</p>
+                    <ul>
+                        <li><strong>Site name and URL</strong> — with a quick-launch link</li>
+                        <li><strong>Environment type</strong> — Production, Staging, or Development, color-coded</li>
+                        <li><strong>PHP version</strong> — flagged amber if it differs from your configured standard</li>
+                        <li><strong>WordPress version</strong> — flagged if updates are available (via the helper plugin)</li>
+                        <li><strong>Last backup status</strong> — green for success, red for failure or missing</li>
+                        <li><strong>Cache status</strong> — EverCache state and last flush time</li>
+                    </ul>
+                    <p>The grid view is designed to be scanned, not read. At a glance you can see which sites need attention.</p>
+
+                    <h2>Bulk Operations</h2>
+                    <p>Individual site cards are useful. Bulk operations are where Central Command earns its name.</p>
+                    <p>Select multiple sites with checkboxes and run operations across all of them simultaneously:</p>
+                    <ul>
+                        <li><strong>Flush cache</strong> — Purge EverCache on selected sites</li>
+                        <li><strong>Trigger backup</strong> — Kick off an on-demand backup checkpoint</li>
+                        <li><strong>Enable/disable maintenance mode</strong> — Via the helper plugin</li>
+                        <li><strong>Export status report</strong> — Generate a CSV summary of selected sites for reporting or handoff</li>
+                    </ul>
+                    <p>Operations run in parallel against the WP Engine API. A progress log updates in real-time so you can see each request succeed or fail as it completes.</p>
+
+                    <h2>The Helper Plugin</h2>
+                    <p>The WP Engine REST API covers hosting-level data well — installs, environments, domains, backups, cache. What it can't tell you is what's happening inside WordPress itself: active plugins, theme, WordPress version, scheduled cron jobs, disk usage by content type.</p>
+                    <p>The <code>wpe-central-command-helper</code> PHP plugin fills this gap. It's a minimal WordPress plugin that:</p>
+                    <ol>
+                        <li>Registers a protected REST endpoint at <code>/wp-json/wpe-cc/v1/status</code></li>
+                        <li>Returns a JSON payload of WordPress-level site data</li>
+                        <li>Authenticates requests using a shared secret configured in both the plugin and the dashboard</li>
+                    </ol>
+                    <pre><code>// Example response from the helper plugin
+{
+  "wp_version": "6.8.1",
+  "active_plugins": 14,
+  "theme": "GeneratePress",
+  "updates_available": {
+    "core": false,
+    "plugins": 2,
+    "themes": 0
+  },
+  "maintenance_mode": false,
+  "cron_next_run": "2026-03-24T03:00:00Z",
+  "upload_dir_size_mb": 842
+}</code></pre>
+                    <p>The dashboard merges this WordPress-level data with the WP Engine API data to build each site card. The combined picture is significantly more useful than either source alone.</p>
+
+                    <h2>Authentication and Security</h2>
+                    <p>The dashboard authenticates with WP Engine using API credentials (an API key/secret pair from the WP Engine User Portal). These are stored as environment variables and never exposed client-side.</p>
+                    <p>The helper plugin uses a separate shared secret for each site — a long random string set via <code>wp-config.php</code> or the plugin settings page. Requests to the helper endpoint that don't include a valid <code>Authorization</code> header are rejected with a 401.</p>
+                    <p>This two-credential model means the dashboard app and the helper plugin have independent security boundaries. Compromising one doesn't expose the other.</p>
+
+                    <h2>Architecture</h2>
+                    <p>The JavaScript app is deliberately simple:</p>
+                    <ul>
+                        <li><strong>Vanilla JS</strong> — No framework. The app is a single HTML file with modular JS. It runs entirely in the browser and makes API calls through a thin proxy endpoint to avoid CORS issues and keep credentials server-side.</li>
+                        <li><strong>Node.js proxy</strong> — A small Express server handles WP Engine API calls and helper plugin requests. The browser talks to the proxy; the proxy talks to the world.</li>
+                        <li><strong>No database</strong> — Site configurations are stored in a JSON file. For most use cases, a database is unnecessary overhead.</li>
+                    </ul>
+                    <pre><code>// sites.json — your fleet configuration
+[
+  {
+    "name": "Client A - Production",
+    "install": "clienta",
+    "environment": "production",
+    "helper_url": "https://clienta.com",
+    "helper_secret": "your-shared-secret-here"
+  },
+  {
+    "name": "Client A - Staging",
+    "install": "clienta-staging",
+    "environment": "staging",
+    "helper_url": "https://staging.clienta.com",
+    "helper_secret": "staging-shared-secret"
+  }
+]</code></pre>
+
+                    <h2>Getting Started</h2>
+                    <pre><code># Clone the dashboard
+git clone https://github.com/josefresco/wpe-central-command.git
+cd wpe-central-command
+
+# Install dependencies
+npm install
+
+# Configure environment
+cp .env.example .env
+# Set WPE_API_USER and WPE_API_PASSWORD in .env
+
+# Configure your sites
+cp sites.example.json sites.json
+# Add your WP Engine installs to sites.json
+
+# Start the server
+npm start</code></pre>
+                    <p>Then install the helper plugin on each WordPress site:</p>
+                    <pre><code># Clone the helper plugin
+git clone https://github.com/josefresco/wpe-central-command-helper.git
+
+# Copy to your WordPress plugins directory, then activate
+# Add to wp-config.php:
+define('WPE_CC_SECRET', 'your-shared-secret-here');</code></pre>
+
+                    <h2>Real-World Use Cases</h2>
+                    <p>A few scenarios where Central Command saves meaningful time:</p>
+
+                    <h3>Monthly Maintenance Runs</h3>
+                    <p>For agencies doing monthly WordPress maintenance, the usual flow is: log in, check for updates, apply updates, verify, move to next site. With Central Command, the "check for updates" step across 20 sites is a single page load. You can prioritize which sites need attention immediately instead of working blindly in sequence.</p>
+
+                    <h3>Incident Response</h3>
+                    <p>When something goes wrong — a plugin conflict, a cache issue, an unexpected maintenance window — you want answers fast. Central Command's real-time status view lets you confirm which sites are affected and take action (flush cache, toggle maintenance mode) without the portal context-switching overhead.</p>
+
+                    <h3>Pre-Launch Checklists</h3>
+                    <p>Before promoting staging to production, the helper plugin data confirms: correct WordPress version, no pending plugin updates, maintenance mode off, recent backup completed. It's a quick sanity check without logging into each environment individually.</p>
+
+                    <h2>What It Doesn't Do</h2>
+                    <p>WPE Central Command is a management and visibility tool — not a deployment pipeline. It doesn't:</p>
+                    <ul>
+                        <li>Push code changes between environments (use WP Engine's push/pull for that)</li>
+                        <li>Manage DNS or SSL certificates</li>
+                        <li>Replace direct WP Engine portal access for billing or account management</li>
+                        <li>Work with non-WP Engine WordPress hosts</li>
+                    </ul>
+                    <p>It does one thing well: give you a single, actionable view of your WP Engine fleet.</p>
+
+                    <h2>Lessons Learned</h2>
+                    <p>A few things that came up during development:</p>
+                    <ul>
+                        <li><strong>API rate limits matter at scale.</strong> The WP Engine API has rate limits. Fetching data for 30 sites in parallel can hit those limits. The proxy now batches requests and staggers them to stay within limits.</li>
+                        <li><strong>The helper plugin needs to be lightweight.</strong> Every page load on a managed site runs the helper's registered hooks. I was careful to only run the status endpoint logic on authenticated API requests, not on every WordPress request.</li>
+                        <li><strong>Shared secrets need rotation tooling.</strong> Rotating secrets across 20 sites manually is the kind of chore that doesn't get done. I added a helper script that generates new secrets and outputs the <code>wp-config.php</code> snippet for each site alongside the updated <code>sites.json</code> entries.</li>
+                        <li><strong>Parallel operations need a progress UI.</strong> Firing 20 simultaneous API calls and waiting in silence is a bad experience. The real-time log was added after the first demo where everything looked frozen for 4 seconds.</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>WPE Central Command started as a personal productivity tool and turned into something I use every day for client work. The WP Engine API is well-designed, and pairing it with the helper plugin gives a complete picture that neither source provides on its own.</p>
+                    <p>If you manage multiple WP Engine sites and spend meaningful time on routine housekeeping tasks, the setup investment pays off quickly. The source for both the dashboard and the helper plugin is on GitHub — built to be read, forked, and adapted to your own site configurations.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/wpe-central-command" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Managing a Portfolio of WordPress Sites?</h2>
+                <p class="cta-description">
+                    From custom WP Engine tooling to WordPress plugins and automation dashboards, I build
+                    solutions that make managing multiple sites practical — not a full-time job.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=WordPress Management Project&body=Hi Jose,%0D%0A%0D%0AI read your WPE Central Command post and have a similar WordPress management challenge.%0D%0A%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
