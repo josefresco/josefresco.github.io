@@ -37,6 +37,11 @@
     transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
 }
 
+.blog-post-content a:visited {
+    color: var(--neural-primary);
+    text-decoration-color: var(--neural-primary);
+}
+
 .blog-post-content a:hover {
     color: var(--text-accent);
     text-decoration-color: var(--text-accent);
