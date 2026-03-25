@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-03-25
+
+### Updated
+- `README.md` — expanded project structure to include all content directories, scripts, and documentation files; added `MARKETING_RECOMMENDATIONS.md` and `WEBSITE_REVIEW_2026.md` to the documentation index
+- `sitemap.xml` — moved `wpe-central-command.html` to the blog posts section (was misplaced between homepage and about/projects/contact); refreshed `lastmod` dates for homepage, blog index, and now page
+- `feed.xml` — trimmed to 10 most recent posts (removed oldest entry); updated `lastBuildDate` to 2026-03-25
+
+### Removed
+- `moving-hosting-gemini-ai.png` (root) — unused duplicate; the blog post references `.svg` and `.webp` versions from `blog/images/`
+- `website-sync.log` — local sync log file; was tracked in git despite being listed in `.gitignore`
+
 ## [1.4.0] - 2026-03-24
 
 ### Added

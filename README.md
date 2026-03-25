@@ -58,21 +58,40 @@ josefresco.github.io/
 ├── index.html              # Main landing page with portfolio
 ├── style.css               # Global stylesheet
 ├── script.js               # JavaScript functionality
+├── sw.js                   # Service worker (offline/caching)
+├── global-header.js        # Shared header component
+├── favicon.ico             # Site favicon
+├── CNAME                   # Custom domain (josefresco.com)
 ├── robots.txt              # Search engine directives
 ├── sitemap.xml             # Site structure for SEO
+├── feed.xml                # RSS feed
+├── llms.txt                # AI agent optimization guide
 ├── blog/                   # Blog posts directory
 │   ├── index.html          # Blog listing page
+│   ├── images/             # Blog post images
 │   └── *.html              # Individual blog post files
+├── projects/               # Project landing pages
+│   ├── index.html          # Projects overview
+│   ├── jf-notify.html      # JF Notify project page
+│   └── jf-website-monitor.html  # JF Website Monitor page
+├── about/                  # About page
+├── contact/                # Contact page
+├── ai-tools/               # AI tools listing
+├── skills/                 # Skills showcase
+├── now/                    # Now page (current focus)
+├── images/                 # Site-wide images (og-image, etc.)
 ├── css/                    # Additional stylesheets
 ├── website-sync.sh         # Automated deployment script
 ├── update_content_for_ai.sh # AI optimization checklist
 ├── optimize-images.sh      # Image optimization script
 ├── README.md               # This file
+├── CHANGELOG.md            # Version history
 ├── CONTENT_MANAGEMENT.md   # Content management guide
 ├── DEPLOYMENT.md           # Deployment documentation
 ├── CONTRIBUTING.md         # Contribution guidelines
 ├── PERFORMANCE.md          # Performance optimization guide
-└── CHANGELOG.md            # Version history
+├── MARKETING_RECOMMENDATIONS.md  # Marketing strategy guide
+└── WEBSITE_REVIEW_2026.md  # Site audit & recommendations
 ```
 
 ## Content Management
@@ -156,11 +175,13 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 ## Documentation
 
 - **[README.md](README.md)** - Project overview and quick start (you are here)
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
 - **[CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md)** - Content management workflows and AI optimization guide
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guide and troubleshooting
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 - **[PERFORMANCE.md](PERFORMANCE.md)** - Performance optimization guide
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history
+- **[MARKETING_RECOMMENDATIONS.md](MARKETING_RECOMMENDATIONS.md)** - Marketing strategy and growth recommendations
+- **[WEBSITE_REVIEW_2026.md](WEBSITE_REVIEW_2026.md)** - Comprehensive site audit and recommendations (2026)
 
 ## License
 
