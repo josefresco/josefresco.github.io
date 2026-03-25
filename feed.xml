@@ -9,6 +9,14 @@
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>Who Dis: Building a Right-Click IP Lookup Chrome Extension</title>
+      <link>https://josefresco.com/blog/who-dis-chrome-extension.html</link>
+      <description>How I built Who Dis — a lightweight Chrome Manifest V3 extension that puts instant IP geolocation, ASN, and ISP data one right-click away. No new tab, no copy-paste, no context switch.</description>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/who-dis-chrome-extension.html</guid>
+    </item>
+
+    <item>
       <title>WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites</title>
       <link>https://josefresco.com/blog/wpe-central-command.html</link>
       <description>How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place, with bulk operations and at-a-glance health monitoring.</description>

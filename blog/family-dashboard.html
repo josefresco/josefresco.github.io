@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creating a Shared Family Dashboard - Jose Fresco</title>
-    <meta name="description" content="Building a centralized hub for family scheduling and weather information, and the challenges of integrating multiple data sources reliably">
+    <meta name="description" content="Building a centralized hub for family scheduling, weather, and tide data — and the real-world challenges of integrating multiple APIs into a room-readable display optimized for older iPads.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dashboard.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="blog.css">
 
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//github.com">
-    <link rel="dns-prefetch" href="//linkedin.com">
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Creating a Shared Family Dashboard - Jose Fresco">
-    <meta property="og:description" content="Building a centralized hub for family scheduling and weather information, and the challenges of integrating multiple data sources reliably">
+    <meta property="og:description" content="Building a centralized hub for family scheduling, weather, and tide data — and the real-world challenges of integrating multiple APIs into a room-readable display optimized for older iPads.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/family-dashboard.html">
     <meta property="og:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-25T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Family Tech">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Creating a Shared Family Dashboard - Jose Fresco">
-    <meta name="twitter:description" content="Building a centralized hub for family scheduling and weather information, and the challenges of integrating multiple data sources reliably">
+    <meta name="twitter:description" content="Building a centralized hub for family scheduling, weather, and tide data — and the real-world challenges of integrating multiple APIs into a room-readable display optimized for older iPads.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
 
     <!-- Schema.org Structured Data -->
@@ -47,7 +47,7 @@
         "@id": "https://josefresco.com/blog/family-dashboard.html"
       },
       "headline": "Creating a Shared Family Dashboard",
-      "description": "Building a centralized hub for family scheduling and weather information, and the challenges of integrating multiple data sources reliably",
+      "description": "Building a centralized hub for family scheduling, weather, and tide data — and the real-world challenges of integrating multiple APIs into a room-readable display optimized for older iPads.",
       "image": "https://josefresco.com/blog/images/family-dashboard.svg",
       "author": {
         "@type": "Person",
@@ -64,16 +64,18 @@
         }
       },
       "datePublished": "2025-08-01T00:00:00+00:00",
-      "dateModified": "2025-08-01T00:00:00+00:00",
-      "keywords": "JavaScript, CalDAV, API Integration, Family Dashboard, Web Development"
+      "dateModified": "2026-03-25T00:00:00+00:00",
+      "keywords": "JavaScript, CalDAV, API Integration, Family Dashboard, Web Development, Google Calendar, OpenWeather, Raspberry Pi, iPad Kiosk"
     }
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div class="neural-bg">
         <div class="neural-nodes"></div>
     </div>
-    
+
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
@@ -92,12 +94,12 @@
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
@@ -109,76 +111,118 @@
                 </div>
 
                 <div class="blog-post-image">
-                    <img src="images/family-dashboard.png" alt="Family Dashboard interface showing calendar, weather, and task widgets" class="blog-hero-image">
-                </div>
-
-                <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                    <p><strong>TLDR:</strong> This post describes the creation of a Family Dashboard, a centralized display for family schedules, weather, and other key information. It integrates with CalDAV for calendars and various APIs for weather and tide data. The post discusses the challenges of implementation, including API reliability and timezone handling for all-day events.</p>
+                    <picture>
+                        <source srcset="images/family-dashboard.svg" type="image/svg+xml">
+                        <img src="images/family-dashboard.svg" alt="Family Dashboard interface showing calendar events, weather, and tide widgets on an iPad" class="blog-hero-image">
+                    </picture>
                 </div>
 
                 <div class="blog-post-content">
-                    <p>Every family has that moment of chaos: "What time is soccer practice?" "Is it going to rain?" "Wait, didn't we have dinner plans tonight?" The <strong>Family Dashboard</strong> was born from these everyday coordination challenges, designed to be the central nervous system of family logistics.</p>
-
-                    <h2>The Problem</h2>
-                    <p>Modern families juggle multiple calendars, weather apps, and scheduling systems. Information is scattered across phones, computers, and sticky notes on the refrigerator. I wanted to create a single, always-visible display that could serve as the family's information hub.</p>
-
-                    <h2>Building the Solution</h2>
-                    <p>The dashboard pulls from multiple data sources to create a comprehensive family view:</p>
-                    <ul>
-                        <li><strong>CalDAV integration</strong> for syncing multiple family calendars</li>
-                        <li><strong>Weather API</strong> for local forecasts and conditions</li>
-                        <li><strong>Tide data</strong> for coastal families who surf, fish, or beach-walk</li>
-                        <li><strong>Sunrise/sunset times</strong> for planning outdoor activities</li>
-                    </ul>
-
-                    <p>The interface is optimized for older iPads, making it perfect for mounting on the kitchen wall or leaving on the counter. The large, readable text and intuitive layout ensure that everyone from kids to grandparents can quickly understand what's happening.</p>
-
-                    <blockquote>
-                        <p>"The goal was creating a room-readable display that answers the most common family questions at a glance."</p>
-                    </blockquote>
-
-                    <h2>Real-World Implementation</h2>
-                    <div class="pros-cons-grid">
-                        <div class="pros-cons-section pros">
-                            <h3>✅ What Works</h3>
-                            <ul>
-                                <li><strong>Family coordination</strong> - Everyone can see what's on the schedule for the day and plan accordingly</li>
-                                <li><strong>Multi-calendar sync</strong> - Aggregates events from different family members' calendars</li>
-                                <li><strong>Weather narratives</strong> - Contextual weather information helps with planning</li>
-                                <li><strong>Mobile responsive</strong> - Works on phones for on-the-go reference</li>
-                            </ul>
-                        </div>
-                        <div class="pros-cons-section cons">
-                            <h3>⚠️ Ongoing Challenges</h3>
-                            <ul>
-                                <li><strong>Weather forecasting can be wonky</strong> - API inconsistencies affect reliability</li>
-                                <li><strong>All day events sometimes appear on wrong day</strong> - Timezone handling complexities</li>
-                                <li><strong>Weather UI isn't great</strong> - Visual design could be more intuitive</li>
-                                <li><strong>Weather jokes are terrible</strong> - Attempted humor mostly falls flat</li>
-                            </ul>
-                        </div>
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The Family Dashboard is a wall-mounted information display built for an older iPad — pulling calendar events from CalDAV, weather from OpenWeather, and tide data from a local API. It surfaces the answers to the questions every family asks a dozen times a day, so nobody has to ask them. This post covers v1. For the full evolution of the project, see <a href="/blog/family-dashboard-evolution.html" style="color: var(--neural-primary);">Family Dashboard Evolution</a>.
                     </div>
 
-                    <h2>Technical Lessons</h2>
-                    <p>Working with multiple external APIs taught me valuable lessons about error handling and graceful degradation. When the weather service is down, the calendar should still work. When CalDAV sync fails, the weather information remains available.</p>
+                    <h2>The Problem</h2>
+                    <p>Every family has that moment of chaos: "What time is soccer practice?" "Is it going to rain this afternoon?" "Wait, didn't we have dinner plans tonight?" These questions get asked and re-asked because the answers live in different places — calendar apps on different phones, weather apps buried three taps deep, sticky notes on the fridge that nobody updates.</p>
+                    <p>The Family Dashboard was built to eliminate the question. Mount it in the kitchen, always on, always current. The answers are on the wall before anyone needs to ask.</p>
 
-                    <p>The biggest challenge was <strong>timezone handling</strong> for all-day events. Different calendar systems interpret "all day" differently, leading to events appearing on the wrong date depending on the user's timezone settings.</p>
-
-                    <h2>Future Improvements</h2>
-                    <p>Version 4.0 is in development with plans to:</p>
+                    <h2>Design Constraints</h2>
+                    <p>The target hardware was a retired iPad that would otherwise sit in a drawer. That constraint shaped every decision:</p>
                     <ul>
-                        <li>Redesign the weather interface with better visual hierarchy</li>
-                        <li>Implement smarter timezone handling for all-day events</li>
-                        <li>Add customizable family member colors and icons</li>
-                        <li>Include traffic data for commuting family members</li>
+                        <li><strong>No app install</strong> — Web-based, runs in the browser, accessible via URL</li>
+                        <li><strong>Large, scannable text</strong> — Readable from across the room without squinting</li>
+                        <li><strong>Minimal interaction</strong> — It's a display, not a control panel; touch targets exist but the screen mostly just shows</li>
+                        <li><strong>Auto-refresh</strong> — Data updates on a schedule without any user action</li>
+                        <li><strong>Graceful degradation</strong> — When one data source fails, the rest keep working</li>
                     </ul>
 
-                    <p>The dashboard continues to evolve based on real family usage patterns, proving that the best software solutions come from solving your own problems first.</p>
+                    <h2>Data Sources</h2>
+                    <p>The dashboard pulls from four data sources on a rotating refresh schedule:</p>
+
+                    <h3>CalDAV — Family Calendars</h3>
+                    <p>Calendar integration was the most critical feature. The dashboard needed to show events from multiple family calendars — each family member's schedule plus shared events. CalDAV is the open standard behind Google Calendar, Apple Calendar, and most calendar services, which made it the natural integration point.</p>
+                    <p>The integration fetches events for the current day and the next two days, parsed and sorted by start time. All-day events surface at the top; timed events show their start time prominently. Family member names are color-coded so you can immediately see whose event is whose.</p>
+                    <p>The trickiest part was timezone handling for all-day events. CalDAV all-day events are stored as date values without a time component, but different calendar implementations interpret "midnight" differently when the server and client are in different timezones. The v1 solution used a normalization pass — stripping timezone offsets from all-day events before display — which mostly worked but had edge cases at daylight saving transitions.</p>
+
+                    <h3>OpenWeather API — Current Conditions and Forecast</h3>
+                    <p>Weather was a deliberate scope limit. The dashboard shows:</p>
+                    <ul>
+                        <li>Current temperature and conditions</li>
+                        <li>Today's high and low</li>
+                        <li>Precipitation probability for the afternoon (the practical planning question)</li>
+                        <li>A brief three-day outlook</li>
+                    </ul>
+                    <p>OpenWeather's free tier covers this comfortably. The API response is cached for 30 minutes — weather data doesn't change fast enough to warrant more frequent polling, and staying within free tier limits matters.</p>
+
+                    <h3>Tide Data</h3>
+                    <p>For a family near the water, tide times matter for planning beach trips, fishing, and kayaking. The dashboard pulls today's tide predictions — high and low times with heights — and displays them alongside a simple visual indicator of whether the tide is currently rising or falling.</p>
+                    <p>Tide data is highly cacheable (predictions are published weeks in advance), so this API call happens once per day rather than on the standard refresh cycle.</p>
+
+                    <h3>Sunrise and Sunset</h3>
+                    <p>Sunrise and sunset times round out the daily planning information. Computed locally using the device's location (via a one-time permission prompt) rather than an API call, which eliminates a dependency and makes this data always available regardless of network connectivity.</p>
+
+                    <h2>Architecture</h2>
+                    <p>The dashboard is a single HTML file with vanilla JavaScript — no framework, no build step, no server-side rendering. This keeps deployment trivial: drop the file on any web server (or run it directly from a Raspberry Pi on the local network), navigate to the URL on the iPad, and add it to the home screen for full-screen kiosk mode.</p>
+                    <pre><code>// Refresh schedule
+const REFRESH_INTERVALS = {
+  calendar: 5 * 60 * 1000,    // Every 5 minutes
+  weather: 30 * 60 * 1000,    // Every 30 minutes
+  tides: 24 * 60 * 60 * 1000, // Once per day
+  clock: 1000                  // Every second (for the time display)
+};
+
+function startRefreshCycles() {
+  refreshCalendar();
+  refreshWeather();
+  refreshTides();
+
+  setInterval(refreshCalendar, REFRESH_INTERVALS.calendar);
+  setInterval(refreshWeather, REFRESH_INTERVALS.weather);
+  setInterval(refreshTides, REFRESH_INTERVALS.tides);
+  setInterval(updateClock, REFRESH_INTERVALS.clock);
+}</code></pre>
+
+                    <h2>Graceful Degradation</h2>
+                    <p>A dashboard that breaks silently when an API is down is worse than no dashboard — you don't know if the data is stale or just not loading. Each data source has an independent error state that renders a visible "Last updated: [time]" indicator when the most recent fetch failed:</p>
+                    <pre><code>async function refreshWeather() {
+  try {
+    const data = await fetchWeather();
+    renderWeather(data);
+    setLastUpdated('weather', new Date());
+  } catch (err) {
+    renderWeatherError('Weather unavailable — last updated: ' +
+      formatTime(getLastUpdated('weather')));
+  }
+}</code></pre>
+                    <p>The calendar and weather panels fail independently. A weather API outage doesn't blank the calendar. A CalDAV server hiccup doesn't break the weather display. The dashboard always shows something useful.</p>
+
+                    <h2>What Works Well</h2>
+                    <ul>
+                        <li><strong>Family coordination</strong> — The dashboard has genuinely changed how the family coordinates. "Check the board" has replaced half the "what's going on today" conversations.</li>
+                        <li><strong>Multi-calendar aggregation</strong> — Seeing all family members' events in one view (color-coded by person) surfaced scheduling conflicts that used to only emerge at the last minute.</li>
+                        <li><strong>Weather context</strong> — The precipitation probability for the afternoon is the single most-used piece of information on the board. It answers the practical question ("do I need an umbrella?") without making you interpret a forecast.</li>
+                        <li><strong>iPad compatibility</strong> — Running as a web app in Safari on an older iPad has been remarkably trouble-free. No app update cycles, no OS compatibility issues.</li>
+                    </ul>
+
+                    <h2>What Needed Work</h2>
+                    <ul>
+                        <li><strong>All-day event timezone edge cases</strong> — The normalization approach had gaps at DST transitions. This was addressed in subsequent versions with a more robust date-only parsing approach.</li>
+                        <li><strong>Weather UI clarity</strong> — The v1 weather panel tried to show too much and ended up being hard to read at a distance. A redesign consolidated the view around the two questions that actually matter: what's it like right now, and is it going to rain?</li>
+                        <li><strong>No visual refresh indicator</strong> — Users couldn't tell whether the data was 2 minutes old or 2 hours old. A subtle "refreshing..." animation during API calls and a persistent "last updated" timestamp addressed this.</li>
+                    </ul>
+
+                    <h2>Evolution</h2>
+                    <p>The v1 dashboard described here has been through several iterations since its initial deployment. The project has expanded to include smarter timezone handling, a redesigned weather section with better visual hierarchy, and tighter integration with the Raspberry Pi it runs on. For the full story of how the dashboard evolved beyond the initial version, see <a href="/blog/family-dashboard-evolution.html">Family Dashboard Evolution</a>.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The best home automation projects solve a problem the whole household has, not just the person who built it. The Family Dashboard passed that test — it gets used by everyone, every day, without anyone needing to understand how it works.</p>
+                    <p>The architecture is deliberately simple: vanilla JavaScript, standard APIs, a single HTML file. The complexity lives in the edge cases (timezone normalization, API failure handling, cache management), not in the framework or the build pipeline. That simplicity has made iterating on it straightforward as real-world usage revealed what needed changing.</p>
+                    <p>The full source is on GitHub. If you have an old tablet gathering dust and a family that keeps asking "what's the plan today?", it's a worthwhile weekend project.</p>
                 </div>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View Project →</a>
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
                 </div>
             </div>
         </section>
@@ -191,8 +235,8 @@
             <div class="cta-content">
                 <h2 class="cta-title">Ready for Your Custom Dashboard?</h2>
                 <p class="cta-description">
-                    Family coordination got you down? I can build custom dashboards that integrate with your existing 
-                    tools and make life easier for everyone.
+                    Family coordination got you down? I can build custom dashboards that integrate with your existing
+                    calendars, APIs, and data sources — and make the information actually visible to the people who need it.
                 </p>
                 <div class="cta-buttons">
                     <a href="mailto:josefresco@gmail.com?subject=Custom Dashboard Inquiry&body=Hi Jose,%0D%0A%0D%0AI saw your family dashboard project and would like something similar for my needs.%0D%0A%0D%0AWhat I need:%0D%0A- [Your requirements]%0D%0A%0D%0ALet's chat about making this happen.%0D%0A%0D%0ABest regards," class="btn-cta">
@@ -210,12 +254,14 @@
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="../global-header.js" defer></script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

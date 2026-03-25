@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Dis: Building a Right-Click IP Lookup Chrome Extension - Jose Fresco</title>
+    <meta name="description" content="How I built Who Dis — a lightweight Chrome extension that puts instant IP geolocation and ASN data one right-click away, with no page load and no external service dependency during browsing.">
+    <link rel="canonical" href="https://josefresco.com/blog/who-dis-chrome-extension.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Who Dis: Building a Right-Click IP Lookup Chrome Extension - Jose Fresco">
+    <meta property="og:description" content="How I built Who Dis — a lightweight Chrome extension that puts instant IP geolocation and ASN data one right-click away, with no page load and no external service dependency during browsing.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/who-dis-chrome-extension.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/who-dis-ip-lookup.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-25T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Browser Extension">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Who Dis: Building a Right-Click IP Lookup Chrome Extension - Jose Fresco">
+    <meta name="twitter:description" content="How I built Who Dis — a lightweight Chrome extension that puts instant IP geolocation and ASN data one right-click away, with no page load and no external service dependency during browsing.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/who-dis-ip-lookup.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/who-dis-chrome-extension.html"
+      },
+      "headline": "Who Dis: Building a Right-Click IP Lookup Chrome Extension",
+      "description": "How I built Who Dis — a lightweight Chrome extension that puts instant IP geolocation and ASN data one right-click away, with no page load and no external service dependency during browsing.",
+      "image": "https://josefresco.com/blog/images/who-dis-ip-lookup.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-25T00:00:00+00:00",
+      "dateModified": "2026-03-25T00:00:00+00:00",
+      "keywords": "Chrome Extension, IP Lookup, Geolocation, ASN, Network Tools, JavaScript, Manifest V3, Developer Tools, Browser Extension"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Who Dis: Building a Right-Click IP Lookup Chrome Extension</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/who-dis-ip-lookup.svg" type="image/svg+xml">
+                        <img src="images/who-dis-ip-lookup.svg" alt="Who Dis Chrome extension context menu showing IP lookup results with geolocation and ASN data" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Every time I saw an IP address in a log file, email header, or error message, I'd open a new tab and paste it into an IP lookup site. I built <code>who-dis</code> — a Chrome extension that adds "Who is this IP?" to the right-click context menu — so the lookup happens in a popup, right where you are, in under a second.
+                    </div>
+
+                    <h2>The Problem with IP Lookups</h2>
+                    <p>IP addresses show up constantly in developer workflows: server logs, email headers, abuse reports, security alerts, API responses, network diagnostics. The information they carry — country, city, ISP, ASN, whether the IP is a known VPN exit or datacenter — is genuinely useful context.</p>
+                    <p>The lookup workflow, though, has always been tedious:</p>
+                    <ol>
+                        <li>Select the IP address</li>
+                        <li>Copy it</li>
+                        <li>Open a new tab</li>
+                        <li>Navigate to an IP lookup service</li>
+                        <li>Paste and submit</li>
+                        <li>Read the results</li>
+                        <li>Switch back to what you were doing</li>
+                    </ol>
+                    <p>That's seven steps for information you need in two seconds. The web lookup approach also scatters your workflow across tabs and requires navigating to a third-party site for routine information.</p>
+                    <p><code>who-dis</code> compresses that to two steps: right-click, read.</p>
+
+                    <h2>What Who Dis Does</h2>
+                    <p>Who Dis adds a single context menu item that appears when you right-click on selected text. If the selected text looks like an IP address (IPv4 or IPv6), selecting "Who is this IP?" opens a small popup with:</p>
+                    <ul>
+                        <li><strong>Country and city</strong> — flag emoji, country name, city</li>
+                        <li><strong>ISP and organization</strong> — the registered network name</li>
+                        <li><strong>ASN</strong> — Autonomous System Number and name</li>
+                        <li><strong>IP type flags</strong> — datacenter, VPN, Tor exit node, proxy (where available)</li>
+                        <li><strong>Timezone</strong> — the timezone associated with the geolocation</li>
+                    </ul>
+                    <p>The popup appears near the selection point, shows the data, and dismisses when you click away. No new tab, no navigation, no context switch.</p>
+
+                    <h2>Architecture: Manifest V3</h2>
+                    <p>Who Dis is built to Chrome Manifest V3, which changes how extensions interact with the browser in a few important ways:</p>
+
+                    <h3>Service Workers instead of Background Pages</h3>
+                    <p>MV3 replaces persistent background pages with event-driven service workers. The extension's background logic — registering the context menu item, handling the click, fetching IP data — runs in a service worker that Chrome spins up on demand and shuts down when idle.</p>
+                    <pre><code>// background.js (service worker)
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: 'who-dis-lookup',
+    title: 'Who is this IP?',
+    contexts: ['selection']
+  });
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'who-dis-lookup') {
+    const selectedText = info.selectionText.trim();
+    if (isValidIP(selectedText)) {
+      lookupIP(selectedText, tab);
+    }
+  }
+});</code></pre>
+
+                    <h3>No Remote Code Execution</h3>
+                    <p>MV3 prohibits extensions from executing remotely hosted code. All logic in Who Dis is bundled locally in the extension. The only external call is to the IP data API — the code itself never comes from outside the extension package.</p>
+
+                    <h3>Host Permissions</h3>
+                    <p>The manifest declares explicit host permissions for the API endpoint rather than using the catch-all <code>"&lt;all_urls&gt;"</code> pattern:</p>
+                    <pre><code>// manifest.json (relevant sections)
+{
+  "manifest_version": 3,
+  "name": "Who Dis — IP Lookup",
+  "version": "1.0",
+  "description": "Right-click any IP address for instant geolocation and network data",
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://ipapi.co/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}</code></pre>
+
+                    <h2>IP Detection</h2>
+                    <p>The extension needs to determine whether selected text is actually an IP address before offering the menu item — or at least before performing a lookup. The validation handles both IPv4 and IPv6:</p>
+                    <pre><code>function isValidIP(text) {
+  // IPv4
+  const ipv4Regex = /^(\d{1,3}\.){3}\d{1,3}$/;
+  // IPv6 (simplified — full validation is complex)
+  const ipv6Regex = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
+
+  if (ipv4Regex.test(text)) {
+    // Validate each octet is 0-255
+    return text.split('.').every(octet => {
+      const n = parseInt(octet, 10);
+      return n >= 0 && n <= 255;
+    });
+  }
+
+  return ipv6Regex.test(text);
+}
+</code></pre>
+                    <p>The context menu item is always shown when text is selected — Chrome's context menu API doesn't support conditional display based on selection content. The validation happens at click time, with a graceful "That doesn't look like a valid IP address" message if the selection isn't an IP.</p>
+
+                    <h2>The Popup UI</h2>
+                    <p>Results display in a content script injected into the active tab rather than a browser popup window. This keeps the lookup result visually close to where the IP appeared on the page:</p>
+                    <pre><code>// Injected into page to show results
+function showResultCard(ip, data) {
+  const card = document.createElement('div');
+  card.id = 'who-dis-card';
+  card.innerHTML = `
+    &lt;div class="who-dis-header"&gt;
+      &lt;span class="who-dis-flag"&gt;${data.country_flag_emoji}&lt;/span&gt;
+      &lt;strong&gt;${ip}&lt;/strong&gt;
+      &lt;button class="who-dis-close"&gt;&times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="who-dis-row"&gt;
+      &lt;span class="who-dis-label"&gt;Location&lt;/span&gt;
+      &lt;span&gt;${data.city}, ${data.country_name}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="who-dis-row"&gt;
+      &lt;span class="who-dis-label"&gt;ISP&lt;/span&gt;
+      &lt;span&gt;${data.org}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="who-dis-row"&gt;
+      &lt;span class="who-dis-label"&gt;ASN&lt;/span&gt;
+      &lt;span&gt;${data.asn}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="who-dis-row"&gt;
+      &lt;span class="who-dis-label"&gt;Timezone&lt;/span&gt;
+      &lt;span&gt;${data.timezone}&lt;/span&gt;
+    &lt;/div&gt;
+  `;
+  document.body.appendChild(card);
+
+  // Dismiss on outside click
+  document.addEventListener('click', (e) => {
+    if (!card.contains(e.target)) card.remove();
+  }, { once: true });
+}
+</code></pre>
+                    <p>The card is styled with an injected stylesheet scoped to the <code>#who-dis-card</code> ID to avoid conflicts with the host page's CSS.</p>
+
+                    <h2>API Choice: ipapi.co</h2>
+                    <p>Who Dis uses <a href="https://ipapi.co" target="_blank" rel="noopener">ipapi.co</a> for geolocation data. The choice came down to:</p>
+                    <ul>
+                        <li><strong>Free tier</strong> — 30,000 requests/month, more than enough for personal use</li>
+                        <li><strong>No API key required</strong> for the free tier (simplifies first-run setup)</li>
+                        <li><strong>JSON response</strong> — clean, predictable schema with all the fields I needed</li>
+                        <li><strong>IPv6 support</strong> — works with both address families</li>
+                    </ul>
+                    <p>The free tier limitation is worth noting: for high-volume use, an API key is recommended, and Who Dis includes an optional API key setting accessible from the extension popup.</p>
+                    <pre><code>async function fetchIPData(ip) {
+  // Check for saved API key
+  const { apiKey } = await chrome.storage.local.get('apiKey');
+  const url = apiKey
+    ? `https://ipapi.co/${ip}/json/?key=${apiKey}`
+    : `https://ipapi.co/${ip}/json/`;
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  return response.json();
+}</code></pre>
+
+                    <h2>Caching Lookups</h2>
+                    <p>Hitting the API every time the same IP appears in your work session is wasteful. Who Dis caches results using <code>chrome.storage.session</code>, which persists across pages within a browser session but clears when the browser closes — appropriate for IP data that's unlikely to change within a session but shouldn't be stale across days:</p>
+                    <pre><code>async function lookupWithCache(ip) {
+  const cacheKey = `cache_${ip}`;
+  const cached = await chrome.storage.session.get(cacheKey);
+
+  if (cached[cacheKey]) {
+    return cached[cacheKey]; // Cache hit
+  }
+
+  const data = await fetchIPData(ip);
+  await chrome.storage.session.set({ [cacheKey]: data });
+  return data;
+}</code></pre>
+
+                    <h2>Real-World Use Cases</h2>
+                    <p>A few scenarios where Who Dis saves time in a real development workflow:</p>
+
+                    <h3>Reading Server Logs</h3>
+                    <p>Tail-reading a web server access log and seeing unusual traffic from an unfamiliar IP block? Right-click to confirm whether it's a known CDN, a Tor exit node, or a datacenter IP — without leaving the log viewer tab.</p>
+
+                    <h3>Email Header Analysis</h3>
+                    <p>Investigating a phishing attempt or spam campaign? Email headers contain a chain of IP hops through mail servers. Select each IP and right-click to trace the path geographically and identify anomalies.</p>
+
+                    <h3>Security Alerts</h3>
+                    <p>A monitoring dashboard flags a failed login from an IP. Right-click to see whether it's coming from a known cloud provider (likely automated attack tooling) or a residential ISP in an unexpected country — context that shapes the response.</p>
+
+                    <h3>API Response Debugging</h3>
+                    <p>An API returns a server IP or the response comes from an unexpected region. Quick lookup confirms whether the CDN is routing you to the right geographic endpoint.</p>
+
+                    <h2>What I'd Add Next</h2>
+                    <p>The current version keeps the scope narrow by design — lookup, display, dismiss. A few features I've considered:</p>
+                    <ul>
+                        <li><strong>Threat intelligence flags</strong> — integrating with a threat feed to flag IPs known for malicious activity</li>
+                        <li><strong>Copy to clipboard</strong> — a one-click button to copy the full lookup result as formatted text</li>
+                        <li><strong>Lookup history</strong> — a popup panel showing recent lookups in the current session</li>
+                        <li><strong>Custom API support</strong> — allowing power users to point the extension at a self-hosted IP data service</li>
+                    </ul>
+                    <p>The risk with feature additions is always complexity creep. The extension's main value is that it's instant and unobtrusive — a heavy settings UI or multi-panel interface would undermine that.</p>
+
+                    <h2>Installing Who Dis</h2>
+                    <p>The extension isn't in the Chrome Web Store — it's designed for personal/developer use and installed as an unpacked extension from the source:</p>
+                    <pre><code># Clone the repo
+git clone https://github.com/josefresco/who-dis.git
+
+# Load in Chrome:
+# 1. Navigate to chrome://extensions
+# 2. Enable "Developer mode" (top right toggle)
+# 3. Click "Load unpacked"
+# 4. Select the cloned who-dis directory</code></pre>
+                    <p>Unpacked installation means it's available immediately and updated by pulling the latest from GitHub. No Chrome Web Store review process, no waiting — which is appropriate for a tool used in a trusted personal environment.</p>
+
+                    <h2>Lessons from Building Context Menu Extensions</h2>
+                    <p>A few things that came up during development:</p>
+                    <ul>
+                        <li><strong>Service worker lifecycle is unforgiving.</strong> MV3 service workers are killed aggressively by Chrome. Any state stored in variables is gone between events. Use <code>chrome.storage</code> for anything that needs to survive across clicks.</li>
+                        <li><strong>Content script injection timing matters.</strong> Injecting a content script on context menu click is subject to whether the tab's page has fully loaded. Handle cases where injection fails gracefully.</li>
+                        <li><strong>API rate limits need user visibility.</strong> The first version silently failed when hitting the free tier limit. Adding a clear "rate limit reached — add an API key in settings" message made the failure recoverable.</li>
+                        <li><strong>CSS isolation in content scripts is hard.</strong> Injecting a styled card into an arbitrary page means fighting with the host page's CSS. Using a Shadow DOM for the card UI is the right long-term approach to avoid style bleed.</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>Who Dis is a small tool that solves a small but frequent friction point. The context menu extension pattern is underused — there are plenty of actions developers take repeatedly (encode/decode strings, look up documentation, validate formats) that would benefit from the same treatment: select, right-click, done.</p>
+                    <p>The full source is on GitHub. It's compact enough to read in 20 minutes and adapt for your own lookup needs — swap the API, add fields, change the card UI. The right-click pattern and Manifest V3 scaffolding are the reusable parts.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/who-dis" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom Browser Extension?</h2>
+                <p class="cta-description">
+                    From context menu tools to full-featured Chrome extensions, I build browser utilities that
+                    fit directly into your development workflow — no tab-switching required.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Browser Extension Project&body=Hi Jose,%0D%0A%0D%0AI read your Who Dis post and have a browser extension idea I'd like to discuss.%0D%0A%0D%0AIdea:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

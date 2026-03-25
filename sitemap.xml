@@ -9,13 +9,6 @@
   </url>
 
   <url>
-    <loc>https://josefresco.com/blog/wpe-central-command.html</loc>
-    <lastmod>2026-03-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://josefresco.com/about/</loc>
     <lastmod>2026-03-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -76,7 +69,7 @@
 
   <url>
     <loc>https://josefresco.com/blog/family-dashboard.html</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -222,6 +215,13 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://josefresco.com/blog/who-dis-chrome-extension.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Section Pages -->
   <url>
     <loc>https://josefresco.com/ai-tools/</loc>
@@ -246,7 +246,7 @@
 
   <url>
     <loc>https://josefresco.com/feed.xml</loc>
-    <lastmod>2026-03-24</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
