@@ -89,9 +89,7 @@ josefresco.github.io/
 ├── CONTENT_MANAGEMENT.md   # Content management guide
 ├── DEPLOYMENT.md           # Deployment documentation
 ├── CONTRIBUTING.md         # Contribution guidelines
-├── PERFORMANCE.md          # Performance optimization guide
-├── MARKETING_RECOMMENDATIONS.md  # Marketing strategy guide
-└── WEBSITE_REVIEW_2026.md  # Site audit & recommendations
+└── PERFORMANCE.md          # Performance optimization guide
 ```
 
 ## Content Management
@@ -180,8 +178,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guide and troubleshooting
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 - **[PERFORMANCE.md](PERFORMANCE.md)** - Performance optimization guide
-- **[MARKETING_RECOMMENDATIONS.md](MARKETING_RECOMMENDATIONS.md)** - Marketing strategy and growth recommendations
-- **[WEBSITE_REVIEW_2026.md](WEBSITE_REVIEW_2026.md)** - Comprehensive site audit and recommendations (2026)
 
 ## License
 

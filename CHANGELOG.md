@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-03-26
+
+### Updated
+- `sitemap.xml` — corrected `lastmod` for `save-to-my-blog.html` from `2026-01-24` to `2026-03-21` (post was updated in March 2026)
+- `README.md` — removed references to deleted planning documents from project structure and documentation index
+
+### Removed
+- `MARKETING_RECOMMENDATIONS.md` — AI-generated marketing strategy report; internal planning document not suited for public repository
+- `WEBSITE_REVIEW_2026.md` — AI-generated site audit report; internal planning document not suited for public repository
+
 ## [1.5.0] - 2026-03-25
 
 ### Updated
