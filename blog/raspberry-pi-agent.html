@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation - Jose Fresco</title>
+    <meta name="description" content="How I built a Python-based command dispatcher for my Raspberry Pi that handles shell execution, service checks, file operations, and system stats — the backend layer behind Arpy Assist and my broader Pi automation stack.">
+    <link rel="canonical" href="https://josefresco.com/blog/raspberry-pi-agent.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation - Jose Fresco">
+    <meta property="og:description" content="How I built a Python-based command dispatcher for my Raspberry Pi that handles shell execution, service checks, file operations, and system stats — the backend layer behind Arpy Assist and my broader Pi automation stack.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/raspberry-pi-agent.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/raspberry-pi-agent.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-26T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation - Jose Fresco">
+    <meta name="twitter:description" content="How I built a Python-based command dispatcher for my Raspberry Pi that handles shell execution, service checks, file operations, and system stats — the backend layer behind Arpy Assist and my broader Pi automation stack.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/raspberry-pi-agent.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/raspberry-pi-agent.html"
+      },
+      "headline": "Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation",
+      "description": "How I built a Python-based command dispatcher for my Raspberry Pi that handles shell execution, service checks, file operations, and system stats — the backend layer behind Arpy Assist and my broader Pi automation stack.",
+      "image": "https://josefresco.com/blog/images/raspberry-pi-agent.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-26T00:00:00+00:00",
+      "dateModified": "2026-03-26T00:00:00+00:00",
+      "keywords": "Python, Raspberry Pi, Automation, Shell Scripting, AI Agent, System Monitoring, CLI, subprocess",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/raspberry-pi-agent.svg" type="image/svg+xml">
+                        <img src="images/raspberry-pi-agent.svg" alt="Raspberry Pi Agent Python command dispatcher architecture diagram showing command routing between shell, file, and system modules" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> My Raspberry Pi runs a lot of things — <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">Pi Backups</a>, <a href="/blog/arpy-assist-qwen-web-interface.html" style="color: var(--neural-primary);">Arpy Assist</a>, a <a href="/blog/telegram-pi-monitoring-bot.html" style="color: var(--neural-primary);">Telegram monitoring bot</a>, the <a href="/blog/family-dashboard.html" style="color: var(--neural-primary);">Family Dashboard</a>. Managing all of that needed a unified Python agent that could accept structured commands — run a shell command, check a service, read a log, report system stats — without wiring a one-off script for each task. <code>raspberry-pi-agent</code> is that layer.
+                    </div>
+
+                    <h2>The Problem with Ad-Hoc Scripts</h2>
+                    <p>The Pi started as a web host, became a monitoring node, then an AI command center, and now runs half a dozen services simultaneously. Each new tool I built on it — the Telegram bot, the backup scheduler, the Qwen CLI wrapper — wanted to do the same basic operations:</p>
+                    <ul>
+                        <li>Run a shell command and capture its output</li>
+                        <li>Check whether a systemd service is running</li>
+                        <li>Read the tail of a log file</li>
+                        <li>Report CPU temperature, memory usage, and disk space</li>
+                        <li>Restart a service if it's unhealthy</li>
+                    </ul>
+                    <p>The first few tools each implemented their own version of these operations. That meant five different <code>subprocess.run()</code> wrappers, five slightly different approaches to error handling, five different ways to format the output. When a pattern needed changing — better timeout handling, consistent logging — I had to find and update every copy.</p>
+                    <p><code>raspberry-pi-agent</code> consolidates all of it into a single, importable Python module with a consistent interface.</p>
+
+                    <h2>Architecture: A Command Dispatcher</h2>
+                    <p>The agent is built around a central dispatcher that routes typed command objects to the appropriate handler. Commands are plain Python dataclasses — easy to serialize, easy to log, easy to test:</p>
+                    <pre><code>from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class ShellCommand:
+    command: str
+    timeout: int = 30
+    capture_stderr: bool = True
+
+@dataclass
+class ServiceCommand:
+    service_name: str
+    action: str  # 'status', 'start', 'stop', 'restart'
+
+@dataclass
+class LogTailCommand:
+    log_path: str
+    lines: int = 50
+
+@dataclass
+class SystemStatsCommand:
+    include_temperature: bool = True
+    include_disk: bool = True</code></pre>
+
+                    <p>The dispatcher maps each command type to a handler function:</p>
+                    <pre><code>class PiAgent:
+    def __init__(self):
+        self._handlers = {
+            ShellCommand: self._handle_shell,
+            ServiceCommand: self._handle_service,
+            LogTailCommand: self._handle_log_tail,
+            SystemStatsCommand: self._handle_system_stats,
+        }
+
+    def execute(self, command) -> dict:
+        handler = self._handlers.get(type(command))
+        if not handler:
+            return {'success': False, 'error': f'Unknown command type: {type(command).__name__}'}
+        try:
+            return handler(command)
+        except Exception as e:
+            return {'success': False, 'error': str(e), 'command': repr(command)}</code></pre>
+
+                    <p>Every handler returns the same structure: a dict with a <code>success</code> boolean, a <code>result</code> on success, or an <code>error</code> string on failure. Callers never need to distinguish between a shell execution failure and a Python exception — they always get back the same shape of data.</p>
+
+                    <h2>Shell Execution</h2>
+                    <p>The shell handler wraps <code>subprocess.run()</code> with sane defaults — timeout enforcement, stderr capture, and output decoding — that were missing or inconsistent in the ad-hoc scripts:</p>
+                    <pre><code>def _handle_shell(self, cmd: ShellCommand) -> dict:
+    stderr_dest = subprocess.PIPE if cmd.capture_stderr else subprocess.DEVNULL
+    result = subprocess.run(
+        cmd.command,
+        shell=True,
+        capture_output=True,
+        text=True,
+        timeout=cmd.timeout
+    )
+    return {
+        'success': result.returncode == 0,
+        'stdout': result.stdout.strip(),
+        'stderr': result.stderr.strip() if cmd.capture_stderr else None,
+        'returncode': result.returncode
+    }</code></pre>
+
+                    <p>The <code>shell=True</code> choice is intentional: the Pi agent is for local, trusted commands — the same commands I'd type at the terminal myself. For external-input scenarios, parameterized commands would be the right approach, but that's not the use case here.</p>
+
+                    <h2>Service Management</h2>
+                    <p>Service checks and restarts are the most common operations. The service handler translates action strings into <code>systemctl</code> calls and parses the output into a structured response:</p>
+                    <pre><code>def _handle_service(self, cmd: ServiceCommand) -> dict:
+    if cmd.action == 'status':
+        result = subprocess.run(
+            ['systemctl', 'is-active', cmd.service_name],
+            capture_output=True, text=True
+        )
+        active = result.stdout.strip() == 'active'
+        return {
+            'success': True,
+            'service': cmd.service_name,
+            'active': active,
+            'status': result.stdout.strip()
+        }
+    elif cmd.action in ('start', 'stop', 'restart'):
+        result = subprocess.run(
+            ['sudo', 'systemctl', cmd.action, cmd.service_name],
+            capture_output=True, text=True, timeout=30
+        )
+        return {
+            'success': result.returncode == 0,
+            'service': cmd.service_name,
+            'action': cmd.action,
+            'error': result.stderr.strip() if result.returncode != 0 else None
+        }
+    else:
+        return {'success': False, 'error': f'Unknown action: {cmd.action}'}</code></pre>
+
+                    <h2>System Stats</h2>
+                    <p>The system stats handler aggregates the Pi's health metrics into a single response — CPU temperature, memory usage, disk space, and uptime. Rather than shelling out for each metric, it uses a mix of <code>/proc</code> reads and the <code>psutil</code> library for cross-version compatibility:</p>
+                    <pre><code>import psutil
+import subprocess
+
+def _handle_system_stats(self, cmd: SystemStatsCommand) -> dict:
+    stats = {
+        'success': True,
+        'cpu_percent': psutil.cpu_percent(interval=1),
+        'memory': {
+            'total_mb': psutil.virtual_memory().total // (1024 * 1024),
+            'used_mb': psutil.virtual_memory().used // (1024 * 1024),
+            'percent': psutil.virtual_memory().percent
+        },
+        'uptime_seconds': int(psutil.boot_time())
+    }
+
+    if cmd.include_temperature:
+        try:
+            temp_result = subprocess.run(
+                ['vcgencmd', 'measure_temp'],
+                capture_output=True, text=True, timeout=5
+            )
+            # Output: temp=52.3'C
+            temp_str = temp_result.stdout.strip()
+            temp_val = float(temp_str.replace("temp=", "").replace("'C", ""))
+            stats['cpu_temp_celsius'] = temp_val
+        except Exception:
+            stats['cpu_temp_celsius'] = None
+
+    if cmd.include_disk:
+        disk = psutil.disk_usage('/')
+        stats['disk'] = {
+            'total_gb': round(disk.total / (1024 ** 3), 1),
+            'used_gb': round(disk.used / (1024 ** 3), 1),
+            'percent': disk.percent
+        }
+
+    return stats</code></pre>
+
+                    <h2>Log Tailing</h2>
+                    <p>Reading the tail of a log file is something every service integration needed — the Telegram bot to surface recent errors, Arpy Assist to answer "what did the backup script do last night?" The handler uses Python's file reading rather than shelling out to <code>tail</code>, which keeps the output consistent across log sizes:</p>
+                    <pre><code>def _handle_log_tail(self, cmd: LogTailCommand) -> dict:
+    try:
+        with open(cmd.log_path, 'r', errors='replace') as f:
+            lines = f.readlines()
+        tail = lines[-cmd.lines:] if len(lines) > cmd.lines else lines
+        return {
+            'success': True,
+            'log_path': cmd.log_path,
+            'lines_returned': len(tail),
+            'content': ''.join(tail)
+        }
+    except FileNotFoundError:
+        return {'success': False, 'error': f'Log not found: {cmd.log_path}'}
+    except PermissionError:
+        return {'success': False, 'error': f'Permission denied: {cmd.log_path}'}</code></pre>
+
+                    <h2>How Other Tools Use It</h2>
+                    <p>The agent is imported directly by the other Pi services that need it. The Telegram monitoring bot uses it for health check commands:</p>
+                    <pre><code># In the Telegram bot's command handler
+from raspberry_pi_agent import PiAgent, SystemStatsCommand, ServiceCommand
+
+agent = PiAgent()
+
+async def handle_status_command(update, context):
+    stats = agent.execute(SystemStatsCommand())
+    if not stats['success']:
+        await update.message.reply_text("Couldn't retrieve stats.")
+        return
+
+    msg = (
+        f"CPU: {stats['cpu_percent']}% | "
+        f"Temp: {stats.get('cpu_temp_celsius', 'N/A')}°C\n"
+        f"Memory: {stats['memory']['used_mb']}MB / {stats['memory']['total_mb']}MB "
+        f"({stats['memory']['percent']}%)\n"
+        f"Disk: {stats['disk']['used_gb']}GB / {stats['disk']['total_gb']}GB "
+        f"({stats['disk']['percent']}%)"
+    )
+    await update.message.reply_text(msg)</code></pre>
+
+                    <p><a href="/blog/arpy-assist-qwen-web-interface.html">Arpy Assist</a> — the web interface for Qwen CLI — uses the agent to execute commands that the AI model suggests, routing Qwen's shell recommendations through the dispatcher rather than running them directly. This gives the web interface a consistent layer for logging and timeout handling around everything Qwen wants to run.</p>
+
+                    <h2>Adding New Command Types</h2>
+                    <p>Adding a new capability to the agent is a three-step pattern:</p>
+                    <ol>
+                        <li>Define a new dataclass for the command</li>
+                        <li>Write a handler method</li>
+                        <li>Register it in <code>self._handlers</code></li>
+                    </ol>
+                    <p>No base classes to inherit from, no decorator magic to understand, no framework to fight. The Telegram bot integration prompted adding a <code>NetworkCommand</code> type for checking external connectivity and ping times; the Pi Backups integration added a <code>BackupStatusCommand</code> that reads from the backup log. Each addition took under 30 minutes and didn't touch any existing handler.</p>
+
+                    <h2>Testing Without a Pi</h2>
+                    <p>One practical problem with Pi automation scripts: they're hard to test on a development machine. <code>vcgencmd</code> doesn't exist on macOS. <code>systemctl</code> behaves differently on non-systemd systems. The agent's architecture makes this testable:</p>
+                    <pre><code>class MockPiAgent(PiAgent):
+    """Drop-in replacement for unit testing without Pi hardware."""
+
+    def _handle_system_stats(self, cmd):
+        return {
+            'success': True,
+            'cpu_percent': 23.5,
+            'cpu_temp_celsius': 48.2,
+            'memory': {'total_mb': 4096, 'used_mb': 1820, 'percent': 44.4},
+            'disk': {'total_gb': 64.0, 'used_gb': 18.3, 'percent': 28.6}
+        }
+
+    def _handle_service(self, cmd):
+        return {'success': True, 'service': cmd.service_name, 'active': True, 'status': 'active'}</code></pre>
+
+                    <p>The calling code never knows it's talking to a mock — it just calls <code>agent.execute(command)</code> and gets back the same dict shape. This made it possible to develop and test the Telegram bot's response formatting and Arpy Assist's frontend entirely on a laptop.</p>
+
+                    <h2>What's Next</h2>
+                    <p>The agent currently operates synchronously — each command blocks until complete. For the Telegram bot this is fine; it's handling one command at a time per chat. For Arpy Assist's web interface, which can serve multiple concurrent users, an async version built around <code>asyncio.create_subprocess_shell</code> would remove the blocking constraint.</p>
+                    <p>A command queue with persistent storage (SQLite) would let long-running operations — a full backup, a large file transfer — be submitted and polled for results rather than holding an HTTP connection open. That's a likely next step as the Arpy Assist web interface adds more ambitious command types.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The pattern here — a typed command + a dispatcher + consistent return shapes — isn't novel. It's the same principle behind every command bus or message queue. The value isn't in the novelty; it's in applying a pattern that prevents the Pi's automation stack from turning into a collection of incompatible, poorly-tested one-offs.</p>
+                    <p>If you're building anything more than one or two automation scripts for a Pi, a central agent layer like this pays for itself in the second tool you add. The code is on GitHub as part of the broader Pi automation stack.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/raspberry-pi-agent" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Custom Raspberry Pi Automation?</h2>
+                <p class="cta-description">
+                    From monitoring bots to local AI integrations, I build practical automation tools that
+                    run reliably on constrained hardware. Let's talk about what you're trying to automate.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Pi Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your Raspberry Pi Agent post and have an automation project I'd like to discuss.%0D%0A%0D%0AWhat I'm trying to automate:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

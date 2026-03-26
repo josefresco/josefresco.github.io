@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation</title>
+      <link>https://josefresco.com/blog/raspberry-pi-agent.html</link>
+      <description>How I built a Python-based command dispatcher that unifies shell execution, service checks, log tailing, and system stats across my entire Pi automation stack — the backend layer behind Arpy Assist, the Telegram bot, and Pi Backups.</description>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/raspberry-pi-agent.html</guid>
+    </item>
 
     <item>
       <title>Who Dis: Building a Right-Click IP Lookup Chrome Extension</title>
