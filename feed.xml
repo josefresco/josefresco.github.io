@@ -5,7 +5,7 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -86,14 +86,6 @@
       <description>Learn how JF Website Monitor helps businesses maintain SLA compliance with detailed uptime reports, PDF exports, and comprehensive monitoring analytics.</description>
       <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/sla-reporting-jf-website-monitor.html</guid>
-    </item>
-
-    <item>
-      <title>Geekworm P173 Case: How This Aluminum Alloy Housing Dropped My Pi's CPU Temp by 20°C</title>
-      <link>https://josefresco.com/blog/geekworm-p173-raspberry-pi-case-cooling-solution.html</link>
-      <description>Discover how the Geekworm P173 heavy-duty aluminum alloy case dramatically improved my Raspberry Pi's thermal performance, dropping CPU temperatures by 20°C and extending its lifespan.</description>
-      <pubDate>Fri, 30 Jan 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/geekworm-p173-raspberry-pi-case-cooling-solution.html</guid>
     </item>
 
   </channel>

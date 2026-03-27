@@ -64,11 +64,12 @@ josefresco.github.io/
 ├── CNAME                   # Custom domain (josefresco.com)
 ├── robots.txt              # Search engine directives
 ├── sitemap.xml             # Site structure for SEO
-├── feed.xml                # RSS feed
+├── feed.xml                # RSS feed (10 most recent posts)
 ├── llms.txt                # AI agent optimization guide
 ├── blog/                   # Blog posts directory
 │   ├── index.html          # Blog listing page
-│   ├── images/             # Blog post images
+│   ├── blog.css            # Blog-specific styles
+│   ├── images/             # Blog post images (SVG, PNG, WebP)
 │   └── *.html              # Individual blog post files
 ├── projects/               # Project landing pages
 │   ├── index.html          # Projects overview
@@ -81,6 +82,7 @@ josefresco.github.io/
 ├── now/                    # Now page (current focus)
 ├── images/                 # Site-wide images (og-image, etc.)
 ├── css/                    # Additional stylesheets
+├── images/                 # Root-level images (og-image.jpg)
 ├── website-sync.sh         # Automated deployment script
 ├── update_content_for_ai.sh # AI optimization checklist
 ├── optimize-images.sh      # Image optimization script
