@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JF Website Monitor: How Content Change Detection Works Under the Hood - Jose Fresco</title>
+    <meta name="description" content="A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and fingerprinting to CSS selector targeting and meaningful diff alerts.">
+    <link rel="canonical" href="https://josefresco.com/blog/jf-website-monitor-content-change-detection.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="JF Website Monitor: How Content Change Detection Works Under the Hood - Jose Fresco">
+    <meta property="og:description" content="A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and fingerprinting to CSS selector targeting and meaningful diff alerts.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-website-monitor-content-change-detection.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-27T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JF Website Monitor: How Content Change Detection Works Under the Hood - Jose Fresco">
+    <meta name="twitter:description" content="A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and fingerprinting to CSS selector targeting and meaningful diff alerts.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-website-monitor-content-change-detection.html"
+      },
+      "headline": "JF Website Monitor: How Content Change Detection Works Under the Hood",
+      "description": "A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and fingerprinting to CSS selector targeting and meaningful diff alerts.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-27T00:00:00+00:00",
+      "dateModified": "2026-03-27T00:00:00+00:00",
+      "keywords": "Website Monitoring, Content Change Detection, Node.js, JavaScript, Puppeteer, SHA-256, HTML Normalization, CSS Selectors, Uptime Monitoring, Self-hosting",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">JF Website Monitor: How Content Change Detection Works Under the Hood</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Uptime checks tell you a site is responding — they don't tell you the homepage pricing quietly changed, or the product you're tracking went back in stock. <a href="/blog/jf-website-monitor-launch.html" style="color: var(--neural-primary);">JF Website Monitor</a> ships a content change detection engine alongside its uptime checks. This post covers how that engine actually works: HTML normalization, SHA-256 fingerprinting, CSS selector targeting, and how we filter noise from meaningful changes to avoid alert fatigue.
+                    </div>
+
+                    <h2>The Gap Uptime Monitoring Leaves Open</h2>
+                    <p>A 200 OK is a low bar. It means a server responded — it says nothing about what it responded with. Your site can return a 200 all day while its checkout page shows an error message, its pricing table has reverted to last year's rates, or a critical product description has gone blank.</p>
+                    <p>This is the gap <a href="/blog/why-uptime-is-not-enough.html">I wrote about</a> when JF Website Monitor was first in development. Uptime is necessary but not sufficient. Content change detection is what fills the gap.</p>
+                    <p>The challenge is that "content change" is a fuzzy concept. Almost every page on the web changes constantly — ad slots rotate, timestamps update, session tokens refresh, A/B test variants flip. A naive change detector would alert on every page load. The useful signal is specific, targeted changes: a price that moved, a product that appeared or disappeared, a status indicator that flipped.</p>
+
+                    <h2>Step 1: Fetching the Page</h2>
+                    <p>JF Website Monitor uses <strong>Puppeteer</strong> (headless Chromium) rather than a simple HTTP fetch for content checks. This was a deliberate choice: many modern pages require JavaScript execution to render their actual content. A <code>fetch()</code> of a React or Vue app returns an empty shell; the content lives in bundles that execute after load.</p>
+                    <pre><code>const browser = await puppeteer.launch({ headless: 'new' });
+const page = await browser.newPage();
+
+// Block unnecessary resources to speed up content checks
+await page.setRequestInterception(true);
+page.on('request', (req) => {
+  const blocked = ['image', 'stylesheet', 'font', 'media'];
+  if (blocked.includes(req.resourceType())) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+});
+
+await page.goto(url, {
+  waitUntil: 'networkidle2',
+  timeout: 30000
+});
+
+const html = await page.content();</code></pre>
+                    <p>Blocking images, stylesheets, fonts, and media cuts check time significantly while preserving the DOM content we actually care about. <code>networkidle2</code> waits until there are no more than 2 pending network connections for 500ms — reliable enough for SPA content rendering without waiting for every third-party tracker to finish.</p>
+
+                    <h2>Step 2: Targeting with CSS Selectors</h2>
+                    <p>Running a change check against an entire page's HTML would produce constant false positives. Instead, each monitor is configured with an optional <strong>CSS selector</strong> that scopes the check to a specific element:</p>
+                    <pre><code>// Example monitor configurations
+const monitors = [
+  {
+    url: 'https://example.com/pricing',
+    selector: '.pricing-table',    // Watch only the pricing section
+    name: 'Pricing Page'
+  },
+  {
+    url: 'https://shop.example.com/product/42',
+    selector: '#stock-status',     // Watch only the stock indicator
+    name: 'Product Stock Status'
+  },
+  {
+    url: 'https://status.example.com',
+    selector: null,                // No selector — watch the full page body
+    name: 'Status Page'
+  }
+];</code></pre>
+                    <p>When a selector is provided, the engine extracts only that element's inner HTML before fingerprinting. When no selector is configured, it falls back to the full <code>&lt;body&gt;</code> content — useful for simple pages like status dashboards where any change is meaningful.</p>
+                    <pre><code>async function extractContent(page, selector) {
+  if (!selector) {
+    return page.$eval('body', el => el.innerHTML);
+  }
+
+  try {
+    await page.waitForSelector(selector, { timeout: 5000 });
+    return page.$eval(selector, el => el.innerHTML);
+  } catch (err) {
+    // Selector not found — record as a content error, not a change
+    throw new ContentError(`Selector "${selector}" not found on page`);
+  }
+}</code></pre>
+                    <p>Missing selectors are treated as errors, not changes — this avoids false-positive alerts when a page restructures in a way that removes the monitored element entirely. A separate alert type surfaces "selector not found" so the monitor configuration can be updated.</p>
+
+                    <h2>Step 3: HTML Normalization</h2>
+                    <p>Raw HTML is full of noise that isn't meaningful content change. Before fingerprinting, the extracted HTML passes through a normalization pipeline that strips or collapses known sources of churn:</p>
+                    <pre><code>function normalizeHTML(html) {
+  return html
+    // Remove script tags and their content
+    .replace(/&lt;script\b[^&gt;]*&gt;[\s\S]*?&lt;\/script&gt;/gi, '')
+    // Remove inline style attributes
+    .replace(/\s+style="[^"]*"/gi, '')
+    // Remove data attributes (often used for analytics/tracking IDs)
+    .replace(/\s+data-[\w-]+="[^"]*"/gi, '')
+    // Collapse whitespace
+    .replace(/\s+/g, ' ')
+    // Remove HTML comments
+    .replace(/&lt;!--[\s\S]*?--&gt;/g, '')
+    // Trim
+    .trim();
+}</code></pre>
+                    <p>This handles the most common noise sources: A/B test data attributes, tracking pixel scripts injected into the DOM, and whitespace-only formatting differences. The result is a stable representation of the visible text and structure, without the ephemeral metadata that changes on every render.</p>
+                    <p>For sites with particularly volatile markup, monitors can be configured with an <strong>ignore patterns</strong> list — additional regex rules applied during normalization to strip site-specific noise before fingerprinting.</p>
+
+                    <h2>Step 4: SHA-256 Fingerprinting</h2>
+                    <p>The normalized HTML is hashed with SHA-256. The hash is small, fast to compare, and collision-resistant enough for this use case:</p>
+                    <pre><code>const crypto = require('crypto');
+
+function fingerprint(normalizedHTML) {
+  return crypto
+    .createHash('sha256')
+    .update(normalizedHTML, 'utf8')
+    .digest('hex');
+}</code></pre>
+                    <p>Each check run stores the fingerprint in the database alongside the check timestamp. On the next run, the new fingerprint is compared to the stored value:</p>
+                    <pre><code>async function runContentCheck(monitor) {
+  const currentFingerprint = await fetchAndFingerprint(monitor);
+  const stored = await db.getLastFingerprint(monitor.id);
+
+  if (!stored) {
+    // First check — establish baseline, no alert
+    await db.saveFingerprint(monitor.id, currentFingerprint);
+    return { changed: false, baseline: true };
+  }
+
+  const changed = currentFingerprint !== stored.fingerprint;
+
+  if (changed) {
+    await db.saveFingerprint(monitor.id, currentFingerprint);
+    await db.recordChangeEvent(monitor.id, {
+      previousFingerprint: stored.fingerprint,
+      currentFingerprint,
+      detectedAt: new Date()
+    });
+  }
+
+  return { changed, previousFingerprint: stored.fingerprint };
+}</code></pre>
+
+                    <h2>Step 5: Diff Generation for Alerts</h2>
+                    <p>Knowing a change occurred is useful; knowing <em>what</em> changed is more useful. When a fingerprint mismatch is detected, the engine generates a human-readable diff to include in the alert notification.</p>
+                    <p>The diff operates on the normalized text content (not raw HTML) — extracted with a simple text-only pass after normalization:</p>
+                    <pre><code>const { diffWords } = require('diff');
+
+function generateTextDiff(previousHTML, currentHTML) {
+  const previousText = extractText(normalizeHTML(previousHTML));
+  const currentText = extractText(normalizeHTML(currentHTML));
+
+  const changes = diffWords(previousText, currentText);
+
+  const added = changes
+    .filter(c => c.added)
+    .map(c => c.value.trim())
+    .filter(Boolean);
+
+  const removed = changes
+    .filter(c => c.removed)
+    .map(c => c.value.trim())
+    .filter(Boolean);
+
+  return { added, removed };
+}
+
+function extractText(html) {
+  // Strip remaining tags, decode entities
+  return html
+    .replace(/&lt;[^&gt;]+&gt;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '&lt;')
+    .replace(/&gt;/g, '&gt;')
+    .replace(/\s+/g, ' ')
+    .trim();
+}</code></pre>
+                    <p>The alert notification includes the top 3 added and removed text fragments — enough context to understand what changed without flooding a Telegram message with a full page dump.</p>
+
+                    <h2>Alert Thresholds and Cooldowns</h2>
+                    <p>Without thresholds, a page that legitimately changes every few minutes would generate a constant stream of alerts. Two mechanisms prevent this:</p>
+                    <p><strong>Change sensitivity threshold</strong>: Monitors can be configured with a minimum change percentage. The diff output is scored as a fraction of total word count — changes that affect less than the threshold (default: 5%) are recorded but don't trigger a notification. This handles rolling news tickers and "X minutes ago" timestamps that slip through normalization.</p>
+                    <p><strong>Alert cooldown</strong>: After a change alert fires, a configurable cooldown period (default: 1 hour) suppresses further alerts for that monitor. Changes during the cooldown are still recorded in the database — they just don't generate notifications until the cooldown expires. This prevents a single volatile element from producing dozens of consecutive alerts before you've had a chance to respond to the first one.</p>
+                    <pre><code>async function shouldAlert(monitor, changeEvent) {
+  // Check change sensitivity
+  const sensitivity = monitor.changeSensitivity ?? 0.05;
+  if (changeEvent.changePercent &lt; sensitivity) {
+    return false;
+  }
+
+  // Check cooldown
+  const lastAlert = await db.getLastAlertTime(monitor.id);
+  if (lastAlert) {
+    const cooldownMs = (monitor.alertCooldownMinutes ?? 60) * 60 * 1000;
+    if (Date.now() - lastAlert.getTime() &lt; cooldownMs) {
+      return false;
+    }
+  }
+
+  return true;
+}</code></pre>
+
+                    <h2>Notification Delivery</h2>
+                    <p>When a change passes the threshold and cooldown checks, a notification is dispatched. JF Website Monitor currently supports <strong>Telegram</strong> and <strong>email</strong> as delivery channels, configured per monitor.</p>
+                    <p>The Telegram message format is designed to be scannable at a glance:</p>
+                    <pre><code>function formatTelegramAlert(monitor, diff) {
+  const lines = [
+    `🔄 *Content Change Detected*`,
+    `📍 ${monitor.name}`,
+    `🔗 ${monitor.url}`,
+    ``
+  ];
+
+  if (diff.removed.length > 0) {
+    lines.push(`*Removed:*`);
+    diff.removed.slice(0, 3).forEach(text => {
+      lines.push(`➖ ${text.substring(0, 100)}`);
+    });
+    lines.push('');
+  }
+
+  if (diff.added.length > 0) {
+    lines.push(`*Added:*`);
+    diff.added.slice(0, 3).forEach(text => {
+      lines.push(`➕ ${text.substring(0, 100)}`);
+    });
+  }
+
+  return lines.join('\n');
+}</code></pre>
+
+                    <h2>Performance: Running Checks at Scale</h2>
+                    <p>Content checks are significantly more expensive than uptime checks — each one spins up a headless browser, waits for JavaScript execution, and processes HTML. Running them at the same frequency as uptime checks (every minute) would be impractical for a self-hosted instance with modest hardware.</p>
+                    <p>JF Website Monitor separates uptime check frequency from content check frequency. Typical configuration:</p>
+                    <ul>
+                        <li><strong>Uptime checks</strong>: every 1–5 minutes (lightweight HTTP HEAD request)</li>
+                        <li><strong>Content checks</strong>: every 15–60 minutes (full Puppeteer render)</li>
+                    </ul>
+                    <p>Content checks also run with a concurrency limit — the Puppeteer pool is capped to prevent resource exhaustion on the host machine. On a Raspberry Pi 5 (the current self-hosted target), a pool of 2 concurrent browser instances keeps memory usage below 600MB while still completing a 20-monitor check cycle in under 8 minutes.</p>
+                    <pre><code>const pLimit = require('p-limit');
+const limit = pLimit(2); // Max 2 concurrent Puppeteer instances
+
+async function runAllContentChecks(monitors) {
+  const tasks = monitors.map(monitor =>
+    limit(() => runContentCheck(monitor))
+  );
+  return Promise.allSettled(tasks);
+}</code></pre>
+
+                    <h2>What's Still on the Roadmap</h2>
+                    <p>The content change detection engine covers the core use cases well, but there are a few areas still in development:</p>
+                    <ul>
+                        <li><strong>Visual diff screenshots</strong> — Capturing before/after screenshots and highlighting changed regions visually. Useful for layout changes that don't surface in text diff.</li>
+                        <li><strong>Structured data extraction</strong> — Rather than diffing HTML, extracting specific values (price, stock count, rating) and alerting when they cross configured thresholds. More precise than text diff for e-commerce monitoring.</li>
+                        <li><strong>Change history UI</strong> — The database stores every fingerprint and change event, but the dashboard currently only shows the most recent. A timeline view of change events would make it easier to correlate content changes with traffic or conversion data.</li>
+                    </ul>
+
+                    <h2>The Broader Context</h2>
+                    <p>Content change detection is one piece of a monitoring stack that includes <a href="/blog/sla-reporting-jf-website-monitor.html">SLA compliance reporting</a>, uptime tracking, and performance checks. It runs self-hosted — after <a href="/blog/jf-website-monitor-self-hosting-migration.html">migrating off Vercel</a> — on the same Raspberry Pi that handles the Family Dashboard, Pi Backups, and the rest of the automation stack.</p>
+                    <p>The code is in the <a href="https://github.com/josefresco/jf-website-monitor" target="_blank" rel="noopener">jf-website-monitor GitHub repo</a>. The live service is at <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener">jfwebsitemonitor.com</a> — free to use, with self-hosting instructions in the repo README.</p>
+
+                    <div class="blog-navigation">
+                        <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                        <a href="https://github.com/josefresco/jf-website-monitor" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Website Monitoring Built Into Your Stack?</h2>
+                <p class="cta-description">
+                    Whether you need uptime alerts, content change detection, or SLA reporting integrated into your
+                    existing tooling, I can build or adapt a monitoring solution that fits your infrastructure.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Website Monitoring Project&body=Hi Jose,%0D%0A%0D%0AI read your content change detection post and have a monitoring requirement I'd like to discuss.%0D%0A%0D%0AWhat I need to monitor:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
