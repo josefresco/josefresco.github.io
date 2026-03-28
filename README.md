@@ -80,9 +80,8 @@ josefresco.github.io/
 ├── ai-tools/               # AI tools listing
 ├── skills/                 # Skills showcase
 ├── now/                    # Now page (current focus)
-├── images/                 # Site-wide images (og-image, etc.)
-├── css/                    # Additional stylesheets
 ├── images/                 # Root-level images (og-image.jpg)
+├── css/                    # Additional stylesheets
 ├── website-sync.sh         # Automated deployment script
 ├── update_content_for_ai.sh # AI optimization checklist
 ├── optimize-images.sh      # Image optimization script
