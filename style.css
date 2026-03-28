@@ -48,6 +48,11 @@
     box-sizing: border-box;
 }
 
+a {
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -1466,6 +1471,7 @@ section {
 
 /* Links in blog post content should be clearly identifiable */
 .blog-post-content a {
+    color: var(--neural-primary);
     text-decoration: underline;
     text-decoration-color: var(--neural-primary);
     text-decoration-thickness: 1px;
@@ -1484,6 +1490,7 @@ section {
 
 /* Also style links in blog excerpts */
 .blog-excerpt a {
+    color: var(--neural-primary);
     text-decoration: underline;
     text-decoration-color: var(--neural-primary);
     text-decoration-thickness: 1px;
