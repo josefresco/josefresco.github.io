@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap - Jose Fresco</title>
+    <meta name="description" content="A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes site-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard.">
+    <link rel="canonical" href="https://josefresco.com/blog/wpe-central-command-helper.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap - Jose Fresco">
+    <meta property="og:description" content="A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes site-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/wpe-central-command-helper.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/wpe-central-command.png">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="WordPress">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap - Jose Fresco">
+    <meta name="twitter:description" content="A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes site-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/wpe-central-command.png">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/wpe-central-command-helper.html"
+      },
+      "headline": "WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap",
+      "description": "A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes site-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard.",
+      "image": "https://josefresco.com/blog/images/wpe-central-command.png",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-28T00:00:00+00:00",
+      "dateModified": "2026-03-28T00:00:00+00:00",
+      "keywords": "WordPress, PHP, REST API, WP Engine, Plugin Development, Authentication, WordPress Agency, Site Management, JSON, Security",
+      "articleSection": "WordPress",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/wpe-central-command.png" type="image/png">
+                        <img src="images/wpe-central-command.png" alt="WPE Central Command dashboard showing site cards with WordPress-level data sourced from the helper plugin" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The WP Engine REST API knows everything about your hosting environment but nothing about what's running inside WordPress. <code>wpe-central-command-helper</code> is the thin PHP plugin installed on each managed site that fills that gap — exposing WordPress version, active plugin count, pending updates, maintenance mode state, and upload directory size through a single secured REST endpoint that the <a href="/blog/wpe-central-command.html">WPE Central Command dashboard</a> queries at page load.
+                    </div>
+
+                    <h2>Two APIs, Two Different Views of a WordPress Site</h2>
+                    <p>When I built <a href="/blog/wpe-central-command.html">WPE Central Command</a>, the WP Engine REST API gave me everything I needed to know about the hosting layer: environment type, PHP version, backup status, domain configuration, cache state. That's a solid foundation for a fleet management dashboard.</p>
+                    <p>But there's a line the hosting API doesn't cross. It can tell you a site is running PHP 8.3 on a production environment with a successful backup from last night. It cannot tell you:</p>
+                    <ul>
+                        <li>Which version of WordPress core is installed</li>
+                        <li>Whether there are pending plugin or theme updates</li>
+                        <li>How many active plugins the site is running</li>
+                        <li>Whether maintenance mode is currently on</li>
+                        <li>How much disk space the uploads directory is consuming</li>
+                        <li>When WP-Cron last ran and when it's next scheduled</li>
+                    </ul>
+                    <p>These are WordPress-level concerns. To answer them, you need something running inside WordPress — hence the helper plugin.</p>
+
+                    <h2>What the Helper Plugin Does</h2>
+                    <p><code>wpe-central-command-helper</code> is a minimal WordPress plugin with a single job: register a protected REST API endpoint that returns a JSON summary of WordPress-level site data. No settings page, no admin menu (beyond an optional configuration screen for the shared secret), no frontend output. It runs silently in the background and responds only to authenticated API requests.</p>
+                    <p>The endpoint lives at:</p>
+                    <pre><code>GET /wp-json/wpe-cc/v1/status</code></pre>
+                    <p>An authenticated request to that endpoint returns a payload that the Central Command dashboard merges with data from the WP Engine API to build a complete picture of each site.</p>
+
+                    <h2>The Status Payload</h2>
+                    <p>Here's what a typical response looks like:</p>
+                    <pre><code>{
+  "wp_version": "6.8.1",
+  "active_plugins": 14,
+  "theme": "GeneratePress",
+  "updates_available": {
+    "core": false,
+    "plugins": 2,
+    "themes": 0
+  },
+  "maintenance_mode": false,
+  "cron_next_run": "2026-03-28T03:00:00Z",
+  "upload_dir_size_mb": 842,
+  "site_url": "https://example.com",
+  "admin_email": "admin@example.com",
+  "timezone": "America/New_York",
+  "timestamp": "2026-03-28T14:22:10Z"
+}</code></pre>
+                    <p>Each field in the payload maps to one of the status indicators on the Central Command site card. <code>updates_available.plugins</code> drives the amber badge that appears when a site has pending updates. <code>maintenance_mode</code> toggles the maintenance mode indicator and determines whether the bulk toggle action is shown as "Enable" or "Disable."</p>
+
+                    <h2>How It Collects the Data</h2>
+                    <p>The plugin uses standard WordPress functions and APIs — no custom database queries, no external calls, nothing that introduces side effects on the host site.</p>
+
+                    <h3>WordPress Version and Update Status</h3>
+                    <pre><code>// WordPress core version
+global $wp_version;
+$data['wp_version'] = $wp_version;
+
+// Check for available updates
+$core_updates = get_site_transient('update_core');
+$data['updates_available']['core'] = isset($core_updates->updates)
+    && !empty($core_updates->updates)
+    && $core_updates->updates[0]->response === 'upgrade';</code></pre>
+                    <p><code>get_site_transient('update_core')</code> returns whatever update check result WordPress has cached. The plugin doesn't trigger a fresh update check — it reads the existing transient. This keeps the endpoint fast and avoids firing an external HTTP request on every dashboard page load.</p>
+
+                    <h3>Plugin Count and Update Status</h3>
+                    <pre><code>// Active plugin count
+$active_plugins = get_option('active_plugins', []);
+$data['active_plugins'] = count($active_plugins);
+
+// Plugin updates available
+$plugin_updates = get_site_transient('update_plugins');
+$data['updates_available']['plugins'] = isset($plugin_updates->response)
+    ? count($plugin_updates->response)
+    : 0;</code></pre>
+                    <p>Same approach: read the cached transient, don't trigger a fresh check. The update count is what matters for the dashboard — the exact list of which plugins have updates is available by navigating directly to the WordPress admin, which is one click from the Central Command site card.</p>
+
+                    <h3>Maintenance Mode</h3>
+                    <p>WordPress doesn't have a native maintenance mode flag in the database. The conventional approach is the presence of a <code>.maintenance</code> file in the WordPress root. The helper checks for that:</p>
+                    <pre><code>$data['maintenance_mode'] = file_exists(ABSPATH . '.maintenance');</code></pre>
+                    <p>When the Central Command dashboard sends a "enable maintenance mode" bulk action, it calls a separate endpoint on the helper plugin that creates or removes that file. The status endpoint then accurately reflects the current state on the next dashboard refresh.</p>
+
+                    <h3>Upload Directory Size</h3>
+                    <pre><code>function wpe_cc_dir_size($path) {
+    $size = 0;
+    foreach (new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)
+    ) as $file) {
+        $size += $file->getSize();
+    }
+    return round($size / 1048576, 1); // Return in MB
+}
+
+$upload_dir = wp_upload_dir();
+$data['upload_dir_size_mb'] = wpe_cc_dir_size($upload_dir['basedir']);</code></pre>
+                    <p>This is the one field that can be slow on large sites with thousands of media files. On the first few deploys I found it adding 2-3 seconds to the response time on sites with 5GB+ upload directories. The fix was caching the result in a transient with a 1-hour TTL — upload directory size is useful context data, not something that needs to be live to the second.</p>
+
+                    <h2>Authentication: Shared Secrets</h2>
+                    <p>The status endpoint returns sensitive site data. It needs to be accessible to the Central Command dashboard from outside the site but not to the general public. WordPress's built-in cookie authentication doesn't work for cross-origin requests from a separate app, and OAuth is overkill for a self-hosted internal tool.</p>
+                    <p>The solution is a shared secret: a long random string configured in both the WordPress site and the Central Command dashboard. Every request to the helper endpoint must include the secret in an <code>Authorization</code> header:</p>
+                    <pre><code>Authorization: Bearer your-shared-secret-here</code></pre>
+                    <p>On the WordPress side, the plugin validates this on every request:</p>
+                    <pre><code>function wpe_cc_check_auth(WP_REST_Request $request) {
+    $configured_secret = defined('WPE_CC_SECRET') ? WPE_CC_SECRET : '';
+
+    if (empty($configured_secret)) {
+        return new WP_Error(
+            'wpe_cc_not_configured',
+            'Helper plugin secret is not configured.',
+            ['status' => 503]
+        );
+    }
+
+    $auth_header = $request->get_header('authorization');
+    $token = str_replace('Bearer ', '', $auth_header ?? '');
+
+    if (!hash_equals($configured_secret, $token)) {
+        return new WP_Error(
+            'wpe_cc_unauthorized',
+            'Invalid authorization token.',
+            ['status' => 401]
+        );
+    }
+
+    return true;
+}
+
+register_rest_route('wpe-cc/v1', '/status', [
+    'methods'             => 'GET',
+    'callback'            => 'wpe_cc_status_handler',
+    'permission_callback' => 'wpe_cc_check_auth',
+]);</code></pre>
+                    <p>Two details worth noting here:</p>
+                    <ul>
+                        <li><strong><code>hash_equals()</code> instead of <code>===</code></strong> — Timing-safe string comparison prevents timing attacks that could be used to guess the secret one character at a time.</li>
+                        <li><strong>503 for unconfigured secret</strong> — If the plugin is activated but <code>WPE_CC_SECRET</code> hasn't been set yet, the endpoint returns a 503 (service unavailable) rather than a 401 (unauthorized). This makes misconfiguration distinguishable from a wrong secret in the Central Command error log.</li>
+                    </ul>
+
+                    <h2>Configuring the Secret: wp-config.php vs Settings Page</h2>
+                    <p>The shared secret can be set two ways:</p>
+
+                    <h3>Option 1: wp-config.php (Recommended)</h3>
+                    <pre><code>// Add to wp-config.php, before "That's all, stop editing!"
+define('WPE_CC_SECRET', 'paste-your-generated-secret-here');</code></pre>
+                    <p>This keeps the secret out of the WordPress database and out of the admin UI — it can't be accidentally revealed by a plugin that reads options, and it won't be included in a database export. For production sites, this is the right approach.</p>
+
+                    <h3>Option 2: Plugin Settings Page</h3>
+                    <p>For convenience during initial setup, the plugin includes a minimal settings page under <strong>Settings → WPE Central Command</strong> that lets you paste the secret into a password field. The value is stored in the WordPress options table (encrypted at rest using WordPress's built-in secrets, but still database-accessible). Once a site is configured, I recommend migrating to <code>wp-config.php</code> and deleting the stored option.</p>
+
+                    <h2>Keeping the Plugin Footprint Small</h2>
+                    <p>Every active WordPress plugin adds overhead to every page load, even if it's just hook registration. I was deliberate about keeping the helper's footprint minimal:</p>
+                    <ul>
+                        <li><strong>REST route registration only on <code>rest_api_init</code></strong> — The plugin hooks into <code>rest_api_init</code> to register the endpoint, not <code>init</code>. The route registration only runs when WordPress initializes the REST API stack — not on frontend page loads.</li>
+                        <li><strong>No database queries outside of authenticated API requests</strong> — The status handler only runs when an authenticated GET request hits the endpoint. None of the plugin's data-collection code runs on regular WordPress requests.</li>
+                        <li><strong>No enqueued scripts or styles</strong> — The plugin has no frontend output whatsoever.</li>
+                        <li><strong>No activation/deactivation hooks with side effects</strong> — Activating or deactivating the plugin doesn't modify site options, create database tables, or change any site configuration.</li>
+                    </ul>
+                    <p>The result is a plugin that's effectively invisible to site visitors and adds no measurable overhead to page load time.</p>
+
+                    <h2>Installation</h2>
+                    <pre><code># Clone the plugin into your WordPress plugins directory
+cd /path/to/wordpress/wp-content/plugins
+git clone https://github.com/josefresco/wpe-central-command-helper.git
+
+# Activate via WP CLI (or WordPress admin)
+wp plugin activate wpe-central-command-helper</code></pre>
+                    <p>Then set the shared secret in <code>wp-config.php</code>:</p>
+                    <pre><code>define('WPE_CC_SECRET', 'replace-with-a-long-random-string');</code></pre>
+                    <p>Generate a secure secret with:</p>
+                    <pre><code>openssl rand -base64 48</code></pre>
+                    <p>Then add the same secret and the site's URL to your <code>sites.json</code> in the Central Command dashboard:</p>
+                    <pre><code>{
+  "name": "My Site - Production",
+  "install": "mysite",
+  "environment": "production",
+  "helper_url": "https://mysite.com",
+  "helper_secret": "the-same-secret-from-wp-config"
+}</code></pre>
+
+                    <h2>Secret Rotation</h2>
+                    <p>Rotating secrets across a fleet of 20+ sites manually is the kind of maintenance task that doesn't get done — until there's a reason it needs to. The Central Command dashboard includes a helper script that automates the rotation process:</p>
+                    <pre><code># Generate new secrets and output configuration snippets
+node scripts/rotate-secrets.js
+
+# Output for each site:
+# Site: My Site - Production
+# New secret: abc123...
+# wp-config.php line: define('WPE_CC_SECRET', 'abc123...');
+# sites.json entry: { "helper_secret": "abc123..." }
+# Updated sites.json written to sites.json.rotated</code></pre>
+                    <p>The script generates new secrets, outputs the <code>wp-config.php</code> snippet for each site, and writes an updated <code>sites.json</code> file. You apply the <code>wp-config.php</code> changes to each site (via SFTP or WP Engine's file manager), then rename <code>sites.json.rotated</code> to <code>sites.json</code>. Once the new secrets are live, the old ones stop working.</p>
+
+                    <h2>What I Got Wrong the First Time</h2>
+                    <p>The first version of the helper used WordPress application passwords instead of a shared secret — it seemed like the "proper WordPress way" since application passwords are built into WordPress 5.6+.</p>
+                    <p>The problem: application passwords are tied to a specific WordPress user account. That means:</p>
+                    <ul>
+                        <li>Each site needs a dedicated WordPress user for the dashboard</li>
+                        <li>If that user is deleted or their password reset, the connection breaks</li>
+                        <li>Application password management is buried in the user profile, not in a visible plugin setting</li>
+                        <li>Rotating credentials requires navigating to each site's admin and revoking/regenerating the application password</li>
+                    </ul>
+                    <p>The shared secret approach avoids all of this. It's independent of WordPress users, easy to configure via <code>wp-config.php</code>, and easy to rotate with a script. For a server-to-server internal tool, it's the right trade-off.</p>
+
+                    <h2>Extending the Payload</h2>
+                    <p>The status payload is designed to be straightforward to extend. Adding a new field means adding a key to the array returned by the status handler:</p>
+                    <pre><code>// Example: Add WooCommerce order count if WooCommerce is active
+if (class_exists('WooCommerce')) {
+    $data['woocommerce'] = [
+        'active'      => true,
+        'order_count' => wc_get_order_count('processing'),
+    ];
+}</code></pre>
+                    <p>Then update the Central Command dashboard to read and display the new field. The separation between the plugin (data source) and the dashboard (display layer) means each side can evolve independently.</p>
+
+                    <h2>The Bigger Pattern</h2>
+                    <p>The helper plugin is a specific implementation of a broader pattern that comes up often in WordPress agency work: the platform you're building on top of doesn't expose everything you need, so you add a thin layer inside it that does.</p>
+                    <p>The same pattern applies whenever you need to:</p>
+                    <ul>
+                        <li>Surface WordPress data to an external monitoring or reporting tool</li>
+                        <li>Trigger WordPress actions (like maintenance mode or cache clearing) from an external dashboard</li>
+                        <li>Expose site health data without requiring direct database or file system access</li>
+                    </ul>
+                    <p>A lightweight REST plugin — one endpoint, one auth check, one JSON payload — is usually the cleanest solution. It's explicit about what data it exposes, it's auditable, and it's removable without side effects.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The WPE Central Command helper plugin is about 200 lines of PHP. It does one thing: answer the question "what's happening inside WordPress on this site, right now?" with a single authenticated API call. Small as it is, it's the piece that makes the Central Command dashboard actually useful — the difference between a hosting-layer status board and a complete picture of every site in your fleet.</p>
+                    <p>Both the helper plugin and the dashboard are on GitHub. If you manage a fleet of WP Engine sites, the setup is worth the hour it takes — the time you'll get back on routine maintenance tasks compounds quickly.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/wpe-central-command-helper" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Managing a Fleet of WordPress Sites?</h2>
+                <p class="cta-description">
+                    Custom WordPress plugins, WP Engine tooling, and automation dashboards — I build the internal
+                    tools that make managing a portfolio of client sites practical, not painful.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=WordPress Tooling Project&body=Hi Jose,%0D%0A%0D%0AI read your WPE Central Command Helper post and have a WordPress tooling project I'd like to discuss.%0D%0A%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

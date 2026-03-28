@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</title>
+      <link>https://josefresco.com/blog/wpe-central-command-helper.html</link>
+      <description>A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes WordPress-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard with core version, pending updates, active plugins, maintenance mode state, and upload directory size through a single secured REST endpoint.</description>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/wpe-central-command-helper.html</guid>
+    </item>
 
     <item>
       <title>JF Website Monitor: How Content Change Detection Works Under the Hood</title>
@@ -80,13 +88,6 @@
       <guid>https://josefresco.com/blog/jf-notify-launch-announcement.html</guid>
     </item>
 
-    <item>
-      <title>Moving JF Website Monitor from Vercel to Self-Hosting - Cost &amp; Control</title>
-      <link>https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html</link>
-      <description>How I migrated JF Website Monitor from Vercel to a locally hosted solution to avoid high costs, Prisma DB limits, and cron-job.org dependence, with plans for future VPS deployment.</description>
-      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-website-monitor-self-hosting-migration.html</guid>
-    </item>
 
   </channel>
 </rss>
