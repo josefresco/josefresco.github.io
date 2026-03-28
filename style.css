@@ -1023,6 +1023,26 @@ section {
     color: var(--text-primary);
 }
 
+.blog-post-content pre {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.blog-post-content pre code {
+    background: none;
+    color: var(--text-primary);
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.875rem;
+    white-space: pre;
+}
+
 .blog-post-content code {
     background: rgba(255, 255, 255, 0.1);
     color: var(--neural-primary);
