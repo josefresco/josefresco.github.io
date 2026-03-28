@@ -385,27 +385,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!mobileMenuToggle || !navLinks) return;
 
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+
+    function openMenu() {
+        navLinks.classList.add('active');
+        mobileMenuToggle.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
     mobileMenuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.contains('active') ? closeMenu() : openMenu();
     });
 
     // Close menu when clicking on a link
-    const navLinksList = navLinks.querySelectorAll('a');
-    navLinksList.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileMenuToggle.classList.remove('active');
-        });
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!mobileMenuToggle.contains(event.target) && !navLinks.contains(event.target)) {
-            navLinks.classList.remove('active');
-            mobileMenuToggle.classList.remove('active');
-        }
-    });
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', closeMenu);
 });
 
 // Theme toggle functionality
