@@ -81,7 +81,6 @@ josefresco.github.io/
 ├── skills/                 # Skills showcase
 ├── now/                    # Now page (current focus)
 ├── images/                 # Root-level images (og-image.jpg)
-├── css/                    # Additional stylesheets
 ├── website-sync.sh         # Automated deployment script
 ├── update_content_for_ai.sh # AI optimization checklist
 ├── optimize-images.sh      # Image optimization script

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-03-30
+
+### Removed
+- `css/main.css` — unused 3-line stub file with no HTML references; `css/` directory removed along with it
+
+### Updated
+- `README.md` — removed `css/` directory from project structure listing
+- `CONTRIBUTING.md` — removed `css/main.css` entry from project structure listing
+- `feed.xml` — updated `lastBuildDate` to 2026-03-30
+- `sitemap.xml` — updated `lastmod` for `/feed.xml` entry to 2026-03-30
+
 ## [1.8.0] - 2026-03-28
 
 ### Fixed

@@ -355,8 +355,6 @@ josefresco.github.io/
 ├── blog/                  # Blog posts directory
 │   ├── index.html        # Blog listing page
 │   └── *.html            # Individual blog posts
-├── css/                   # Additional CSS files
-│   └── main.css
 ├── admin/                 # Admin utilities
 ├── README.md              # Project overview
 ├── CHANGELOG.md           # Version history
