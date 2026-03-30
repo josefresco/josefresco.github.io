@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building jfnotify.com: Designing a Static Marketing Site for a WordPress Plugin - Jose Fresco</title>
+    <meta name="description" content="How I built jfnotify.com — the static HTML marketing site for JF Notify, a Gravity Forms Telegram notification plugin. Covers design decisions, GitHub Pages hosting, schema markup for software products, and conversion-focused landing page structure.">
+    <link rel="canonical" href="https://josefresco.com/blog/jf-notify-website.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Building jfnotify.com: Designing a Static Marketing Site for a WordPress Plugin - Jose Fresco">
+    <meta property="og:description" content="How I built jfnotify.com — the static HTML marketing site for JF Notify, a Gravity Forms Telegram notification plugin. Covers design decisions, GitHub Pages hosting, schema markup for software products, and conversion-focused landing page structure.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-notify-website.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/jf-notify-launch.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-30T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building jfnotify.com: Designing a Static Marketing Site for a WordPress Plugin - Jose Fresco">
+    <meta name="twitter:description" content="How I built jfnotify.com — the static HTML marketing site for JF Notify, a Gravity Forms Telegram notification plugin. Covers design decisions, GitHub Pages hosting, schema markup for software products, and conversion-focused landing page structure.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/jf-notify-launch.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-notify-website.html"
+      },
+      "headline": "Building jfnotify.com: Designing a Static Marketing Site for a WordPress Plugin",
+      "description": "How I built jfnotify.com — the static HTML marketing site for JF Notify, a Gravity Forms Telegram notification plugin. Covers design decisions, GitHub Pages hosting, schema markup for software products, and conversion-focused landing page structure.",
+      "image": "https://josefresco.com/blog/images/jf-notify-launch.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-30T00:00:00+00:00",
+      "dateModified": "2026-03-30T00:00:00+00:00",
+      "keywords": "HTML, CSS, Landing Page, Marketing Site, GitHub Pages, WordPress Plugin, JF Notify, Gravity Forms, Telegram, Static Site, Web Design, SEO",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Building jfnotify.com: Designing a Static Marketing Site for a WordPress Plugin</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-notify-launch.svg" type="image/svg+xml">
+                        <img src="images/jf-notify-launch.svg" alt="JF Notify marketing site hero section showing the plugin logo and primary call-to-action" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Once <a href="/blog/jf-notify-launch-announcement.html">JF Notify</a> was ready to ship, it needed a home that wasn't a GitHub README. <a href="https://jfnotify.com" target="_blank" rel="noopener">jfnotify.com</a> is a purpose-built static HTML/CSS marketing site hosted on GitHub Pages — no framework, no build step, no CMS. This post covers the design decisions, landing page structure, <code>SoftwareApplication</code> schema markup, and why static HTML is often the right choice for a single-product plugin site.
+                    </div>
+
+                    <h2>A Plugin Needs a Landing Page</h2>
+                    <p>When JF Notify was just a GitHub repository, the only way to understand what it did was to read the README. That's fine for developers browsing GitHub, but it's not where WordPress site owners end up when they're looking for a solution to a problem.</p>
+                    <p>The plugin needed a dedicated URL — something I could link to from the WordPress plugin directory, from blog posts, and from my portfolio. A landing page that answers the visitor's core question in the first ten seconds: "Will this solve my problem, and how do I get it?"</p>
+                    <p>The choice was between building something with WordPress (the obvious choice for a WordPress plugin's marketing site), a static site generator like Eleventy or Hugo, or just hand-coded HTML. I went with hand-coded HTML for the same reason I tend to reach for it for single-purpose sites: no dependencies to manage, no build pipeline to maintain, no CMS to update. The site is three files — <code>index.html</code>, <code>style.css</code>, and a handful of assets. It deploys by pushing to GitHub.</p>
+
+                    <h2>What the Page Needs to Do</h2>
+                    <p>Before writing a line of HTML, I thought through what a visitor arriving at jfnotify.com actually needs to accomplish:</p>
+                    <ul>
+                        <li><strong>Understand the product in ten seconds</strong> — What is JF Notify? What problem does it solve? Who is it for?</li>
+                        <li><strong>Trust that it works</strong> — Enough technical detail and specificity that a developer or agency owner feels confident installing it on a client site.</li>
+                        <li><strong>Find the download or installation path</strong> — The primary CTA is getting the plugin. That path needs to be obvious and frictionless.</li>
+                        <li><strong>Understand the integration requirements</strong> — JF Notify requires both Gravity Forms and a Telegram bot. Visitors need to know that upfront, not discover it after installation.</li>
+                    </ul>
+                    <p>Those four goals directly shaped the page structure. Each section of the page maps to one of them.</p>
+
+                    <h2>Page Structure: The Anatomy of a Plugin Landing Page</h2>
+                    <p>The page is organized into six distinct sections, each with a single job:</p>
+
+                    <h3>1. Hero — The Ten-Second Test</h3>
+                    <p>The hero section leads with a single sentence that names the product, states what it does, and names the tools it connects: "Instant Telegram notifications for Gravity Forms submissions." No jargon, no passive voice, no "leveraging synergies." Then a short supporting paragraph with slightly more context, and two CTA buttons — one primary (get the plugin) and one secondary (view on GitHub for developers who want to inspect before installing).</p>
+                    <p>The visual element in the hero is a simplified diagram showing the flow: Gravity Forms submission → JF Notify → Telegram notification. Diagrams answer "how does this work?" faster than paragraphs do.</p>
+
+                    <h3>2. Feature Cards — Trust Through Specificity</h3>
+                    <p>Generic feature lists ("Easy to use!", "Powerful!", "Reliable!") do nothing for trust. The feature cards on jfnotify.com are specific: "Field mapping — choose exactly which form fields appear in your Telegram message", "Conditional logic — only notify when specific form values are submitted", "Retry on failure — failed deliveries are retried automatically with exponential backoff."</p>
+                    <p>Specificity is the credibility signal. When a developer reads "exponential backoff," they know the plugin was built by someone who thought about edge cases. That detail does more conversion work than any marketing adjective.</p>
+
+                    <h3>3. Requirements — Set Expectations Early</h3>
+                    <p>This section gets skipped on a lot of plugin landing pages, and it's a mistake. JF Notify has two hard requirements: an active Gravity Forms license and a Telegram bot token. If a visitor doesn't have those, installing JF Notify won't help them — and they'll leave a bad review blaming the plugin for something that was a compatibility issue.</p>
+                    <p>A short "What You'll Need" section before the install instructions saves support emails and sets honest expectations. It also filters in the right audience: WordPress shops that already use Gravity Forms are the target users, and naming Gravity Forms prominently helps those visitors self-identify.</p>
+
+                    <h3>4. Installation — From Download to First Notification</h3>
+                    <p>The installation section walks through the process step by step: download the plugin, install via WordPress admin or WP-CLI, activate, navigate to the settings page, enter the Telegram bot token and chat ID, map the form fields. Each step is concrete and numbered.</p>
+                    <p>The goal is to get a new user to their first working notification as fast as possible. First value achieved = product credibility established. I included a screenshot of the settings page here because nothing short-circuits setup confusion like a visual reference.</p>
+
+                    <h3>5. FAQ — Defuse the Objections</h3>
+                    <p>The FAQ section addresses the questions that show up repeatedly in support: "Does this work with Gravity Forms conditional logic?", "Can I send to multiple Telegram chats?", "What happens if Telegram is down when a form is submitted?", "Is the bot token stored securely?"</p>
+                    <p>These aren't hypothetical questions — they're the real things people wonder about before installing a notification plugin on a client site. Answering them on the page reduces the friction between "looks interesting" and "I'll try it."</p>
+
+                    <h3>6. Footer CTA — Close with Action</h3>
+                    <p>The page ends where it started: a clear CTA to get the plugin. Visitors who scrolled to the bottom read everything and are the most qualified to convert. Meeting them again at the bottom with a direct link is good conversion practice.</p>
+
+                    <h2>Design Direction: Matching the Ecosystem</h2>
+                    <p>JF Notify is part of the JF product family, so jfnotify.com shares the same dark-theme design language as this portfolio site — the same neural-network-inspired color palette (cyan, purple, amber), the same card patterns, the same Inter typeface. Consistency across the product family makes each property feel like it belongs to the same developer.</p>
+                    <p>For a plugin targeting WordPress agencies and developers, the dark developer aesthetic works well. The audience is technical, comfortable with dark themes, and more impressed by clean code samples in the install instructions than by hero images of people at laptops.</p>
+                    <p>The Telegram brand color (#27A7E7) is used as a secondary accent in the integration-focused sections — a small touch that signals "this product was built by someone who actually uses Telegram."</p>
+
+                    <h2>Hosting: GitHub Pages + Custom Domain</h2>
+                    <p>The <a href="https://github.com/josefresco/jf-notify-website" target="_blank" rel="noopener">jf-notify-website repository</a> is a public GitHub repository with a <code>CNAME</code> file pointing to <code>jfnotify.com</code>. GitHub Pages serves it over HTTPS with automatic certificate renewal. The setup takes about five minutes and costs nothing beyond the domain registration.</p>
+                    <p>The deployment workflow is as simple as it gets:</p>
+                    <pre><code># Make changes locally
+# Commit and push
+git add .
+git commit -m "Update feature descriptions"
+git push origin main
+# GitHub Pages serves the update within ~30 seconds</code></pre>
+                    <p>No build step. No CI/CD pipeline. No deployment config. For a static marketing site that changes infrequently, this is exactly the right level of complexity.</p>
+                    <p>One thing worth noting: GitHub Pages serves from the repository root by default. The entire site lives in <code>index.html</code> at the root, with assets in an <code>/assets</code> subdirectory. This keeps the repository structure obvious and the deployment behavior predictable.</p>
+
+                    <h2>Schema Markup: SoftwareApplication</h2>
+                    <p>Most plugin landing pages use generic <code>WebPage</code> or <code>WebSite</code> schema. For a software product page, <code>SoftwareApplication</code> schema is more precise and gives search engines structured information about what the product actually is:</p>
+                    <pre><code>{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "JF Notify",
+  "description": "WordPress plugin for instant Telegram notifications on Gravity Forms submissions",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "WordPress",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "url": "https://jfnotify.com",
+  "downloadUrl": "https://github.com/josefresco/jf-notify",
+  "softwareRequirements": "WordPress 5.6+, Gravity Forms, PHP 7.4+",
+  "author": {
+    "@type": "Person",
+    "name": "Jose Fresco",
+    "url": "https://josefresco.com"
+  }
+}</code></pre>
+                    <p>The <code>operatingSystem: "WordPress"</code> field is the key detail. Schema.org's <code>SoftwareApplication</code> type was designed for apps but maps cleanly to WordPress plugins — WordPress is the platform the software runs on, the same way iOS is the platform a mobile app runs on.</p>
+                    <p>The <code>offers</code> block with <code>price: "0"</code> signals to search engines that the plugin is free. This can surface in rich snippets that display pricing information alongside the search result.</p>
+
+                    <h2>Performance: No JavaScript Required</h2>
+                    <p>jfnotify.com loads with zero JavaScript — no analytics, no chat widgets, no cookie consent banners. The page achieves its conversion goals with HTML and CSS alone.</p>
+                    <p>This is a deliberate choice. JavaScript has real costs on marketing sites: parse time on mobile, third-party script dependencies that can fail, cookie consent requirements that interrupt the first interaction. For a static landing page, eliminating JS entirely removes all of those concerns and makes the page load predictably fast on any device.</p>
+                    <p>The one place JavaScript would add value is analytics — knowing where visitors come from and which sections they engage with. I'm handling that by tracking referrals from the GitHub repository and the blog posts rather than embedding a tracking pixel on the landing page itself. Not perfect, but it's enough signal to make iteration decisions without adding script overhead to the page.</p>
+
+                    <h2>What I'd Do Differently</h2>
+                    <p>Looking back at the site after a few weeks of it being live, two things stand out as improvements worth making:</p>
+                    <p><strong>A short demo video in the hero.</strong> The installation section does a good job of explaining setup, but a 30-second screen recording showing a Gravity Forms submission arriving as a Telegram notification would be more convincing than any written description. Video is the most effective format for "here's what this does," and it's the one thing the current site is missing.</p>
+                    <p><strong>An explicit "works with" section for common Gravity Forms setups.</strong> JF Notify works with Gravity Forms conditional logic, multi-page forms, file uploads, and payment integrations — but the current page doesn't call that out explicitly. Visitors who use those features specifically might not realize they're covered, which means some qualified prospects bounce when they shouldn't.</p>
+                    <p>Both of those are on the roadmap for the next revision of the site.</p>
+
+                    <h2>The Static Site Is the Right Tool</h2>
+                    <p>Every few months there's a new argument for why developer-built products should use Webflow, or Framer, or a headless WordPress CMS for their marketing pages. Those tools have their place. But for a single-product plugin site that changes four times a year, hand-coded HTML hosted on GitHub Pages is hard to beat: zero hosting costs, zero maintenance burden, sub-second load times, and a deployment workflow that's literally <code>git push</code>.</p>
+                    <p>The instinct to reach for a more sophisticated tool often reflects a desire to feel productive rather than a genuine need. For jfnotify.com, the right amount of technology is exactly what it has.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>jfnotify.com started as a README that needed to become a real product page. The result is a static HTML/CSS site that answers the four questions every plugin landing page visitor has, built with no framework overhead and deployed on GitHub Pages. The design matches the JF product family, the schema markup tells search engines it's a software product, and the whole thing updates with a <code>git push</code>.</p>
+                    <p>The repository is public — if you're building a similar landing page for a plugin or small tool, the structure is worth a look.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/jf-notify-website" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Marketing Site for Your Plugin or Product?</h2>
+                <p class="cta-description">
+                    From plugin landing pages to full product sites — I build static and WordPress-powered marketing
+                    sites that are fast, focused, and built to convert. Let's talk about your project.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Marketing Site Project&body=Hi Jose,%0D%0A%0D%0AI read your jfnotify.com post and would like to discuss a marketing site project.%0D%0A%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
