@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent - Jose Fresco</title>
+    <meta name="description" content="How arpy-assist evolved from a simple Qwen CLI web interface into a local AI coding agent — detecting code blocks, routing execution through raspberry-pi-agent, and returning results without leaving your network.">
+    <link rel="canonical" href="https://josefresco.com/blog/arpy-assist-coding-agent.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent - Jose Fresco">
+    <meta property="og:description" content="How arpy-assist evolved from a simple Qwen CLI web interface into a local AI coding agent — detecting code blocks, routing execution through raspberry-pi-agent, and returning results without leaving your network.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/arpy-assist-coding-agent.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/arpy-assist.png">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-03-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-03-31T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent - Jose Fresco">
+    <meta name="twitter:description" content="How arpy-assist evolved from a simple Qwen CLI web interface into a local AI coding agent — detecting code blocks, routing execution through raspberry-pi-agent, and returning results without leaving your network.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/arpy-assist.png">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/arpy-assist-coding-agent.html"
+      },
+      "headline": "arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent",
+      "description": "How arpy-assist evolved from a simple Qwen CLI web interface into a local AI coding agent — detecting code blocks, routing execution through raspberry-pi-agent, and returning results without leaving your network.",
+      "image": "https://josefresco.com/blog/images/arpy-assist.png",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-03-31T00:00:00+00:00",
+      "dateModified": "2026-03-31T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Python, AI, Qwen, Local LLM, Coding Agent, Automation, raspberry-pi-agent, Self-hosted",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">March 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/arpy-assist.png" type="image/png">
+                        <img src="images/arpy-assist.png" alt="arpy-assist web interface showing a code generation prompt and execution result from the raspberry-pi-agent dispatcher" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="/blog/arpy-assist-qwen-web-interface.html">arpy-assist started as a web UI</a> wrapping Qwen CLI on a Raspberry Pi. It's since grown into a local AI coding agent — one that detects code blocks in Qwen's responses, offers to execute them directly on the Pi via the <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent dispatcher</a>, and streams back the result. No cloud APIs, no data leaving the network, no copy-pasting between tabs.
+                    </div>
+
+                    <h2>The Gap in the Original Design</h2>
+                    <p>The <a href="/blog/arpy-assist-qwen-web-interface.html">first version of arpy-assist</a> solved a real annoyance: accessing Qwen CLI from a phone or another computer without SSH. You'd open the web interface, type a prompt, and get a response streamed back from the Pi. Useful for asking questions, generating scripts, talking through a problem.</p>
+                    <p>But every time Qwen produced a code block, the workflow broke down. You'd read the code in the browser, then open a new tab to SSH into the Pi, paste it into a file, make it executable, run it, and come back to check the output. Five steps for what should be one.</p>
+                    <p>The coding agent capability exists to close that gap. When arpy-assist sees a code block in Qwen's response, it wraps it in a "Run on Pi" button. One click sends that code to the <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent dispatcher</a>, which executes it and streams the output back into the same conversation thread.</p>
+
+                    <h2>How Code Detection Works</h2>
+                    <p>Qwen's output is Markdown. Code blocks come back as standard fenced blocks — triple backticks with an optional language tag. The response parser in arpy-assist walks the rendered output and wraps each detected code block with an execution affordance:</p>
+                    <pre><code>function wrapCodeBlocks(responseText) {
+    const fencePattern = /```(\w+)?\n([\s\S]*?)```/g;
+    return responseText.replace(fencePattern, (match, lang, code) => {
+        const language = lang || 'bash';
+        const escaped = encodeURIComponent(code.trim());
+        return `
+&lt;div class="code-block-wrapper"&gt;
+  &lt;pre&gt;&lt;code class="language-${language}"&gt;${code.trim()}&lt;/code&gt;&lt;/pre&gt;
+  &lt;button class="run-on-pi"
+          data-code="${escaped}"
+          data-lang="${language}"&gt;
+    ▶ Run on Pi
+  &lt;/button&gt;
+&lt;/div&gt;`;
+    });
+}</code></pre>
+                    <p>The language tag matters: <code>bash</code> and <code>shell</code> blocks execute directly via the dispatcher's shell runner. <code>python</code> blocks are written to a temp file and run with the system Python. <code>javascript</code> blocks are run with Node.js if it's available. Any other language shows the button as disabled with a "Not supported" tooltip rather than silently failing.</p>
+
+                    <h2>The Execution Pipeline</h2>
+                    <p>When the "Run on Pi" button is clicked, arpy-assist sends a POST to its own backend:</p>
+                    <pre><code>POST /api/execute
+{
+  "code": "import psutil\nprint(psutil.cpu_percent(interval=1))",
+  "language": "python",
+  "timeout": 30
+}</code></pre>
+                    <p>The arpy-assist backend is the same Python Flask server that handles the Qwen chat API. It forwards the execution request to the <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent</a> dispatcher over its local socket interface — the same dispatcher used by the <a href="/blog/telegram-pi-monitoring-bot.html">Telegram bot</a> and the <a href="/blog/pi-backups-raspberry-pi.html">backup scripts</a>.</p>
+                    <p>The dispatcher handles the actual subprocess management: spawning the process, capturing stdout and stderr, enforcing the timeout, and cleaning up temp files. arpy-assist gets the result back as a JSON payload and appends it to the conversation thread as a collapsible output block:</p>
+                    <pre><code>{
+  "exit_code": 0,
+  "stdout": "14.2\n",
+  "stderr": "",
+  "duration_ms": 1043,
+  "truncated": false
+}</code></pre>
+                    <p>Non-zero exit codes render the output block with a red border and the stderr content expanded by default. Timeouts return a synthetic error with the partial stdout captured up to the cutoff.</p>
+
+                    <h2>Dry-Run Mode and Confirmation</h2>
+                    <p>Not every code block should execute without a second look. Qwen sometimes produces code that's directionally correct but makes assumptions about file paths or environment variables that don't hold on my Pi setup. Running it blindly would create files in the wrong place or fail halfway through with a confusing error.</p>
+                    <p>Dry-run mode is always on by default. When you click "Run on Pi," arpy-assist first renders a confirmation dialog that shows:</p>
+                    <ul>
+                        <li>The exact command or script that will run</li>
+                        <li>The working directory (defaults to <code>/home/pi</code> unless overridden)</li>
+                        <li>The configured timeout</li>
+                        <li>A warning if the code contains potentially destructive patterns (<code>rm -rf</code>, <code>DROP TABLE</code>, redirects to system paths)</li>
+                    </ul>
+                    <p>You confirm or cancel. If you confirm, execution proceeds. If you cancel, the code block stays visible and you can edit it inline before retrying. There's a session-level setting to disable the confirmation for a session if you're in an exploratory flow and the constant prompts become friction — but it resets on every page load.</p>
+
+                    <h2>Inline Editing Before Execution</h2>
+                    <p>The other pattern I kept running into: Qwen's code is right in structure but needs a variable swapped out — a hardcoded path, a placeholder API key, a hostname that matches the model's training data rather than my actual Pi. Copying to a text editor, editing, pasting back, clicking run is four steps. The inline editor cuts it to one.</p>
+                    <p>Each code block in the interface is also a <code>contenteditable</code> pre-code block. Clicking the code switches it from display mode to edit mode. The "Run on Pi" button reads the current content of the block at click time, not the original Qwen output — so edits are automatically picked up without any extra save step.</p>
+                    <pre><code>runButton.addEventListener('click', () => {
+    // Read current content from the editable block,
+    // not the original data-code attribute
+    const currentCode = codeBlock.innerText.trim();
+    executeOnPi(currentCode, language);
+});</code></pre>
+
+                    <h2>Context Injection: Giving Qwen Pi-Specific Awareness</h2>
+                    <p>One limitation of running a local model like Qwen on a Raspberry Pi is that it has no knowledge of your specific environment. It doesn't know your Pi's hostname, what services are running, what Python packages are installed, or how your directory structure is organized. Left to its own devices, it generates generic code that often needs manual adaptation.</p>
+                    <p>arpy-assist addresses this with a system context prompt that's prepended to every conversation. The context is generated at session start by querying the raspberry-pi-agent for a lightweight environment snapshot:</p>
+                    <pre><code>SYSTEM CONTEXT (injected at session start):
+You are a coding assistant running on a Raspberry Pi 5.
+Environment:
+- Hostname: arpy
+- OS: Raspberry Pi OS Bookworm (64-bit)
+- Python: 3.11.2 (/usr/bin/python3)
+- Node.js: 20.11.0 (/usr/local/bin/node)
+- Available services: mosquitto, nginx, jf-website-monitor, arpy-assist
+- Home directory: /home/pi
+- App data directory: /opt/apps
+- Installed Python packages: psutil, flask, requests, paho-mqtt, schedule
+
+When generating code, use these paths and package names.
+Prefer scripts that can be run without root unless root is genuinely required.
+</code></pre>
+                    <p>This context is refreshed on each new conversation (not on each message — that would add overhead). The result is code that references real hostnames, uses the actual Python path, and imports packages that are actually installed rather than hallucinating <code>pip install</code> steps for packages already present.</p>
+
+                    <h2>Running Qwen on Pi 5 Hardware</h2>
+                    <p>The <a href="/blog/arpy-assist-qwen-web-interface.html">previous post</a> covered the setup: Qwen running via Ollama on a Raspberry Pi 5 with 8GB RAM. A few things worth adding now that the agent has been in use for a while:</p>
+
+                    <h3>Model Size vs. Code Quality Tradeoff</h3>
+                    <p>I run <code>qwen2.5-coder:7b</code> by default. The 1.5b model is noticeably faster (responses in ~8 seconds vs. ~25 seconds for 7b) but produces code that more frequently needs correction for anything beyond simple shell commands. For coding tasks specifically — which is most of what arpy-assist is used for — the 7b model's accuracy improvement is worth the latency.</p>
+
+                    <h3>Thermal Throttling</h3>
+                    <p>Extended coding sessions push the Pi 5's CPU to sustained load. Without active cooling, the SoC throttles at around 80°C, which extends response times noticeably. I'm running a Geekworm case with active fan cooling — it keeps the CPU under 65°C under sustained load and eliminates throttling entirely. If you're running Qwen on a Pi and seeing inconsistent response times, thermal throttling is the first thing to check with <code>vcgencmd measure_temp</code>.</p>
+
+                    <h3>Concurrent Requests</h3>
+                    <p>Ollama queues concurrent requests rather than parallelizing them. If two devices send prompts at the same time, the second one waits. For a personal tool this is fine — there's only ever one person using it. The queue does mean that if you accidentally double-submit a long prompt, you'll see both responses eventually rather than one being dropped.</p>
+
+                    <h2>The Agent Loop in Practice</h2>
+                    <p>A typical session for writing a new automation script on the Pi now looks like this:</p>
+                    <ol>
+                        <li>Open arpy-assist on my phone while the Pi is running a job I want to script</li>
+                        <li>Describe what I want: <em>"Write a Python script that checks disk usage on /opt/apps and sends a Telegram message if any subdirectory exceeds 500MB"</em></li>
+                        <li>Qwen returns the script. I scan it — the paths look right from the injected context, the Telegram bot token is a placeholder I need to fill in</li>
+                        <li>Click the code block, replace the placeholder with the real token inline</li>
+                        <li>Click "Run on Pi," confirm in the dialog, watch the output stream back</li>
+                        <li>If the script needs tweaking, I either edit it inline and re-run, or ask Qwen a follow-up ("the Telegram message is being sent but the directory names are truncated — fix that")</li>
+                    </ol>
+                    <p>The whole loop from idea to running script is usually under 3 minutes, compared to 10–15 minutes when the workflow involved SSH, a text editor, and manual copy-paste.</p>
+
+                    <h2>What I Got Wrong</h2>
+
+                    <h3>Trusting Code Output Too Early</h3>
+                    <p>The first version of the execution feature had no confirmation dialog — just a direct "Run" button. I broke a monitoring service by running a Qwen-generated systemd reload command that had the wrong service name. The service it reloaded happened to conflict with another service's port binding. Adding the dry-run preview and the destructive-pattern warnings came directly from that incident.</p>
+
+                    <h3>Streaming vs. Complete Responses</h3>
+                    <p>Qwen streams responses token by token. The original code-block detection ran on the complete response after streaming finished, which meant you'd watch the code appear token by token and then wait for the "Run on Pi" button to appear after a noticeable pause. Switching to incremental parsing — detecting the closing triple-backtick fence as it streams — makes the button appear as soon as the code block is complete, before the rest of the response has finished rendering.</p>
+
+                    <h3>Session Context Accumulation</h3>
+                    <p>Qwen's context window is finite. Long coding sessions where I kept iterating on the same script would eventually hit the context limit, causing Qwen to start forgetting earlier parts of the conversation. The fix was a "Summarize and continue" button that sends the conversation history to Qwen with the prompt "Summarize this conversation in 3 bullet points, focusing on the code that was written and the current state of the script." The summary replaces the full history in the context, keeping the conversation focused without losing the important state.</p>
+
+                    <h2>What's Next</h2>
+                    <p>The piece I want to add next is file system awareness — the ability to tell arpy-assist "edit <code>/opt/apps/monitor/config.json</code>" and have it read the current file content, pass it to Qwen as context, apply the suggested changes, and write the result back. Right now that workflow still requires SSH for the file read/write steps. The raspberry-pi-agent dispatcher already has file read and write commands; it's a matter of wiring them into the arpy-assist agent loop.</p>
+                    <p>The other piece is conversation persistence — saving session history to a local SQLite database so you can pick up a coding thread where you left it rather than starting fresh every time. Useful for multi-session projects where you're iterating on the same script over several days.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>arpy-assist started as a convenience wrapper around Qwen CLI. Adding code execution capability turned it into something more genuinely useful: a local AI coding assistant that can take a natural language description of an automation task and go from prompt to running script in a single session, on a $90 piece of hardware, without any data leaving the network.</p>
+                    <p>The pieces that made it work weren't novel — code block detection, a dispatcher for subprocess execution, a confirmation dialog for safety. But assembling them on a constrained device with a local model changed the character of the tool from "chat with AI" to "get things done with AI."</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/arpy-assist" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Building Automation on Raspberry Pi?</h2>
+                <p class="cta-description">
+                    From local AI agents to monitoring dashboards and backup systems — I build self-hosted tools
+                    that run reliably on Pi hardware without depending on cloud services.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Raspberry Pi Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your arpy-assist coding agent post and have a Pi automation project I'd like to discuss.%0D%0A%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

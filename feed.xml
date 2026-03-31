@@ -9,6 +9,14 @@
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>arpy-assist: From Qwen CLI Frontend to Raspberry Pi Coding Agent</title>
+      <link>https://josefresco.com/blog/arpy-assist-coding-agent.html</link>
+      <description>How arpy-assist evolved from a simple Qwen CLI web interface into a local AI coding agent — detecting code blocks, routing execution through raspberry-pi-agent, and returning results without leaving your network. No cloud APIs, no latency spikes, no data leaving your network.</description>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/arpy-assist-coding-agent.html</guid>
+    </item>
+
+    <item>
       <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</title>
       <link>https://josefresco.com/blog/wpe-central-command-helper.html</link>
       <description>A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes WordPress-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard with core version, pending updates, active plugins, maintenance mode state, and upload directory size through a single secured REST endpoint.</description>

@@ -53,6 +53,13 @@
   </url>
 
   <url>
+    <loc>https://josefresco.com/blog/arpy-assist-coding-agent.html</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://josefresco.com/blog/jf-website-monitor-content-change-detection.html</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -69,7 +76,7 @@
   <!-- Featured Blog Posts - Higher Priority -->
   <url>
     <loc>https://josefresco.com/blog/breeze-time-tracker-dashboard.html</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
