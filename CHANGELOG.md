@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-03-31
+
+### Reviewed
+- All 27 blog post HTML files confirmed present and accounted for in `sitemap.xml`
+- All 27 blog post URLs in `sitemap.xml` verified against files on disk — no orphaned entries or missing pages
+- `feed.xml` confirmed correct with 10 most recent posts in chronological order
+- `blog/images/` directory audited — `moving-hosting-gemini-ai.png` confirmed referenced and retained; `watch-list-screenshot-3.jpeg` confirmed referenced and retained
+- `blog/who-dis-chrome-extension.html` confirmed reusing `who-dis-ip-lookup.svg` intentionally — no missing image
+- No unnecessary, duplicate, or unreferenced files found for removal
+
+### Updated
+- `sitemap.xml` — updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to 2026-03-31
+- `feed.xml` — updated `lastBuildDate` to 2026-03-31
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.9.0] - 2026-03-30
 
 ### Removed
