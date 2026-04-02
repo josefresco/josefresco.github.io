@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-04-02
+
+### Reviewed
+- All 27 blog post HTML files confirmed present and accounted for in `sitemap.xml`
+- All 27 `sitemap.xml` blog post URLs verified against files on disk — no orphaned entries or missing pages
+- `feed.xml` confirmed correct with 10 most recent posts in chronological order
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- No unnecessary, duplicate, or unreferenced files found for removal
+- `README.md` reviewed — project structure and documentation index are accurate and up to date
+
+### Updated
+- `sitemap.xml` — updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to 2026-04-02
+- `feed.xml` — updated `lastBuildDate` to 2026-04-02
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.10.0] - 2026-03-31
 
 ### Reviewed
