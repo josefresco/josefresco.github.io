@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building the JF Notify Marketing Site with Eleventy - Jose Fresco</title>
+    <meta name="description" content="How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.">
+    <link rel="canonical" href="https://josefresco.com/blog/jf-notify-website.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Building the JF Notify Marketing Site with Eleventy - Jose Fresco">
+    <meta property="og:description" content="How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-notify-website.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-03T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building the JF Notify Marketing Site with Eleventy - Jose Fresco">
+    <meta name="twitter:description" content="How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-notify-website.html"
+      },
+      "headline": "Building the JF Notify Marketing Site with Eleventy",
+      "description": "How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-03T00:00:00+00:00",
+      "dateModified": "2026-04-03T00:00:00+00:00",
+      "keywords": "Eleventy, 11ty, Static Site Generator, Nunjucks, Marketing Site, WordPress Plugin, Serverless Functions, Web Development, JAMstack",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Building the JF Notify Marketing Site with Eleventy</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> When I launched <a href="/blog/jf-notify-launch-announcement.html">JF Notify</a>, I needed a dedicated marketing site to give the plugin its own home — separate from my portfolio. I built it with <a href="https://www.11ty.dev/" target="_blank" rel="noopener">Eleventy (11ty)</a> using Nunjucks templates and a small serverless function for form handling. The result is a fast, maintainable static site that deploys automatically on every push. Here's how it came together.
+                    </div>
+
+                    <h2>Why a Separate Marketing Site?</h2>
+                    <p>JF Notify is a commercial WordPress plugin — a real product with a real URL (<a href="https://jfnotify.com" target="_blank" rel="noopener">jfnotify.com</a>). Tucking it under a portfolio page would send the wrong signal. Products deserve their own identity: a domain that's easy to remember, a landing page focused entirely on the one thing the product does, and documentation that doesn't compete for attention with other projects.</p>
+                    <p>A dedicated site also gives the plugin room to grow. If I add pricing tiers, a changelog, user-facing docs, or a support contact page, each of those is a natural section of a product site — not something that fits neatly on a portfolio card.</p>
+
+                    <h2>Choosing Eleventy</h2>
+                    <p>I considered a few options before landing on Eleventy:</p>
+                    <ul>
+                        <li><strong>WordPress</strong> — The irony of running a WordPress site to market a WordPress plugin wasn't lost on me. It's overkill for a mostly-static product page, and I'd rather not maintain a database and PHP runtime just to serve a few HTML files.</li>
+                        <li><strong>Hugo</strong> — Fast and capable, but Go templates have always felt slightly at odds with how I think about markup. Nunjucks, which Eleventy supports natively, is closer to the Jinja2/Twig syntax I already know from other projects.</li>
+                        <li><strong>Next.js</strong> — Solid choice if you need client-side interactivity or server-rendered pages. For a product marketing site, it's more framework than I need. The build output would be larger, and Vercel's free tier adds a dependency I'd rather avoid for something this simple.</li>
+                    </ul>
+                    <p>Eleventy won because it stays out of the way. It takes templates and data, produces HTML, and doesn't prescribe a JavaScript framework, a build pipeline, or a specific hosting provider. The config is explicit and easy to follow. And for a site that's 95% static content, that's exactly what I wanted.</p>
+
+                    <h2>Project Structure</h2>
+                    <p>The repository follows a standard Eleventy layout:</p>
+                    <pre><code>jf-notify-website/
+├── src/
+│   ├── _includes/
+│   │   ├── layouts/
+│   │   │   └── base.njk        # Base HTML shell
+│   │   └── partials/
+│   │       ├── header.njk      # Site header & nav
+│   │       └── footer.njk      # Site footer
+│   ├── index.njk               # Landing page
+│   ├── docs.njk                # Documentation page
+│   ├── changelog.njk           # Version history
+│   └── assets/
+│       ├── css/
+│       └── js/
+├── functions/
+│   └── contact.js              # Netlify serverless function
+├── eleventy.config.js
+└── package.json</code></pre>
+                    <p>The <code>src/</code> directory holds everything Eleventy processes. Each top-level <code>.njk</code> file becomes a page. Shared markup lives in <code>_includes/</code>. Static assets are passed through to the build output unchanged.</p>
+
+                    <h2>Nunjucks Templating</h2>
+                    <p>Eleventy supports multiple template languages — Markdown, Liquid, Handlebars, plain HTML — but Nunjucks is my preference for layouts that mix logic with markup. The base layout wraps every page:</p>
+                    <pre><code>{# src/_includes/layouts/base.njk #}
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;{{ title }} | JF Notify&lt;/title&gt;
+  &lt;meta name="description" content="{{ description }}"&gt;
+  &lt;link rel="stylesheet" href="/assets/css/main.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  {% include "partials/header.njk" %}
+  &lt;main&gt;
+    {{ content | safe }}
+  &lt;/main&gt;
+  {% include "partials/footer.njk" %}
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    <p>Each page sets its front matter at the top:</p>
+                    <pre><code>---
+layout: layouts/base.njk
+title: JF Notify — Instant Telegram Alerts for Gravity Forms
+description: Get Telegram notifications the moment someone submits a Gravity Forms entry. No delays, no missed leads.
+---
+
+&lt;section class="hero"&gt;
+  &lt;h1&gt;Know the moment a form is submitted.&lt;/h1&gt;
+  ...
+&lt;/section&gt;</code></pre>
+                    <p>Front matter variables flow into the layout automatically — <code>{{ title }}</code> in the base layout resolves to whatever the page declares. This keeps each page focused on its own content without duplicating boilerplate.</p>
+
+                    <h2>The Eleventy Config</h2>
+                    <p>The <code>eleventy.config.js</code> file handles a few key jobs:</p>
+                    <pre><code>module.exports = function(eleventyConfig) {
+  // Pass static assets through unchanged
+  eleventyConfig.addPassthroughCopy("src/assets");
+
+  // Watch for CSS/JS changes during development
+  eleventyConfig.addWatchTarget("src/assets/css/");
+  eleventyConfig.addWatchTarget("src/assets/js/");
+
+  return {
+    dir: {
+      input: "src",
+      output: "_site",
+      includes: "_includes",
+    },
+    templateFormats: ["njk", "html", "md"],
+    htmlTemplateEngine: "njk",
+  };
+};</code></pre>
+                    <p><code>addPassthroughCopy</code> tells Eleventy to copy the <code>assets/</code> directory to the build output without processing it. <code>addWatchTarget</code> means <code>eleventy --serve</code> restarts when CSS or JS changes — handy during development. The <code>dir</code> block maps Eleventy's expected input/output directories to the project layout.</p>
+
+                    <h2>Serverless Function for Contact</h2>
+                    <p>The one piece that can't be purely static is the contact form. Rather than wire up a third-party form service, I added a small serverless function that handles form submissions and forwards them via email:</p>
+                    <pre><code>// functions/contact.js
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
+  const { name, email, message } = JSON.parse(event.body);
+
+  if (!name || !email || !message) {
+    return { statusCode: 400, body: JSON.stringify({ error: "Missing fields" }) };
+  }
+
+  // Forward via email service (SendGrid, Resend, etc.)
+  await sendEmail({ name, email, message });
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ success: true }),
+  };
+};</code></pre>
+                    <p>The function runs as a Netlify Function (or equivalent), invoked by the contact form's fetch call on the frontend. The static site stays fully static — the function only runs when someone actually submits the form. No server to manage, no polling, no cost at typical traffic levels.</p>
+
+                    <h2>Build and Deployment</h2>
+                    <p>The build command is simple:</p>
+                    <pre><code>npm run build   # eleventy --output=_site
+npm run serve   # eleventy --serve (local dev with live reload)</code></pre>
+                    <p>Eleventy processes all the templates in <code>src/</code> and writes the output to <code>_site/</code>. The entire build on this project takes under a second — one of the reasons I keep reaching for Eleventy on small sites.</p>
+                    <p>For deployment, the site connects to GitHub so every push to <code>main</code> triggers an automatic deploy. The <code>_site/</code> directory is what gets served. No Node.js runtime needed at the edge — just HTML, CSS, and a CDN.</p>
+
+                    <h2>What I'd Do Differently</h2>
+                    <p>A few things I'd change if I were starting fresh:</p>
+                    <ul>
+                        <li><strong>Eleventy's data cascade for shared metadata</strong> — Right now, some page-level metadata (like OG image paths and structured data) is hardcoded in each template. Eleventy's global data files (<code>_data/site.json</code>) could centralize this so changes propagate everywhere automatically.</li>
+                        <li><strong>Markdown for documentation pages</strong> — The docs page is a Nunjucks file with inline HTML. Markdown + front matter would be easier to maintain as the documentation grows, and Eleventy handles the conversion natively.</li>
+                        <li><strong>A changelog data file</strong> — Rather than maintaining the changelog as HTML in a template, a structured YAML or JSON file in <code>_data/</code> would make it trivial to add entries without touching markup.</li>
+                    </ul>
+                    <p>None of these are blockers for a v1 — they're the kind of improvements that make sense once you know what the site actually needs to do. The current setup ships fast and is easy to update, which was the priority at launch.</p>
+
+                    <h2>Static Sites for Product Marketing</h2>
+                    <p>There's a recurring pattern in side projects: the product itself (a WordPress plugin, a Chrome extension, a CLI tool) gets all the engineering attention, and the marketing site ends up as an afterthought — a page on the portfolio, a GitHub README, or a hand-rolled HTML file with no template system.</p>
+                    <p>Eleventy makes it practical to give a product its own proper site without overcommitting to a framework. The learning curve is low if you know HTML and have seen any templating language before. The output is fast, portable, and trivially hostable. And because it's just files, you can move hosts, tweak the build, or hand it off to someone else without untangling framework-specific conventions.</p>
+                    <p>For JF Notify, having a real product site at its own domain made the launch feel more serious — both to potential users and to me. It's a small thing, but the discipline of building a proper landing page forces you to articulate what the product actually does and who it's for, which is useful work regardless of traffic.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The <a href="https://github.com/josefresco/jf-notify-website" target="_blank" rel="noopener">jf-notify-website</a> repository is the full source for the <a href="https://jfnotify.com" target="_blank" rel="noopener">jfnotify.com</a> marketing site. Eleventy, Nunjucks, one serverless function, and a CI/CD pipeline that gets out of the way. If you're building a product site and want to skip the framework overhead, it's a reasonable starting point.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/jf-notify-website" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Product Marketing Site?</h2>
+                <p class="cta-description">
+                    From static landing pages to full product sites with documentation and contact forms,
+                    I build focused, fast marketing sites that give your product the home it deserves.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Marketing Site Project&body=Hi Jose,%0D%0A%0D%0AI read your Eleventy post and need a product marketing site.%0D%0A%0D%0AProduct:%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco</title>
-    <meta name="description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <title>SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet - Jose Fresco</title>
+    <meta name="description" content="How I built SafeShare — a Next.js 16 web app with Redis storage that creates clean, shareable Reddit post views with a one-click bookmarklet. No login walls, no install prompts, just the content.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,22 +18,22 @@
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco">
-    <meta property="og:description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <meta property="og:title" content="SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet - Jose Fresco">
+    <meta property="og:description" content="How I built SafeShare — a Next.js 16 web app with Redis storage that creates clean, shareable Reddit post views with a one-click bookmarklet. No login walls, no install prompts, just the content.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/safeshare-reddit-bookmarklet.html">
     <meta property="og:image" content="https://josefresco.com/blog/images/safeshare-reddit.png">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-03-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-03T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet - Jose Fresco">
-    <meta name="twitter:description" content="Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.">
+    <meta name="twitter:title" content="SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet - Jose Fresco">
+    <meta name="twitter:description" content="How I built SafeShare — a Next.js 16 web app with Redis storage that creates clean, shareable Reddit post views with a one-click bookmarklet. No login walls, no install prompts, just the content.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/safeshare-reddit.png">
 
     <!-- Canonical & RSS -->
@@ -49,8 +49,8 @@
         "@type": "WebPage",
         "@id": "https://josefresco.com/blog/safeshare-reddit-bookmarklet.html"
       },
-      "headline": "SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet",
-      "description": "Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.",
+      "headline": "SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet",
+      "description": "How I built SafeShare — a Next.js 16 web app with Redis storage that creates clean, shareable Reddit post views with a one-click bookmarklet. No login walls, no install prompts, just the content.",
       "image": "https://josefresco.com/blog/images/safeshare-reddit.png",
       "author": {
         "@type": "Person",
@@ -67,8 +67,8 @@
         }
       },
       "datePublished": "2026-03-20T00:00:00+00:00",
-      "dateModified": "2026-03-24T00:00:00+00:00",
-      "keywords": "Reddit, Bookmarklet, Next.js, Vercel, Redis, Share Links, Clean Reader, Web Development",
+      "dateModified": "2026-04-03T00:00:00+00:00",
+      "keywords": "Reddit, Bookmarklet, Next.js, Vercel, Redis, Share Links, Clean Reader, Web Development, TypeScript, App Router",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
     }
@@ -98,6 +98,9 @@
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
                 <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
@@ -108,7 +111,7 @@
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
-                    <h1 class="blog-post-title">SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet</h1>
+                    <h1 class="blog-post-title">SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Web Development</span>
                         <span class="blog-date">March 2026</span>
@@ -121,7 +124,7 @@
 
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                        <strong style="color: var(--text-primary);">TL;DR:</strong> SafeShare creates clean, shareable views of Reddit posts — no login walls, no app install prompts, no ads. Built with Next.js 16 and Vercel Redis, it features a one-click bookmarklet for instant link generation. Perfect for sharing with family and friends who just want to read the content.
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> SafeShare is a Next.js 16 web app that creates clean, shareable views of Reddit posts — no login walls, no app install prompts, no ads. It uses Vercel Redis with a 90-day TTL for snapshot storage and a one-click bookmarklet that generates a shareable link without leaving the Reddit tab. The architecture fetches post data client-side to bypass Reddit's datacenter IP restrictions, then stores the snapshot server-side. <em>Updated April 2026 with App Router implementation details.</em>
                     </div>
 
                     <h2>The Problem</h2>
@@ -225,6 +228,73 @@ npm run dev</code></pre>
                         <li>Automatic SSL certificates</li>
                         <li>Global edge caching</li>
                     </ul>
+
+                    <h2>How the App Router Structures the Application</h2>
+                    <p>SafeShare is built on Next.js 16 with the App Router — not the older Pages Router. This shapes how routes, data fetching, and server/client components are organized.</p>
+                    <p>The core route structure:</p>
+                    <pre><code>app/
+├── layout.tsx          # Root layout (shared head, fonts)
+├── page.tsx            # Landing page — paste URL or use bookmarklet
+├── [id]/
+│   └── page.tsx        # Snapshot viewer — renders a stored post
+└── api/
+    ├── store/
+    │   └── route.ts    # POST endpoint — receives snapshot from bookmarklet
+    └── snapshot/
+        └── [id]/
+            └── route.ts  # GET endpoint — retrieves snapshot for viewer</code></pre>
+                    <p>The landing page (<code>app/page.tsx</code>) is a Client Component — it needs the URL input field and form submission logic to run in the browser. The snapshot viewer (<code>app/[id]/page.tsx</code>) is a Server Component — it fetches the snapshot from Redis at request time and renders the post HTML server-side, so the reader sees fully-rendered content with no client-side hydration required for the post body.</p>
+
+                    <h3>Storing a Snapshot</h3>
+                    <p>When the bookmarklet (or the paste form on the landing page) sends a Reddit post to SafeShare, the <code>/api/store</code> route handles it:</p>
+                    <pre><code>// app/api/store/route.ts
+import { Redis } from '@upstash/redis';
+import { nanoid } from 'nanoid';
+
+const redis = new Redis({ url: process.env.REDIS_URL! });
+
+export async function POST(request: Request) {
+  const snapshot = await request.json();
+
+  // Basic validation
+  if (!snapshot.title || !snapshot.subreddit) {
+    return Response.json({ error: 'Invalid snapshot' }, { status: 400 });
+  }
+
+  const id = nanoid(10);
+  const ttl = 60 * 60 * 24 * 90; // 90 days in seconds
+
+  await redis.set(`post:${id}`, JSON.stringify(snapshot), { ex: ttl });
+
+  return Response.json({ id, url: `https://safe-share.vercel.app/${id}` });
+}</code></pre>
+                    <p><code>nanoid</code> generates a short, URL-safe ID. The snapshot is stored in Redis with a 90-day TTL — after that, the key expires automatically and the shareable link returns a 404. No cleanup job needed.</p>
+
+                    <h3>Rendering a Snapshot</h3>
+                    <p>The viewer route fetches from Redis on the server and renders synchronously:</p>
+                    <pre><code>// app/[id]/page.tsx
+import { Redis } from '@upstash/redis';
+import { notFound } from 'next/navigation';
+
+const redis = new Redis({ url: process.env.REDIS_URL! });
+
+export default async function SnapshotPage({ params }: { params: { id: string } }) {
+  const raw = await redis.get(`post:${params.id}`);
+
+  if (!raw) notFound();
+
+  const post = typeof raw === 'string' ? JSON.parse(raw) : raw;
+
+  return (
+    &lt;article&gt;
+      &lt;h1&gt;{post.title}&lt;/h1&gt;
+      &lt;p&gt;r/{post.subreddit} · {post.score} points&lt;/p&gt;
+      &lt;div dangerouslySetInnerHTML={{ __html: post.bodyHtml }} /&gt;
+      {/* Top comments rendered here */}
+    &lt;/article&gt;
+  );
+}</code></pre>
+                    <p>Because this is a Server Component, the Redis fetch happens at request time without any client-side JavaScript. The rendered HTML reaches the browser ready to display. For a read-only view of a stored post, that's exactly the right trade-off — fast first paint, no loading spinner, no layout shift.</p>
 
                     <h2>What's Next</h2>
                     <p>SafeShare is already useful in its current form, but there are plenty of ideas for future improvements:</p>

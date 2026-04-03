@@ -9,6 +9,14 @@
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>Building the JF Notify Marketing Site with Eleventy</title>
+      <link>https://josefresco.com/blog/jf-notify-website.html</link>
+      <description>How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and a serverless contact function — a static-first approach to giving a WordPress plugin its own proper home on the web.</description>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
+    </item>
+
+    <item>
       <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</title>
       <link>https://josefresco.com/blog/wpe-central-command-helper.html</link>
       <description>A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes WordPress-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard with core version, pending updates, active plugins, maintenance mode state, and upload directory size through a single secured REST endpoint.</description>
