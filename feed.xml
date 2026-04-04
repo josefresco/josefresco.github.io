@@ -88,21 +88,5 @@
       <guid>https://josefresco.com/blog/arpy-assist-qwen-web-interface.html</guid>
     </item>
 
-    <item>
-      <title>Watch List: A Private JustWatch Alternative PWA Powered by TMDB</title>
-      <link>https://josefresco.com/blog/watch-list-pwa.html</link>
-      <description>I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.</description>
-      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/watch-list-pwa.html</guid>
-    </item>
-
-    <item>
-      <title>JF Notify Launches - Instant Telegram Notifications for Gravity Forms</title>
-      <link>https://josefresco.com/blog/jf-notify-launch-announcement.html</link>
-      <description>JF Notify (formerly Telegram Notifier for Gravity Forms) is now officially launched at jfnotify.com. Get instant Telegram notifications when Gravity Forms entries are submitted.</description>
-      <pubDate>Sat, 07 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-notify-launch-announcement.html</guid>
-    </item>
-
   </channel>
 </rss>

@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] - 2026-04-04
+
+### Reviewed
+- All 29 blog post HTML files confirmed present and accounted for in `sitemap.xml`
+- All 29 `sitemap.xml` blog post URLs verified against files on disk — no orphaned entries or missing pages
+- `feed.xml` trimmed to 10 most recent posts (was 12; `watch-list-pwa.html` and `jf-notify-launch-announcement.html` removed as oldest entries)
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- No unnecessary, duplicate, or unreferenced files found for removal
+- `README.md` reviewed — accurate and up to date
+
+### Fixed
+- `feed.xml` — removed 2 excess items (`watch-list-pwa.html` and `jf-notify-launch-announcement.html`) to restore the 10-item cap; `lastBuildDate` already correct at 2026-04-04
+- `sitemap.xml` — removed stray blank line between homepage and about URL blocks
+- `sitemap.xml` — updated `lastmod` for `/feed.xml` entry from `2026-04-03` to `2026-04-04`
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.12.0] - 2026-04-03
 
 ### Reviewed
