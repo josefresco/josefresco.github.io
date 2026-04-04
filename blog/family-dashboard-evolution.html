@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery - Jose Fresco</title>
-    <meta name="description" content="How the Family Dashboard evolved from v3.7 to v3.26 with humorous weather narratives, major architecture cleanup, and bulletproof CalDAV integration">
+    <meta name="description" content="How the Family Dashboard evolved from v3.7 to v3.26 — and beyond to v3.30 — with weather narrative architecture, a 2,000-line code purge, bulletproof CalDAV integration, and an original one-liner overhaul.">
     <link rel="canonical" href="https://josefresco.com/blog/family-dashboard-evolution.html">
     <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,21 +21,21 @@
 
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery - Jose Fresco">
-    <meta property="og:description" content="How the Family Dashboard evolved from v3.7 to v3.26 with humorous weather narratives, major architecture cleanup, and bulletproof CalDAV integration">
+    <meta property="og:description" content="How the Family Dashboard evolved from v3.7 to v3.26 — and beyond to v3.30 — with weather narrative architecture, a 2,000-line code purge, bulletproof CalDAV integration, and an original one-liner overhaul.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/family-dashboard-evolution.html">
     <meta property="og:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-01-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-04T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery - Jose Fresco">
-    <meta name="twitter:description" content="How the Family Dashboard evolved from v3.7 to v3.26 with humorous weather narratives, major architecture cleanup, and bulletproof CalDAV integration">
+    <meta name="twitter:description" content="How the Family Dashboard evolved from v3.7 to v3.26 — and beyond to v3.30 — with weather narrative architecture, a 2,000-line code purge, bulletproof CalDAV integration, and an original one-liner overhaul.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
 
     <!-- Schema.org Structured Data -->
@@ -48,7 +48,7 @@
         "@id": "https://josefresco.com/blog/family-dashboard-evolution.html"
       },
       "headline": "Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery",
-      "description": "How the Family Dashboard evolved from v3.7 to v3.26 with humorous weather narratives, major architecture cleanup, and bulletproof CalDAV integration",
+      "description": "How the Family Dashboard evolved from v3.7 to v3.26 — and beyond to v3.30 — with weather narrative architecture, a 2,000-line code purge, bulletproof CalDAV integration, and an original one-liner overhaul.",
       "image": "https://josefresco.com/blog/images/family-dashboard.svg",
       "author": {
         "@type": "Person",
@@ -65,7 +65,7 @@
         }
       },
       "datePublished": "2026-01-24T00:00:00+00:00",
-      "dateModified": "2026-03-27T00:00:00+00:00",
+      "dateModified": "2026-04-04T00:00:00+00:00",
       "keywords": "JavaScript, CalDAV, Family Dashboard, Personality System, Timezone, DST, Architecture, Weather API, OpenWeather, iPad Kiosk, Raspberry Pi",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
@@ -95,25 +95,32 @@
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
                     <h1 class="blog-post-title">Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Web Development</span>
-                        <span class="blog-date">August 2024</span>
+                        <span class="blog-date">January 2026</span>
                     </div>
                 </div>
 
                 <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                    <p><strong>TLDR:</strong> This post details the evolution of the Family Dashboard, highlighting major improvements like humorous weather narratives, a significant codebase cleanup (removing over 2,000 lines of deprecated code), and a shift from a complex OAuth-based calendar integration to a simpler, more reliable CalDAV approach. The migration to Netlify Functions and fixes for timezone bugs are also covered.</p>
+                    <strong style="color: var(--text-primary);">TL;DR:</strong> The Family Dashboard evolved from v3.7 to v3.26 with a personality-driven weather narrative system, a 2,000+ line code purge, and a move from complex OAuth to simple CalDAV. The v3.26 modular refactor — extracting <code>weather-narrative-engine.js</code>, <code>caldav-client.js</code>, and friends — paid off immediately in v3.30, when the entire commentary set was replaced in a single-file change. See the <a href="/blog/family-dash-v330.html">v3.30 post</a> for that story.
+                </div>
+
+                <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 8px; padding: 1rem; margin: 1.5rem 0;">
+                    <strong style="color: var(--neural-primary);">April 2026 Update:</strong> This post covers v3.7 through v3.26. The dashboard has since reached v3.30.2, which replaced the comedian-style commentary with 56 original one-liners. Read the full story: <a href="/blog/family-dash-v330.html">Family Dashboard v3.30: Writing My Own Weather One-Liners</a>.
                 </div>
 
                 <div class="blog-post-content">
@@ -280,26 +287,20 @@ if (temp >= 60 && !precipitation?.expected) {
                     <h3>5. Serverless Functions Enable Client-Side Apps</h3>
                     <p>The CalDAV proxy demonstrates how serverless functions solve CORS issues while keeping the main app client-side. A single 200-line function enables calendar integration without managing a full backend server.</p>
 
-                    <h2>Current State (v3.26)</h2>
-                    <p>The dashboard now runs as a pure static site on GitHub Pages with a single Netlify Function for CalDAV proxying. It features:</p>
+                    <h2>State at v3.26</h2>
+                    <p>The dashboard at v3.26 ran as a pure static site on GitHub Pages with a single Netlify Function for CalDAV proxying. The modular refactor extracted five new files — <code>weather-narrative-engine.js</code>, <code>caldav-client.js</code>, <code>api-client.js</code>, <code>date-utils.js</code>, and <code>logger.js</code> — creating clean module boundaries that would make future changes much easier. It featured:</p>
                     <ul>
-                        <li><strong>Personality-driven weather forecasts</strong> with 36 randomized messages</li>
+                        <li><strong>Personality-driven weather forecasts</strong> with 156 randomized messages across four categories</li>
                         <li><strong>Reliable CalDAV integration</strong> for Gmail and Google Workspace</li>
                         <li><strong>Accurate timezone handling</strong> for Eastern Time events</li>
-                        <li><strong>Clean architecture</strong> with minimal dependencies</li>
+                        <li><strong>Modular architecture</strong> with clearly separated concerns</li>
                         <li><strong>PWA capabilities</strong> for mobile installation</li>
                         <li><strong>Room-readable UI</strong> optimized for 1024x768 displays</li>
                     </ul>
 
-                    <h2>Future Improvements</h2>
-                    <p>Potential enhancements being considered:</p>
-                    <ul>
-                        <li><strong>User-customizable messages</strong> - Let users add their own weather quips</li>
-                        <li><strong>Multi-timezone support</strong> - Configurable timezone instead of hardcoded Eastern</li>
-                        <li><strong>Weather alerts</strong> - Highlight severe weather warnings prominently</li>
-                        <li><strong>Calendar filtering</strong> - Hide specific calendars or event types</li>
-                        <li><strong>Export settings</strong> - Sync configuration across devices</li>
-                    </ul>
+                    <h2>What Came Next: v3.30</h2>
+                    <p>The modular architecture from v3.26 paid its first dividend in v3.30. The entire 156-entry commentary set — comedian-style quips that had accumulated without much curation — was replaced with 56 clean, original one-liners. Because <code>weather-narrative-engine.js</code> owned the commentary data with a narrow interface, the change required editing exactly one file. The rest of the dashboard was untouched.</p>
+                    <p>v3.30.2 also tightened the emoji usage, adjusted the extreme weather thresholds, and simplified the narrative selection logic. The full story is in the <a href="/blog/family-dash-v330.html">v3.30 post</a>.</p>
 
                     <h2>The Philosophy of Iterative Improvement</h2>
                     <p>The evolution from v3.7 to v3.26 wasn't planned as a major rewrite. Each improvement addressed a specific pain point:</p>
@@ -355,12 +356,14 @@ if (temp >= 60 && !precipitation?.expected) {
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="../global-header.js" defer></script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

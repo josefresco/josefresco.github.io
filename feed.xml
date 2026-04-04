@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 04 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Family Dashboard v3.30: Writing My Own Weather One-Liners</title>
+      <link>https://josefresco.com/blog/family-dash-v330.html</link>
+      <description>How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.</description>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-v330.html</guid>
+    </item>
 
     <item>
       <title>Building the JF Notify Marketing Site with Eleventy</title>
