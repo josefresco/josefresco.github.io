@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon - Jose Fresco</title>
+    <meta name="description" content="A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dash-vercel-caldav-setup.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon - Jose Fresco">
+    <meta property="og:description" content="A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/family-dash-vercel-caldav-setup.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-05T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon - Jose Fresco">
+    <meta name="twitter:description" content="A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/family-dash-vercel-caldav-setup.html"
+      },
+      "headline": "Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon",
+      "description": "A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.",
+      "image": "https://josefresco.com/blog/images/family-dashboard.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-05T00:00:00+00:00",
+      "dateModified": "2026-04-05T00:00:00+00:00",
+      "keywords": "Family Dashboard, Vercel, CalDAV, Serverless, Google Calendar, App Password, iPad Kiosk, OpenWeather, JavaScript, Raspberry Pi, Setup Guide, Self-hosted",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dashboard.svg" type="image/svg+xml">
+                        <img src="images/family-dashboard.svg" alt="Family Dashboard showing calendar, weather, and tide widgets on a wall-mounted iPad" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Getting <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" style="color: var(--neural-primary);">Family Dashboard</a> running involves four steps: clone the repo, get an OpenWeather API key, generate a CalDAV App Password from your calendar provider, and deploy the <code>api/calendar.js</code> serverless function to Vercel. The dashboard itself is a static HTML file — no build step, no framework. CalDAV requires the proxy; everything else works locally.
+                    </div>
+
+                    <h2>What You're Setting Up</h2>
+                    <p>Family Dashboard is a wall-mounted information display — calendar events, weather, tide data, and a rotating weather commentary — designed to run 24/7 on an old tablet. If you want the backstory on why it exists and how it has evolved, see <a href="/blog/family-dashboard.html">the original post</a> and the <a href="/blog/family-dashboard-evolution.html">v3.7–v3.26 evolution post</a>. This post is just the setup guide.</p>
+                    <p>The repo lives at <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">github.com/josefresco/family-dash</a>. The current release is v3.30.</p>
+
+                    <h2>Prerequisites</h2>
+                    <ul>
+                        <li>A free <a href="https://openweathermap.org/api" target="_blank" rel="noopener">OpenWeather API key</a> (the free tier is more than enough)</li>
+                        <li>A CalDAV-compatible calendar — Google Calendar, Apple iCloud, Nextcloud, or any standard CalDAV server</li>
+                        <li>A free <a href="https://vercel.com" target="_blank" rel="noopener">Vercel account</a> for the CalDAV proxy (only needed for calendar integration; weather works without it)</li>
+                        <li>Git and Node.js 18+ installed locally</li>
+                    </ul>
+                    <p>If you skip Vercel and the CalDAV setup, the dashboard still works for weather, tides, and the clock — just without calendar events.</p>
+
+                    <h2>Step 1: Clone the Repo</h2>
+                    <pre><code>git clone https://github.com/josefresco/family-dash.git
+cd family-dash</code></pre>
+                    <p>There's no build step and no <code>npm install</code> required for the dashboard itself. Open <code>dashboard.html</code> in a browser and it will load — at this point it will show weather placeholders (no API key yet) and no calendar events, but the layout will render.</p>
+
+                    <h2>Step 2: Run the Setup Wizard</h2>
+                    <p>Open <code>setup.html</code> in a browser. This is a guided configuration wizard that walks through every credential the dashboard needs and writes them to <code>config.js</code>.</p>
+                    <p>The wizard covers:</p>
+                    <ul>
+                        <li><strong>OpenWeather API key and location</strong> — paste your key, enter your city name or coordinates</li>
+                        <li><strong>CalDAV connection strings</strong> — up to three calendar accounts, each with a server URL, username, and password</li>
+                        <li><strong>CALDAV_PROXY_URL</strong> — the Vercel function URL (you'll fill this in after Step 4)</li>
+                        <li><strong>Display preferences</strong> — timezone, temperature unit (°F/°C), tide station ID</li>
+                    </ul>
+                    <p>Each section in the wizard has a "Test Connection" button that validates the credential before saving. You can run through the wizard in order, skip sections you don't need, and come back to fill in the proxy URL after deploying to Vercel.</p>
+
+                    <h2>Step 3: Get Your OpenWeather API Key</h2>
+                    <p>Go to <a href="https://openweathermap.org/api" target="_blank" rel="noopener">openweathermap.org/api</a> and create a free account. Under "My API Keys", generate a key. The free tier includes the Current Weather and 5-Day Forecast endpoints that Family Dashboard uses.</p>
+                    <p>One gotcha: new OpenWeather API keys take up to 2 hours to activate. If the weather section shows errors immediately after pasting the key, wait a bit and try again. The test button in the setup wizard will tell you whether the key is active.</p>
+                    <p>Paste the key into the setup wizard's weather section. Enter your location as a city name (<code>Miami, FL, US</code>), a zip code, or latitude/longitude coordinates. Hit "Test Connection" — you should see current conditions returned in the preview.</p>
+
+                    <h2>Step 4: Set Up CalDAV Credentials</h2>
+                    <p>CalDAV integration requires an App Password rather than your main account password. The reason: CalDAV clients authenticate over Basic Auth (username + password in the request headers), and most calendar providers require App Passwords for third-party integrations as a security measure.</p>
+
+                    <h3>Google Calendar App Password</h3>
+                    <ol>
+                        <li>Go to <strong>myaccount.google.com → Security → 2-Step Verification</strong> (must be enabled)</li>
+                        <li>Scroll to <strong>App passwords</strong> at the bottom of that page</li>
+                        <li>Select "Other (Custom name)", name it "Family Dashboard", and click Generate</li>
+                        <li>Copy the 16-character password — you won't see it again</li>
+                    </ol>
+                    <p>In the setup wizard, use these values for a Google Calendar account:</p>
+                    <ul>
+                        <li><strong>Server URL:</strong> <code>https://www.googleapis.com/calendar/v3/calendars/</code></li>
+                        <li><strong>Username:</strong> your Gmail address</li>
+                        <li><strong>Password:</strong> the 16-character App Password (no spaces)</li>
+                    </ul>
+                    <p>The CalDAV URL for a specific Google Calendar is <code>https://apidata.googleusercontent.com/caldav/v2/YOUR_CALENDAR_ID/events</code>. Your primary calendar ID is usually your Gmail address. You can find other calendar IDs under Calendar Settings → Integrate calendar in Google Calendar.</p>
+
+                    <h3>iCloud Calendar</h3>
+                    <p>For iCloud, generate an App-Specific Password at <strong>appleid.apple.com → Sign-In and Security → App-Specific Passwords</strong>. The CalDAV server URL is <code>https://caldav.icloud.com</code>. iCloud CalDAV uses automatic discovery, so the setup wizard's connection test will locate the right calendar URL once the server, username, and App Password are entered.</p>
+
+                    <h3>Nextcloud / Generic CalDAV</h3>
+                    <p>For self-hosted CalDAV (Nextcloud, Radicale, Baikal, etc.), use your server's CalDAV endpoint directly. Nextcloud's endpoint follows the pattern <code>https://your-nextcloud.com/remote.php/dav/calendars/USERNAME/</code>. No App Password needed — your regular Nextcloud credentials work.</p>
+
+                    <h2>Step 5: Deploy the CalDAV Proxy to Vercel</h2>
+                    <p>Browsers block direct CalDAV requests from a web page due to CORS restrictions — CalDAV servers don't send the <code>Access-Control-Allow-Origin</code> header that browsers require for cross-origin requests. The <code>api/calendar.js</code> serverless function in the repo acts as a proxy: the dashboard calls the function, the function calls the CalDAV server, and the response comes back without a CORS issue.</p>
+
+                    <h3>Why Vercel</h3>
+                    <p>The function is a single file with no external dependencies beyond Node's built-in <code>https</code> module. Vercel's free tier is more than sufficient — the proxy handles a handful of requests per hour at most. You could deploy the same function to Netlify Functions, Cloudflare Workers, or any other serverless platform with minor modifications, but Vercel's automatic GitHub integration makes it the path of least resistance.</p>
+
+                    <h3>Deploying</h3>
+                    <pre><code># Install the Vercel CLI if you haven't already
+npm install -g vercel
+
+# From the family-dash project root
+vercel
+
+# Follow the prompts:
+# - Link to your Vercel account
+# - Set up as a new project
+# - Root directory: . (the repo root)
+# - No build command needed
+# - Output directory: . (the repo root)
+
+# After deployment, Vercel gives you a URL like:
+# https://family-dash-yourname.vercel.app</code></pre>
+                    <p>After deploying, go back to <code>setup.html</code> and paste the Vercel deployment URL into the <strong>CALDAV_PROXY_URL</strong> field. The full proxy URL will be <code>https://your-deployment.vercel.app/api/calendar</code>.</p>
+
+                    <h3>Passing Credentials Securely</h3>
+                    <p>The proxy function receives the CalDAV server URL, username, and password as query parameters or in the request body — they're sent over HTTPS and never logged or stored by the function. For production use, consider setting CalDAV credentials as Vercel environment variables and having the function read them server-side rather than passing them from the client. The setup wizard has an option for this under "Advanced Configuration".</p>
+
+                    <h2>Step 6: Test Everything</h2>
+                    <p>With all credentials configured, open <code>dashboard.html</code> in a browser. Within 30 seconds of the first load, you should see:</p>
+                    <ul>
+                        <li>Current temperature and conditions in the weather panel</li>
+                        <li>Today's high/low and precipitation probability</li>
+                        <li>Today's calendar events (fetched via the proxy) grouped by account</li>
+                        <li>A weather one-liner at the bottom of the weather panel</li>
+                    </ul>
+                    <p>If the calendar is empty but weather is working, check the browser console for CalDAV proxy errors. The most common issues are:</p>
+                    <ul>
+                        <li><strong>401 Unauthorized</strong> — wrong App Password or the App Password hasn't propagated yet (Google can take a few minutes)</li>
+                        <li><strong>404 Not Found</strong> — incorrect CalDAV URL for your calendar account</li>
+                        <li><strong>CORS error</strong> — the CALDAV_PROXY_URL in config.js is either empty or pointing to the wrong endpoint</li>
+                    </ul>
+
+                    <h2>Step 7: Deploy as a Static Site</h2>
+                    <p>The dashboard is a static HTML file — you can serve it from anywhere.</p>
+
+                    <h3>GitHub Pages</h3>
+                    <p>Fork the repo and enable GitHub Pages on the <code>main</code> branch from the repository settings. The dashboard will be available at <code>https://yourusername.github.io/family-dash/dashboard.html</code>. Your <code>config.js</code> with credentials should <em>not</em> be committed to a public fork — add it to <code>.gitignore</code> and serve it separately or use environment-based configuration.</p>
+
+                    <h3>Raspberry Pi on Local Network</h3>
+                    <p>The original setup runs on a Raspberry Pi serving the file over the local network:</p>
+                    <pre><code># On the Pi, install nginx
+sudo apt install nginx
+
+# Copy the family-dash files to the web root
+sudo cp -r family-dash/* /var/www/html/
+
+# The dashboard is now accessible at http://raspberry-pi-ip/dashboard.html</code></pre>
+                    <p>This approach keeps credentials off the public internet entirely — the CalDAV proxy still runs on Vercel, but the dashboard HTML lives on your local network and is only reachable from devices in your home.</p>
+
+                    <h2>Step 8: iPad Kiosk Setup</h2>
+                    <p>The target hardware is any iPad — even a first-generation iPad Air runs the dashboard without trouble. Getting it into a clean kiosk mode takes a few steps:</p>
+                    <ol>
+                        <li>Open the dashboard URL in Safari</li>
+                        <li>Tap the Share button → <strong>Add to Home Screen</strong></li>
+                        <li>Name it "Dashboard" and confirm — this creates a full-screen web app icon</li>
+                        <li>Launch from the home screen icon; it now runs without the Safari browser chrome</li>
+                        <li>In <strong>Settings → Accessibility → Guided Access</strong>, enable Guided Access and set a passcode to prevent accidental navigation away from the dashboard</li>
+                    </ol>
+                    <p>For a wall-mounted setup, an iPad case with a built-in wall mount works well. The screen will stay on if the iPad is plugged in — iOS won't auto-lock a charging device running a full-screen web app if you set the Auto-Lock to "Never" under <strong>Settings → Display & Brightness</strong>.</p>
+
+                    <h2>Optional: Tide Data</h2>
+                    <p>Tide data comes from the NOAA Tides and Currents API and requires a NOAA station ID for your location. Find yours at <a href="https://tidesandcurrents.noaa.gov/stations.html" target="_blank" rel="noopener">tidesandcurrents.noaa.gov/stations.html</a> — search by state or nearest city and copy the 7-digit station ID. Paste it into the setup wizard's tide section. The tide panel is hidden if no station ID is configured.</p>
+                    <p>NOAA tide predictions are free, require no API key, and are published months in advance — the dashboard caches them for 24 hours and rarely needs to refetch.</p>
+
+                    <h2>Keeping It Updated</h2>
+                    <p>The repo gets occasional updates — weather UI refinements, CalDAV reliability improvements, and commentary updates. To pull the latest:</p>
+                    <pre><code>git pull origin main</code></pre>
+                    <p>Your <code>config.js</code> is not tracked by git (it's in <code>.gitignore</code>), so credentials survive a pull. If a config format change is introduced in a new version, <code>setup.html</code> will display a migration notice on first load.</p>
+
+                    <h2>Troubleshooting Reference</h2>
+
+                    <h3>Weather not loading</h3>
+                    <ul>
+                        <li>Verify the API key is active (new keys take up to 2 hours)</li>
+                        <li>Check the browser console for the specific error response from OpenWeather</li>
+                        <li>Confirm the location string is valid — use coordinates if city name lookup fails</li>
+                    </ul>
+
+                    <h3>Calendar shows no events</h3>
+                    <ul>
+                        <li>Confirm the CalDAV proxy URL ends in <code>/api/calendar</code> (not just the Vercel domain root)</li>
+                        <li>Check Vercel function logs for errors from the CalDAV server</li>
+                        <li>For Google Calendar, ensure 2-Step Verification is enabled before trying to generate an App Password</li>
+                    </ul>
+
+                    <h3>Dashboard goes blank after a few hours</h3>
+                    <ul>
+                        <li>This is usually an uncaught JavaScript error from a failed API fetch — check the console</li>
+                        <li>The error handler in <code>error-handler.js</code> should display a visible error panel rather than a blank screen; if you're seeing a blank screen, the error is happening during initial render rather than on refresh</li>
+                    </ul>
+
+                    <h2>What's Next</h2>
+                    <p>Once the dashboard is running, there are a few configuration options worth exploring:</p>
+                    <ul>
+                        <li><strong>Multi-account color coding</strong> — each CalDAV account gets a distinct accent color; configure the color per account in <code>config.js</code> under <code>accounts[n].color</code></li>
+                        <li><strong>Custom weather commentary</strong> — the roadmap for a future version includes a JSON config override for the weather narrative engine; for now, editing <code>weather-narrative-engine.js</code> directly is the way to customize the one-liners</li>
+                        <li><strong>Timezone configuration</strong> — the dashboard defaults to Eastern Time; change <code>config.timezone</code> to any IANA timezone string (<code>"America/Los_Angeles"</code>, <code>"Europe/London"</code>, etc.)</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>The setup is longer to describe than to do. In practice: clone, run the wizard, paste two API credentials, click deploy on Vercel, and navigate to the URL on the iPad. The wizard handles the config file format; the proxy handles the CORS problem; the rest is just a static HTML file that refreshes itself.</p>
+                    <p>The full source is on <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">GitHub</a>. If you run into something the wizard doesn't handle well, open an issue — the repo is actively maintained.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom Dashboard Built?</h2>
+                <p class="cta-description">
+                    I build personal and business dashboards that pull from multiple data sources into clean,
+                    always-on interfaces. From family calendars to operational metrics, let's build something useful together.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Custom Dashboard Project&body=Hi Jose,%0D%0A%0D%0AI read your Family Dashboard setup guide and have a project I'd like to discuss.%0D%0A%0D%0AWhat I need:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

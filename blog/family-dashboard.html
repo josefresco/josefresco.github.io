@@ -27,7 +27,7 @@
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-05T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Family Tech">
 
@@ -64,7 +64,7 @@
         }
       },
       "datePublished": "2025-08-01T00:00:00+00:00",
-      "dateModified": "2026-03-26T00:00:00+00:00",
+      "dateModified": "2026-04-05T00:00:00+00:00",
       "keywords": "JavaScript, CalDAV, API Integration, Family Dashboard, Web Development, Google Calendar, OpenWeather, Raspberry Pi, iPad Kiosk",
       "articleSection": "Family Tech",
       "inLanguage": "en-US"
@@ -95,8 +95,11 @@
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -121,7 +124,7 @@
 
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                        <strong style="color: var(--text-primary);">TL;DR:</strong> The Family Dashboard is a wall-mounted information display built for an older iPad — pulling calendar events from CalDAV, weather from OpenWeather, and tide data from a local API. It surfaces the answers to the questions every family asks a dozen times a day, so nobody has to ask them. This post covers v1 (August 2025). The project has since grown to <strong style="color: var(--text-primary);">v3.26</strong> with major improvements to timezone handling, CalDAV reliability, and the weather UI. For the full evolution story, see <a href="/blog/family-dashboard-evolution.html" style="color: var(--neural-primary);">Family Dashboard Evolution</a>.
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The Family Dashboard is a wall-mounted information display built for an older iPad — pulling calendar events from CalDAV, weather from OpenWeather, and tide data from a local API. It surfaces the answers to the questions every family asks a dozen times a day, so nobody has to ask them. This post covers v1 (August 2025). The project has since grown to <strong style="color: var(--text-primary);">v3.30</strong> with major improvements to timezone handling, CalDAV reliability, and the weather UI. For the full evolution story, see <a href="/blog/family-dashboard-evolution.html" style="color: var(--neural-primary);">Family Dashboard Evolution</a>. Ready to run it yourself? See the <a href="/blog/family-dash-vercel-caldav-setup.html" style="color: var(--neural-primary);">setup guide</a>.
                     </div>
 
                     <h2>The Problem</h2>
@@ -213,8 +216,9 @@ function startRefreshCycles() {
                         <li><strong>No visual refresh indicator</strong> — Users couldn't tell whether the data was 2 minutes old or 2 hours old. A subtle "refreshing..." animation during API calls and a persistent "last updated" timestamp addressed this.</li>
                     </ul>
 
-                    <h2>Evolution — Now at v3.26</h2>
-                    <p>The v1 dashboard described here has been through many iterations since its initial August 2025 deployment. As of v3.26 (March 2026), the project includes smarter timezone and DST handling, a redesigned weather section built around the two questions that actually matter, tighter integration with the Raspberry Pi host, a personality system for rotating display themes, and robust CalDAV reliability improvements. The GitHub repo (<a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">josefresco/family-dash</a>) is actively maintained and open-source. For the full story of how the dashboard evolved, see <a href="/blog/family-dashboard-evolution.html">Family Dashboard Evolution</a>.</p>
+                    <h2>Evolution — Now at v3.30</h2>
+                    <p>The v1 dashboard described here has been through many iterations since its initial August 2025 deployment. As of v3.30 (April 2026), the project includes smarter timezone and DST handling, a redesigned weather section built around the two questions that actually matter, tighter integration with the Raspberry Pi host, a modular architecture split across six dedicated JavaScript modules, and a fully rewritten weather commentary engine with 56 original one-liners. The GitHub repo (<a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">josefresco/family-dash</a>) is actively maintained and open-source.</p>
+                    <p>For the full story of how the dashboard evolved from v1 to v3.26, see <a href="/blog/family-dashboard-evolution.html">Family Dashboard Evolution</a>. For the v3.30 commentary overhaul specifically, see <a href="/blog/family-dash-v330.html">Writing My Own Weather One-Liners</a>. If you want to run the dashboard yourself, the <a href="/blog/family-dash-vercel-caldav-setup.html">setup guide</a> covers the complete deployment from clone to kiosk.</p>
 
                     <h2>Conclusion</h2>
                     <p>The best home automation projects solve a problem the whole household has, not just the person who built it. The Family Dashboard passed that test — it gets used by everyone, every day, without anyone needing to understand how it works.</p>
