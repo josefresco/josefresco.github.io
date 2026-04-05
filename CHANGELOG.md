@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.14.0] - 2026-04-05
+
+### Reviewed
+- All 30 blog post HTML files confirmed present and accounted for in `sitemap.xml`
+- All 30 `sitemap.xml` blog post URLs verified against files on disk — no orphaned entries or missing pages
+- `feed.xml` trimmed to 10 most recent posts; `family-dash-vercel-caldav-setup.html` added as newest entry, `arpy-assist-qwen-web-interface.html` removed as oldest
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- No unnecessary, duplicate, or unreferenced files found for removal
+- `README.md` reviewed — accurate and up to date
+
+### Updated
+- `sitemap.xml` — added `family-dash-vercel-caldav-setup.html` entry; updated `lastmod` for `/`, `/blog/`, `family-dashboard.html`, and `/feed.xml` entries to `2026-04-05`
+- `feed.xml` — updated `lastBuildDate` to `Sun, 05 Apr 2026`; updated to 10 most recent posts
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.13.0] - 2026-04-04
 
 ### Reviewed
