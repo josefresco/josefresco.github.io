@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.0] - 2026-04-06
+
+### Reviewed
+- All 31 blog post HTML files confirmed present and accounted for in `sitemap.xml`
+- All 31 `sitemap.xml` blog post URLs verified against files on disk — no orphaned entries or missing pages
+- `feed.xml` trimmed to 10 most recent posts; `save-to-my-blog-extension-internals.html` added as newest entry, `safeshare-reddit-bookmarklet.html` removed as oldest
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- No unnecessary, duplicate, or unreferenced files found for removal
+- `README.md` reviewed — accurate and up to date
+
+### Added
+- `blog/save-to-my-blog-extension-internals.html` — new blog post: technical deep-dive into Save to My Blog (Chrome Manifest V3, service workers, WordPress REST API)
+
+### Updated
+- `blog/index.html` — updated featured posts to show `save-to-my-blog-extension-internals.html` as newest; `safeshare-reddit-bookmarklet.html` noted as updated April 2026
+- `sitemap.xml` — added `save-to-my-blog-extension-internals.html` entry; updated `lastmod` for `/`, `/blog/`, `safeshare-reddit-bookmarklet.html`, and `/feed.xml` entries to `2026-04-06`
+- `feed.xml` — updated `lastBuildDate` to `Mon, 06 Apr 2026`; added `save-to-my-blog-extension-internals.html` as newest item; removed `safeshare-reddit-bookmarklet.html` as oldest item to maintain 10-item cap; removed stray blank line before closing `</channel>` tag
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.14.0] - 2026-04-05
 
 ### Reviewed
