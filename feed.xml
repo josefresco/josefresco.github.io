@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API</title>
+      <link>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</link>
+      <description>A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.</description>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</guid>
+    </item>
 
     <item>
       <title>Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon</title>
@@ -80,13 +88,6 @@
       <guid>https://josefresco.com/blog/pi-backups-raspberry-pi.html</guid>
     </item>
 
-    <item>
-      <title>SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet</title>
-      <link>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</link>
-      <description>Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.</description>
-      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</guid>
-    </item>
 
   </channel>
 </rss>

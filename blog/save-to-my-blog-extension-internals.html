@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API - Jose Fresco</title>
+    <meta name="description" content="A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.">
+    <link rel="canonical" href="https://josefresco.com/blog/save-to-my-blog-extension-internals.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API - Jose Fresco">
+    <meta property="og:description" content="A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/save-to-my-blog-extension-internals.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/save-to-my-blog.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-06T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Browser Extension">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API - Jose Fresco">
+    <meta name="twitter:description" content="A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/save-to-my-blog.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/save-to-my-blog-extension-internals.html"
+      },
+      "headline": "Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API",
+      "description": "A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.",
+      "image": "https://josefresco.com/blog/images/save-to-my-blog.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-06T00:00:00+00:00",
+      "dateModified": "2026-04-06T00:00:00+00:00",
+      "keywords": "Chrome Extension, Manifest V3, Service Worker, WordPress REST API, Application Passwords, JavaScript, Browser Extension, Content Curation",
+      "articleSection": "Browser Extension",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API", "item": "https://josefresco.com/blog/save-to-my-blog-extension-internals.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/save-to-my-blog.svg" type="image/svg+xml">
+                        <img src="images/save-to-my-blog.svg" alt="Save to My Blog Chrome extension architecture diagram" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Save to My Blog is a Chrome Manifest V3 extension that posts URLs to WordPress in two clicks. Under the hood it uses a service worker (not a background page) to handle the WordPress REST API call, a popup that captures the active tab's URL and selected text, and Application Passwords for credential-free authentication. This post covers the architecture, the MV3 migration pain points, and the message-passing pattern that ties it all together.
+                    </div>
+
+                    <p>The <a href="/blog/save-to-my-blog.html">original Save to My Blog post</a> focused on what the extension does and why I built it. This one is about <em>how</em> it works — the Chrome extension architecture, the Manifest V3 constraints that shaped the design, and the specific choices I made around the WordPress REST API integration.</p>
+
+                    <h2>Why Manifest V3 Changes Everything</h2>
+                    <p>Chrome extensions have two major manifest versions in active use: Manifest V2 (MV2) and Manifest V3 (MV3). Google's long push to deprecate MV2 means any new extension should target MV3. The most significant breaking change for extensions like Save to My Blog is the <strong>removal of persistent background pages</strong>.</p>
+
+                    <p>In MV2, a background page was a long-lived HTML page that ran JavaScript continuously. You could store state in memory, keep connections open, and run code whenever you liked. Extensions like <a href="/blog/who-dis-chrome-extension.html">Who Dis</a> relied on this model.</p>
+
+                    <p>In MV3, the background page is replaced by a <strong>service worker</strong>. Service workers are event-driven and ephemeral — Chrome spins them up to handle an event, then terminates them. This has two important implications for Save to My Blog:</p>
+                    <ul>
+                        <li><strong>No persistent in-memory state</strong> — anything the service worker needs to remember between events must be written to <code>chrome.storage</code>, not a variable</li>
+                        <li><strong>No DOM access</strong> — service workers run outside any document context, so no <code>window</code>, no <code>document</code>, no DOM APIs</li>
+                    </ul>
+
+                    <h2>The Three-File Architecture</h2>
+                    <p>Save to My Blog is deliberately minimal. The entire extension is three JavaScript files:</p>
+                    <ul>
+                        <li><strong>popup.js</strong> — runs in the toolbar popup, captures current tab data, sends a message to the service worker</li>
+                        <li><strong>background.js</strong> — the MV3 service worker, receives the message, calls the WordPress REST API</li>
+                        <li><strong>options.js</strong> — runs in the settings page, reads and writes config to <code>chrome.storage.sync</code></li>
+                    </ul>
+
+                    <p>The manifest declares them like this:</p>
+                    <pre><code>{
+  "manifest_version": 3,
+  "name": "Save to My Blog",
+  "version": "1.3.0",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon48.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}</code></pre>
+
+                    <p>The key line is <code>"service_worker": "background.js"</code>. In MV2 this would have been <code>"scripts": ["background.js"]</code> under a <code>"background"</code> key with <code>"persistent": false</code> (or true). MV3 drops the <code>persistent</code> flag entirely — the service worker is always non-persistent.</p>
+
+                    <h2>Capturing the Current Tab</h2>
+                    <p>When the user clicks the extension icon, Chrome opens <code>popup.html</code> and runs <code>popup.js</code>. The popup needs three things from the current tab:</p>
+                    <ol>
+                        <li>The page URL</li>
+                        <li>The page title</li>
+                        <li>Any text the user has selected (for the post excerpt)</li>
+                    </ol>
+
+                    <p>The URL and title come from the <code>chrome.tabs</code> API. The selected text requires injecting a small script into the page via <code>chrome.scripting.executeScript</code>:</p>
+                    <pre><code>// popup.js
+async function getTabData() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  // Inject script to grab selected text
+  const [{ result: selectedText }] = await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: () => window.getSelection()?.toString() ?? ''
+  });
+
+  return {
+    url: tab.url,
+    title: tab.title,
+    excerpt: selectedText
+  };
+}</code></pre>
+
+                    <p>The <code>scripting</code> permission in the manifest is required for <code>executeScript</code>. In MV2, extensions often used <code>tabs.executeScript</code> directly — MV3 moved this to the dedicated <code>scripting</code> API with stricter permission requirements.</p>
+
+                    <h2>Message Passing: Popup to Service Worker</h2>
+                    <p>The popup doesn't call the WordPress API directly. Instead it sends a message to the background service worker and waits for a response. This separation keeps network calls out of the popup lifecycle — the popup can close and the API call will still complete.</p>
+
+                    <pre><code>// popup.js — send the save request
+async function savePost(tabData, saveAsDraft) {
+  const response = await chrome.runtime.sendMessage({
+    action: 'saveToWordPress',
+    data: { ...tabData, draft: saveAsDraft }
+  });
+
+  if (response.success) {
+    showSuccess(response.postUrl);
+  } else {
+    showError(response.error);
+  }
+}</code></pre>
+
+                    <pre><code>// background.js — service worker receives the message
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'saveToWordPress') {
+    // Must return true to keep the message channel open for async response
+    handleSaveToWordPress(message.data).then(sendResponse);
+    return true;
+  }
+});</code></pre>
+
+                    <p>The <code>return true</code> at the end of the listener is critical. Without it, Chrome closes the message channel immediately after the listener returns, before the async <code>handleSaveToWordPress</code> promise resolves. The popup's <code>sendMessage</code> call would never receive its response.</p>
+
+                    <h2>Calling the WordPress REST API</h2>
+                    <p>The service worker handles the actual API call. It reads credentials from <code>chrome.storage.sync</code>, constructs the post payload, and calls the WordPress REST API's <code>/wp/v2/posts</code> endpoint:</p>
+
+                    <pre><code>// background.js
+async function handleSaveToWordPress({ url, title, excerpt, draft }) {
+  const config = await chrome.storage.sync.get(['wpUrl', 'wpUser', 'wpAppPassword']);
+
+  if (!config.wpUrl || !config.wpUser || !config.wpAppPassword) {
+    return { success: false, error: 'Extension not configured. Open settings to add your WordPress credentials.' };
+  }
+
+  const credentials = btoa(`${config.wpUser}:${config.wpAppPassword}`);
+  const apiEndpoint = `${config.wpUrl.replace(/\/$/, '')}/wp-json/wp/v2/posts`;
+
+  const postBody = {
+    title: title,
+    content: `<p><a href="${url}">${url}</a></p>`,
+    excerpt: excerpt || '',
+    status: draft ? 'draft' : 'publish',
+    format: 'link'
+  };
+
+  try {
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      },
+      body: JSON.stringify(postBody)
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      return { success: false, error: err.message ?? `HTTP ${res.status}` };
+    }
+
+    const post = await res.json();
+    return { success: true, postUrl: post.link };
+  } catch (e) {
+    return { success: false, error: e.message };
+  }
+}</code></pre>
+
+                    <p>A few things worth noting here:</p>
+                    <ul>
+                        <li><strong>Credentials live in <code>chrome.storage.sync</code></strong>, not hardcoded or in localStorage. <code>sync</code> storage syncs across the user's Chrome profile, so setting up the extension once makes it available on all their devices.</li>
+                        <li><strong>Basic auth with Application Passwords</strong> — the credentials string is <code>username:application_password</code>, base64 encoded. WordPress Application Passwords (introduced in WordPress 5.6) are separate from the account password and can be revoked individually.</li>
+                        <li><strong>Post format is <code>link</code></strong> — WordPress link posts are specifically designed for curated links. Most themes display them with a special treatment.</li>
+                        <li><strong>Error messages bubble up</strong> from the WordPress API response body, not just the HTTP status code, so the popup can show the user what actually went wrong.</li>
+                    </ul>
+
+                    <h2>Storing Configuration Securely</h2>
+                    <p>The options page lets the user enter their WordPress URL, username, and Application Password. These are written directly to <code>chrome.storage.sync</code>. I considered <code>chrome.storage.session</code> (which clears on browser close) or encrypting the password, but ultimately landed on <code>sync</code> unencrypted for a pragmatic reason: the Application Password is already a revocable, limited-scope credential. Treating it like a secret key would add complexity without meaningfully improving security — if someone has access to the user's Chrome profile, they have bigger problems than a WordPress Application Password.</p>
+
+                    <pre><code>// options.js — save config
+document.getElementById('save-btn').addEventListener('click', async () => {
+  const config = {
+    wpUrl: document.getElementById('wp-url').value.trim(),
+    wpUser: document.getElementById('wp-user').value.trim(),
+    wpAppPassword: document.getElementById('wp-app-password').value.trim()
+  };
+
+  // Basic validation before saving
+  if (!config.wpUrl.startsWith('http')) {
+    showError('WordPress URL must start with http:// or https://');
+    return;
+  }
+
+  await chrome.storage.sync.set(config);
+  showSuccess('Settings saved');
+});</code></pre>
+
+                    <h2>The MV3 Service Worker Gotcha I Hit</h2>
+                    <p>During development I ran into a frustrating issue: the service worker would handle the first message fine, then fail silently on subsequent ones after a few minutes of inactivity. The root cause was Chrome terminating the idle service worker — and since I'd tried to cache the config object in a module-level variable, it was gone when the worker restarted.</p>
+
+                    <p>The fix was straightforward: <strong>always read from <code>chrome.storage</code> at the start of each handler</strong>, never rely on in-memory state. The extra storage read costs a few milliseconds but is invisible to the user, and the handler becomes stateless and restartable:</p>
+
+                    <pre><code>// Wrong: module-level cache that disappears when worker restarts
+let cachedConfig = null;
+
+async function handleSave(data) {
+  if (!cachedConfig) cachedConfig = await chrome.storage.sync.get(...);
+  // ...
+}
+
+// Right: read fresh from storage every time
+async function handleSave(data) {
+  const config = await chrome.storage.sync.get(['wpUrl', 'wpUser', 'wpAppPassword']);
+  // ...
+}</code></pre>
+
+                    <h2>Testing Without the Chrome Extension Toolchain</h2>
+                    <p>Chrome extension development has historically been tedious to test — you reload the extension, click around, check the service worker DevTools console. For Save to My Blog, I extracted the WordPress API logic into a pure function (<code>handleSaveToWordPress</code>) that takes config and post data as arguments and returns a result object. This made it testable with Node.js and a mocked <code>fetch</code> without needing a browser at all:</p>
+
+                    <pre><code>// test/api.test.js (Node.js)
+import { buildPostPayload, parseApiError } from '../src/api.js';
+
+test('draft flag sets status to draft', () => {
+  const payload = buildPostPayload({ title: 'Test', url: 'https://example.com', draft: true });
+  expect(payload.status).toBe('draft');
+});
+
+test('parseApiError returns message from WP error body', () => {
+  const error = parseApiError({ message: 'rest_cannot_create', data: { status: 401 } });
+  expect(error).toContain('rest_cannot_create');
+});</code></pre>
+
+                    <p>Keeping the API logic pure and side-effect-free — no <code>fetch</code> calls, no <code>chrome.*</code> calls — made unit testing practical without a headless Chrome setup.</p>
+
+                    <h2>What's Different in v1.3</h2>
+                    <p>The March 2026 update (v1.3) added draft mode, better error messaging, and excerpt handling. Architecturally, the main change was the config validation on the options page — checking that the WordPress URL returns a valid <code>/wp-json/</code> response before saving, rather than letting users discover bad config at save time:</p>
+
+                    <pre><code>// options.js — validate WP URL before saving
+async function validateWordPressUrl(url) {
+  try {
+    const res = await fetch(`${url.replace(/\/$/, '')}/wp-json/`);
+    const json = await res.json();
+    return json.namespaces?.includes('wp/v2') ?? false;
+  } catch {
+    return false;
+  }
+}</code></pre>
+
+                    <p>If the URL check fails, the options page shows a warning but still allows saving — the user might be on a VPN or have a non-standard WordPress setup. It's a hint, not a blocker.</p>
+
+                    <h2>Final Thoughts</h2>
+                    <p>Building a Manifest V3 extension for the first time surfaces a lot of gotchas that MV2 developers don't expect: no persistent state, no DOM in service workers, the <code>return true</code> pattern for async message responses. Once you understand the mental model — the service worker is a stateless event handler, storage is the only state that survives — the architecture becomes clean and predictable.</p>
+
+                    <p>Save to My Blog is a small tool, but it's one I use daily. The two-click workflow it enables has made link curation a habit rather than a chore. The <a href="https://github.com/josefresco/save-to-my-blog" target="_blank" rel="noopener">full source is on GitHub</a> if you want to dig into the implementation or adapt it for your own use.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/save-to-my-blog" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom Chrome Extension?</h2>
+                <p class="cta-description">
+                    From simple bookmarklets to full Manifest V3 extensions with REST API integrations,
+                    I build browser tools that eliminate friction and fit seamlessly into your workflow.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Chrome Extension Development&body=Hi Jose,%0D%0A%0D%0AI read your Save to My Blog extension internals post and have a similar project in mind.%0D%0A%0D%0AMy idea:%0D%0A- [Describe your browser extension concept]%0D%0A%0D%0ALet's discuss.%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Conversation
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
