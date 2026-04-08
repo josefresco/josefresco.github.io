@@ -25,10 +25,10 @@
     </item>
 
     <item>
-      <title>Family Dashboard v3.30: Writing My Own Weather One-Liners</title>
+      <title>Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection</title>
       <link>https://josefresco.com/blog/family-dash-v330.html</link>
-      <description>How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.</description>
-      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <description>How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction — all running on a retired iPad as a 24/7 wall display.</description>
+      <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/family-dash-v330.html</guid>
     </item>
 

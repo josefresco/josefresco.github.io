@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Dashboard v3.30: Writing My Own Weather One-Liners - Jose Fresco</title>
-    <meta name="description" content="How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.">
+    <title>Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection - Jose Fresco</title>
+    <meta name="description" content="How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction.">
     <link rel="canonical" href="https://josefresco.com/blog/family-dash-v330.html">
     <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,23 +19,23 @@
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Family Dashboard v3.30: Writing My Own Weather One-Liners - Jose Fresco">
-    <meta property="og:description" content="How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.">
+    <meta property="og:title" content="Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection - Jose Fresco">
+    <meta property="og:description" content="How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/family-dash-v330.html">
-    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
-    <meta property="article:published_time" content="2026-04-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-04-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2026-04-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-08T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Family Dashboard v3.30: Writing My Own Weather One-Liners - Jose Fresco">
-    <meta name="twitter:description" content="How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.">
-    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta name="twitter:title" content="Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection - Jose Fresco">
+    <meta name="twitter:description" content="How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dashboard.svg">
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -46,9 +46,9 @@
         "@type": "WebPage",
         "@id": "https://josefresco.com/blog/family-dash-v330.html"
       },
-      "headline": "Family Dashboard v3.30: Writing My Own Weather One-Liners",
-      "description": "How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.",
-      "image": "https://josefresco.com/images/og-image.jpg",
+      "headline": "Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection",
+      "description": "How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction.",
+      "image": "https://josefresco.com/blog/images/family-dashboard.svg",
       "author": {
         "@type": "Person",
         "name": "Jose Fresco",
@@ -63,22 +63,11 @@
           "url": "https://josefresco.com/favicon.ico"
         }
       },
-      "datePublished": "2026-04-04T00:00:00+00:00",
-      "dateModified": "2026-04-04T00:00:00+00:00",
-      "keywords": "Family Dashboard, JavaScript, Weather Narrative Engine, Open Source, PWA, CalDAV, Raspberry Pi, Home Dashboard, Vanilla JavaScript, Refactoring",
+      "datePublished": "2026-04-08T00:00:00+00:00",
+      "dateModified": "2026-04-08T00:00:00+00:00",
+      "keywords": "JavaScript, Family Dashboard, Weather Alerts, CalDAV, PWA, Service Worker, NOAA, OpenWeather, iPad, Smart Home, Birthday Detection, Bundle Optimization",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
-        {"@type": "ListItem", "position": 3, "name": "Family Dashboard v3.30: Writing My Own Weather One-Liners", "item": "https://josefresco.com/blog/family-dash-v330.html"}
-      ]
     }
     </script>
 </head>
@@ -110,7 +99,7 @@
                 <a href="/ai-tools" class="nav-link">AI Tools</a>
                 <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -119,165 +108,185 @@
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
-                    <h1 class="blog-post-title">Family Dashboard v3.30: Writing My Own Weather One-Liners</h1>
+                    <h1 class="blog-post-title">Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Web Development</span>
                         <span class="blog-date">April 2026</span>
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dashboard.svg" type="image/svg+xml">
+                        <img src="images/family-dashboard.svg" alt="Family Dashboard wall display showing weather, calendar, and tide data on an iPad" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                        <strong style="color: var(--text-primary);">TL;DR:</strong> The Family Dashboard v3.30 replaced 156 comedian-style weather quips — borrowed material that never quite felt like mine — with 56 clean, original one-liners. The modular <code>weather-narrative-engine.js</code> built during the v3.26 refactor made the swap a single-file change. Fewer lines, owned voice, better fit for a dashboard you look at a dozen times a day.
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Family Dashboard v3.30 adds extreme weather overlays (orange/red/rainbow alerts for NOAA warning levels), temperature shift alerts when the forecast swings ≥15°F from today's high, birthday and holiday detection with a 30-day calendar scan, support for up to three simultaneous CalDAV accounts with per-account color coding, and a modular architecture overhaul that shrunk the bundle from 160 KB to 68 KB. The <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">open-source repo</a> is live and has 3 community forks.
                     </div>
 
-                    <h2>The Dashboard, Briefly</h2>
-                    <p>The <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">Family Dashboard</a> is a wall-mounted display I run on an older iPad. It shows today's weather, CalDAV calendar events from up to three accounts, a weekend preview, and a rotating one-liner tied to the current weather conditions. It refreshes every 30 minutes and has been running 24/7 since I first deployed it.</p>
-                    <p>If you want the full origin story — the CalDAV migration, the timezone bug hunts, the 2,000-line code purge — the <a href="/blog/family-dashboard-evolution.html">v3.7 to v3.26 evolution post</a> covers all of that. This post picks up where that one left off.</p>
+                    <h2>Where We Left Off</h2>
+                    <p>The <a href="/blog/family-dashboard-evolution.html">previous post</a> covered v3.7 through v3.26: the move from OAuth to CalDAV, the removal of 2,000+ lines of dead code, and the introduction of personality-driven weather commentary. At v3.26 the dashboard was reliable and pleasant to use — but it was missing something.</p>
+                    <p>A wall display that silently shows the wrong temperature because a cold front moved in overnight isn't doing its job. Neither is one that shows "Happy Tuesday" when a tornado watch is active two counties over. The gap between "it's currently 58°F" and "it was supposed to be 75°F today" is real information. v3.27 through v3.30 plugged these gaps.</p>
 
-                    <h2>The Problem with Borrowed Material</h2>
-                    <p>The weather commentary system has been in the dashboard since early versions. The idea is simple: after the temperature and forecast description, a one-liner appears — something light, a bit playful, appropriate to whether the weather is good or bad. The dashboard becomes slightly less utilitarian and slightly more alive.</p>
-                    <p>For a long time, the commentary was sourced from comedian-style quips — the kind of jokes you find in lists of "funny weather quotes." Some of them were good. A lot of them were fine. But none of them were <em>mine</em>. And on a display I look at a dozen times a day, the difference between writing that sounds like you and writing that sounds like a random internet list turns out to matter.</p>
-                    <p>The earlier implementation had accumulated <strong>156 total entries</strong> across four weather categories: good weather, poor weather, extreme heat, and extreme cold. A few of the lines were genuinely sharp. Many were the kind of weatherman-humor that wears out quickly. Several were clearly paraphrased from comedian material — technically original enough, but carrying the debt of borrowed tone.</p>
-                    <p>The v3.30 decision was to cut the entire set and start over.</p>
+                    <h2>Extreme Weather Alert Overlays (v3.29)</h2>
+                    <p>The dashboard already showed current conditions and forecasts, but it treated a sunny afternoon and an active severe thunderstorm warning the same way: a weather icon and a number. That's fine 355 days a year. On the other 10, you want the display to scream.</p>
+                    <p>v3.29 introduced a tiered visual alert system keyed to NOAA severity levels:</p>
+                    <ul>
+                        <li><strong>Warning level</strong> — Orange pulsing border overlay. Something significant is happening nearby; pay attention.</li>
+                        <li><strong>Severe level</strong> — Red full-screen overlay with high-contrast text. Take shelter.</li>
+                        <li><strong>Extreme level</strong> — Animated rainbow border overlay. This is the one you won't miss from across the kitchen.</li>
+                    </ul>
+                    <p>The alert state is evaluated on every weather refresh. When the NOAA API returns a warning event for the configured location, the overlay renders over the normal dashboard content. When the event expires or is lifted, the overlay clears automatically.</p>
+                    <pre><code>function applyWeatherAlertOverlay(alertLevel) {
+    const overlay = document.getElementById('alert-overlay');
+    overlay.className = ''; // reset
 
-                    <h2>What the Narrative Engine Looks Like</h2>
-                    <p>The v3.26 modular refactor extracted the weather commentary system into its own file: <code>weather-narrative-engine.js</code>. Before that refactor, commentary logic was scattered through the main dashboard module — arrays defined inline, selection logic mixed with rendering code, no clear boundary between "data" and "how we display data."</p>
-                    <p>After the refactor, <code>weather-narrative-engine.js</code> owns all of it:</p>
+    if (alertLevel === 'extreme') {
+        overlay.classList.add('alert-extreme'); // animated rainbow
+    } else if (alertLevel === 'severe') {
+        overlay.classList.add('alert-severe');  // red full-screen
+    } else if (alertLevel === 'warning') {
+        overlay.classList.add('alert-warning'); // orange pulsing border
+    }
 
-                    <pre><code>// weather-narrative-engine.js
-const narratives = {
-  goodWeather: [
-    /* entries */
-  ],
-  poorWeather: [
-    /* entries */
-  ],
-  extremeHeat: [
-    /* entries */
-  ],
-  extremeCold: [
-    /* entries */
-  ]
-};
-
-export function getWeatherNarrative(conditions) {
-  const { tempF, precipitation, isExtremeHeat, isExtremeCold } = conditions;
-
-  let pool;
-  if (isExtremeCold) pool = narratives.extremeCold;
-  else if (isExtremeHeat) pool = narratives.extremeHeat;
-  else if (tempF >= 60 && !precipitation?.expected) pool = narratives.goodWeather;
-  else pool = narratives.poorWeather;
-
-  return pool[Math.floor(Math.random() * pool.length)];
+    overlay.hidden = alertLevel === null;
 }</code></pre>
+                    <p>The overlay approach — a dedicated element that sits above the dashboard content — means the underlying data remains accurate and visible. The alert is additive, not a replacement. A severe storm warning shows the storm warning <em>and</em> the current 52°F temperature, which is what you actually need if you're trying to decide whether to bring in the patio furniture.</p>
 
-                    <p>The interface is deliberately narrow: pass in a conditions object, get back a string. The rest of the dashboard doesn't know or care how the string was chosen. It just renders it.</p>
-                    <p>This separation is what made the v3.30 overhaul painless. The commentary rewrite was a single-file change. The calling code didn't move. The rendering didn't move. I opened <code>weather-narrative-engine.js</code>, deleted the arrays, and wrote new ones.</p>
+                    <h2>Temperature Shift Alerts (v3.30)</h2>
+                    <p>The extreme weather overlays handle the rare case. Temperature shift alerts handle the common one: the forecast that changed since you last looked.</p>
+                    <p>The trigger is a ≥15°F deviation between this morning's forecast high and the current forecast high. If you woke up to a "75°F and sunny" forecast and by noon the model is showing 55°F, the dashboard flags it:</p>
+                    <pre><code>function checkTemperatureShift(forecastHighAtPageLoad, currentForecastHigh) {
+    const shift = Math.abs(currentForecastHigh - forecastHighAtPageLoad);
 
-                    <h2>Writing 56 Original Lines</h2>
-                    <p>Cutting from 156 to 56 was intentional. The prior set had accumulated entries over time without any real curation — a line would get added because it was okay, and it would stay because nothing forced a review. The result was a pool that was large but uneven: a handful of genuinely good lines diluted by a lot of filler.</p>
-                    <p>Starting from zero with a target of 56 forced actual decisions. Each of the four categories gets 14 lines:</p>
+    if (shift >= 15) {
+        const direction = currentForecastHigh > forecastHighAtPageLoad ? 'warmer' : 'cooler';
+        renderTemperatureShiftAlert(shift, direction);
+    }
+}</code></pre>
+                    <p>The shift alert appears as a banner in the weather section rather than a full-screen overlay — it's informational, not urgent. It shows the original forecast, the current forecast, and the delta. For a family that plans outdoor activities in the morning based on the day's forecast, this has been one of the most practically useful additions.</p>
+
+                    <h3>The 15°F Threshold</h3>
+                    <p>Why 15°F? Because smaller swings happen constantly and don't change plans. A 3°F revision from 72°F to 69°F is noise. A 15°F swing from 75°F to 60°F crosses the jacket line, the "do we cancel the beach trip" line, the "kids need different clothes" line. The number came from a few weeks of watching the dashboard and counting the times a smaller threshold would have triggered alerts that didn't change anyone's behavior. 15°F was the threshold where the alert reliably meant something.</p>
+
+                    <h2>Birthday and Holiday Detection (v3.30)</h2>
+                    <p>The calendar integration already showed today's events and the next two days. v3.30 added a separate scan layer that looks 30 days out specifically for birthdays and holidays — the calendar events that you don't notice are coming until the day of.</p>
+                    <p>The detection logic runs a VEVENT scan across all connected CalDAV accounts on each calendar refresh. It looks for two patterns:</p>
                     <ul>
-                        <li><strong>Good weather (14)</strong> — for days above 60°F with no precipitation expected</li>
-                        <li><strong>Poor weather (14)</strong> — for cold, rainy, or generally discouraging days</li>
-                        <li><strong>Extreme heat (14)</strong> — triggered when the temperature crosses the heat threshold</li>
-                        <li><strong>Extreme cold (14)</strong> — triggered when it drops below the cold threshold</li>
+                        <li><strong>Birthdays</strong> — Events with "birthday" in the summary (case-insensitive), recurring annually</li>
+                        <li><strong>Holidays</strong> — Events from dedicated holiday calendars (detected by the calendar's display name or X-WR-CALNAME property)</li>
                     </ul>
-                    <p>Fourteen per category means you see a repeat roughly every two weeks if you check the dashboard once a day. That felt like the right cadence — familiar enough to become part of the rhythm without becoming invisible.</p>
+                    <pre><code>function scanForSpecialEvents(events, lookAheadDays = 30) {
+    const cutoff = addDays(new Date(), lookAheadDays);
+    const specials = [];
 
-                    <h3>What "Original" Actually Meant</h3>
-                    <p>The bar I set for "original" wasn't novelty for its own sake. It was: does this line sound like something I'd actually say? The test was reading each line aloud and asking whether it felt natural or performed.</p>
-                    <p>The comedian-style lines had a particular problem: they were written to land in isolation, to get a reaction from a stranger reading a list. A dashboard one-liner has a different job. It's read by the same person, repeatedly, in the context of their actual day. It needs to fit the moment without demanding attention.</p>
-                    <p>Some examples of what the new lines look like in practice:</p>
+    for (const event of events) {
+        const isBirthday = /birthday/i.test(event.summary);
+        const isHoliday  = event.calendarType === 'holiday';
 
-                    <p><strong>Good weather:</strong></p>
+        if ((isBirthday || isHoliday) && event.startDate <= cutoff) {
+            specials.push({
+                type: isBirthday ? 'birthday' : 'holiday',
+                summary: event.summary,
+                daysUntil: daysBetween(new Date(), event.startDate)
+            });
+        }
+    }
+
+    return specials.sort((a, b) => a.daysUntil - b.daysUntil);
+}</code></pre>
+                    <p>Detected birthdays and holidays appear in a dedicated section at the bottom of the calendar panel, sorted by proximity. An event three days out gets more visual weight than one 25 days out. The section is hidden entirely when there's nothing in the 30-day window — no empty state, no "no upcoming birthdays" message. The absence of the section is the information.</p>
+
+                    <h2>Multi-Account CalDAV (v3.28)</h2>
+                    <p>v3.26 supported one CalDAV account at a time — enough for a single person's calendar or a shared family calendar. The real scheduling picture for most families spans multiple accounts: one per family member, plus a shared household calendar.</p>
+                    <p>v3.28 expanded support to three simultaneous CalDAV accounts. Each account is configured independently through the setup page, and each gets its own color in the event display:</p>
+                    <pre><code>// config.js — stored in LocalStorage
+const calendarAccounts = [
+    { email: 'parent1@gmail.com', password: '...', color: '#00d4ff', label: 'Mom' },
+    { email: 'parent2@gmail.com', password: '...', color: '#7c3aed', label: 'Dad' },
+    { email: 'family@shared.com', password: '...', color: '#f59e0b', label: 'Family' }
+];</code></pre>
+                    <p>The refresh cycle fires all three CalDAV requests in parallel and merges the results into a single sorted event list. Events from different accounts with the same time slot don't conflict — they stack, with their per-account color making the source immediately visible. A 6 PM event in cyan is Mom's; a 6 PM event in purple is Dad's. Scheduling conflicts become visible at a glance.</p>
+                    <p>Each account also gets its own connection status indicator on the setup page. If the third account's CalDAV server returns an error, the other two still show their events. The failure is isolated.</p>
+
+                    <h2>Bundle Optimization: 160 KB → 68 KB</h2>
+                    <p>One of the less visible but more consequential changes across v3.27–v3.30 was a systematic modularization pass that reduced the JavaScript bundle from ~160 KB to ~68 KB — a 57% reduction.</p>
+                    <p>The old architecture was a sprawling single-file dashboard where utilities, API clients, and rendering logic were interleaved. The refactor extracted five dedicated modules:</p>
                     <ul>
-                        <li>"Take the long way home tonight."</li>
-                        <li>"The forecast recommends leaving your desk at some point."</li>
-                        <li>"Your future self will thank you for going outside."</li>
+                        <li><strong><code>logger.js</code></strong> — Centralized logging with configurable verbosity levels. Debug output stays out of production.</li>
+                        <li><strong><code>error-handler.js</code></strong> — Unified error capture, categorization, and retry scheduling with exponential backoff.</li>
+                        <li><strong><code>date-utils.js</code></strong> — All timezone arithmetic, DST handling, and date formatting in one place. No more scattered <code>new Date()</code> calls.</li>
+                        <li><strong><code>weather-narrative-engine.js</code></strong> — The weather commentary system, separated from the rendering layer that calls it.</li>
+                        <li><strong><code>api-client.js</code></strong> — Fetch wrapper with AbortController timeouts and automatic retry logic.</li>
                     </ul>
+                    <p>Modularization alone doesn't shrink a bundle. The size reduction came from eliminating duplicate logic that had evolved in different parts of the single-file version. The same date arithmetic existed in three places; the same fetch pattern in four. The modules forced a single authoritative implementation of each concern, and the duplicates were deleted.</p>
 
-                    <p><strong>Poor weather:</strong></p>
+                    <h3>The Service Worker</h3>
+                    <p>The modular architecture also made it practical to implement a service worker for offline capability. A single 160 KB file with tangled dependencies is a poor candidate for granular caching. The five-module structure made the caching strategy clear:</p>
                     <ul>
-                        <li>"A good day to clear the backlog."</li>
-                        <li>"The weather is doing its best. Probably."</li>
-                        <li>"Inside is underrated."</li>
+                        <li>Core modules (<code>date-utils.js</code>, <code>logger.js</code>, <code>error-handler.js</code>) — cache-first, long TTL</li>
+                        <li>API client and weather engine — cache-first, short TTL</li>
+                        <li>Dynamic data (weather, calendar) — network-first, fallback to cache</li>
                     </ul>
+                    <p>On a flaky WiFi connection — which describes every old iPad on a home network — this means the dashboard shell loads immediately from cache, then updates its data sections as network requests complete. The display is never blank.</p>
 
-                    <p><strong>Extreme heat:</strong></p>
+                    <h2>Weather Narrative Engine: The 56 One-Liners (v3.30.2)</h2>
+                    <p>The weather commentary system has been through several content revisions since v3.26 introduced 36 messages split between "good weather" and "poor weather" pools. v3.30.0 expanded the library; v3.30.2 did a full content audit.</p>
+                    <p>The v3.30.2 cleanup removed all comedian-inspired quotes — lines that imitated specific comedic styles or referenced pop culture in ways that felt dated or out of place on a family kitchen display. What remained were 56 original one-liners written specifically for the context: something a family of four glances at first thing in the morning while making coffee.</p>
+                    <p>A few examples from the current pool:</p>
                     <ul>
-                        <li>"Drink water. No, more than that."</li>
-                        <li>"The sun is very committed today."</li>
-                        <li>"Good conditions for staying extremely hydrated."</li>
+                        <li><em>Good weather:</em> "The forecast is in: go touch some grass." / "Sun's out. The couch can wait." / "Even your shadow is having a good day."</li>
+                        <li><em>Poor weather:</em> "Somewhere out there, a duck is thriving." / "Great conditions for staring dramatically out a window." / "The umbrella has been patiently waiting for this moment."</li>
                     </ul>
+                    <p>The selection logic was also refined. The threshold moved from a hard 60°F / no-precipitation binary to a multi-factor score:</p>
+                    <pre><code>function selectWeatherNarrative(temp, precipitation, conditions) {
+    const score =
+        (temp >= 65 ? 2 : temp >= 50 ? 1 : 0) +
+        (precipitation.probability < 20 ? 2 : precipitation.probability < 50 ? 1 : 0) +
+        (['Clear', 'Sunny', 'Partly Cloudy'].includes(conditions) ? 1 : 0);
 
-                    <p><strong>Extreme cold:</strong></p>
+    // score 0-2: poor weather pool; 3-5: good weather pool
+    const pool = score >= 3 ? goodWeatherNarratives : poorWeatherNarratives;
+    return pool[Math.floor(Math.random() * pool.length)];
+}</code></pre>
+                    <p>A 63°F overcast day with 40% precipitation probability scores a 2 — poor weather commentary. A 70°F sunny day with 10% precipitation scores a 5 — good weather commentary. The previous version treated the same 63°F overcast day as "good weather" because the temperature crossed 60°F. The scoring approach is closer to how people actually experience a day.</p>
+
+                    <h2>NOAA Tide Integration with Station Fallbacks</h2>
+                    <p>Tide data was in the dashboard from v1, but the station handling was fragile: a single NOAA station ID, and if that station's data was unavailable, the tide panel showed an error.</p>
+                    <p>v3.29 added a fallback chain. The configuration now accepts a primary station and up to two alternates. On each tide refresh, the client tries the primary station first. If the request fails or returns no data, it falls through to the first alternate, then the second:</p>
+                    <pre><code>async function fetchTideData(stations) {
+    for (const stationId of stations) {
+        try {
+            const data = await fetchNOAAStation(stationId);
+            if (data?.predictions?.length) return data;
+        } catch {
+            // try next station
+        }
+    }
+    return null; // all stations failed
+}</code></pre>
+                    <p>For coastal families where tide timing affects plans — fishing, beach access, kayaking windows — the fallback chain means one NOAA station going offline for maintenance doesn't blank the tide display. A nearby station covers the gap with close-enough predictions.</p>
+
+                    <h2>What v3.30.2 Looks Like in Production</h2>
+                    <p>The dashboard that's been running in the kitchen since the v3.30.2 deploy:</p>
                     <ul>
-                        <li>"Layer up. Then layer again."</li>
-                        <li>"The cold builds character. Or at least a good excuse."</li>
-                        <li>"Your car would like a few extra minutes this morning."</li>
+                        <li>Three CalDAV accounts refreshing in parallel every 5 minutes, events color-coded by family member</li>
+                        <li>30-day birthday/holiday scan surfacing upcoming events two weeks before they'd appear in the daily view</li>
+                        <li>Weather narrative that genuinely gets the tone right more often than not</li>
+                        <li>Temperature shift banner that fires a few times a month when the forecast changes meaningfully</li>
+                        <li>Weather alert overlays that haven't fired yet this year, which is exactly what you want</li>
+                        <li>68 KB total JavaScript, served from cache on every load via the service worker</li>
+                        <li>Tile data from the primary NOAA station with two fallbacks configured</li>
                     </ul>
+                    <p>The hardware is still the same retired iPad from v1. Web app, Safari, added to home screen for full-screen kiosk mode. No app updates to manage, no OS compatibility issues to chase.</p>
 
-                    <p>None of these are trying to be jokes. They're observations — small, low-pressure, appropriate to a utility you interact with before you've fully woken up. The tone is more dry than comedic, more matter-of-fact than punchline-seeking.</p>
-
-                    <h2>The Architecture Lesson</h2>
-                    <p>The smoothness of the v3.30 overhaul is a direct consequence of the v3.26 modular refactor. Before that refactor, a change like this would have required touching multiple files, tracking down inline commentary arrays, and carefully avoiding breakage to the rendering logic sitting right next to them in the same function body.</p>
-                    <p>After the refactor, it was: open one file, rewrite the data, close the file. Done.</p>
-                    <p>The v3.26 refactor created five new modules beyond <code>weather-narrative-engine.js</code>:</p>
-                    <ul>
-                        <li><code>logger.js</code> — centralized logging with configurable verbosity levels</li>
-                        <li><code>error-handler.js</code> — consistent error display and recovery patterns</li>
-                        <li><code>date-utils.js</code> — timezone-aware date arithmetic extracted from the main module</li>
-                        <li><code>caldav-client.js</code> — CalDAV request and XML parsing logic</li>
-                        <li><code>api-client.js</code> — weather API calls and response normalization</li>
-                    </ul>
-                    <p>Each module has a narrow interface. <code>caldav-client.js</code> doesn't know anything about how the dashboard renders events. <code>weather-narrative-engine.js</code> doesn't know what temperature threshold triggers "extreme heat" in the UI layer — it receives a pre-evaluated conditions object. The coupling is minimal by design.</p>
-                    <p>This is the reward for doing the modular work earlier: future changes become local changes. The cost of the v3.26 refactor was paid upfront. v3.30 spent that investment.</p>
-
-                    <h2>What Else Changed in v3.30</h2>
-                    <p>The commentary overhaul was the primary change, but v3.30 included a few smaller improvements alongside it:</p>
-                    <ul>
-                        <li><strong>Removed emoji overuse</strong> — the older commentary set used emoji heavily as punctuation. The new set uses them sparingly, only where they add something rather than just adding color.</li>
-                        <li><strong>Tightened category thresholds</strong> — the temperature cutoffs for "extreme heat" and "extreme cold" were adjusted to better reflect the region's actual climate. What triggers "extreme cold" commentary in Florida is different from what would in Minnesota.</li>
-                        <li><strong>Simplified the selection function</strong> — the previous implementation had branching logic that handled some edge cases with fallbacks. The new conditions object structure made the branching cleaner, and a few edge cases turned out to be unreachable in practice.</li>
-                    </ul>
-
-                    <h2>Running It</h2>
-                    <p>If you want to run the Family Dashboard yourself, the setup is straightforward for a self-hosted or GitHub Pages deployment. The CalDAV integration requires a Vercel serverless function to proxy requests — the <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">README</a> covers the full setup including generating App Passwords from Google.</p>
-
-                    <pre><code># Clone and open locally
-git clone https://github.com/josefresco/family-dash.git
-cd family-dash
-
-# Open setup.html first to configure your API keys and CalDAV credentials
-# Then open dashboard.html — no build step required
-
-# For CalDAV support, deploy the api/calendar.js function to Vercel
-# and set CALDAV_PROXY_URL in config.js to your function URL</code></pre>
-
-                    <p>The dashboard is vanilla JavaScript with no build tooling. You can open <code>dashboard.html</code> directly in a browser and it will work for everything except the CalDAV integration, which requires the serverless proxy. There's a <code>setup.html</code> wizard that walks through configuration for first-time setup.</p>
-
-                    <h2>Personality in Utility Software</h2>
-                    <p>The reason this overhaul was worth doing at all comes down to a question about what kind of software the Family Dashboard is trying to be. It's a utility — it displays information you need to start your day. But it's also something you look at constantly, every day, in the same physical space as your family.</p>
-                    <p>That context shapes what "personality" should mean. A Twitter bot can have an exaggerated voice; the stakes of getting it wrong are low and the audience is transient. A wall display in your kitchen has a different relationship with its audience. It needs to fit the room without demanding to be noticed. It should add something small without subtracting focus.</p>
-                    <p>The comedian-style quips failed this test not because they were unfunny — some of them were — but because they were performing. They asked you to appreciate them. The new lines try not to ask for anything. They're just there, briefly, and then your attention moves on to the calendar.</p>
-                    <p>That's the right job for this kind of software personality: low friction, appropriate to the context, and genuinely yours.</p>
-
-                    <h2>What's Next</h2>
-                    <p>A few things on the roadmap for future versions:</p>
-                    <ul>
-                        <li><strong>Configurable commentary</strong> — exposing the narrative engine's data as a JSON config that users can override without touching JavaScript. The module boundary makes this straightforward to add.</li>
-                        <li><strong>Timezone configurability</strong> — the dashboard currently hardcodes Eastern Time. Abstracting this into <code>config.js</code> is a one-afternoon change now that <code>date-utils.js</code> owns the timezone logic.</li>
-                        <li><strong>Visual diff for event changes</strong> — showing which calendar events have changed since the last refresh, rather than silently re-rendering the full event list.</li>
-                        <li><strong>Multi-account color coding improvements</strong> — the per-account colors work well for three accounts but need refinement when a fourth account gets added.</li>
-                    </ul>
-
-                    <h2>Conclusion</h2>
-                    <p>v3.30 is a small release that fixed something I'd been quietly bothered by for a while. The borrowed commentary wasn't broken — it was just not quite right. Replacing it with something smaller and more genuinely mine made the dashboard feel more settled.</p>
-                    <p>The architectural lesson is the more transferable one: the work you do to separate concerns pays forward. The v3.26 modular refactor was uncomfortable when it happened — more files, more indirection, more decisions to make about where things belong. v3.30 made clear why it was worth it. A change that would have been an afternoon of careful surgery became twenty minutes of focused writing.</p>
-                    <p>The full source is on <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">GitHub</a>. Forks welcome — and if you end up writing your own set of weather one-liners, I'd be curious what voice you end up landing on.</p>
+                    <h2>What's Open on GitHub</h2>
+                    <p>The <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">family-dash repo</a> is public and MIT-licensed. Three community forks have appeared since the CalDAV work landed — someone added a fourth calendar account slot, someone adapted the layout for a landscape TV display, and one fork is experimenting with Home Assistant integration for the weather data source.</p>
+                    <p>Setup requires an OpenWeatherMap API key (free tier handles the load easily) and, for calendar integration, CalDAV credentials. Google Calendar requires an App Password, which takes about two minutes to generate from Google Account settings. Full setup instructions are in the README.</p>
+                    <p>If you have a tablet gathering dust and a family that keeps asking "is it going to rain?", this is a Saturday afternoon project.</p>
                 </div>
 
                 <div class="blog-navigation">
@@ -293,13 +302,13 @@ cd family-dash
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Need a Custom Dashboard Built?</h2>
+                <h2 class="cta-title">Want a Custom Dashboard for Your Home or Business?</h2>
                 <p class="cta-description">
-                    I build personal and business dashboards that pull from multiple data sources into clean,
-                    always-on interfaces. From family calendars to operational metrics, let's build something useful together.
+                    From wall-mounted family displays to internal operations dashboards, I build real-time
+                    data views that integrate with your existing calendars, APIs, and data sources.
                 </p>
                 <div class="cta-buttons">
-                    <a href="mailto:josefresco@gmail.com?subject=Custom Dashboard Project&body=Hi Jose,%0D%0A%0D%0AI read your Family Dashboard post and have a dashboard idea I'd like to discuss.%0D%0A%0D%0AWhat I need:%0D%0A%0D%0ABest regards," class="btn-cta">
+                    <a href="mailto:josefresco@gmail.com?subject=Custom Dashboard Project&body=Hi Jose,%0D%0A%0D%0AI read your Family Dashboard v3.30 post and have a similar project in mind.%0D%0A%0D%0AWhat I need:%0D%0A%0D%0ABest regards," class="btn-cta">
                         Get In Touch
                     </a>
                     <a href="/projects" class="btn-secondary">View More Projects</a>
