@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.17.0] - 2026-04-08
+
+### Fixed
+- `sitemap.xml` — removed orphaned entry for `blog/wpengine-hourly-backup-internals.html` (file does not exist on disk; was incorrectly added in v1.16.0)
+- `sitemap.xml` — added missing entries for `blog/family-dash-v330.html` (2026-04-04) and `blog/jf-notify-website.html` (2026-04-03); both files exist on disk and were not indexed
+- `feed.xml` — removed item referencing non-existent `wpengine-hourly-backup-internals.html`; rebuilt feed with correct 10 most-recent posts in chronological order
+
+### Updated
+- `sitemap.xml` — updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to `2026-04-08`
+- `feed.xml` — updated `lastBuildDate` to `Wed, 08 Apr 2026`; feed now correctly reflects the 10 most-recent posts: `save-to-my-blog-extension-internals.html` through `pi-backups-raspberry-pi.html`
+
+### Reviewed
+- All 33 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- `README.md` reviewed — accurate and up to date
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.16.0] - 2026-04-07
 
 ### Reviewed

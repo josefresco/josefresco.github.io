@@ -5,15 +5,39 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 08 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <title>Inside WP Engine Hourly Backup: WP-Cron, the WP Engine REST API, and Custom Scheduling</title>
-      <link>https://josefresco.com/blog/wpengine-hourly-backup-internals.html</link>
-      <description>A technical deep-dive into how WP Engine Hourly Backup works under the hood — custom WP-Cron schedules, the WP Engine backup REST API, admin settings, WP-CLI commands, and how to suppress the email notification flood that comes with triggering 24 backups a day.</description>
-      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/wpengine-hourly-backup-internals.html</guid>
+      <title>Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API</title>
+      <link>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</link>
+      <description>A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.</description>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</guid>
+    </item>
+
+    <item>
+      <title>Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon</title>
+      <link>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</link>
+      <description>A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.</description>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</guid>
+    </item>
+
+    <item>
+      <title>Family Dashboard v3.30: Writing My Own Weather One-Liners</title>
+      <link>https://josefresco.com/blog/family-dash-v330.html</link>
+      <description>How I overhauled the Family Dashboard weather narrative engine in v3.30 — replacing 156 borrowed comedian-style quips with 56 original one-liners, and what the modular architecture from v3.26 made that painless.</description>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-v330.html</guid>
+    </item>
+
+    <item>
+      <title>Building the JF Notify Marketing Site with Eleventy</title>
+      <link>https://josefresco.com/blog/jf-notify-website.html</link>
+      <description>How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.</description>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
     </item>
 
     <item>
@@ -62,30 +86,6 @@
       <description>How I built a shell script system to automatically back up all my Raspberry Pi application data offsite — eliminating the SD card single-point-of-failure with rsync, SSH, and cron.</description>
       <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/pi-backups-raspberry-pi.html</guid>
-    </item>
-
-    <item>
-      <title>SafeShare: Clean Reddit Post Sharing with One-Click Bookmarklet</title>
-      <link>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</link>
-      <description>Introducing SafeShare — a clean reader view for Reddit posts with a one-click bookmarklet. No login walls, no app install prompts, just shareable links.</description>
-      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/safeshare-reddit-bookmarklet.html</guid>
-    </item>
-
-    <item>
-      <title>Arpy Assist: Qwen CLI Web Interface for Raspberry Pi</title>
-      <link>https://josefresco.com/blog/arpy-assist-qwen-web-interface.html</link>
-      <description>Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.</description>
-      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/arpy-assist-qwen-web-interface.html</guid>
-    </item>
-
-    <item>
-      <title>Watch List: A Private JustWatch Alternative PWA Powered by TMDB</title>
-      <link>https://josefresco.com/blog/watch-list-pwa.html</link>
-      <description>I built a private Progressive Web App to replace JustWatch — no ads, no tracking, no dark patterns. Just fast movie and TV search powered by the TMDB API.</description>
-      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/watch-list-pwa.html</guid>
     </item>
   </channel>
 </rss>
