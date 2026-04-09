@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.18.0] - 2026-04-09
+
+### Added
+- `blog/developer-portfolio-performance.html` — new blog post: "Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks" (2026-04-09)
+
+### Fixed
+- `feed.xml` — corrected chronological sort order: `family-dash-v330.html` (Wed 08 Apr) was incorrectly positioned after `save-to-my-blog-extension-internals.html` (Mon 06 Apr) and `family-dash-vercel-caldav-setup.html` (Sun 05 Apr); items now in strict newest-first order
+- `feed.xml` — removed 11th item (`pi-backups-raspberry-pi.html`) to restore the 10-item cap
+
+### Updated
+- `sitemap.xml` — added `developer-portfolio-performance.html` entry (2026-04-09); updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to `2026-04-09`
+- `feed.xml` — `lastBuildDate` already current at `Thu, 09 Apr 2026`; feed now correctly reflects 10 most-recent posts in descending date order
+
+### Reviewed
+- All 32 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs (note: v1.17.0 reported "33 blog post HTML files" — that count incorrectly included `blog/index.html`; actual post count is 32)
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- `README.md` reviewed — accurate and up to date; no changes required
+- No unnecessary or stale files found for removal
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.17.0] - 2026-04-08
 
 ### Fixed
