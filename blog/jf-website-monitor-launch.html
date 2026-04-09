@@ -66,7 +66,7 @@
         }
       },
       "datePublished": "2026-01-24T00:00:00+00:00",
-      "dateModified": "2026-01-24T00:00:00+00:00",
+      "dateModified": "2026-04-09T00:00:00+00:00",
       "keywords": "Website Monitoring, Uptime Monitoring, Content Change Detection, SLA Compliance, JF Website Monitor",
       "articleSection": "Product Launch",
       "inLanguage": "en-US"
@@ -107,8 +107,11 @@
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -120,7 +123,7 @@
                     <h1 class="blog-post-title">Introducing JF Website Monitor: More Than Just Uptime</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Product Launch</span>
-                        <span class="blog-date">January 2026</span>
+                        <span class="blog-date">January 2026 <span style="color: var(--neural-primary); font-size: 0.85em;">(Updated April 2026)</span></span>
                     </div>
                 </div>
 
@@ -132,7 +135,9 @@
                 </div>
 
                 <div class="blog-post-content">
-                    <p>I'm thrilled to announce the upcoming launch of a project I've been working on for the past few months: <strong>JF Website Monitor</strong>. This isn't just another uptime checker; it's a comprehensive monitoring solution designed for developers, agencies, and online businesses who need to know not only if their site is online, but if it's working correctly.</p>
+                    <p><strong>Update, April 2026:</strong> JF Website Monitor is now live at <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener">jfwebsitemonitor.com</a>. The free tier is available with no credit card required. Read on for the original launch post — and see the <a href="#whats-shipped">What's Shipped section</a> below for everything added since January.</p>
+
+                    <p>I'm thrilled to announce the launch of a project I've been working on for the past few months: <strong>JF Website Monitor</strong>. This isn't just another uptime checker; it's a comprehensive monitoring solution designed for developers, agencies, and online businesses who need to know not only if their site is online, but if it's working correctly.</p>
 
                     <h2>The Problem with "Uptime"</h2>
                     <p>Traditional uptime monitors are great for one thing: telling you if your server is responding. But what if your site is online, but the content has been replaced with a malicious script? What if a botched deployment breaks the layout on mobile devices? Most monitoring tools would still report "100% Uptime."</p>
@@ -178,16 +183,29 @@
                     </div>
 
                     <h2>Try it Yourself</h2>
-                    <p>JF Website Monitor is launching soon, but you can check out a live demo of the application today. I'm offering a generous free tier that includes monitoring for multiple sites with no credit card required.</p>
-                    <p><a href="https://www.jfwebsitemonitor.com/" class="btn-primary" target="_blank" rel="noopener">Visit the Live Demo</a></p>
+                    <p>JF Website Monitor is live. The free tier covers monitoring for multiple sites with no credit card required — sign up and have your first site monitored in under two minutes.</p>
+                    <p><a href="https://www.jfwebsitemonitor.com/" class="btn-primary" target="_blank" rel="noopener">Visit JF Website Monitor →</a></p>
                     <p>I'm incredibly proud of how this project has turned out, and I believe it solves a real problem that many of us in the web industry face. The goal is to provide actionable insights, reduce alert fatigue, and give you confidence that your online presence is secure and reliable.</p>
-                    
-                    <p>I'll be sharing more about the technical journey of building this application in future posts. For now, I invite you to check it out and sign up for early access to be notified on launch day.</p>
+
+                    <h2 id="whats-shipped">What's Shipped Since Launch</h2>
+                    <p>Since the January 2026 launch, several significant features have landed. Here's what's new:</p>
+
+                    <h3>Puppeteer-Powered Content Change Detection</h3>
+                    <p>Content change detection now uses a headless Chromium instance (via Puppeteer) to render pages with JavaScript execution before taking snapshots. Static HTTP fetches miss dynamic content; the Puppeteer approach sees what your users actually see. CSS selector targeting lets you watch specific elements — a product price, a stock status badge, a shipping estimate — rather than the entire page. Changes below a configurable 5% threshold are ignored to prevent alert fatigue from cosmetic shifts. See the <a href="/blog/jf-website-monitor-content-change-detection.html">full technical deep-dive</a> for implementation details.</p>
+
+                    <h3>SLA Compliance Reporting</h3>
+                    <p>The SLA reporting dashboard generates exportable PDF reports showing uptime percentage, incident counts, mean time to recovery, and P95 response times for any date range. Agencies can share these directly with clients as proof of SLA adherence. See the <a href="/blog/sla-reporting-jf-website-monitor.html">SLA reporting post</a> for a walkthrough.</p>
+
+                    <h3>Self-Hosting Option</h3>
+                    <p>JF Website Monitor can now be self-hosted for teams that need monitoring data to stay within their own infrastructure. Docker Compose setup, environment variable configuration, and Postgres migration steps are documented in the <a href="/blog/jf-website-monitor-self-hosting-migration.html">self-hosting guide</a>.</p>
+
+                    <h3>Alert Channels</h3>
+                    <p>Beyond email, alerts now route to Telegram (via bot message) and custom webhooks. The webhook payload is a structured JSON object that plugs directly into Slack, PagerDuty, or any other alert management system.</p>
                 </div>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener" class="btn-primary">Get Early Access →</a>
+                    <a href="https://www.jfwebsitemonitor.com/" target="_blank" rel="noopener" class="btn-primary">Visit JF Website Monitor →</a>
                 </div>
             </div>
         </section>
@@ -201,12 +219,14 @@
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="../global-header.js" defer></script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

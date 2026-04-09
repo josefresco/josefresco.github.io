@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 09 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks</title>
+      <link>https://josefresco.com/blog/developer-portfolio-performance.html</link>
+      <description>How the josefresco.github.io portfolio achieves fast load times through inlined critical CSS, deferred scripts, a service worker cache, and Schema.org structured data — with no framework, no build pipeline, and no bundler in sight.</description>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/developer-portfolio-performance.html</guid>
+    </item>
 
     <item>
       <title>Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API</title>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks - Jose Fresco</title>
+    <meta name="description" content="How I built a performance-first developer portfolio using vanilla JavaScript, inlined critical CSS, a service worker, and Schema.org structured data — no frameworks, no build step, no excuses.">
+    <link rel="canonical" href="https://josefresco.com/blog/developer-portfolio-performance.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks - Jose Fresco">
+    <meta property="og:description" content="How I built a performance-first developer portfolio using vanilla JavaScript, inlined critical CSS, a service worker, and Schema.org structured data — no frameworks, no build step, no excuses.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/developer-portfolio-performance.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-09T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks - Jose Fresco">
+    <meta name="twitter:description" content="How I built a performance-first developer portfolio using vanilla JavaScript, inlined critical CSS, a service worker, and Schema.org structured data — no frameworks, no build step, no excuses.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/developer-portfolio-performance.html"
+      },
+      "headline": "Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks",
+      "description": "How I built a performance-first developer portfolio using vanilla JavaScript, inlined critical CSS, a service worker, and Schema.org structured data — no frameworks, no build step, no excuses.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-09T00:00:00+00:00",
+      "dateModified": "2026-04-09T00:00:00+00:00",
+      "keywords": "Performance, Web Development, Vanilla JavaScript, Critical CSS, Service Worker, GitHub Pages, SEO, Schema.org, Portfolio, No Framework",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks", "item": "https://josefresco.com/blog/developer-portfolio-performance.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The <a href="https://github.com/josefresco/josefresco.github.io" target="_blank" rel="noopener">josefresco.github.io repo</a> is a vanilla HTML/CSS/JS developer portfolio that achieves fast load times through inlined critical CSS, deferred non-critical scripts, a service worker for repeat visits, and a versioned cache-busting strategy — with no framework, no build pipeline, and no bundler in sight. This post covers the specific decisions that made it fast and the ones I'd do differently.
+                    </div>
+
+                    <h2>Why No Framework?</h2>
+                    <p>Every conversation about building a personal site eventually arrives at the same question: React, Vue, Next.js, Astro, or something else? My answer for this portfolio was none of them — and it was a deliberate decision, not laziness.</p>
+
+                    <p>A developer portfolio is a <strong>mostly-static document</strong>. It has a hero section, some project cards, a blog index, and static HTML blog posts. There's a theme toggle, a mobile menu, and a service worker. Nothing in that list requires a component tree, a virtual DOM, hydration, or a 200 KB runtime bundle landing in the user's browser before they see my name.</p>
+
+                    <p>The calculus changes when a site has real interactivity: forms with complex state, real-time data, client-side routing with shared layout state. But for a portfolio, the framework overhead is pure cost with no offsetting benefit. The first visitor who opens josefresco.com on a slow mobile connection will get the page faster without React than with it.</p>
+
+                    <p>That said, "no framework" is not the same as "no discipline." The patterns that make framework-based sites maintainable — separation of concerns, reusable components, consistent naming — still matter. They're just expressed differently in vanilla HTML and CSS.</p>
+
+                    <h2>Critical CSS: The First Paint Problem</h2>
+
+                    <p>The most impactful performance decision on the home page is inlining critical CSS. Here's the problem it solves:</p>
+
+                    <p>When a browser receives HTML, it starts parsing and rendering. The moment it encounters a <code>&lt;link rel="stylesheet"&gt;</code>, it pauses rendering and fetches the stylesheet — because the CSS could contain rules that affect layout. For a stylesheet hosted on the same server, this adds one full round-trip before anything appears on screen. On a slow connection, that's the difference between "page starts rendering immediately" and "blank white screen for 800ms."</p>
+
+                    <p>The solution is to inline the CSS that controls above-the-fold rendering directly in a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code>. The browser gets the HTML with the critical styles already embedded; it can start rendering the hero section immediately, without waiting for the external stylesheet.</p>
+
+                    <pre><code>&lt;!-- Critical CSS inlined in &lt;head&gt; --&gt;
+&lt;style&gt;
+  :root {
+    --primary-bg: #0a0b0f;
+    --neural-primary: #00d4ff;
+    --font-family: 'Inter', -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box }
+  body { font-family: var(--font-family); background: var(--primary-bg); }
+  .header { position: fixed; top: 0; backdrop-filter: blur(20px); }
+  .hero { padding: 140px 0 100px; min-height: 100vh; }
+  /* ... rest of above-fold rules ... */
+&lt;/style&gt;
+
+&lt;!-- Full stylesheet loaded after --&gt;
+&lt;link rel="stylesheet" href="style.css?v=1756732569"&gt;</code></pre>
+
+                    <p>The full <code>style.css</code> — 58 KB covering every section of the site — still loads, but it loads <em>after</em> the browser has already rendered the hero section. The user sees content immediately; the rest of the styles arrive while they're reading.</p>
+
+                    <h3>The Version Query String</h3>
+
+                    <p>That <code>?v=1756732569</code> on the stylesheet URL is a cache-busting mechanism. Static files served from GitHub Pages are aggressively cached by browsers and CDNs. When I update <code>style.css</code>, I need browsers to fetch the new version rather than serve the cached one.</p>
+
+                    <p>The version number is a Unix timestamp generated at build time. Any change to <code>style.css</code> gets a new timestamp, which changes the query string, which is treated as a different URL by the cache — guaranteed fresh fetch. The same pattern applies to <code>script.js</code>. It's simpler than content-hash-based naming and works just as well for a site of this scale.</p>
+
+                    <h2>Deferred JavaScript</h2>
+
+                    <p>Every <code>&lt;script&gt;</code> tag on the page uses the <code>defer</code> attribute:</p>
+
+                    <pre><code>&lt;script src="global-header.js" defer&gt;&lt;/script&gt;
+&lt;script src="script.js?v=1756062132" defer&gt;&lt;/script&gt;</code></pre>
+
+                    <p><code>defer</code> tells the browser two things: download this script in parallel with HTML parsing (don't block), and execute it after the HTML is fully parsed (don't block the DOM). The net result is that JavaScript never delays the initial render. The page appears complete, then the scripts run and add interactivity.</p>
+
+                    <p>The separation into two files is intentional:</p>
+                    <ul>
+                        <li><strong><code>global-header.js</code></strong> — mobile menu toggle and navigation state. Small and focused (3.4 KB). Runs first.</li>
+                        <li><strong><code>script.js</code></strong> — theme toggle, animations, and service worker registration. Larger (14.4 KB). Runs after.</li>
+                    </ul>
+
+                    <p>Because both are deferred, their execution order is guaranteed (they run in document order), but neither blocks the initial render. The mobile menu works as soon as JavaScript runs; the rest of the enhancements layer on top.</p>
+
+                    <h2>The Service Worker: Fast Repeat Visits</h2>
+
+                    <p>The first visit to josefresco.com goes through a normal page load — HTML from GitHub Pages, CSS and JS from cache or origin. The second visit is different: the service worker intercepts the request and serves assets from a local cache, making the load nearly instant.</p>
+
+                    <p>The caching strategy is straightforward:</p>
+
+                    <pre><code>// sw.js — simplified
+const CACHE_NAME = 'josefresco-v1';
+const STATIC_ASSETS = [
+    '/',
+    '/style.css',
+    '/script.js',
+    '/global-header.js',
+    '/blog/',
+    '/about/',
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+    );
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request).then(cached => {
+            return cached || fetch(event.request);
+        })
+    );
+});</code></pre>
+
+                    <p>Cache-first for static assets means every page navigation after the first one pulls HTML, CSS, and JS from disk rather than the network. For a developer reading through blog posts, this makes the site feel local — instant page loads, no visible network latency.</p>
+
+                    <p>The trade-off is cache invalidation. When I update the site, I bump the <code>CACHE_NAME</code> version. Old service workers are replaced on the next visit, and the new cache is populated with fresh assets. Not elegant, but reliable.</p>
+
+                    <h2>Resource Hints: Telling the Browser What's Coming</h2>
+
+                    <p>The <code>&lt;head&gt;</code> contains a set of resource hint tags that instruct the browser to start work before it actually needs the resources:</p>
+
+                    <pre><code>&lt;!-- Start TLS handshakes early --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com" crossorigin&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+
+&lt;!-- Resolve DNS early (cheaper than preconnect) --&gt;
+&lt;link rel="dns-prefetch" href="//github.com"&gt;
+&lt;link rel="dns-prefetch" href="//linkedin.com"&gt;
+
+&lt;!-- Fetch script early, highest priority --&gt;
+&lt;link rel="preload" href="/script.js" as="script"&gt;</code></pre>
+
+                    <p><code>preconnect</code> for Google Fonts establishes the TCP connection and TLS handshake before the browser has parsed the font reference in the stylesheet. By the time the browser asks for the font, the connection is already open — the font data starts flowing immediately.</p>
+
+                    <p><code>dns-prefetch</code> for GitHub and LinkedIn resolves their DNS names early. These aren't resources the page downloads; they're links the user might click. Resolving the DNS ahead of time means the navigation after clicking a link starts with the DNS already resolved.</p>
+
+                    <p><code>preload</code> for <code>script.js</code> fetches the script at the highest priority, even though it's deferred (it won't execute until parsing is complete). This ensures the script is ready and waiting when the browser gets to it, rather than being fetched at lower priority and potentially arriving late.</p>
+
+                    <h2>CSS Architecture: Custom Properties and No Pre-processor</h2>
+
+                    <p>The site uses native CSS custom properties (variables) throughout — no Sass, no PostCSS, no CSS-in-JS. Here's the root variable set that everything inherits from:</p>
+
+                    <pre><code>:root {
+    --primary-bg: #0a0b0f;
+    --secondary-bg: #1a1d29;
+    --card-bg: rgba(26, 29, 41, 0.8);
+    --neural-primary: #00d4ff;
+    --neural-secondary: #7c3aed;
+    --neural-accent: #f59e0b;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --container-max: 1200px;
+}</code></pre>
+
+                    <p>The "neural" naming comes from the dark tech aesthetic — cyan primary, purple secondary, amber accent — which maps directly to the neural network background animation. Every color in the design derives from one of these three root hues, keeping the palette coherent without manual coordination.</p>
+
+                    <p>The theme toggle (dark/light mode) works by overriding these custom properties on the <code>:root</code> element when the light theme class is applied. Because every component uses the variables, a single override propagates everywhere instantly — no JavaScript loops through elements, no inline styles, just a class toggle and CSS cascade.</p>
+
+                    <h3>Fluid Typography with <code>clamp()</code></h3>
+
+                    <p>Headings scale fluidly between viewport sizes using CSS <code>clamp()</code>:</p>
+
+                    <pre><code>.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+}</code></pre>
+
+                    <p><code>clamp(min, preferred, max)</code> means: never smaller than 2.5rem, never larger than 4rem, and scale with the viewport between those bounds. This replaces multiple breakpoint rules with a single declaration, and the scaling is continuous rather than jumping at fixed breakpoints. The result is typography that looks right on everything from a 320px phone to a 4K monitor without a single media query for font size.</p>
+
+                    <h2>Schema.org Structured Data Strategy</h2>
+
+                    <p>Every page on the site includes Schema.org JSON-LD structured data. The home page has two schemas: a <code>WebSite</code> schema with a <code>Person</code> entity, and nothing else — no <code>BlogPosting</code> on the home page because it's not a blog post.</p>
+
+                    <p>Blog posts have two schemas: a <code>BlogPosting</code> with full metadata (headline, description, image, published date, modified date, keywords, author) and a <code>BreadcrumbList</code> that traces the navigation path back to the home page. Google uses both to generate rich results in search — the <code>BlogPosting</code> enables article-style search cards; the <code>BreadcrumbList</code> shows the site hierarchy in search result URLs.</p>
+
+                    <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Post title here",
+  "datePublished": "2026-04-09T00:00:00+00:00",
+  "dateModified": "2026-04-09T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jose Fresco",
+    "url": "https://josefresco.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Jose Fresco",
+    "url": "https://josefresco.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://josefresco.com/favicon.ico"
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Post title", "item": "https://josefresco.com/blog/post-slug.html"}
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+                    <p>The <code>publisher</code> field uses <code>@type: Person</code> rather than <code>Organization</code> because this is a personal site, not a brand. Google accepts both; the key is that <code>publisher.logo</code> must point to a real image URL — the favicon works for a personal blog.</p>
+
+                    <h2>GitHub Pages as a Hosting Decision</h2>
+
+                    <p>The repo deploys directly to GitHub Pages via the <code>main</code> branch. There's no CI/CD pipeline, no build step, no deployment script. Push to <code>main</code>, GitHub deploys it. Done.</p>
+
+                    <p>This works because the site is genuinely static: HTML files, a CSS file, a JS file, and images. There's nothing to compile, bundle, or transform. GitHub Pages serves the files exactly as they sit in the repository.</p>
+
+                    <p>The CNAME file in the root points the GitHub Pages domain to the custom domain <code>josefresco.com</code>. GitHub handles the SSL certificate automatically via Let's Encrypt. Zero infrastructure to manage — which means zero infrastructure to break at 2am.</p>
+
+                    <h2>What I'd Do Differently</h2>
+
+                    <p>A few decisions I'd revisit if starting fresh:</p>
+
+                    <ul>
+                        <li><strong>Automate critical CSS extraction</strong> — The critical CSS is currently maintained manually. When I add new above-fold components, I have to remember to add the relevant rules to the inlined block. A build step using a tool like <a href="https://github.com/GoogleChromeLabs/critters" target="_blank" rel="noopener">Critters</a> would extract and inline critical CSS automatically. The site's simplicity makes manual management feasible today; it won't scale forever.</li>
+                        <li><strong>Image optimization pipeline</strong> — The <code>optimize-images.sh</code> script in the repo handles image compression, but it's a manual step. An automated pipeline that generates WebP variants and responsive sizes on commit would improve image performance without depending on remembering to run the script.</li>
+                        <li><strong>Smarter service worker caching</strong> — The current implementation is a simple cache-first strategy. A more sophisticated approach would use stale-while-revalidate for pages and network-first for API calls, matching the caching strategy to the volatility of each resource type.</li>
+                        <li><strong>A proper sitemap generator</strong> — The <code>sitemap.xml</code> is currently updated manually when blog posts are added. A script that generates the sitemap from the file system would eliminate the risk of missing a post.</li>
+                    </ul>
+
+                    <h2>The Repo</h2>
+
+                    <p>The full source is at <a href="https://github.com/josefresco/josefresco.github.io" target="_blank" rel="noopener">github.com/josefresco/josefresco.github.io</a>. It's a useful reference if you're building a similar static portfolio — the critical CSS pattern, service worker, and Schema.org implementations are all there in plain HTML and vanilla JS, with no toolchain required to read and understand what's happening.</p>
+
+                    <p>If you're building a developer portfolio and finding yourself evaluating frameworks primarily out of habit, consider whether the site you're describing actually needs one. For a static document with a theme toggle and a mobile menu, vanilla HTML is not a compromise — it's the right tool.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/josefresco.github.io" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Fast, Custom Web Presence?</h2>
+                <p class="cta-description">
+                    From performance-optimized portfolios to full-stack web applications, I build sites that load fast,
+                    rank well, and work on every device — without unnecessary complexity.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Development Project&body=Hi Jose,%0D%0A%0D%0AI read your portfolio performance post and have a web project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start Your Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
