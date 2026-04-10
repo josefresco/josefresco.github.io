@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `now/index.html` — updated date stamp from "March 2026" to "April 2026"; updated "Working On" section to reflect Family Dashboard v3.30 (was v3.26), content change detection work on JF Website Monitor, and developer portfolio performance project
 
 ### Reviewed
-- All 32 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- All 33 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
 - `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
 - `README.md` reviewed — accurate and up to date; no changes required
 - No unnecessary or stale files found for removal
