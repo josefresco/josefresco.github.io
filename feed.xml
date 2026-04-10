@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</title>
+      <link>https://josefresco.com/blog/watch-list-internals.html</link>
+      <description>A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters including MY_SERVICES and EXCLUDED_PROVIDERS constants.</description>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/watch-list-internals.html</guid>
+    </item>
 
     <item>
       <title>Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks</title>
@@ -80,12 +88,5 @@
       <guid>https://josefresco.com/blog/who-dis-chrome-extension.html</guid>
     </item>
 
-    <item>
-      <title>WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites</title>
-      <link>https://josefresco.com/blog/wpe-central-command.html</link>
-      <description>How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place, with bulk operations and at-a-glance health monitoring.</description>
-      <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/wpe-central-command.html</guid>
-    </item>
   </channel>
 </rss>
