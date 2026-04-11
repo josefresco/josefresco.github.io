@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.20.0] - 2026-04-11
+
+### Added
+- `blog/watch-list-internals.html` — new blog post: "Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth" (2026-04-10)
+- `blog/arpy-assist-coding-agent.html` — new blog post: "Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos" (2026-04-11)
+
+### Updated
+- `sitemap.xml` — added entries for `watch-list-internals.html` (2026-04-10) and `arpy-assist-coding-agent.html` (2026-04-11); corrected `lastmod` for `/feed.xml` entry from `2026-04-10` to `2026-04-11`
+- `feed.xml` — added `arpy-assist-coding-agent.html` as newest item and `watch-list-internals.html` as second; removed oldest item (`who-dis-chrome-extension.html`) to restore the 10-item cap; updated `lastBuildDate` to `Sat, 11 Apr 2026`
+
+### Reviewed
+- All 34 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- `README.md` reviewed — accurate and up to date; no changes required
+- No unnecessary or stale files found for removal
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.19.0] - 2026-04-10
 
 ### Updated
