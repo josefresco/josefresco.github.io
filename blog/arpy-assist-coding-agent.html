@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos - Jose Fresco</title>
+    <meta name="description" content="How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching, and repo management from any browser.">
+    <link rel="canonical" href="https://josefresco.com/blog/arpy-assist-coding-agent.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos - Jose Fresco">
+    <meta property="og:description" content="How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching, and repo management from any browser.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/arpy-assist-coding-agent.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-11T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="AI & Automation">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos - Jose Fresco">
+    <meta name="twitter:description" content="How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching, and repo management from any browser.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/arpy-assist-coding-agent.html"
+      },
+      "headline": "Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos",
+      "description": "How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching, and repo management from any browser.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-11T00:00:00+00:00",
+      "dateModified": "2026-04-11T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Claude Code, Coding Agent, Python, Automation, Git, Autonomous, Arpy Assist, raspberry-pi-agent, Flask",
+      "articleSection": "AI & Automation",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Arpy Assist Becomes a Coding Agent", "item": "https://josefresco.com/blog/arpy-assist-coding-agent.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">AI & Automation</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="/blog/arpy-assist-qwen-web-interface.html" style="color: var(--neural-primary);">Arpy Assist</a> started as a web wrapper for the Qwen CLI. It's now a full coding agent: it runs Claude Code on the Pi, integrates with the <a href="/blog/raspberry-pi-agent.html" style="color: var(--neural-primary);">raspberry-pi-agent</a> command dispatcher, and handles autonomous git workflows — clone, edit, commit, push — triggered by a single browser request. The key upgrade was swapping the "ask and answer" model for an "ask and do" agent loop that can actually change files and ship code.
+                    </div>
+
+                    <h2>How It Started</h2>
+
+                    <p>The <a href="/blog/arpy-assist-qwen-web-interface.html">original Arpy Assist</a> was a Flask web UI sitting in front of the Qwen CLI. You typed a question, it ran <code>qwen</code> in a subprocess, and it showed you the output. That was the whole thing. Useful for reading code explanations on a phone, not useful for actually getting work done.</p>
+
+                    <p>The first limitation showed up quickly: Qwen would generate a fix for a bug, but applying it still required manually copying the code into a terminal. The web interface had no write access to anything — it was read-only AI, which is about half as useful as it sounds.</p>
+
+                    <p>The second limitation was model quality. Qwen Coder Plus is good, but Claude Code — running Claude Sonnet or Opus — is in a different tier for multi-step coding tasks. When a task involves reading a file, understanding its context, making a targeted edit, running a test, and committing the result, the quality of the reasoning matters at every step. After running both side by side for a few weeks, the switch was obvious.</p>
+
+                    <h2>The Upgrade: From Chat Interface to Agent Loop</h2>
+
+                    <p>The core architectural change was replacing the subprocess-to-CLI model with an agent loop that can take <em>actions</em>, not just produce <em>text</em>. Here's the difference in practice:</p>
+
+                    <p><strong>Old flow (Qwen web interface):</strong></p>
+                    <ol>
+                        <li>User types: "Add error handling to the backup script"</li>
+                        <li>Arpy Assist runs <code>qwen "Add error handling to the backup script"</code></li>
+                        <li>Qwen outputs: a code block with the suggested changes</li>
+                        <li>User manually copies the code and applies it</li>
+                    </ol>
+
+                    <p><strong>New flow (coding agent):</strong></p>
+                    <ol>
+                        <li>User types: "Add error handling to the backup script"</li>
+                        <li>Arpy Assist invokes Claude Code with the target repo path</li>
+                        <li>Claude Code reads the backup script, identifies where error handling is needed, writes the changes, and runs a syntax check</li>
+                        <li>The agent loop confirms success and commits the changes</li>
+                        <li>User sees: "Done — committed as 'Add error handling to backup.py'"</li>
+                    </ol>
+
+                    <p>The difference is that step 4 (applying the change) is no longer the user's job.</p>
+
+                    <h2>The raspberry-pi-agent Layer</h2>
+
+                    <p>Arpy Assist doesn't run shell commands directly. That responsibility belongs to <a href="/blog/raspberry-pi-agent.html"><code>raspberry-pi-agent</code></a> — the Python command dispatcher that underlies most of the Pi automation stack.</p>
+
+                    <p>When Arpy Assist needs to clone a repo, check a service, or read a log, it constructs a typed command object and hands it to the agent's <code>execute()</code> method. The agent handles subprocess management, timeout enforcement, error formatting, and output normalization. Arpy Assist gets back a consistent dict and never has to think about subprocess plumbing:</p>
+
+                    <pre><code>from raspberry_pi_agent import PiAgent, ShellCommand, ServiceCommand
+
+agent = PiAgent()
+
+# Clone a repo into the workspace
+result = agent.execute(ShellCommand(
+    command=f"git clone git@github.com:josefresco/{repo_name}.git /workspace/{repo_name}",
+    timeout=60
+))
+
+if result['success']:
+    print(f"Cloned to /workspace/{repo_name}")
+else:
+    print(f"Clone failed: {result['error']}")</code></pre>
+
+                    <p>This separation keeps Arpy Assist's web layer focused on request routing and response formatting, while the agent layer owns everything that touches the OS.</p>
+
+                    <h2>The Coding Agent Task Runner</h2>
+
+                    <p>The heart of the new Arpy Assist is the task runner — a Python module that orchestrates the full coding workflow for a given request. A task breaks down into four phases:</p>
+
+                    <h3>1. Workspace Setup</h3>
+                    <p>If the target repo isn't already on disk, the task runner clones it. If it is, it fetches the latest changes. Each task runs in an isolated directory under <code>/workspace/</code> to prevent state from bleeding between sessions.</p>
+
+                    <pre><code>def prepare_workspace(self, repo: str) -> str:
+    """Clone or update repo, return workspace path."""
+    workspace_path = f"/workspace/{repo}"
+
+    if os.path.exists(workspace_path):
+        self.agent.execute(ShellCommand(
+            command=f"git -C {workspace_path} pull --rebase",
+            timeout=30
+        ))
+    else:
+        self.agent.execute(ShellCommand(
+            command=f"git clone git@github.com:josefresco/{repo}.git {workspace_path}",
+            timeout=60
+        ))
+
+    return workspace_path</code></pre>
+
+                    <h3>2. Claude Code Invocation</h3>
+                    <p>With the workspace ready, the task runner invokes Claude Code via the <code>claude</code> CLI, passing the user's request and the workspace path. The <code>--print</code> flag captures structured output without an interactive session; <code>--allowedTools</code> explicitly grants file read/write and bash execution:</p>
+
+                    <pre><code>def run_claude(self, workspace: str, prompt: str) -> dict:
+    """Invoke Claude Code on the workspace with the given prompt."""
+    cmd = (
+        f"cd {workspace} && claude --print "
+        f"--allowedTools 'Read,Write,Edit,Bash' "
+        f"'{prompt}'"
+    )
+
+    return self.agent.execute(ShellCommand(command=cmd, timeout=300))</code></pre>
+
+                    <p>The 300-second timeout gives Claude Code enough runway for multi-file tasks without leaving zombie processes if something goes wrong.</p>
+
+                    <h3>3. Git Commit</h3>
+                    <p>After Claude Code completes, the task runner checks for uncommitted changes. If there are any, it stages everything and commits with a message derived from the original user prompt:</p>
+
+                    <pre><code>def commit_changes(self, workspace: str, prompt: str) -> dict:
+    """Stage and commit any changes Claude Code made."""
+    # Check for changes
+    status = self.agent.execute(ShellCommand(
+        command=f"git -C {workspace} status --porcelain",
+        timeout=10
+    ))
+
+    if not status['stdout'].strip():
+        return {'committed': False, 'reason': 'No changes to commit'}
+
+    commit_message = f"Agent: {prompt[:72]}"
+
+    self.agent.execute(ShellCommand(
+        command=f"git -C {workspace} add -A",
+        timeout=10
+    ))
+
+    result = self.agent.execute(ShellCommand(
+        command=f'git -C {workspace} commit -m "{commit_message}"',
+        timeout=15
+    ))
+
+    return {'committed': result['success'], 'message': commit_message}</code></pre>
+
+                    <h3>4. Response Formatting</h3>
+                    <p>The task runner compiles the outcome — what changed, what was committed, any errors — into a structured response that the Flask layer formats for the browser. The web UI shows a diff summary, the commit message, and a link to the GitHub repo.</p>
+
+                    <h2>The Smart Button System</h2>
+
+                    <p>Not every interaction needs a free-text prompt. The smart button system provides pre-built workflows for common tasks. Each button maps to a task template with a repo, a prompt pattern, and optional parameters:</p>
+
+                    <pre><code>SMART_BUTTONS = [
+    {
+        "label": "📋 Update README",
+        "repo": None,  # User selects repo from dropdown
+        "prompt": "Review the README and update it to accurately reflect the current state of the code. Keep it concise.",
+    },
+    {
+        "label": "🔍 Review open issues",
+        "repo": None,
+        "prompt": "List all open GitHub issues for this repo and suggest fixes for any that look straightforward.",
+    },
+    {
+        "label": "🧹 Remove dead code",
+        "repo": None,
+        "prompt": "Identify and remove any dead code, unused imports, or orphaned functions. Commit the cleanup.",
+    },
+    {
+        "label": "📊 Pi Status",
+        "repo": None,
+        "prompt": None,  # Handled by system_stats handler, not Claude Code
+        "action": "system_stats"
+    },
+]</code></pre>
+
+                    <p>The "Pi Status" button is the one exception — it routes to the <code>raspberry-pi-agent</code> system stats handler directly, bypassing Claude Code entirely. No reason to spin up an LLM to read CPU temperature.</p>
+
+                    <h2>Repo Management</h2>
+
+                    <p>A dropdown in the web UI lists all repos from a configured list in <code>config/config.yaml</code>. The config drives both the UI and the workspace management:</p>
+
+                    <pre><code>repos:
+  - family-dash
+  - josefresco.github.io
+  - pi-backups
+  - raspberry-pi-agent
+  - arpy-assist
+
+workspace_root: /workspace
+claude_timeout: 300
+commit_on_change: true
+push_after_commit: false  # Push requires manual confirmation</code></pre>
+
+                    <p><code>push_after_commit: false</code> is deliberate. Autonomous commits to a local workspace are low-risk — the worst case is a bad commit that's easy to revert. Auto-pushing to a remote is a different risk profile: a bad push to <code>main</code> is harder to clean up, and some repos have CI pipelines that trigger on push. Push is a one-click confirmation in the UI, not automatic.</p>
+
+                    <h2>Security Model</h2>
+
+                    <p>Arpy Assist runs behind a Cloudflare Tunnel with HTTP Basic Auth at the tunnel level. That covers the "only I can reach it" requirement. Inside the app, there's no additional authentication — it's a personal tool on a personal Pi, and layering auth inside a already-auth-gated tunnel is security theater.</p>
+
+                    <p>The bigger security consideration is what Claude Code is allowed to do. The <code>--allowedTools</code> flag is explicit: file read, file write, file edit, and bash execution on the workspace directory. Claude Code is not given network access beyond what the system already has — no ability to install packages, no ability to run <code>sudo</code>, no ability to touch anything outside <code>/workspace/</code>.</p>
+
+                    <p>In practice, Claude Code runs as the same Pi user that runs the Flask app — a non-root user with limited system permissions. If it tries to do something outside its scope, it fails at the OS level. The <code>--allowedTools</code> restriction is a first line; the OS user permissions are the actual boundary.</p>
+
+                    <h2>The Difference a Year Makes</h2>
+
+                    <p>The original Arpy Assist post was from March 2026 — about seven weeks ago. Looking at the original, it was essentially a terminal emulator in a browser window. The current version is closer to a junior developer you can assign tasks to from your phone while you're away from your desk.</p>
+
+                    <p>The shift from "chat that tells me what to do" to "agent that does it" is real, and it happened faster than I expected. The infrastructure was already there — the <a href="/blog/raspberry-pi-agent.html">Pi agent command dispatcher</a>, the Flask routing layer, the Cloudflare Tunnel. The missing piece was a model capable enough to handle multi-step coding tasks without constant hand-holding. Claude Code provided that.</p>
+
+                    <p>The repo is at <a href="https://github.com/josefresco/arpy-assist" target="_blank" rel="noopener">github.com/josefresco/arpy-assist</a>. If you're running a Pi as a home server, the pattern — lightweight Flask frontend, typed command dispatcher, Claude Code backend — is worth adapting. The hardware cost is low; the capability is surprisingly high.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/arpy-assist-qwen-web-interface.html" class="btn-secondary">← Arpy Assist: Origin Story</a>
+                    <a href="https://github.com/josefresco/arpy-assist" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Want an AI Automation Stack for Your Infrastructure?</h2>
+                <p class="cta-description">
+                    From Raspberry Pi coding agents to cloud-deployed automation tools, I build practical AI-powered
+                    systems that do real work — not just answer questions. Let's talk about what you're trying to automate.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your Arpy Assist coding agent post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

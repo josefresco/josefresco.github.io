@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos</title>
+      <link>https://josefresco.com/blog/arpy-assist-coding-agent.html</link>
+      <description>How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching via raspberry-pi-agent, and repo management from any browser. Covers the task runner architecture, workspace setup, Claude Code invocation, git commit flow, smart button system, and security model.</description>
+      <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/arpy-assist-coding-agent.html</guid>
+    </item>
 
     <item>
       <title>Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</title>
@@ -78,14 +86,6 @@
       <description>How I built a Python-based command dispatcher that unifies shell execution, service checks, log tailing, and system stats across my entire Pi automation stack — the backend layer behind Arpy Assist, the Telegram bot, and Pi Backups.</description>
       <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/raspberry-pi-agent.html</guid>
-    </item>
-
-    <item>
-      <title>Who Dis: Building a Right-Click IP Lookup Chrome Extension</title>
-      <link>https://josefresco.com/blog/who-dis-chrome-extension.html</link>
-      <description>How I built Who Dis — a lightweight Chrome Manifest V3 extension that puts instant IP geolocation, ASN, and ISP data one right-click away. No new tab, no copy-paste, no context switch.</description>
-      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/who-dis-chrome-extension.html</guid>
     </item>
 
   </channel>
