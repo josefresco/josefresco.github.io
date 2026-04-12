@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups - Jose Fresco</title>
+    <meta name="description" content="How the pi-backups April 2026 update adds GPG encryption of backup archives and an automated restore verification script — protecting your Pi data even from your own hosting provider.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-encryption.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups - Jose Fresco">
+    <meta property="og:description" content="How the pi-backups April 2026 update adds GPG encryption of backup archives and an automated restore verification script — protecting your Pi data even from your own hosting provider.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-encryption.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/pi-backups.png">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups - Jose Fresco">
+    <meta name="twitter:description" content="How the pi-backups April 2026 update adds GPG encryption of backup archives and an automated restore verification script — protecting your Pi data even from your own hosting provider.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/pi-backups.png">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-encryption.html"
+      },
+      "headline": "Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups",
+      "description": "How the pi-backups April 2026 update adds GPG encryption of backup archives and an automated restore verification script — protecting your Pi data even from your own hosting provider.",
+      "image": "https://josefresco.com/blog/images/pi-backups.png",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-12T00:00:00+00:00",
+      "dateModified": "2026-04-12T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Backup, GPG, Encryption, Shell Script, rsync, Restore Verification, Security, Automation, Linux, Self-hosting",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups", "item": "https://josefresco.com/blog/pi-backups-encryption.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The April 2026 update to <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">pi-backups</a> adds two things: GPG symmetric encryption of backup archives before transfer (so your hosting provider can't read your data in transit or at rest), and an automated <code>verify.sh</code> script that downloads, decrypts, and spot-checks a recent backup — then reports pass or fail via Telegram. The <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original rsync + SSH + cron architecture</a> is unchanged.
+                    </div>
+
+                    <h2>Why I Added Encryption</h2>
+                    <p>The <a href="/blog/pi-backups-raspberry-pi.html">original pi-backups setup</a> was simple and solid: rsync over SSH to a cheap VPS, nightly via cron, with a Telegram notification on success or failure. It worked exactly as intended — until I started thinking about what "worked" actually meant.</p>
+                    <p>rsync over SSH encrypts data <em>in transit</em>. But once the files land on the remote server, they sit on disk in plaintext. If the VPS provider can access the filesystem (they can), or if the server is ever compromised, your application data, configs, and any credentials inside those backup files are fully readable.</p>
+                    <p>For a personal Pi running home automation and a family dashboard, this probably doesn't matter much in practice. But I was already storing database files, config files with API keys, and Telegram bot tokens in the backup set. Encrypting them took about 30 minutes to implement and eliminates the whole concern for the cost of one dependency (<code>gpg</code>, which is pre-installed on Raspberry Pi OS).</p>
+
+                    <h2>GPG Symmetric Encryption: Why Symmetric?</h2>
+                    <p>There are two ways to encrypt with GPG:</p>
+                    <ul>
+                        <li><strong>Asymmetric (public/private key)</strong> — Encrypt with a public key, decrypt with a private key. Secure and flexible, but requires key management: generating a keypair, securing the private key, keeping it off the Pi, and having it available when you need to restore in an emergency.</li>
+                        <li><strong>Symmetric (passphrase-based)</strong> — A single passphrase encrypts and decrypts. Simpler, no key management required, and the passphrase is the only thing you need to perform a restore.</li>
+                    </ul>
+                    <p>For a personal backup system, symmetric encryption is the right call. The passphrase goes in a config file (protected by filesystem permissions), in your password manager, and nowhere else. No key pair to manage, no risk of losing your private key, no "how do I get this onto a new machine" problem during a disaster recovery scenario.</p>
+                    <p>The trade-off: if someone obtains your passphrase and gains access to the remote server, they have your backups. But that's a meaningful improvement over the prior state where server access alone was sufficient.</p>
+
+                    <h2>How the Encryption Works</h2>
+                    <p>The updated backup script creates a compressed, encrypted archive before transferring, instead of rsync-ing files directly. Here's the updated flow:</p>
+
+                    <h3>1. Create the Archive</h3>
+                    <pre><code>#!/bin/bash
+# pi-backups: nightly backup with GPG encryption
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_PATH="/backups/pi"
+GPG_PASSPHRASE_FILE="/home/pi/.config/pi-backups/passphrase"
+STAGING_DIR="/tmp/pi-backup-staging"
+DATE=$(date +%Y-%m-%d)
+ARCHIVE_NAME="pi-backup-${DATE}.tar.gz.gpg"
+LOG_FILE="/var/log/pi-backups.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+log "Starting backup..."
+
+# Create staging directory
+mkdir -p "$STAGING_DIR"
+
+# Create compressed tar archive
+log "Creating archive..."
+tar -czf "${STAGING_DIR}/pi-backup-${DATE}.tar.gz" \
+    /home/pi/apps/ \
+    /home/pi/scripts/ \
+    /etc/crontab \
+    /home/pi/.bashrc \
+    --exclude='*.log' \
+    --exclude='*/__pycache__/*' \
+    --exclude='*/node_modules/*' \
+    2>> "$LOG_FILE"</code></pre>
+
+                    <h3>2. Encrypt with GPG</h3>
+                    <pre><code># Encrypt the archive with GPG symmetric encryption
+log "Encrypting archive..."
+gpg --batch \
+    --passphrase-file "$GPG_PASSPHRASE_FILE" \
+    --symmetric \
+    --cipher-algo AES256 \
+    --output "${STAGING_DIR}/${ARCHIVE_NAME}" \
+    "${STAGING_DIR}/pi-backup-${DATE}.tar.gz"
+
+# Remove the unencrypted archive immediately
+rm -f "${STAGING_DIR}/pi-backup-${DATE}.tar.gz"</code></pre>
+                    <p>The <code>--batch</code> flag enables non-interactive mode (essential for cron). <code>--cipher-algo AES256</code> explicitly selects 256-bit AES — stronger than GPG's default cipher. The unencrypted tar is deleted immediately after encryption; it never touches the remote server.</p>
+
+                    <h3>3. Transfer and Clean Up</h3>
+                    <pre><code># Transfer encrypted archive to remote
+log "Transferring archive..."
+scp "${STAGING_DIR}/${ARCHIVE_NAME}" \
+    "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/${ARCHIVE_NAME}"
+
+EXIT_CODE=$?
+
+# Clean up staging regardless of transfer result
+rm -rf "$STAGING_DIR"
+
+if [ $EXIT_CODE -eq 0 ]; then
+    log "Backup complete: ${ARCHIVE_NAME} ✓"
+    send_telegram "✅ Pi backup complete: ${DATE} (encrypted)"
+else
+    log "Transfer FAILED ✗"
+    send_telegram "❌ Pi backup transfer FAILED — check logs"
+    exit 1
+fi</code></pre>
+                    <p>The staging directory is cleaned up in all cases — success or failure. If the transfer fails, the encrypted archive doesn't sit in <code>/tmp</code> indefinitely.</p>
+
+                    <h2>Retention: Now Simpler to Manage</h2>
+                    <p>The archive-per-day approach makes retention management straightforward — delete archives older than 30 days by filename pattern:</p>
+                    <pre><code># On the remote server: weekly cleanup cron
+find /backups/pi -name "pi-backup-*.tar.gz.gpg" -mtime +30 -delete</code></pre>
+                    <p>The filename convention <code>pi-backup-YYYY-MM-DD.tar.gz.gpg</code> makes it easy to list backups by date and the <code>-mtime +30</code> predicate handles age filtering without any custom logic.</p>
+
+                    <h2>The Restore Verification Script</h2>
+                    <p>A backup you've never restored is a backup you don't actually have. The new <code>verify.sh</code> script tests the full restore pipeline automatically — download, decrypt, extract manifest, spot-check, report:</p>
+                    <pre><code>#!/bin/bash
+# verify.sh: download, decrypt, and spot-check a recent backup
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_PATH="/backups/pi"
+GPG_PASSPHRASE_FILE="/home/pi/.config/pi-backups/passphrase"
+VERIFY_DIR="/tmp/pi-backup-verify"
+LOG_FILE="/var/log/pi-backup-verify.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+log "Starting restore verification..."
+
+# Find most recent backup on remote
+LATEST=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "ls -1t ${REMOTE_PATH}/pi-backup-*.tar.gz.gpg | head -1")
+
+if [ -z "$LATEST" ]; then
+    log "ERROR: No backup archives found on remote"
+    send_telegram "❌ Backup verification FAILED: no archives found on remote"
+    exit 1
+fi
+
+log "Found latest backup: $(basename $LATEST)"
+
+# Download it
+mkdir -p "$VERIFY_DIR"
+scp "${REMOTE_USER}@${REMOTE_HOST}:${LATEST}" "${VERIFY_DIR}/latest.tar.gz.gpg"
+
+# Decrypt
+log "Decrypting..."
+gpg --batch \
+    --passphrase-file "$GPG_PASSPHRASE_FILE" \
+    --decrypt \
+    --output "${VERIFY_DIR}/latest.tar.gz" \
+    "${VERIFY_DIR}/latest.tar.gz.gpg"
+
+if [ $? -ne 0 ]; then
+    log "ERROR: Decryption failed"
+    send_telegram "❌ Backup verification FAILED: decryption error"
+    rm -rf "$VERIFY_DIR"
+    exit 1
+fi
+
+# List archive contents and spot-check expected paths
+log "Verifying archive contents..."
+tar -tzf "${VERIFY_DIR}/latest.tar.gz" > "${VERIFY_DIR}/contents.txt" 2>&1
+
+EXPECTED_PATHS=(
+    "home/pi/apps/"
+    "home/pi/scripts/"
+    "home/pi/.bashrc"
+)
+
+MISSING=()
+for path in "${EXPECTED_PATHS[@]}"; do
+    if ! grep -q "$path" "${VERIFY_DIR}/contents.txt"; then
+        MISSING+=("$path")
+    fi
+done
+
+# Clean up
+rm -rf "$VERIFY_DIR"
+
+if [ ${#MISSING[@]} -eq 0 ]; then
+    ARCHIVE_DATE=$(basename "$LATEST" | grep -oP '\d{4}-\d{2}-\d{2}')
+    log "Verification passed: all expected paths present in ${ARCHIVE_DATE} backup ✓"
+    send_telegram "✅ Backup verified: ${ARCHIVE_DATE} archive decrypts and extracts cleanly"
+else
+    log "ERROR: Missing expected paths: ${MISSING[*]}"
+    send_telegram "❌ Backup verification FAILED: missing paths: ${MISSING[*]}"
+    exit 1
+fi</code></pre>
+                    <p>The script uses <code>tar -t</code> (list contents only) rather than a full extract — no disk I/O for gigabytes of data, just a manifest check. This confirms the archive is readable, decryption worked, and the expected top-level paths are present. Fast enough to run weekly without friction.</p>
+
+                    <h2>Scheduling Verification</h2>
+                    <p>Verification runs weekly — frequent enough to catch problems before they compound, infrequent enough that it doesn't add noticeable load:</p>
+                    <pre><code># /etc/crontab — weekly restore verification (Sunday 3 AM)
+0 3 * * 0 pi /home/pi/pi-backups/verify.sh</code></pre>
+                    <p>Sunday at 3 AM, after the nightly backup has completed. If the verify script sends a Telegram failure alert, I have a problem worth investigating before the following week's backups.</p>
+
+                    <h2>Pi Agent Integration</h2>
+                    <p>Both the backup and verification scripts are now registered as named commands in <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent</a>, which means I can trigger them on-demand from <a href="/blog/arpy-assist-coding-agent.html">Arpy Assist</a>'s browser interface without SSHing into the Pi:</p>
+                    <pre><code># In raspberry-pi-agent/commands.yaml
+backup_run:
+  command: /home/pi/pi-backups/backup.sh
+  timeout: 300
+  description: "Run Pi offsite backup immediately"
+
+backup_verify:
+  command: /home/pi/pi-backups/verify.sh
+  timeout: 180
+  description: "Download and verify most recent backup"
+
+backup_list:
+  command: "ssh backup@your-remote-server.com 'ls -lht /backups/pi/*.gpg | head -10'"
+  timeout: 30
+  description: "List 10 most recent backup archives on remote"</code></pre>
+                    <p>"Run backup now," "Verify backup," and "List backups" are now single-button actions in the Arpy Assist UI. No terminal required.</p>
+
+                    <h2>Updated Config</h2>
+                    <p>The new <code>backup.conf.example</code> includes two additional fields for encryption:</p>
+                    <pre><code># backup.conf
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_PATH="/backups/pi"
+
+# Encryption (added April 2026)
+GPG_PASSPHRASE_FILE="/home/pi/.config/pi-backups/passphrase"
+
+# Notifications (Telegram)
+BOT_TOKEN="your-telegram-bot-token"
+CHAT_ID="your-telegram-chat-id"</code></pre>
+                    <p>The passphrase file contains only the passphrase — no trailing newline, no shell quoting complications. Permissions must be <code>600</code>:</p>
+                    <pre><code># One-time setup: create the passphrase file
+mkdir -p /home/pi/.config/pi-backups
+printf 'your-strong-passphrase' > /home/pi/.config/pi-backups/passphrase
+chmod 600 /home/pi/.config/pi-backups/passphrase</code></pre>
+
+                    <h2>Migrating From the Original Setup</h2>
+                    <p>If you're upgrading from the original rsync-based setup, the existing unencrypted backups on the remote don't need to be migrated — they can age out under the 30-day retention policy. New backups will be encrypted; old ones will expire naturally. Within a month you'll have a fully encrypted backup history.</p>
+                    <p>If you want to encrypt existing backups immediately (reasonable if you're concerned about that window of plaintext data on the VPS), you can run this once on the remote server:</p>
+                    <pre><code># On the remote server: encrypt and archive existing backup dirs (run once)
+for dir in /backups/pi/apps/*/; do
+    date_str=$(basename "$dir")
+    tar -czf - "$dir" | \
+    gpg --batch \
+        --passphrase "your-passphrase" \
+        --symmetric \
+        --cipher-algo AES256 \
+        --output "/backups/pi/pi-backup-${date_str}.tar.gz.gpg"
+done</code></pre>
+                    <p>Run it inside <code>screen</code> or <code>tmux</code> so it survives SSH disconnection on large backup sets.</p>
+
+                    <h2>What Didn't Change</h2>
+                    <p>The core pi-backups architecture from the <a href="/blog/pi-backups-raspberry-pi.html">March 2026 release</a> is unchanged:</p>
+                    <ul>
+                        <li>SSH key-based authentication to the remote server (no password prompts)</li>
+                        <li>Cron scheduling — nightly at 2 AM by default</li>
+                        <li>30-day retention with weekly cleanup</li>
+                        <li>Telegram alerts for backup status (success and failure)</li>
+                        <li>Pure shell scripts — no runtime dependencies beyond standard Linux tools and <code>gpg</code></li>
+                    </ul>
+                    <p>GPG is pre-installed on Raspberry Pi OS. No additional package installs are required for this upgrade.</p>
+
+                    <h2>Lessons Learned</h2>
+                    <ul>
+                        <li><strong>Test decryption manually before trusting cron.</strong> Write one backup, decrypt it by hand, verify the contents, then deploy. A typo in the passphrase file means cron will happily produce encrypted archives you can't open.</li>
+                        <li><strong>Store the passphrase in your password manager.</strong> The whole point of backups is disaster recovery. If the Pi is gone and the passphrase only lived on the Pi, you're stuck. Put it in Bitwarden, 1Password, or wherever you keep important credentials — today, before you forget.</li>
+                        <li><strong>The verify script is not optional.</strong> It's the line between "I have backups" and "I have tested backups." Set it up at the same time as the encryption, not later.</li>
+                        <li><strong>AES256 costs essentially nothing.</strong> The encryption and decryption overhead on a Pi 4 is negligible for backup sizes under a few GB. Default to the stronger cipher — there's no reason not to.</li>
+                    </ul>
+
+                    <h2>Getting the Update</h2>
+                    <pre><code># Pull the latest changes
+cd /home/pi/pi-backups
+git pull
+
+# Review and update your config with new GPG fields
+nano backup.conf
+
+# Create passphrase file (one time)
+mkdir -p /home/pi/.config/pi-backups
+printf 'your-strong-passphrase' > /home/pi/.config/pi-backups/passphrase
+chmod 600 /home/pi/.config/pi-backups/passphrase
+
+# Test manually before handing off to cron
+./backup.sh --dry-run
+
+# Add weekly verification to cron
+crontab -e
+# Add: 0 3 * * 0 /home/pi/pi-backups/verify.sh</code></pre>
+
+                    <h2>Conclusion</h2>
+                    <p>Unencrypted offsite backups are better than no backups. Encrypted offsite backups with automated restore verification are better than unencrypted ones. The upgrade took an afternoon and the Pi backup system is now genuinely complete: daily AES-256 encrypted snapshots, weekly verified restores, Telegram alerts for any failure, and on-demand control via Arpy Assist.</p>
+                    <p>The full source — including the updated backup script, <code>verify.sh</code>, and the new <code>backup.conf.example</code> — is on GitHub at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener">github.com/josefresco/pi-backups</a>.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-raspberry-pi.html" class="btn-secondary">← Pi Backups: Original Post</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Help Automating Your Infrastructure?</h2>
+                <p class="cta-description">
+                    From encrypted backup pipelines to full monitoring dashboards, I build automation tools that run quietly
+                    in the background — so you don't have to think about them until you need them.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your Pi Backups encryption post and have a similar automation project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

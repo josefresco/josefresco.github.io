@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups</title>
+      <link>https://josefresco.com/blog/pi-backups-encryption.html</link>
+      <description>How the pi-backups April 2026 update adds AES-256 GPG encryption of backup archives and an automated restore verification script — protecting Pi application data, configs, and credentials even from your own hosting provider. Covers symmetric vs asymmetric GPG, the updated backup script, the new verify.sh script, weekly cron scheduling, raspberry-pi-agent integration, and a migration guide from the original rsync-based setup.</description>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-encryption.html</guid>
+    </item>
 
     <item>
       <title>Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos</title>
