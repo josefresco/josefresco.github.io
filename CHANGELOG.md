@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.21.0] - 2026-04-12
+
+### Fixed
+- `feed.xml` — removed 11th item (`raspberry-pi-agent.html`, Thu 26 Mar 2026) to restore the 10-item cap; feed was at 11 items after v1.20.0 added 2 posts but only removed 1
+
+### Reviewed
+- All 35 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs (corrects v1.20.0 count of 34; actual post count is 35)
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 35 blog posts present, dates accurate; no changes required
+- No unnecessary or stale files found for removal
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.20.0] - 2026-04-11
 
 ### Added
