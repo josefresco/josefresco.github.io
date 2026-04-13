@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
 
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -27,7 +28,7 @@
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-04-08T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-04-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-13T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
@@ -64,7 +65,7 @@
         }
       },
       "datePublished": "2026-04-08T00:00:00+00:00",
-      "dateModified": "2026-04-08T00:00:00+00:00",
+      "dateModified": "2026-04-13T00:00:00+00:00",
       "keywords": "JavaScript, Family Dashboard, Weather Alerts, CalDAV, PWA, Service Worker, NOAA, OpenWeather, iPad, Smart Home, Birthday Detection, Bundle Optimization",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
@@ -134,6 +135,10 @@
                 </div>
 
                 <div class="blog-post-content">
+                    <div style="background: rgba(124, 58, 237, 0.15); padding: 0.75rem 1rem; margin: 0 0 1.5rem 0; border-left: 4px solid var(--neural-secondary); color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong style="color: var(--text-primary);">Updated April 13, 2026:</strong> This post has been updated to include the v3.30.1 and v3.30.2 releases. The <a href="#weather-narrative" style="color: var(--neural-primary);">Weather Narrative Engine</a> section covers the v3.30.2 "Clean Weather Commentary" content audit and the multi-factor scoring system introduced in this release.
+                    </div>
+
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> Family Dashboard v3.30 adds extreme weather overlays (orange/red/rainbow alerts for NOAA warning levels), temperature shift alerts when the forecast swings ≥15°F from today's high, birthday and holiday detection with a 30-day calendar scan, support for up to three simultaneous CalDAV accounts with per-account color coding, and a modular architecture overhaul that shrunk the bundle from 160 KB to 68 KB. The <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener">open-source repo</a> is live and has 3 community forks.
                     </div>
@@ -244,7 +249,7 @@ const calendarAccounts = [
                     </ul>
                     <p>On a flaky WiFi connection — which describes every old iPad on a home network — this means the dashboard shell loads immediately from cache, then updates its data sections as network requests complete. The display is never blank.</p>
 
-                    <h2>Weather Narrative Engine: The 56 One-Liners (v3.30.2)</h2>
+                    <h2 id="weather-narrative">Weather Narrative Engine: The 56 One-Liners (v3.30.2)</h2>
                     <p>The weather commentary system has been through several content revisions since v3.26 introduced 36 messages split between "good weather" and "poor weather" pools. v3.30.0 expanded the library; v3.30.2 did a full content audit.</p>
                     <p>The v3.30.2 cleanup removed all comedian-inspired quotes — lines that imitated specific comedic styles or referenced pop culture in ways that felt dated or out of place on a family kitchen display. What remained were 56 original one-liners written specifically for the context: something a family of four glances at first thing in the morning while making coffee.</p>
                     <p>A few examples from the current pool:</p>
@@ -301,7 +306,7 @@ const calendarAccounts = [
                 </div>
 
                 <div class="blog-navigation">
-                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="/blog/family-dashboard-evolution.html" class="btn-secondary">← Family Dashboard Evolution</a>
                     <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
                 </div>
             </div>

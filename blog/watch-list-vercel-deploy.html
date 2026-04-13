@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation - Jose Fresco</title>
+    <meta name="description" content="A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, read access token vs API key, session ID creation, build-time credential injection, and installing the app on iOS and Android.">
+    <link rel="canonical" href="https://josefresco.com/blog/watch-list-vercel-deploy.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation - Jose Fresco">
+    <meta property="og:description" content="A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, read access token vs API key, session ID creation, build-time credential injection, and installing the app on iOS and Android.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/watch-list-vercel-deploy.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-13T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation - Jose Fresco">
+    <meta name="twitter:description" content="A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, read access token vs API key, session ID creation, build-time credential injection, and installing the app on iOS and Android.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/watch-list-vercel-deploy.html"
+      },
+      "headline": "Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation",
+      "description": "A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, read access token vs API key, session ID creation, build-time credential injection, and installing the app on iOS and Android.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-13T00:00:00+00:00",
+      "dateModified": "2026-04-13T00:00:00+00:00",
+      "keywords": "Watch List, PWA, Vercel, TMDB, The Movie Database, Deployment, Progressive Web App, JavaScript, Streaming, Movie Tracker",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation", "item": "https://josefresco.com/blog/watch-list-vercel-deploy.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener" style="color: var(--neural-primary);">Watch List</a> is a privacy-focused movie and TV tracking PWA that runs on TMDB's free API. Deploying it requires three credentials (API key, read access token, and session ID) injected at build time via <code>build.js</code>, a Vercel project with those values set as environment variables, and a one-time trigger of the build hook. This guide takes you from fork to installable app in about 15 minutes, including the non-obvious TMDB session ID step that isn't documented in the README.
+                    </div>
+
+                    <h2>What Watch List Is</h2>
+                    <p>Watch List is a single-file progressive web app for tracking movies and TV shows you want to watch. No ads, no tracking, no subscription — just a personal watchlist backed by <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">The Movie Database (TMDB)</a> API for search, poster images, and streaming availability data.</p>
+                    <p>The <a href="/blog/watch-list-pwa.html">launch post</a> covers the feature set; the <a href="/blog/watch-list-internals.html">internals post</a> covers the architecture. This post covers deployment — specifically, how to get your own instance running on Vercel with your own TMDB credentials, and how to install it as a native-feeling PWA on any device.</p>
+
+                    <h2>Prerequisites</h2>
+                    <ul>
+                        <li>A free <a href="https://www.themoviedb.org/signup" target="_blank" rel="noopener">TMDB account</a></li>
+                        <li>A free <a href="https://vercel.com/signup" target="_blank" rel="noopener">Vercel account</a></li>
+                        <li>A GitHub account (Vercel imports from GitHub)</li>
+                        <li>Node.js installed locally (only needed if you want to run the build script locally)</li>
+                    </ul>
+                    <p>No server, no database, no paid tier of anything. TMDB's free API tier is generous — the dashboard load is a handful of requests per session and doesn't approach the rate limits for personal use.</p>
+
+                    <h2>Step 1: Fork the Repo</h2>
+                    <p>Fork <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener">josefresco/watch-list</a> to your own GitHub account. You need your own fork because Vercel will deploy from your repo, and you'll be configuring environment variables in your Vercel project — not the original.</p>
+                    <p>The repo structure is intentionally minimal:</p>
+                    <pre><code>watch-list/
+├── index.html        # The entire application (pre-build template)
+├── build.js          # Node.js script that injects credentials at deploy time
+├── vercel.json       # Vercel deployment config
+├── favicon.svg
+└── apple-touch-icon.png</code></pre>
+                    <p>The <code>index.html</code> in the repo contains placeholder strings for the credentials. <code>build.js</code> reads environment variables, substitutes the placeholders, and writes the final <code>index.html</code>. Vercel runs this script as part of the build step, so the deployed file has real credentials baked in — but those credentials never touch version control.</p>
+
+                    <h2>Step 2: Get Your TMDB Credentials</h2>
+                    <p>You need three values from TMDB. Two come from the API settings page; one requires a separate API call. Here's what each one is for:</p>
+
+                    <h3>API Key</h3>
+                    <p>Log in to TMDB, go to <strong>Settings → API</strong>, and request an API key (choose "Developer" use type). The key is a 32-character hex string. This is used for movie search and metadata requests.</p>
+
+                    <h3>Read Access Token (v4 Bearer Token)</h3>
+                    <p>On the same API settings page, below the API key, is the <strong>API Read Access Token</strong> — a longer JWT-format token used for v4 API endpoints. You'll need this for watchlist operations. Copy it; you won't be able to view it again without regenerating it.</p>
+
+                    <h3>Session ID (The Non-Obvious One)</h3>
+                    <p>The session ID is what ties your watchlist to your TMDB account. It's not in the settings UI — you generate it through a three-step OAuth-style flow:</p>
+                    <ol>
+                        <li><strong>Create a request token:</strong>
+                            <pre><code>curl -X POST \
+  "https://api.themoviedb.org/3/authentication/token/new" \
+  -H "Authorization: Bearer YOUR_READ_ACCESS_TOKEN" \
+  -H "Content-Type: application/json"</code></pre>
+                            <p>This returns a <code>request_token</code> string.</p>
+                        </li>
+                        <li><strong>Approve the request token:</strong><br>
+                            Open this URL in your browser, replacing <code>REQUEST_TOKEN</code>:
+                            <pre><code>https://www.themoviedb.org/authenticate/REQUEST_TOKEN</code></pre>
+                            <p>TMDB will ask you to approve the token for your account. Click Allow. You'll be redirected to a TMDB page confirming approval. The token is now authorized.</p>
+                        </li>
+                        <li><strong>Exchange for a session ID:</strong>
+                            <pre><code>curl -X POST \
+  "https://api.themoviedb.org/3/authentication/session/new" \
+  -H "Authorization: Bearer YOUR_READ_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"request_token": "YOUR_REQUEST_TOKEN"}'</code></pre>
+                            <p>The response contains your <code>session_id</code>. Copy it — this is the value that lets Watch List read and write your TMDB watchlist.</p>
+                        </li>
+                    </ol>
+                    <p>Session IDs don't expire under normal use. As long as you don't revoke it from TMDB's settings, the same session ID will work indefinitely. Store it in your password manager alongside the other two credentials.</p>
+
+                    <h2>Step 3: Create a Vercel Project</h2>
+                    <p>In Vercel, create a new project and import your forked repository. On the configuration screen, before deploying, set three environment variables:</p>
+                    <pre><code>TMDB_API_KEY         = your-32-char-api-key
+TMDB_READ_TOKEN      = your-jwt-read-access-token
+TMDB_SESSION_ID      = your-session-id</code></pre>
+                    <p>These names match what <code>build.js</code> reads from <code>process.env</code>. If you rename them, update <code>build.js</code> accordingly.</p>
+                    <p>For the <strong>Build Command</strong>, set it to:</p>
+                    <pre><code>node build.js</code></pre>
+                    <p>For the <strong>Output Directory</strong>, set it to <code>.</code> (the project root) — the build script writes the final <code>index.html</code> in place, not to a dist directory.</p>
+                    <p>Click Deploy. Vercel runs <code>node build.js</code>, which reads the environment variables and substitutes them into <code>index.html</code>. The deployed file is the fully-credentialed app. Your fork on GitHub still contains only the placeholder strings.</p>
+
+                    <h2>How build.js Works</h2>
+                    <p>It's worth understanding what the build script does, because it explains why Vercel is the recommended deployment target (and why you can't just open <code>index.html</code> directly from your local machine):</p>
+                    <pre><code>// build.js (simplified)
+const fs = require('fs');
+
+const apiKey     = process.env.TMDB_API_KEY;
+const readToken  = process.env.TMDB_READ_TOKEN;
+const sessionId  = process.env.TMDB_SESSION_ID;
+
+if (!apiKey || !readToken || !sessionId) {
+    console.error('Missing required environment variables');
+    process.exit(1);
+}
+
+let html = fs.readFileSync('index.html', 'utf8');
+
+html = html
+    .replace('__TMDB_API_KEY__', apiKey)
+    .replace('__TMDB_READ_TOKEN__', readToken)
+    .replace('__TMDB_SESSION_ID__', sessionId);
+
+fs.writeFileSync('index.html', html);
+console.log('Build complete: credentials injected into index.html');
+</code></pre>
+                    <p>The script reads the template <code>index.html</code>, performs three string replacements on the placeholder tokens, and writes the result back. Nothing more. This approach means:</p>
+                    <ul>
+                        <li>Credentials are never committed to the repo (the template has <code>__PLACEHOLDERS__</code>, not real values)</li>
+                        <li>The deployed app is a single static file with no runtime secret-handling complexity</li>
+                        <li>Rotating credentials means updating Vercel's environment variables and triggering a new deployment — no code changes required</li>
+                    </ul>
+                    <p>If you want to run the app locally, you can set environment variables in your shell and run <code>node build.js</code> before opening <code>index.html</code> in a browser. The <a href="/blog/watch-list-internals.html">internals post</a> covers this and the wider architecture in detail.</p>
+
+                    <h2>Step 4: Configuring Streaming Providers</h2>
+                    <p>After your first deployment, you can customize which streaming services appear in the availability display. Two constants near the top of the template control this:</p>
+                    <pre><code>// In index.html (edit before build, or directly in your fork)
+
+// Services you subscribe to — shown prominently
+const MY_SERVICES = ['Netflix', 'Max', 'Disney Plus', 'Hulu'];
+
+// Services to exclude entirely — not shown even if available
+const EXCLUDED_PROVIDERS = ['Peacock', 'Tubi', 'Pluto TV'];</code></pre>
+                    <p><code>MY_SERVICES</code> highlights the streaming services you actually use, so you can immediately see whether something is on a platform you have without scanning the full list. <code>EXCLUDED_PROVIDERS</code> removes noise — free ad-supported services or platforms you'd never use.</p>
+                    <p>Provider names must match TMDB's naming exactly (case-sensitive). The full list of provider names can be found in the TMDB API's <code>/watch/providers/movie</code> endpoint, or by searching for any movie and inspecting the streaming availability response in your browser's network tab.</p>
+                    <p>After editing these constants in your fork, commit and push — Vercel will automatically rebuild and redeploy.</p>
+
+                    <h2>Step 5: Install as a PWA</h2>
+                    <p>Once deployed, Watch List can be installed on any device for a native-app experience — no app store, no download, no updates to manage.</p>
+
+                    <h3>Desktop (Chrome or Edge)</h3>
+                    <p>Visit your Vercel URL in Chrome or Edge. Look for the install icon in the address bar (a computer with a download arrow), or open the browser menu and choose <strong>Install Watch List</strong>. The app opens in its own window, with no browser chrome — it behaves like a native app.</p>
+
+                    <h3>iOS (Safari)</h3>
+                    <p>Safari on iOS is the only way to install PWAs on iPhone and iPad. Open your Vercel URL in Safari, tap the Share button (the box with an upward arrow), and scroll down to <strong>Add to Home Screen</strong>. The app installs with the Watch List icon and opens in full-screen kiosk mode.</p>
+                    <p>Note: iOS requires Safari specifically — Chrome and Firefox on iOS cannot install PWAs due to Apple's browser engine restrictions.</p>
+
+                    <h3>Android (Chrome)</h3>
+                    <p>Open your Vercel URL in Chrome on Android. Chrome will show an install banner at the bottom of the screen, or you can tap the three-dot menu and choose <strong>Add to Home Screen</strong>. The installed app appears in your app drawer alongside native apps.</p>
+
+                    <h2>Optional: Adult Content PIN</h2>
+                    <p>If you want TMDB's adult content to appear in search results, you can enable it in your TMDB account settings and configure an optional PIN in the Watch List settings panel. The PIN gate appears before adult content is displayed — a lightweight parental control for shared devices. Leave the PIN field empty to skip this entirely if it's not relevant for your setup.</p>
+
+                    <h2>Updating Credentials</h2>
+                    <p>If you need to rotate your TMDB credentials (say, you regenerated your API key or created a new TMDB session):</p>
+                    <ol>
+                        <li>In Vercel, go to your project's <strong>Settings → Environment Variables</strong></li>
+                        <li>Update the relevant variable(s)</li>
+                        <li>Go to <strong>Deployments</strong> and click <strong>Redeploy</strong> on the latest deployment</li>
+                    </ol>
+                    <p>Vercel re-runs the build script with the new values, and the updated app is live in under a minute. No code changes, no pushing commits.</p>
+
+                    <h2>What You End Up With</h2>
+                    <p>After following these steps you have:</p>
+                    <ul>
+                        <li>A personal Watch List instance at <code>your-project.vercel.app</code> (or a custom domain if you configure one)</li>
+                        <li>Your TMDB watchlist synced — movies you add in the PWA appear in your TMDB account and vice versa</li>
+                        <li>Streaming availability filtered to your services, across all your devices</li>
+                        <li>An installable app icon on every phone, tablet, and desktop you use</li>
+                        <li>No ongoing hosting costs, no maintenance, no server to manage</li>
+                    </ul>
+                    <p>Because the deployment is entirely static — one HTML file on Vercel's CDN — it's as fast as a web app can be. No server round-trips, no database queries. The only network requests are to the TMDB API for search results and streaming availability data.</p>
+
+                    <h2>Troubleshooting</h2>
+
+                    <h3>Build fails with "Missing required environment variables"</h3>
+                    <p>One or more of <code>TMDB_API_KEY</code>, <code>TMDB_READ_TOKEN</code>, or <code>TMDB_SESSION_ID</code> is not set in your Vercel project environment. Double-check the variable names — they're case-sensitive.</p>
+
+                    <h3>Watchlist operations fail with 401</h3>
+                    <p>Your session ID may be invalid or revoked. Generate a new one by repeating Step 2's three-step flow, update the environment variable in Vercel, and redeploy.</p>
+
+                    <h3>Search returns results but no streaming data</h3>
+                    <p>Streaming availability is region-specific in TMDB's API. If you're outside the US, check that TMDB is returning <code>US</code> provider data or update the region parameter in the app's fetch calls to match your country.</p>
+
+                    <h3>"Add to Home Screen" doesn't appear on iOS</h3>
+                    <p>Make sure you're using Safari, not Chrome or Firefox. iOS only allows PWA installation through Safari.</p>
+
+                    <h2>Conclusion</h2>
+                    <p>The main friction point in deploying Watch List is the TMDB session ID — the three-step token flow isn't documented in the repo README, and without the session ID the watchlist functionality doesn't work. Once you have all three credentials and know where to put them, the Vercel deployment is genuinely fast: fork, set three environment variables, click deploy, install the PWA. Done.</p>
+                    <p>The full source is at <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener">github.com/josefresco/watch-list</a>. If you run into anything not covered here, open an issue on the repo.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/watch-list-internals.html" class="btn-secondary">← Watch List Internals</a>
+                    <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Help Building or Deploying a Web App?</h2>
+                <p class="cta-description">
+                    From single-file PWAs to full-stack applications, I build fast, privacy-respecting web tools
+                    that work reliably across devices — without unnecessary complexity.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web App Project&body=Hi Jose,%0D%0A%0D%0AI read your Watch List deployment post and have a similar project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

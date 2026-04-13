@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation</title>
+      <link>https://josefresco.com/blog/watch-list-vercel-deploy.html</link>
+      <description>A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, the non-obvious three-step session ID flow, build-time credential injection via build.js, configuring MY_SERVICES and EXCLUDED_PROVIDERS streaming filters, and installing the app as a native PWA on iOS, Android, and desktop.</description>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/watch-list-vercel-deploy.html</guid>
+    </item>
 
     <item>
       <title>Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups</title>
@@ -80,13 +88,6 @@
       <guid>https://josefresco.com/blog/wpe-central-command-helper.html</guid>
     </item>
 
-    <item>
-      <title>JF Website Monitor: How Content Change Detection Works Under the Hood</title>
-      <link>https://josefresco.com/blog/jf-website-monitor-content-change-detection.html</link>
-      <description>A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and SHA-256 fingerprinting to CSS selector targeting and alert cooldowns that prevent notification fatigue.</description>
-      <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-website-monitor-content-change-detection.html</guid>
-    </item>
 
   </channel>
 </rss>
