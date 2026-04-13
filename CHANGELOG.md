@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.22.0] - 2026-04-13
+
+### Added
+- `blog/watch-list-vercel-deploy.html` — new blog post: "Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation" (2026-04-13)
+
+### Fixed
+- `feed.xml` — removed stray blank lines before closing `</channel>` tag (recurring issue; previously fixed in v1.8.0, v1.12.0, and v1.15.0)
+
+### Updated
+- `sitemap.xml` — added `watch-list-vercel-deploy.html` entry (2026-04-13); updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to `2026-04-13`
+- `feed.xml` — added `watch-list-vercel-deploy.html` as newest item; removed oldest item (`jf-website-monitor-content-change-detection.html`, Fri 27 Mar 2026) to maintain 10-item cap; updated `lastBuildDate` to `Mon, 13 Apr 2026`
+
+### Reviewed
+- All 36 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs (corrects v1.21.0 count of 35; actual post count is 36)
+- `blog/images/` directory confirmed clean — no unreferenced or duplicate image files
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 36 blog posts present, dates accurate; no changes required
+- No unnecessary or stale files found for removal
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.21.0] - 2026-04-12
 
 ### Fixed
