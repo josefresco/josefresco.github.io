@@ -104,21 +104,26 @@
 
         .repo-item:hover { background: rgba(0, 212, 255, 0.05); }
 
-        .repo-main { flex: 1; min-width: 0; }
+        .repo-main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
 
         .repo-name {
             font-size: 1rem;
             font-weight: 600;
             color: var(--neural-primary);
-            margin-bottom: 0.2rem;
         }
 
         .repo-desc {
             font-size: 0.875rem;
             color: var(--text-secondary);
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .repo-meta {
@@ -182,7 +187,7 @@
         @media (max-width: 600px) {
             .repo-item { flex-direction: column; gap: 0.4rem; }
             .repo-meta { justify-content: flex-start; }
-            .repo-desc { white-space: normal; }
+            .repo-desc { white-space: normal; text-overflow: clip; }
         }
     </style>
 
