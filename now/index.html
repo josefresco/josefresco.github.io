@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Now - Jose Fresco</title>
-    <meta name="description" content="What Jose Fresco is currently working on, learning, and using - Updated April 2026">
+    <meta name="description" content="What Jose Fresco is actively working on — live feed of recently updated GitHub repos.">
     <link rel="canonical" href="https://josefresco.com/now/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,140 +80,128 @@
         </nav>
     </header>
 
+    <style>
+        .repo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 1.5rem;
+        }
+
+        .repo-item {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 1rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background var(--transition-fast);
+        }
+
+        .repo-item:last-child { border-bottom: none; }
+
+        .repo-item:hover { background: rgba(0, 212, 255, 0.05); }
+
+        .repo-main { flex: 1; min-width: 0; }
+
+        .repo-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neural-primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .repo-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .repo-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .repo-lang {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .lang-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .repo-updated { color: var(--text-muted); }
+
+        .now-loading, .now-error {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .now-error { color: #f87171; }
+
+        .now-section { padding: 20px 0 80px; }
+
+        .repos-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .repos-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .repos-header a {
+            font-size: 0.85rem;
+            color: var(--neural-primary);
+            text-decoration: none;
+        }
+
+        .repos-header a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            .repo-item { flex-direction: column; gap: 0.4rem; }
+            .repo-meta { justify-content: flex-start; }
+            .repo-desc { white-space: normal; }
+        }
+    </style>
+
     <main id="main-content">
         <section class="page-hero">
             <div class="container">
                 <h1 class="page-title">Now</h1>
-                <p class="page-subtitle">What I'm working on, learning, and using</p>
-                <p class="page-date">Updated April 2026</p>
+                <p class="page-subtitle">What I'm actively working on</p>
             </div>
         </section>
 
         <section class="now-section">
             <div class="container">
-                <div class="now-content">
-                    <div class="now-intro">
-                        <p>This page is inspired by <a href="https://nownownow.com/about" target="_blank" rel="noopener">nownownow.com</a>. It's a snapshot of what I'm focused on right now—my projects, learning goals, and the tools I use daily.</p>
-                    </div>
-
-                    <div class="now-grid">
-                        <!-- Working On -->
-                        <div class="now-card">
-                            <div class="now-card-header">
-                                <span class="now-icon">🚀</span>
-                                <h2>Working On</h2>
-                            </div>
-                            <ul class="now-list">
-                                <li><strong>JF Notify</strong> - WordPress plugin for Gravity Forms to Telegram notifications, live at <a href="https://jfnotify.com" target="_blank" rel="noopener">jfnotify.com</a></li>
-                                <li><strong>JF Website Monitor</strong> - Continuous improvements to uptime monitoring and content change detection</li>
-                                <li><strong>Family Dashboard v3.30</strong> - Latest release adds extreme weather alerts, temperature shift notifications, multi-account CalDAV, and birthday/holiday detection</li>
-                                <li><strong>Developer Portfolio</strong> - Performance-focused rebuild with critical CSS inlining, service workers, and no framework dependencies</li>
-                            </ul>
-                        </div>
-
-                        <!-- Learning -->
-                        <div class="now-card">
-                            <div class="now-card-header">
-                                <span class="now-icon">📚</span>
-                                <h2>Learning</h2>
-                            </div>
-                            <ul class="now-list">
-                                <li><strong>Rust</strong> - Exploring systems programming for performance-critical tools</li>
-                                <li><strong>AI/ML Integration</strong> - Learning to integrate LLMs into web applications</li>
-                                <li><strong>Web Performance</strong> - Deep dive into Core Web Vitals optimization</li>
-                                <li><strong>PostgreSQL</strong> - Advanced queries and performance tuning</li>
-                            </ul>
-                        </div>
-
-                        <!-- Reading -->
-                        <div class="now-card">
-                            <div class="now-card-header">
-                                <span class="now-icon">📖</span>
-                                <h2>Reading</h2>
-                            </div>
-                            <ul class="now-list">
-                                <li><em>The Pragmatic Programmer</em> - Andrew Hunt & David Thomas</li>
-                                <li><em>Designing Data-Intensive Applications</em> - Martin Kleppmann</li>
-                                <li><em>Building Microservices</em> - Sam Newman</li>
-                                <li>Various technical blogs and documentation</li>
-                            </ul>
-                        </div>
-
-                        <!-- Listening To -->
-                        <div class="now-card">
-                            <div class="now-card-header">
-                                <span class="now-icon">🎧</span>
-                                <h2>Listening To</h2>
-                            </div>
-                            <ul class="now-list">
-                                <li><strong>Shop Talk Show</strong> - Frontend development podcast</li>
-                                <li><strong>JS Party</strong> - JavaScript community podcast</li>
-                                <li><strong>PHP Roundtable</strong> - PHP community discussions</li>
-                                <li>Lo-fi beats for coding sessions</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Development Setup -->
-                    <div class="now-setup">
-                        <h2>Development Setup</h2>
-                        <div class="setup-grid">
-                            <div class="setup-item">
-                                <h3>💻 Hardware</h3>
-                                <ul>
-                                    <li>MacBook Pro M3 Pro</li>
-                                    <li>32GB RAM</li>
-                                    <li>LG UltraFine 4K Monitor</li>
-                                    <li>Keychron K2 Mechanical Keyboard</li>
-                                    <li>Logitech MX Master 3</li>
-                                </ul>
-                            </div>
-                            <div class="setup-item">
-                                <h3>🛠️ Software</h3>
-                                <ul>
-                                    <li><strong>Editor:</strong> VS Code with Vim keybindings</li>
-                                    <li><strong>Terminal:</strong> iTerm2 + Zsh + Oh My Zsh</li>
-                                    <li><strong>Browser:</strong> Chrome for development, Firefox for testing</li>
-                                    <li><strong>Design:</strong> Figma</li>
-                                </ul>
-                            </div>
-                            <div class="setup-item">
-                                <h3>📦 VS Code Extensions</h3>
-                                <ul>
-                                    <li>ESLint + Prettier</li>
-                                    <li>PHP Intelephense</li>
-                                    <li>GitLens</li>
-                                    <li>Thunder Client (API testing)</li>
-                                    <li>Docker</li>
-                                    <li>Live Server</li>
-                                </ul>
-                            </div>
-                            <div class="setup-item">
-                                <h3>🌐 Services</h3>
-                                <ul>
-                                    <li><strong>Hosting:</strong> GitHub Pages, self-hosted VPS</li>
-                                    <li><strong>Version Control:</strong> GitHub</li>
-                                    <li><strong>CI/CD:</strong> GitHub Actions</li>
-                                    <li><strong>Communication:</strong> Telegram, Slack</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="repos-header">
+                    <h2>Recently active repos</h2>
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">View all on GitHub →</a>
                 </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title">Want to Collaborate?</h2>
-                    <p class="cta-description">
-                        I'm always open to discussing interesting projects and opportunities.
-                    </p>
-                    <div class="cta-buttons">
-                        <a href="/contact" class="btn-cta">Get In Touch</a>
-                        <a href="/projects" class="btn-secondary">View My Work</a>
-                    </div>
+                <div id="repo-list" class="repo-list">
+                    <div class="now-loading">Loading repos&hellip;</div>
                 </div>
             </div>
         </section>
@@ -238,5 +226,74 @@
 
     <script src="../global-header.js" defer></script>
     <script src="../script.js" defer></script>
+    <script>
+    (function () {
+        var LANG_COLORS = {
+            JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5',
+            PHP: '#4F5D95', HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051',
+            Ruby: '#701516', Go: '#00ADD8', Rust: '#dea584', Vue: '#41b883',
+            'Jupyter Notebook': '#DA5B0B'
+        };
+
+        function timeAgo(iso) {
+            var diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+            if (diff < 60)   return 'just now';
+            if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+            if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+            var days = Math.floor(diff / 86400);
+            if (days < 30)  return days + 'd ago';
+            if (days < 365) return Math.floor(days / 30) + 'mo ago';
+            return Math.floor(days / 365) + 'y ago';
+        }
+
+        fetch('https://api.github.com/users/josefresco/repos?sort=pushed&direction=desc&per_page=15')
+            .then(function (r) {
+                if (!r.ok) throw new Error(r.status);
+                return r.json();
+            })
+            .then(function (repos) {
+                var listEl = document.getElementById('repo-list');
+                // Filter out forks, keep repos pushed to at least once
+                var active = repos.filter(function (r) { return !r.fork && r.pushed_at; });
+                if (active.length === 0) {
+                    listEl.innerHTML = '<div class="now-error">No repos found.</div>';
+                    return;
+                }
+                listEl.innerHTML = '';
+                active.forEach(function (repo) {
+                    var a = document.createElement('a');
+                    a.href = repo.html_url;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.className = 'repo-item';
+
+                    var langHtml = '';
+                    if (repo.language) {
+                        var color = LANG_COLORS[repo.language] || '#94a3b8';
+                        langHtml = '<span class="repo-lang">' +
+                            '<span class="lang-dot" style="background:' + color + '"></span>' +
+                            repo.language +
+                        '</span>';
+                    }
+
+                    a.innerHTML =
+                        '<span class="repo-main">' +
+                            '<span class="repo-name">' + repo.name + '</span>' +
+                            (repo.description ? '<span class="repo-desc">' + repo.description + '</span>' : '') +
+                        '</span>' +
+                        '<span class="repo-meta">' +
+                            langHtml +
+                            '<span class="repo-updated">' + timeAgo(repo.pushed_at) + '</span>' +
+                        '</span>';
+
+                    listEl.appendChild(a);
+                });
+            })
+            .catch(function () {
+                document.getElementById('repo-list').innerHTML =
+                    '<div class="now-error">Could not load repos — <a href="https://github.com/josefresco" target="_blank" rel="noopener" style="color:var(--neural-primary)">view on GitHub</a>.</div>';
+            });
+    })();
+    </script>
 </body>
 </html>
