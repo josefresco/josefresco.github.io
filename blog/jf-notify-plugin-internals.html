@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts - Jose Fresco</title>
+    <meta name="description" content="A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, admin settings UI, and the security model that keeps credentials out of version control.">
+    <link rel="canonical" href="https://josefresco.com/blog/jf-notify-plugin-internals.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts - Jose Fresco">
+    <meta property="og:description" content="A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, admin settings UI, and the security model that keeps credentials out of version control.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-notify-plugin-internals.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-14T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="WordPress">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts - Jose Fresco">
+    <meta name="twitter:description" content="A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, admin settings UI, and the security model that keeps credentials out of version control.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-notify-plugin-internals.html"
+      },
+      "headline": "Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts",
+      "description": "A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, admin settings UI, and the security model that keeps credentials out of version control.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-14T00:00:00+00:00",
+      "dateModified": "2026-04-14T00:00:00+00:00",
+      "keywords": "JF Notify, WordPress, Gravity Forms, Telegram, Bot API, PHP, Plugin Development, WordPress Hooks, Notifications, Lead Alerts",
+      "articleSection": "WordPress",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts", "item": "https://josefresco.com/blog/jf-notify-plugin-internals.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://jfnotify.com" target="_blank" rel="noopener" style="color: var(--neural-primary);">JF Notify</a> is a WordPress plugin that listens for Gravity Forms entry submissions via the <code>gform_after_submission</code> action hook, formats the entry data as a Telegram message, and POSTs it to the Bot API using WordPress's own <code>wp_remote_post()</code>. The plugin stores the Telegram bot token and chat ID in the WordPress options table (encrypted at rest), exposes a settings page under the Gravity Forms admin menu, and includes per-form enable/disable toggles so noisy contact forms don't generate noise on forms that matter. This post covers the hook architecture, message formatter, settings UI, and the edge cases that came up during real-world use.
+                    </div>
+
+                    <h2>Why Build a Plugin Instead of Using a Gravity Forms Notification?</h2>
+                    <p>Gravity Forms already has a built-in notification system. You can configure email notifications, webhooks, and even Zapier/Make integrations directly from the form editor. So why build a dedicated plugin?</p>
+                    <p>The short answer is latency and reliability. Email notifications go through WordPress's mail queue (often <code>wp_mail()</code> routing through an SMTP plugin), can be delayed by MX record propagation, and frequently land in spam folders. Zapier and Make add a middleman that introduces its own latency and cost. A direct Telegram message arrives in under a second and shows up on your phone with a push notification — no spam folder, no polling, no third-party service between the form and your attention.</p>
+                    <p>The longer answer is control. The built-in notification system doesn't let you format messages the way Telegram's MarkdownV2 parser expects, doesn't give you conditional logic at the plugin level, and doesn't give you a single dashboard to see which forms are wired up versus which aren't. Building the plugin meant owning all of that.</p>
+
+                    <h2>Plugin Structure</h2>
+                    <p>JF Notify is a single-file plugin with a companion settings class. The file layout is minimal by design:</p>
+                    <pre><code>jf-notify/
+├── jf-notify.php          # Plugin bootstrap, hooks, core logic
+├── class-jf-notify-settings.php   # Admin settings page and options
+├── readme.txt             # WordPress.org-compatible readme
+└── assets/
+    └── jf-notify-admin.css        # Settings page styles</code></pre>
+                    <p>There's no build step, no npm, no Webpack. The plugin is vanilla PHP. This is the right call for a plugin that installs on WordPress sites of unknown vintage — adding a build pipeline would make the plugin harder to audit and harder to install in restricted environments.</p>
+
+                    <h2>The Core Hook: gform_after_submission</h2>
+                    <p>Everything in JF Notify runs from a single Gravity Forms action hook:</p>
+                    <pre><code>add_action( 'gform_after_submission', [ $this, 'handle_submission' ], 10, 2 );</code></pre>
+                    <p>Gravity Forms fires <code>gform_after_submission</code> after an entry has been saved to the database and all of Gravity Forms' own notifications have run. The hook passes two arguments: the <code>$entry</code> array (the submitted form data) and the <code>$form</code> array (the form definition, including field labels, IDs, and settings).</p>
+                    <p>Using <code>gform_after_submission</code> rather than <code>gform_pre_submission</code> is intentional. By the time this hook fires, the entry is already in the database — if the Telegram message fails to send, the entry is safe. If we hooked earlier and the entry save failed, we'd have sent a notification for data that doesn't exist.</p>
+
+                    <h3>The Handler Method</h3>
+                    <pre><code>public function handle_submission( $entry, $form ) {
+    // Check if notifications are enabled for this form
+    if ( ! $this->is_form_enabled( $form['id'] ) ) {
+        return;
+    }
+
+    $bot_token = $this->get_bot_token();
+    $chat_id   = $this->get_chat_id();
+
+    if ( empty( $bot_token ) || empty( $chat_id ) ) {
+        return; // Credentials not configured — fail silently
+    }
+
+    $message = $this->format_message( $entry, $form );
+    $this->send_telegram_message( $message, $bot_token, $chat_id );
+}</code></pre>
+                    <p>The handler checks three things before doing anything: is this form enabled, are credentials configured, and can a message be formatted. If any of those fail, it returns without error. Failing silently here is the right choice — a Telegram misconfiguration shouldn't break the form submission or generate PHP errors in the site's error log.</p>
+
+                    <h2>Per-Form Enable/Disable</h2>
+                    <p>Not every form needs Telegram notifications. A high-volume newsletter signup form would generate unbearable noise; a low-volume quote request form is exactly what you want a notification for. JF Notify stores per-form enable state in a single serialized option:</p>
+                    <pre><code>// Stored as: array( form_id => bool )
+// e.g.: array( 1 => true, 2 => false, 3 => true )
+$enabled_forms = get_option( 'jf_notify_enabled_forms', [] );</code></pre>
+                    <p>The settings page renders a toggle for every active Gravity Form, so you can enable or disable notifications without touching form configuration. New forms default to disabled — you opt in, rather than getting surprised by a flood of alerts when a client activates a new form.</p>
+
+                    <h2>Message Formatting</h2>
+                    <p>The message formatter is where the interesting work happens. Telegram supports MarkdownV2 formatting in messages, which lets you bold field labels, use monospace for values that benefit from it, and structure the message so it's scannable on a phone screen without scrolling past noise.</p>
+                    <pre><code>private function format_message( $entry, $form ) {
+    $lines = [];
+
+    // Header line: form name and submission timestamp
+    $lines[] = sprintf(
+        "*New Submission: %s*",
+        $this->escape_markdown( $form['title'] )
+    );
+    $lines[] = sprintf(
+        "_Submitted: %s_",
+        date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $entry['date_created'] ) )
+    );
+    $lines[] = ''; // blank line separator
+
+    // Field values
+    foreach ( $form['fields'] as $field ) {
+        // Skip administrative/hidden/section fields
+        if ( in_array( $field->type, [ 'html', 'section', 'page', 'captcha' ], true ) ) {
+            continue;
+        }
+
+        $value = rgar( $entry, (string) $field->id );
+
+        if ( empty( $value ) && $value !== '0' ) {
+            continue; // Skip empty fields — don't clutter the message
+        }
+
+        $lines[] = sprintf(
+            "*%s:* %s",
+            $this->escape_markdown( $field->label ),
+            $this->escape_markdown( $value )
+        );
+    }
+
+    // Footer: link to entry in WP admin
+    $lines[] = '';
+    $lines[] = sprintf(
+        "[View Entry](%s)",
+        admin_url( 'admin.php?page=gf_entries&view=entry&id=' . $form['id'] . '&lid=' . $entry['id'] )
+    );
+
+    return implode( "\n", $lines );
+}</code></pre>
+                    <p>A few decisions worth explaining here:</p>
+                    <ul>
+                        <li><strong>Empty fields are skipped.</strong> Gravity Forms often has conditional fields — fields that appear or disappear based on other answers. Including empty fields would make every message show a list of fields the user never saw.</li>
+                        <li><strong>Administrative field types are excluded.</strong> HTML blocks, section headers, page breaks, and CAPTCHA fields aren't data — they're form UI chrome. Including them in the message would be noise.</li>
+                        <li><strong>The entry link goes to the WP admin entry view.</strong> The Telegram message is a summary; the full entry (with file uploads, multi-select values, and metadata) lives in Gravity Forms. The link brings you there in one tap.</li>
+                    </ul>
+
+                    <h3>MarkdownV2 Escaping</h3>
+                    <p>Telegram's MarkdownV2 parser is strict about special characters — any of <code>_ * [ ] ( ) ~ ` > # + - = | { } . !</code> must be backslash-escaped when they appear in plain text. Customer names, email addresses, and form responses can contain any of these. The escape function handles this before any value reaches the message:</p>
+                    <pre><code>private function escape_markdown( $text ) {
+    $special_chars = [ '_', '*', '[', ']', '(', ')', '~', '`',
+                       '>', '#', '+', '-', '=', '|', '{', '}', '.', '!' ];
+    foreach ( $special_chars as $char ) {
+        $text = str_replace( $char, '\\' . $char, $text );
+    }
+    return $text;
+}</code></pre>
+                    <p>This runs on every field label and every field value before they're inserted into the message template. A customer named "O'Brien & Associates" formats correctly; an email like <code>user+filter@example.com</code> doesn't break the parser.</p>
+
+                    <h2>Sending via the Telegram Bot API</h2>
+                    <p>JF Notify uses WordPress's built-in <code>wp_remote_post()</code> to call the Telegram Bot API rather than <code>curl</code> directly. This respects any HTTP proxy settings the WordPress installation has configured, uses WordPress's SSL certificate handling, and integrates with WordPress's HTTP API filters for testing and debugging.</p>
+                    <pre><code>private function send_telegram_message( $message, $bot_token, $chat_id ) {
+    $api_url = sprintf(
+        'https://api.telegram.org/bot%s/sendMessage',
+        $bot_token
+    );
+
+    $response = wp_remote_post( $api_url, [
+        'body'    => [
+            'chat_id'                  => $chat_id,
+            'text'                     => $message,
+            'parse_mode'               => 'MarkdownV2',
+            'disable_web_page_preview' => true,
+        ],
+        'timeout' => 10,
+    ] );
+
+    if ( is_wp_error( $response ) ) {
+        // Log the error but don't surface it to the end user
+        error_log( 'JF Notify: wp_remote_post error — ' . $response->get_error_message() );
+        return false;
+    }
+
+    $status_code = wp_remote_retrieve_response_code( $response );
+    if ( $status_code !== 200 ) {
+        error_log( 'JF Notify: Telegram API returned HTTP ' . $status_code );
+        return false;
+    }
+
+    return true;
+}</code></pre>
+                    <p>The 10-second timeout is a deliberate choice. The Telegram API is fast, but if it's unreachable (network partition, Telegram outage), we don't want to hold up PHP execution for the default 30 seconds. The form submission has already been saved; this notification is best-effort.</p>
+
+                    <h2>Credential Storage and Security</h2>
+                    <p>The bot token and chat ID are stored in the WordPress options table via <code>update_option()</code>. WordPress automatically serializes the values and stores them in the <code>wp_options</code> table. For sites using a secrets manager or environment-variable-based config, there's a filter:</p>
+                    <pre><code>// Override stored credentials via environment variables or secrets manager
+$bot_token = apply_filters( 'jf_notify_bot_token', get_option( 'jf_notify_bot_token', '' ) );
+$chat_id   = apply_filters( 'jf_notify_chat_id',   get_option( 'jf_notify_chat_id',   '' ) );
+</code></pre>
+                    <p>A site that uses <code>wp-config.php</code> constants for sensitive values can add this to a must-use plugin:</p>
+                    <pre><code>// mu-plugins/jf-notify-config.php
+add_filter( 'jf_notify_bot_token', fn() => defined( 'TELEGRAM_BOT_TOKEN' ) ? TELEGRAM_BOT_TOKEN : '' );
+add_filter( 'jf_notify_chat_id',   fn() => defined( 'TELEGRAM_CHAT_ID' )   ? TELEGRAM_CHAT_ID   : '' );
+</code></pre>
+                    <p>This pattern keeps credentials out of the database entirely for environments where that matters — managed WordPress hosts that snapshot databases, agencies that share database exports with clients, staging environments that clone production. The plugin works with the options table out of the box; the filter is the escape hatch for teams with stricter requirements.</p>
+
+                    <h2>The Settings Page</h2>
+                    <p>The settings page registers under the Gravity Forms admin menu (Settings → JF Notify) using <code>add_submenu_page()</code> with Gravity Forms' own capability check:</p>
+                    <pre><code>add_submenu_page(
+    'gf_edit_forms',                   // Parent: Gravity Forms
+    'JF Notify Settings',              // Page title
+    'JF Notify',                       // Menu label
+    'gravityforms_edit_settings',      // Capability required
+    'jf-notify-settings',             // Menu slug
+    [ $this->settings, 'render_page' ] // Callback
+);</code></pre>
+                    <p>Using <code>gravityforms_edit_settings</code> as the capability means the settings page is only accessible to users who already have permission to configure Gravity Forms. There's no need to define a custom capability — the Gravity Forms permission model covers it.</p>
+                    <p>The settings page has two sections:</p>
+                    <ol>
+                        <li><strong>Credentials</strong> — Bot Token (password field, value masked) and Chat ID (text field). A "Test" button sends a test message to verify the credentials before saving.</li>
+                        <li><strong>Form Toggles</strong> — A checkbox for each active Gravity Form, showing the form name and ID. Checking the box enables Telegram notifications for that form.</li>
+                    </ol>
+
+                    <h3>The Test Button</h3>
+                    <p>The test button is a form submission that fires a separate admin action — it doesn't use the live form hook. This matters because using a live form submission to test credentials would create a fake entry in the Gravity Forms entry log, which would confuse reporting and SLA calculations:</p>
+                    <pre><code>// Registered as admin-post action
+add_action( 'admin_post_jf_notify_test', [ $this, 'handle_test_message' ] );
+
+public function handle_test_message() {
+    check_admin_referer( 'jf_notify_test' );
+
+    $bot_token = sanitize_text_field( $_POST['bot_token'] ?? get_option( 'jf_notify_bot_token', '' ) );
+    $chat_id   = sanitize_text_field( $_POST['chat_id']   ?? get_option( 'jf_notify_chat_id',   '' ) );
+
+    $result = $this->send_telegram_message(
+        "*JF Notify Test* ✓\nCredentials are working\\.",
+        $bot_token,
+        $chat_id
+    );
+
+    wp_redirect( add_query_arg(
+        'jf_notify_test',
+        $result ? 'success' : 'error',
+        wp_get_referer()
+    ) );
+    exit;
+}</code></pre>
+                    <p>The nonce check (<code>check_admin_referer</code>) prevents CSRF. The redirect with a result query param is the standard WordPress pattern for admin action feedback — no custom AJAX required.</p>
+
+                    <h2>Handling Multipart Field Values</h2>
+                    <p>Gravity Forms has several field types that store multiple values under a single field ID — Name fields (first/last/prefix/suffix), Address fields, Date fields with custom separators, and Checkbox groups. <code>rgar( $entry, $field->id )</code> returns the full serialized value for these, which can look like <code>First Last</code> for names but like <code>Array</code> when PHP serializes it badly.</p>
+                    <p>JF Notify handles multipart fields by checking the field type and reconstructing the display value using Gravity Forms' own field value API:</p>
+                    <pre><code>$value = GFFormsModel::get_lead_field_value( $entry, $field );</code></pre>
+                    <p><code>GFFormsModel::get_lead_field_value()</code> is an internal Gravity Forms method that applies the same value formatting that Gravity Forms uses in its own notification emails. This means Name fields render as "Jose Fresco", Address fields render as "123 Main St, City, ST 12345", and Checkbox groups render as a comma-separated list of selected choices. No custom handling per field type required — Gravity Forms does the work.</p>
+
+                    <h2>Edge Cases That Came Up in Production</h2>
+
+                    <h3>Long Messages</h3>
+                    <p>Telegram has a 4096-character limit per message. Contact forms that include a free-text "message" field with a generous character limit can easily produce entries that exceed this. JF Notify handles this by truncating any single field value at 1000 characters and appending an ellipsis, then truncating the full message at 4000 characters with a note to view the full entry in WordPress admin. The 4000-character limit (not 4096) gives the footer line room to avoid an off-by-one that would silently drop it.</p>
+
+                    <h3>File Upload Fields</h3>
+                    <p>File upload fields store a URL to the uploaded file, not the file itself. JF Notify renders file upload values as Telegram inline links — the field label in bold, the filename as the link text, and the URL as the href. Telegram's URL preview is disabled (<code>disable_web_page_preview: true</code>) to prevent the message from expanding into an inline image or video preview that overwhelms the notification.</p>
+
+                    <h3>Repeater Fields</h3>
+                    <p>Gravity Forms' Repeater field (available in GF 2.5+) stores nested entries as a JSON blob. The current version of JF Notify renders the raw JSON for repeater fields, which is readable but not pretty. A future release will recurse into the repeater structure and format each row as a sub-list in the Telegram message.</p>
+
+                    <h3>Entries from Non-Standard Submission Methods</h3>
+                    <p>Some Gravity Forms add-ons — notably the Partial Entries add-on — create entries via routes that don't fire <code>gform_after_submission</code>. JF Notify only handles standard submissions. Partial entries, entries created programmatically via <code>GFAPI::add_entry()</code>, and entries imported via CSV are not notified. This is intentional: a bulk CSV import would send hundreds of Telegram messages, which would be destructive.</p>
+
+                    <h2>What the Launch Post Didn't Cover</h2>
+                    <p>The <a href="/blog/jf-notify-launch-announcement.html">JF Notify launch announcement</a> covered the plugin from a product perspective — what it does, how to install it, and why you'd want it. This post covers the implementation: the hook that makes it work, the formatter that makes messages readable, and the edge cases that took several real-world form deployments to surface.</p>
+                    <p>The plugin is live at <a href="https://jfnotify.com" target="_blank" rel="noopener">jfnotify.com</a> and available on GitHub at <a href="https://github.com/josefresco/jf-notify" target="_blank" rel="noopener">github.com/josefresco/jf-notify</a>. If you're running Gravity Forms and want instant mobile alerts for form submissions — without email latency or third-party services — this is the plugin for it.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/jf-notify-launch-announcement.html" class="btn-secondary">← JF Notify Launch</a>
+                    <a href="https://github.com/josefresco/jf-notify" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom WordPress Plugin?</h2>
+                <p class="cta-description">
+                    From Gravity Forms integrations to custom REST API endpoints, I build WordPress plugins
+                    that solve specific problems cleanly — no bloat, no unnecessary dependencies, no monthly SaaS fee.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=WordPress Plugin Project&body=Hi Jose,%0D%0A%0D%0AI read your JF Notify internals post and have a similar plugin project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

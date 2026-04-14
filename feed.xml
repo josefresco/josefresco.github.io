@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts</title>
+      <link>https://josefresco.com/blog/jf-notify-plugin-internals.html</link>
+      <description>A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, per-form enable/disable toggles, MarkdownV2 escaping, multipart field handling, and the credential filter pattern that keeps bot tokens out of the WordPress database for teams with stricter security requirements.</description>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/jf-notify-plugin-internals.html</guid>
+    </item>
 
     <item>
       <title>Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation</title>
@@ -80,12 +88,5 @@
       <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
     </item>
 
-    <item>
-      <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</title>
-      <link>https://josefresco.com/blog/wpe-central-command-helper.html</link>
-      <description>A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes WordPress-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard with core version, pending updates, active plugins, maintenance mode state, and upload directory size through a single secured REST endpoint.</description>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/wpe-central-command-helper.html</guid>
-    </item>
   </channel>
 </rss>

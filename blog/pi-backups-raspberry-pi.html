@@ -323,8 +323,7 @@ crontab -e
                     <h2>Conclusion</h2>
                     <p>The Pi had been running without backups for too long. Every time an SD card corruption story popped up online, I felt a pang of anxiety about the data I'd lose if mine failed that day.</p>
                     <p>The backup scripts took about two hours to write and test. They've been running unattended every night since, confirming success with a Telegram message I barely notice anymore. That's exactly how infrastructure should work — invisible until you need it, and reliable when you do.</p>
-                    <p>The full source is available on GitHub. It's intentionally simple — read it, understand it, and adapt it to your own Pi's layout.</p>
-                </div>
+                    <p>The full source is available on GitHub at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener">github.com/josefresco/pi-backups</a>. It's intentionally simple — read it, understand it, and adapt it to your own Pi's layout.</p>
 
                     <h2>April 2026 Update</h2>
                     <p>The April 2026 release adds two significant upgrades to the backup pipeline:</p>
@@ -334,6 +333,7 @@ crontab -e
                     </ul>
                     <p>Both scripts are also registered as named commands in <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent</a>, making them triggerable on-demand from the <a href="/blog/arpy-assist-coding-agent.html">Arpy Assist</a> browser interface. The core architecture — rsync-based archiving, SSH key auth, nightly cron, 30-day retention — is unchanged.</p>
                     <p>Full details in the follow-up post: <a href="/blog/pi-backups-encryption.html">Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups →</a></p>
+                </div>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
