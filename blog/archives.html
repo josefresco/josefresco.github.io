@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Archives - Jose Fresco</title>
+    <meta name="description" content="Complete archive of all blog posts by Jose Fresco — web development, browser extensions, Raspberry Pi, AI tools, and more.">
+    <link rel="canonical" href="https://josefresco.com/blog/archives.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <meta property="og:title" content="Blog Archives - Jose Fresco">
+    <meta property="og:description" content="Complete archive of all blog posts by Jose Fresco.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://josefresco.com/blog/archives.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog Archives - Jose Fresco">
+    <meta name="twitter:description" content="Complete archive of all blog posts by Jose Fresco.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Archives", "item": "https://josefresco.com/blog/archives.html"}
+      ]
+    }
+    </script>
+
+    <style>
+        /* Archives page styles */
+        .archives-hero {
+            padding: 120px 0 40px;
+        }
+
+        .archives-controls {
+            padding: 0 0 20px;
+        }
+
+        .archives-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .archives-count {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .archives-count strong {
+            color: var(--neural-primary);
+        }
+
+        .archives-filter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .archives-filter label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .filter-select {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: border-color var(--transition-fast);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--neural-primary);
+        }
+
+        /* Year divider */
+        .year-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .year-divider:first-child {
+            margin-top: 0;
+        }
+
+        .year-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--neural-primary);
+            white-space: nowrap;
+        }
+
+        .year-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(0, 212, 255, 0.3), transparent);
+        }
+
+        /* Archive list */
+        .archives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .archive-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 0 1.5rem;
+            align-items: baseline;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background var(--transition-fast);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .archive-item:last-child {
+            border-bottom: none;
+        }
+
+        .archive-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .archive-item:hover .archive-title {
+            color: var(--neural-primary);
+        }
+
+        .archive-date {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .archive-body {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .archive-category {
+            background: var(--btn-primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            flex-shrink: 0;
+        }
+
+        .archive-title {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            transition: color var(--transition-fast);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 3rem 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.25rem;
+            height: 2.25rem;
+            padding: 0 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--neural-primary);
+            color: var(--neural-primary);
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        .page-btn.active {
+            background: var(--neural-primary);
+            border-color: var(--neural-primary);
+            color: var(--primary-bg);
+            font-weight: 600;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .page-ellipsis {
+            color: var(--text-muted);
+            padding: 0 0.25rem;
+        }
+
+        /* Empty state */
+        .archives-empty {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-muted);
+        }
+
+        .archives-empty p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .archive-item {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            .archive-date {
+                font-size: 0.75rem;
+            }
+
+            .archives-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="archives-hero">
+            <div class="container">
+                <div class="blog-header">
+                    <p class="breadcrumb" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--neural-primary);text-decoration:none;">Blog</a> &rsaquo; Archives
+                    </p>
+                    <h1 class="section-title">Blog Archives</h1>
+                    <p class="section-subtitle">Every post, in chronological order — newest first</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="archives-controls">
+            <div class="container">
+                <div class="archives-toolbar">
+                    <p class="archives-count" id="archives-count"></p>
+                    <div class="archives-filter">
+                        <label for="category-filter">Filter by category:</label>
+                        <select id="category-filter" class="filter-select">
+                            <option value="">All categories</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding-bottom: 20px;">
+            <div class="container">
+                <div id="archives-list" class="archives-list"></div>
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+    <script>
+    (function () {
+        const POSTS_PER_PAGE = 10;
+
+        const ALL_POSTS = [
+            { date: '2026-04-14', category: 'WordPress',              title: 'Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts',                     url: '/blog/jf-notify-plugin-internals.html' },
+            { date: '2026-04-13', category: 'Web Development',        title: 'Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation',                         url: '/blog/watch-list-vercel-deploy.html' },
+            { date: '2026-04-12', category: 'Raspberry Pi',           title: 'Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups',                                    url: '/blog/pi-backups-encryption.html' },
+            { date: '2026-04-11', category: 'AI & Automation',        title: 'Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos',        url: '/blog/arpy-assist-coding-agent.html' },
+            { date: '2026-04-10', category: 'Web Development',        title: 'Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth',     url: '/blog/watch-list-internals.html' },
+            { date: '2026-04-09', category: 'Web Development',        title: 'Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks',               url: '/blog/developer-portfolio-performance.html' },
+            { date: '2026-04-08', category: 'Web Development',        title: 'Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection',                     url: '/blog/family-dash-v330.html' },
+            { date: '2026-04-06', category: 'Browser Extension',      title: 'Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API',                        url: '/blog/save-to-my-blog-extension-internals.html' },
+            { date: '2026-04-05', category: 'Web Development',        title: 'Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon',                                          url: '/blog/family-dash-vercel-caldav-setup.html' },
+            { date: '2026-04-03', category: 'Web Development',        title: 'Building the JF Notify Marketing Site with Eleventy',                                                            url: '/blog/jf-notify-website.html' },
+            { date: '2026-03-28', category: 'WordPress',              title: 'WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap',                             url: '/blog/wpe-central-command-helper.html' },
+            { date: '2026-03-27', category: 'Web Development',        title: 'JF Website Monitor: How Content Change Detection Works Under the Hood',                                          url: '/blog/jf-website-monitor-content-change-detection.html' },
+            { date: '2026-03-26', category: 'Raspberry Pi',           title: 'Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation',                                              url: '/blog/raspberry-pi-agent.html' },
+            { date: '2026-03-25', category: 'Browser Extension',      title: 'Who Dis: Building a Right-Click IP Lookup Chrome Extension',                                                    url: '/blog/who-dis-chrome-extension.html' },
+            { date: '2026-03-24', category: 'WordPress',              title: 'WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites',                                  url: '/blog/wpe-central-command.html' },
+            { date: '2026-03-23', category: 'Raspberry Pi',           title: 'Pi Backups: Automating Offsite Backups for Raspberry Pi Applications',                                           url: '/blog/pi-backups-raspberry-pi.html' },
+            { date: '2026-03-20', category: 'Web Development',        title: 'SafeShare: Friction-Free Reddit Sharing with Next.js and a One-Click Bookmarklet',                               url: '/blog/safeshare-reddit-bookmarklet.html' },
+            { date: '2026-03-18', category: 'AI & Automation',        title: 'Arpy Assist: Qwen CLI Web Interface for Raspberry Pi',                                                           url: '/blog/arpy-assist-qwen-web-interface.html' },
+            { date: '2026-03-15', category: 'Web Development',        title: 'Watch List: A Private JustWatch Alternative PWA Powered by TMDB',                                               url: '/blog/watch-list-pwa.html' },
+            { date: '2026-03-07', category: 'Product Launch',         title: 'JF Notify Launches — Instant Telegram Notifications for Gravity Forms',                                         url: '/blog/jf-notify-launch-announcement.html' },
+            { date: '2026-02-07', category: 'Web Monitoring',         title: 'SLA Reporting with JF Website Monitor — Comprehensive Uptime Analytics',                                        url: '/blog/sla-reporting-jf-website-monitor.html' },
+            { date: '2026-02-07', category: 'Web Development',        title: 'Moving JF Website Monitor from Vercel to Self-Hosting — Cost & Control',                                        url: '/blog/jf-website-monitor-self-hosting-migration.html' },
+            { date: '2026-01-30', category: 'Hardware Review',        title: "Geekworm P173 Case: How This Aluminum Alloy Housing Dropped My Pi's CPU Temp by 20\u00b0C",                     url: '/blog/geekworm-p173-raspberry-pi-case-cooling-solution.html' },
+            { date: '2026-01-25', category: 'AI & Automation',        title: "My Raspberry Pi's New Job: From Web Host to AI Command Center",                                                  url: '/blog/pi-qwen-cli-workflow.html' },
+            { date: '2026-01-24', category: 'Web Hosting',            title: 'Moving Hosting from Raspberry Pi to GitHub Pages with Gemini AI',                                               url: '/blog/moving-hosting-to-github-pages-with-gemini-ai.html' },
+            { date: '2026-01-24', category: 'Web Development',        title: "Your Website Is 'Up,' But Is It Yours? Why Uptime Monitoring Isn't Enough",                                     url: '/blog/why-uptime-is-not-enough.html' },
+            { date: '2026-01-24', category: 'Product Launch',         title: 'Introducing JF Website Monitor: More Than Just Uptime',                                                         url: '/blog/jf-website-monitor-launch.html' },
+            { date: '2026-01-24', category: 'Web Development',        title: 'Family Dashboard Evolution: Personality, Cleanup, and CalDAV Mastery',                                          url: '/blog/family-dashboard-evolution.html' },
+            { date: '2025-10-01', category: 'Browser Extension',      title: 'Save to My Blog: 2-Click WordPress Content Curation Chrome Extension',                                          url: '/blog/save-to-my-blog.html' },
+            { date: '2025-09-01', category: 'IoT & Monitoring',       title: 'Building a Telegram Bot for Raspberry Pi Monitoring and Remote Control',                                        url: '/blog/telegram-pi-monitoring-bot.html' },
+            { date: '2025-08-01', category: 'Browser Extension',      title: 'Quick IP Lookups with Browser Extensions',                                                                      url: '/blog/who-dis-ip-lookup.html' },
+            { date: '2025-08-01', category: 'WordPress',              title: 'Simplifying WordPress PDF Management',                                                                          url: '/blog/easy-pdf-insert.html' },
+            { date: '2025-08-01', category: 'WordPress',              title: 'Automated WordPress Backups Beyond Daily',                                                                      url: '/blog/wpengine-backup-scheduler.html' },
+            { date: '2025-08-01', category: 'Time Tracking',          title: 'Building a Gamified Time Tracking Dashboard',                                                                   url: '/blog/breeze-time-tracker-dashboard.html' },
+            { date: '2025-08-01', category: 'Browser Extension',      title: 'Curating Your Reddit Feed with Smart Filtering',                                                                url: '/blog/reddit-post-hider.html' },
+            { date: '2025-08-01', category: 'Family Tech',            title: 'Creating a Shared Family Dashboard',                                                                            url: '/blog/family-dashboard.html' },
+            { date: '2024-11-01', category: 'Browser Extension',      title: 'Reddit Post Hider v3.0: Major Refactor for Reliability',                                                        url: '/blog/reddit-post-hider-v3.html' },
+        ];
+
+        function formatDate(iso) {
+            const [y, m, d] = iso.split('-');
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            return months[parseInt(m, 10) - 1] + ' ' + d + ', ' + y;
+        }
+
+        function getYear(iso) {
+            return iso.split('-')[0];
+        }
+
+        let currentPage = 1;
+        let filteredPosts = ALL_POSTS.slice();
+
+        // Populate category filter
+        const categories = [...new Set(ALL_POSTS.map(p => p.category))].sort();
+        const select = document.getElementById('category-filter');
+        categories.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            select.appendChild(opt);
+        });
+
+        select.addEventListener('change', function () {
+            const val = this.value;
+            filteredPosts = val ? ALL_POSTS.filter(p => p.category === val) : ALL_POSTS.slice();
+            currentPage = 1;
+            render();
+        });
+
+        function render() {
+            const total = filteredPosts.length;
+            const totalPages = Math.ceil(total / POSTS_PER_PAGE);
+            const start = (currentPage - 1) * POSTS_PER_PAGE;
+            const end = Math.min(start + POSTS_PER_PAGE, total);
+            const pagePosts = filteredPosts.slice(start, end);
+
+            // Count
+            const countEl = document.getElementById('archives-count');
+            if (total === 0) {
+                countEl.innerHTML = 'No posts found';
+            } else {
+                countEl.innerHTML = 'Showing <strong>' + (start + 1) + '&ndash;' + end + '</strong> of <strong>' + total + '</strong> posts';
+            }
+
+            // List
+            const listEl = document.getElementById('archives-list');
+            listEl.innerHTML = '';
+
+            if (total === 0) {
+                listEl.innerHTML = '<div class="archives-empty"><strong>No posts in this category.</strong><p>Try selecting a different filter above.</p></div>';
+            } else {
+                let lastYear = null;
+                pagePosts.forEach(function (post) {
+                    const year = getYear(post.date);
+                    if (year !== lastYear) {
+                        lastYear = year;
+                        const divider = document.createElement('div');
+                        divider.className = 'year-divider';
+                        divider.innerHTML = '<span class="year-label">' + year + '</span><span class="year-line"></span>';
+                        listEl.appendChild(divider);
+                    }
+
+                    const a = document.createElement('a');
+                    a.href = post.url;
+                    a.className = 'archive-item';
+                    a.innerHTML =
+                        '<span class="archive-date">' + formatDate(post.date) + '</span>' +
+                        '<span class="archive-body">' +
+                            '<span class="archive-category">' + post.category + '</span>' +
+                            '<span class="archive-title">' + post.title + '</span>' +
+                        '</span>';
+                    listEl.appendChild(a);
+                });
+            }
+
+            // Pagination
+            const pagEl = document.getElementById('pagination');
+            pagEl.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            function btn(label, page, disabled, active) {
+                const b = document.createElement('button');
+                b.className = 'page-btn' + (active ? ' active' : '');
+                b.textContent = label;
+                b.disabled = !!disabled;
+                if (!disabled && !active) {
+                    b.addEventListener('click', function () {
+                        currentPage = page;
+                        render();
+                        document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+                return b;
+            }
+
+            pagEl.appendChild(btn('\u2190 Prev', currentPage - 1, currentPage === 1));
+
+            for (let p = 1; p <= totalPages; p++) {
+                if (totalPages > 7 && p > 2 && p < totalPages - 1 && Math.abs(p - currentPage) > 1) {
+                    if ((p === 3 && currentPage > 4) || (p === totalPages - 2 && currentPage < totalPages - 3)) {
+                        const dots = document.createElement('span');
+                        dots.className = 'page-ellipsis';
+                        dots.textContent = '\u2026';
+                        pagEl.appendChild(dots);
+                    }
+                    continue;
+                }
+                pagEl.appendChild(btn(p, p, false, p === currentPage));
+            }
+
+            pagEl.appendChild(btn('Next \u2192', currentPage + 1, currentPage === totalPages));
+        }
+
+        render();
+    })();
+    </script>
+</body>
+</html>
