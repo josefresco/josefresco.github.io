@@ -129,7 +129,7 @@
                     <div class="about-visual">
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <span class="stat-number">6</span>
+                                <span class="stat-number" id="repo-count">—</span>
                                 <span class="stat-label">GitHub Projects</span>
                             </div>
                             <div class="stat-item">
@@ -180,6 +180,16 @@
         </div>
     </footer>
 
-    <script src="/script.js"></script>
+    <script src="/global-header.js" defer></script>
+    <script src="/script.js" defer></script>
+    <script>
+        fetch('https://api.github.com/users/josefresco')
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function (u) {
+                var el = document.getElementById('repo-count');
+                if (el) el.textContent = u.public_repos;
+            })
+            .catch(function () { /* leave the dash */ });
+    </script>
 </body>
 </html>
