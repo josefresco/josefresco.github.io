@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/arpy-assist-coding-agent.svg" type="image/svg+xml">
+                        <img src="images/arpy-assist-coding-agent.svg" alt="Arpy Assist coding agent architecture" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="/blog/arpy-assist-qwen-web-interface.html" style="color: var(--neural-primary);">Arpy Assist</a> started as a web wrapper for the Qwen CLI. It's now a full coding agent: it runs Claude Code on the Pi, integrates with the <a href="/blog/raspberry-pi-agent.html" style="color: var(--neural-primary);">raspberry-pi-agent</a> command dispatcher, and handles autonomous git workflows — clone, edit, commit, push — triggered by a single browser request. The key upgrade was swapping the "ask and answer" model for an "ask and do" agent loop that can actually change files and ship code.

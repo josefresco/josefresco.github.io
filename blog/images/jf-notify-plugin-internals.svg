@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Step 1: Gravity Forms submission -->
+  <rect x="30" y="130" width="160" height="130" rx="10" fill="#0f1117" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="110" y="155" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#f59e0b" text-anchor="middle">Gravity Forms</text>
+  <!-- Form fields -->
+  <rect x="45" y="163" width="130" height="16" rx="4" fill="#1a1d29"/>
+  <text x="52" y="174" font-family="monospace" font-size="8" fill="#94a3b8">Name: John Smith</text>
+  <rect x="45" y="183" width="130" height="16" rx="4" fill="#1a1d29"/>
+  <text x="52" y="194" font-family="monospace" font-size="8" fill="#94a3b8">Email: john@...</text>
+  <rect x="45" y="203" width="130" height="16" rx="4" fill="#1a1d29"/>
+  <text x="52" y="214" font-family="monospace" font-size="8" fill="#94a3b8">Message: Hi...</text>
+  <!-- Submit button -->
+  <rect x="65" y="224" width="90" height="22" rx="4" fill="#f59e0b" opacity="0.8"/>
+  <text x="110" y="239" font-family="Inter,sans-serif" font-size="10" fill="black" text-anchor="middle" font-weight="700">Submit</text>
+
+  <!-- Arrow -->
+  <line x1="192" y1="195" x2="235" y2="195" stroke="#f59e0b" stroke-width="1.5"/>
+  <polygon points="231,190 239,195 231,200" fill="#f59e0b"/>
+  <text x="213" y="188" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">gform_after</text>
+  <text x="213" y="200" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">_submission</text>
+
+  <!-- Step 2: PHP Plugin -->
+  <rect x="239" y="110" width="200" height="170" rx="12" fill="#0f1117" stroke="#7c3aed" stroke-width="2"/>
+  <text x="339" y="135" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#7c3aed" text-anchor="middle">JF Notify Plugin</text>
+  <!-- Hook code -->
+  <rect x="254" y="143" width="170" height="110" rx="6" fill="#0a0b0f"/>
+  <text x="262" y="158" font-family="monospace" font-size="8" fill="#94a3b8">add_action(</text>
+  <text x="262" y="170" font-family="monospace" font-size="8" fill="#00d4ff">  'gform_after_submission',</text>
+  <text x="262" y="182" font-family="monospace" font-size="8" fill="#f59e0b">  [$this, 'handle_entry'],</text>
+  <text x="262" y="194" font-family="monospace" font-size="8" fill="#94a3b8">  10, 2</text>
+  <text x="262" y="206" font-family="monospace" font-size="8" fill="#94a3b8">);</text>
+  <text x="262" y="222" font-family="monospace" font-size="8" fill="#22c55e">// escape MarkdownV2</text>
+  <text x="262" y="234" font-family="monospace" font-size="8" fill="#22c55e">// build_message()</text>
+  <text x="262" y="246" font-family="monospace" font-size="8" fill="#22c55e">// send_telegram()</text>
+
+  <!-- Arrow -->
+  <line x1="441" y1="195" x2="484" y2="195" stroke="#7c3aed" stroke-width="1.5"/>
+  <polygon points="480,190 488,195 480,200" fill="#7c3aed"/>
+  <text x="462" y="188" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Bot API</text>
+  <text x="462" y="200" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">sendMessage</text>
+
+  <!-- Step 3: Telegram message -->
+  <rect x="488" y="120" width="260" height="160" rx="10" fill="#0f1117" stroke="#229ED9" stroke-width="1.5"/>
+  <text x="618" y="145" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#229ED9" text-anchor="middle">Telegram</text>
+  <!-- Chat bubble -->
+  <rect x="504" y="155" width="228" height="110" rx="8" fill="#1a2230"/>
+  <rect x="510" y="161" width="210" height="98" rx="6" fill="#1a4a6e"/>
+  <text x="520" y="178" font-family="monospace" font-size="9" fill="#229ED9" font-weight="700">🔔 New Form Entry</text>
+  <text x="520" y="194" font-family="monospace" font-size="8" fill="#e0e0e0">Form: Contact Us</text>
+  <text x="520" y="208" font-family="monospace" font-size="8" fill="#e0e0e0">Name: John Smith</text>
+  <text x="520" y="222" font-family="monospace" font-size="8" fill="#e0e0e0">Email: john@example.com</text>
+  <text x="520" y="236" font-family="monospace" font-size="8" fill="#e0e0e0">Message: Hi, I'd like to...</text>
+  <text x="700" y="252" font-family="monospace" font-size="7" fill="#94a3b8" text-anchor="end">12:34 ✓✓</text>
+
+  <!-- Credentials note at bottom -->
+  <rect x="239" y="300" width="200" height="44" rx="8" fill="#0f1117" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="339" y="318" font-family="monospace" font-size="9" fill="#ef4444" text-anchor="middle">Credentials via filter hook</text>
+  <text x="339" y="334" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">never stored in DB</text>
+
+  <text x="400" y="393" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">JF Notify Plugin Internals</text>
+  <text x="400" y="416" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">PHP Hooks · Gravity Forms · Telegram Bot API</text>
+</svg>

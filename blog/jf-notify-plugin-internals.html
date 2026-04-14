@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-notify-plugin-internals.svg" type="image/svg+xml">
+                        <img src="images/jf-notify-plugin-internals.svg" alt="JF Notify plugin internals flow diagram" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://jfnotify.com" target="_blank" rel="noopener" style="color: var(--neural-primary);">JF Notify</a> is a WordPress plugin that listens for Gravity Forms entry submissions via the <code>gform_after_submission</code> action hook, formats the entry data as a Telegram message, and POSTs it to the Bot API using WordPress's own <code>wp_remote_post()</code>. The plugin stores the Telegram bot token and chat ID in the WordPress options table (encrypted at rest), exposes a settings page under the Gravity Forms admin menu, and includes per-form enable/disable toggles so noisy contact forms don't generate noise on forms that matter. This post covers the hook architecture, message formatter, settings UI, and the edge cases that came up during real-world use.

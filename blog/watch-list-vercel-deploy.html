@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/watch-list-vercel-deploy.svg" type="image/svg+xml">
+                        <img src="images/watch-list-vercel-deploy.svg" alt="Watch List Vercel deployment diagram" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener" style="color: var(--neural-primary);">Watch List</a> is a privacy-focused movie and TV tracking PWA that runs on TMDB's free API. Deploying it requires three credentials (API key, read access token, and session ID) injected at build time via <code>build.js</code>, a Vercel project with those values set as environment variables, and a one-time trigger of the build hook. This guide takes you from fork to installable app in about 15 minutes, including the non-obvious TMDB session ID step that isn't documented in the README.

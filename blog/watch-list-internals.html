@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/watch-list-internals.svg" type="image/svg+xml">
+                        <img src="images/watch-list-internals.svg" alt="Watch List PWA single-file architecture" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> The <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener">watch-list repo</a> is a private streaming tracker PWA that lives entirely in one HTML file. Secrets never enter version control — a <code>build.js</code> script injects environment variables at deploy time via token substitution. TMDB session authentication syncs the watchlist to a real TMDB account. Streaming providers are filtered by configurable constants (<code>MY_SERVICES</code>, <code>EXCLUDED_PROVIDERS</code>), and an optional PIN gates adult content. This post covers the architecture decisions behind each of those choices.

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Pi board -->
+  <rect x="50" y="145" width="160" height="110" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="62" y="157" width="136" height="86" rx="4" fill="#0d1a0d"/>
+  <g fill="#22c55e" opacity="0.6">
+    <circle cx="78" cy="170" r="3"/><circle cx="90" cy="170" r="3"/><circle cx="102" cy="170" r="3"/>
+    <circle cx="114" cy="170" r="3"/><circle cx="126" cy="170" r="3"/><circle cx="138" cy="170" r="3"/>
+    <circle cx="78" cy="182" r="3"/><circle cx="90" cy="182" r="3"/><circle cx="102" cy="182" r="3"/>
+  </g>
+  <rect x="90" y="192" width="52" height="28" rx="4" fill="#1a2e1a" stroke="#22c55e" stroke-width="1"/>
+  <text x="116" y="210" font-family="monospace" font-size="8" fill="#22c55e" text-anchor="middle">Pi 4B</text>
+  <text x="116" y="273" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Raspberry Pi</text>
+
+  <!-- Arrow to Claude Code -->
+  <line x1="212" y1="200" x2="268" y2="200" stroke="#22c55e" stroke-width="1.5"/>
+  <polygon points="264,195 272,200 264,205" fill="#22c55e"/>
+
+  <!-- Claude Code box -->
+  <rect x="272" y="145" width="180" height="110" rx="12" fill="#0f1117" stroke="url(#ai)" stroke-width="2"/>
+  <text x="362" y="178" font-family="Inter,sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">Claude Code</text>
+  <text x="362" y="198" font-family="monospace" font-size="9" fill="#00d4ff" text-anchor="middle">claude --dangerously</text>
+  <text x="362" y="212" font-family="monospace" font-size="9" fill="#00d4ff" text-anchor="middle">-skip-permissions</text>
+  <rect x="292" y="222" width="140" height="18" rx="4" fill="#1a1d29"/>
+  <text x="362" y="234" font-family="monospace" font-size="9" fill="#22c55e" text-anchor="middle">✓ Autonomous mode</text>
+
+  <!-- Outputs -->
+  <!-- git commit -->
+  <rect x="510" y="80" width="220" height="48" rx="8" fill="#0f1117" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="525" y="100" font-family="monospace" font-size="10" fill="#f59e0b">git commit -m "..."</text>
+  <text x="525" y="116" font-family="monospace" font-size="9" fill="#94a3b8">Autonomous commits to repo</text>
+
+  <!-- git push -->
+  <rect x="510" y="140" width="220" height="48" rx="8" fill="#0f1117" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="525" y="160" font-family="monospace" font-size="10" fill="#00d4ff">git push origin main</text>
+  <text x="525" y="176" font-family="monospace" font-size="9" fill="#94a3b8">Push from Pi to GitHub</text>
+
+  <!-- file edit -->
+  <rect x="510" y="200" width="220" height="48" rx="8" fill="#0f1117" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="525" y="220" font-family="monospace" font-size="10" fill="#7c3aed">Edit / Write / Read</text>
+  <text x="525" y="236" font-family="monospace" font-size="9" fill="#94a3b8">Full file system access</text>
+
+  <!-- browser dispatch -->
+  <rect x="510" y="260" width="220" height="48" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="525" y="280" font-family="monospace" font-size="10" fill="#22c55e">dispatch via browser</text>
+  <text x="525" y="296" font-family="monospace" font-size="9" fill="#94a3b8">Arpy Assist web UI</text>
+
+  <!-- Arrows from Claude Code to outputs -->
+  <g stroke="#2a2d3a" stroke-width="1.5">
+    <line x1="454" y1="175" x2="506" y2="104"/><polygon points="502,100 510,104 503,110" fill="#2a2d3a" stroke="none"/>
+    <line x1="454" y1="190" x2="506" y2="164"/><polygon points="502,160 510,164 503,170" fill="#2a2d3a" stroke="none"/>
+    <line x1="454" y1="205" x2="506" y2="224"/><polygon points="502,220 510,224 503,230" fill="#2a2d3a" stroke="none"/>
+    <line x1="454" y1="220" x2="506" y2="284"/><polygon points="502,280 510,284 503,290" fill="#2a2d3a" stroke="none"/>
+  </g>
+
+  <text x="400" y="393" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">Arpy Assist — Coding Agent</text>
+  <text x="400" y="416" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Claude Code · Autonomous Commits · Pi-Powered</text>
+</svg>

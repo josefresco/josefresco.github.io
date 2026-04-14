@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="220" r="240" fill="#00d4ff" opacity="0.025"/>
+
+  <!-- Step 1: TMDB credentials -->
+  <rect x="30" y="100" width="155" height="110" rx="10" fill="#0f1117" stroke="#01b4e4" stroke-width="1.5"/>
+  <text x="107" y="125" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#01b4e4" text-anchor="middle">TMDB Setup</text>
+  <text x="50" y="145" font-family="monospace" font-size="9" fill="#94a3b8">API_KEY=</text>
+  <rect x="50" y="148" width="120" height="8" rx="2" fill="#1a1d29"/>
+  <text x="50" y="168" font-family="monospace" font-size="9" fill="#94a3b8">READ_TOKEN=</text>
+  <rect x="50" y="171" width="120" height="8" rx="2" fill="#1a1d29"/>
+  <text x="50" y="191" font-family="monospace" font-size="9" fill="#22c55e">Session ID →</text>
+  <text x="107" y="204" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">persistent watchlist</text>
+
+  <!-- Arrow 1 -->
+  <line x1="187" y1="155" x2="233" y2="155" stroke="#2a2d3a" stroke-width="1.5"/>
+  <polygon points="229,150 237,155 229,160" fill="#2a2d3a"/>
+
+  <!-- Step 2: Env vars in Vercel -->
+  <rect x="237" y="100" width="155" height="110" rx="10" fill="#0f1117" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="314" y="125" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#f59e0b" text-anchor="middle">Vercel Env Vars</text>
+  <rect x="252" y="135" width="125" height="16" rx="4" fill="#1a1d29"/>
+  <text x="314" y="147" font-family="monospace" font-size="8" fill="#f59e0b" text-anchor="middle">TMDB_API_KEY = ***</text>
+  <rect x="252" y="157" width="125" height="16" rx="4" fill="#1a1d29"/>
+  <text x="314" y="169" font-family="monospace" font-size="8" fill="#f59e0b" text-anchor="middle">TMDB_TOKEN = ***</text>
+  <rect x="252" y="179" width="125" height="16" rx="4" fill="#1a1d29"/>
+  <text x="314" y="191" font-family="monospace" font-size="8" fill="#f59e0b" text-anchor="middle">SESSION_ID = ***</text>
+
+  <!-- Arrow 2 -->
+  <line x1="394" y1="155" x2="434" y2="155" stroke="#2a2d3a" stroke-width="1.5"/>
+  <polygon points="430,150 438,155 430,160" fill="#2a2d3a"/>
+
+  <!-- Step 3: Vercel build + deploy -->
+  <rect x="438" y="100" width="155" height="110" rx="10" fill="#0f1117" stroke="white" stroke-width="1.5"/>
+  <!-- Vercel triangle -->
+  <polygon points="516,118 497,148 535,148" fill="white" opacity="0.9"/>
+  <text x="516" y="168" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Vercel Deploy</text>
+  <text x="516" y="183" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">build.js injects</text>
+  <text x="516" y="196" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">secrets → HTML</text>
+
+  <!-- Arrow 3 -->
+  <line x1="595" y1="155" x2="635" y2="155" stroke="#2a2d3a" stroke-width="1.5"/>
+  <polygon points="631,150 639,155 631,160" fill="#2a2d3a"/>
+
+  <!-- Step 4: Live URL -->
+  <rect x="639" y="100" width="130" height="110" rx="10" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="704" y="125" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#22c55e" text-anchor="middle">Live PWA</text>
+  <rect x="654" y="135" width="100" height="60" rx="6" fill="#1a1d29"/>
+  <rect x="658" y="138" width="92" height="8" rx="2" fill="#00d4ff" opacity="0.4"/>
+  <rect x="658" y="150" width="92" height="20" rx="2" fill="#2a2d3a"/>
+  <rect x="658" y="174" width="92" height="16" rx="2" fill="#2a2d3a"/>
+  <text x="704" y="206" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">your-app.vercel.app</text>
+
+  <!-- PWA install instructions section -->
+  <rect x="100" y="255" width="600" height="100" rx="12" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+  <text x="400" y="280" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">Install as PWA</text>
+
+  <!-- iOS -->
+  <rect x="130" y="292" width="160" height="44" rx="8" fill="#1a1d29"/>
+  <text x="210" y="308" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">iOS Safari</text>
+  <text x="210" y="326" font-family="monospace" font-size="9" fill="#00d4ff" text-anchor="middle">Share → Add to Home</text>
+
+  <!-- Android -->
+  <rect x="320" y="292" width="160" height="44" rx="8" fill="#1a1d29"/>
+  <text x="400" y="308" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">Android Chrome</text>
+  <text x="400" y="326" font-family="monospace" font-size="9" fill="#00d4ff" text-anchor="middle">Menu → Install App</text>
+
+  <!-- Desktop -->
+  <rect x="510" y="292" width="160" height="44" rx="8" fill="#1a1d29"/>
+  <text x="590" y="308" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">Desktop</text>
+  <text x="590" y="326" font-family="monospace" font-size="9" fill="#00d4ff" text-anchor="middle">Address bar → Install</text>
+
+  <text x="400" y="393" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">Deploying Watch List on Vercel</text>
+  <text x="400" y="416" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">TMDB · Environment Variables · PWA Installation</text>
+</svg>

@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups-encryption.svg" type="image/svg+xml">
+                        <img src="images/pi-backups-encryption.svg" alt="Pi backups GPG encryption flow" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> The April 2026 update to <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">pi-backups</a> adds two things: GPG symmetric encryption of backup archives before transfer (so your hosting provider can't read your data in transit or at rest), and an automated <code>verify.sh</code> script that downloads, decrypts, and spot-checks a recent backup — then reports pass or fail via Telegram. The <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original rsync + SSH + cron architecture</a> is unchanged.

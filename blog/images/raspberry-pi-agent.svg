@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="200" r="220" fill="#7c3aed" opacity="0.04"/>
+
+  <!-- Central agent box -->
+  <rect x="300" y="150" width="200" height="120" rx="12" fill="#0f1117" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="300" y="150" width="200" height="32" rx="12" fill="#1a1d29"/>
+  <rect x="300" y="170" width="200" height="12" fill="#1a1d29"/>
+  <text x="400" y="172" font-family="monospace" font-size="11" fill="#94a3b8" text-anchor="middle">pi_agent.py</text>
+  <text x="400" y="205" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#7c3aed" text-anchor="middle">Command</text>
+  <text x="400" y="223" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#7c3aed" text-anchor="middle">Dispatcher</text>
+  <text x="400" y="248" font-family="monospace" font-size="10" fill="#22c55e" text-anchor="middle">dispatch(cmd, args)</text>
+
+  <!-- Pi board on left -->
+  <rect x="60" y="162" width="140" height="96" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="75" y="175" width="110" height="70" rx="4" fill="#0d1f0d"/>
+  <!-- GPIO dots -->
+  <g fill="#22c55e" opacity="0.7">
+    <circle cx="90" cy="188" r="3"/><circle cx="103" cy="188" r="3"/><circle cx="116" cy="188" r="3"/>
+    <circle cx="129" cy="188" r="3"/><circle cx="142" cy="188" r="3"/><circle cx="155" cy="188" r="3"/>
+    <circle cx="90" cy="200" r="3"/><circle cx="103" cy="200" r="3"/><circle cx="116" cy="200" r="3"/>
+    <circle cx="129" cy="200" r="3"/><circle cx="142" cy="200" r="3"/><circle cx="155" cy="200" r="3"/>
+  </g>
+  <!-- CPU chip -->
+  <rect x="100" y="210" width="50" height="24" rx="4" fill="#1a2e1a" stroke="#22c55e" stroke-width="1"/>
+  <text x="125" y="226" font-family="monospace" font-size="8" fill="#22c55e" text-anchor="middle">BCM2711</text>
+  <text x="130" y="250" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Raspberry Pi</text>
+  <!-- Arrow to agent -->
+  <line x1="200" y1="210" x2="296" y2="210" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <polygon points="292,205 300,210 292,215" fill="#22c55e"/>
+
+  <!-- Output commands on right -->
+  <!-- Shell exec -->
+  <rect x="545" y="90" width="155" height="46" rx="8" fill="#0f1117" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="560" y="107" font-family="monospace" font-size="10" fill="#00d4ff">$ shell_exec()</text>
+  <text x="560" y="122" font-family="monospace" font-size="9" fill="#94a3b8">subprocess.run(cmd)</text>
+  <!-- Service check -->
+  <rect x="545" y="148" width="155" height="46" rx="8" fill="#0f1117" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="560" y="165" font-family="monospace" font-size="10" fill="#f59e0b">$ service_check()</text>
+  <text x="560" y="180" font-family="monospace" font-size="9" fill="#94a3b8">systemctl status</text>
+  <!-- File ops -->
+  <rect x="545" y="206" width="155" height="46" rx="8" fill="#0f1117" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="560" y="223" font-family="monospace" font-size="10" fill="#7c3aed">$ file_read()</text>
+  <text x="560" y="238" font-family="monospace" font-size="9" fill="#94a3b8">open / read / write</text>
+  <!-- System stats -->
+  <rect x="545" y="264" width="155" height="46" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="560" y="281" font-family="monospace" font-size="10" fill="#22c55e">$ sys_stats()</text>
+  <text x="560" y="296" font-family="monospace" font-size="9" fill="#94a3b8">cpu · mem · disk</text>
+
+  <!-- Arrows from agent to commands -->
+  <g stroke="#2a2d3a" stroke-width="1.5" fill="none">
+    <line x1="500" y1="185" x2="540" y2="113"/><polygon points="536,110 544,113 538,119" fill="#2a2d3a" stroke="none"/>
+    <line x1="500" y1="200" x2="540" y2="171"/><polygon points="536,167 544,171 537,177" fill="#2a2d3a" stroke="none"/>
+    <line x1="500" y1="215" x2="540" y2="229"/><polygon points="536,225 544,229 537,235" fill="#2a2d3a" stroke="none"/>
+    <line x1="500" y1="230" x2="540" y2="287"/><polygon points="536,283 544,287 537,293" fill="#2a2d3a" stroke="none"/>
+  </g>
+
+  <text x="400" y="395" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">Raspberry Pi Agent</text>
+  <text x="400" y="418" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Python · Command Dispatcher · Pi Automation</text>
+</svg>

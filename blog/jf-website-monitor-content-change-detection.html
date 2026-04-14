@@ -127,6 +127,13 @@
                     </div>
                 </div>
 
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-website-monitor-content-change.svg" type="image/svg+xml">
+                        <img src="images/jf-website-monitor-content-change.svg" alt="Content change detection diagram" class="blog-hero-image">
+                    </picture>
+                </div>
+
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
                         <strong style="color: var(--text-primary);">TL;DR:</strong> Uptime checks tell you a site is responding — they don't tell you the homepage pricing quietly changed, or the product you're tracking went back in stock. <a href="/blog/jf-website-monitor-launch.html" style="color: var(--neural-primary);">JF Website Monitor</a> ships a content change detection engine alongside its uptime checks. This post covers how that engine actually works: HTML normalization, SHA-256 fingerprinting, CSS selector targeting, and how we filter noise from meaningful changes to avoid alert fatigue.

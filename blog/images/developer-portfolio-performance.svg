@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/>
+      <stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="scoreGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="200" r="250" fill="#00d4ff" opacity="0.03"/>
+
+  <!-- Central score circle -->
+  <circle cx="400" cy="195" r="100" fill="none" stroke="#1a1d29" stroke-width="16"/>
+  <circle cx="400" cy="195" r="100" fill="none" stroke="url(#scoreGrad)" stroke-width="16"
+          stroke-dasharray="565" stroke-dashoffset="57" stroke-linecap="round"
+          transform="rotate(-90 400 195)"/>
+  <text x="400" y="185" font-family="Inter,sans-serif" font-size="52" font-weight="800" fill="white" text-anchor="middle">98</text>
+  <text x="400" y="208" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Performance</text>
+
+  <!-- Metric pills around the circle -->
+  <!-- FCP -->
+  <g transform="translate(170,100)">
+    <rect width="110" height="50" rx="8" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+    <text x="55" y="19" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">First Contentful Paint</text>
+    <text x="55" y="38" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#22c55e" text-anchor="middle">0.4s</text>
+    <line x1="110" y1="25" x2="280" y2="80" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- LCP -->
+  <g transform="translate(520,100)">
+    <rect width="110" height="50" rx="8" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+    <text x="55" y="19" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Largest Content Paint</text>
+    <text x="55" y="38" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#22c55e" text-anchor="middle">0.8s</text>
+    <line x1="0" y1="25" x2="-165" y2="80" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- TBT -->
+  <g transform="translate(155,250)">
+    <rect width="110" height="50" rx="8" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+    <text x="55" y="19" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Total Blocking Time</text>
+    <text x="55" y="38" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#22c55e" text-anchor="middle">0ms</text>
+    <line x1="110" y1="25" x2="275" y2="-35" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- CLS -->
+  <g transform="translate(535,250)">
+    <rect width="110" height="50" rx="8" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+    <text x="55" y="19" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Cumul. Layout Shift</text>
+    <text x="55" y="38" font-family="Inter,sans-serif" font-size="18" font-weight="700" fill="#22c55e" text-anchor="middle">0.000</text>
+    <line x1="0" y1="25" x2="-175" y2="-35" stroke="#2a2d3a" stroke-width="1" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- Stack badges at bottom -->
+  <g transform="translate(195,355)">
+    <rect width="90" height="26" rx="13" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1"/>
+    <text x="45" y="17" font-family="Inter,sans-serif" font-size="11" fill="#00d4ff" text-anchor="middle">Vanilla JS</text>
+  </g>
+  <g transform="translate(295,355)">
+    <rect width="110" height="26" rx="13" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1"/>
+    <text x="55" y="17" font-family="Inter,sans-serif" font-size="11" fill="#7c3aed" text-anchor="middle">Critical CSS</text>
+  </g>
+  <g transform="translate(415,355)">
+    <rect width="120" height="26" rx="13" fill="rgba(34,197,94,0.12)" stroke="#22c55e" stroke-width="1"/>
+    <text x="60" y="17" font-family="Inter,sans-serif" font-size="11" fill="#22c55e" text-anchor="middle">Service Worker</text>
+  </g>
+  <g transform="translate(545,355)">
+    <rect width="70" height="26" rx="13" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="1"/>
+    <text x="35" y="17" font-family="Inter,sans-serif" font-size="11" fill="#f59e0b" text-anchor="middle">No Build</text>
+  </g>
+
+  <text x="400" y="415" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Performance-First Developer Portfolio</text>
+</svg>
