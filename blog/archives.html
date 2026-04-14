@@ -189,56 +189,6 @@
             transition: color var(--transition-fast);
         }
 
-        /* Pagination */
-        .pagination {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 3rem 0 2rem;
-            flex-wrap: wrap;
-        }
-
-        .page-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 2.25rem;
-            height: 2.25rem;
-            padding: 0 0.75rem;
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            font-family: var(--font-family);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .page-btn:hover:not(:disabled) {
-            border-color: var(--neural-primary);
-            color: var(--neural-primary);
-            background: rgba(0, 212, 255, 0.08);
-        }
-
-        .page-btn.active {
-            background: var(--neural-primary);
-            border-color: var(--neural-primary);
-            color: var(--primary-bg);
-            font-weight: 600;
-        }
-
-        .page-btn:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-        }
-
-        .page-ellipsis {
-            color: var(--text-muted);
-            padding: 0 0.25rem;
-        }
-
         /* Empty state */
         .archives-empty {
             text-align: center;
@@ -330,7 +280,6 @@
         <section style="padding-bottom: 20px;">
             <div class="container">
                 <div id="archives-list" class="archives-list"></div>
-                <div id="pagination" class="pagination"></div>
             </div>
         </section>
     </main>
@@ -354,8 +303,6 @@
     <script src="../script.js" defer></script>
     <script>
     (function () {
-        const POSTS_PER_PAGE = 10;
-
         const ALL_POSTS = [
             { date: '2026-04-14', category: 'WordPress',              title: 'Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts',                     url: '/blog/jf-notify-plugin-internals.html' },
             { date: '2026-04-13', category: 'Web Development',        title: 'Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation',                         url: '/blog/watch-list-vercel-deploy.html' },
@@ -402,17 +349,12 @@
             return months[parseInt(m, 10) - 1] + ' ' + d + ', ' + y;
         }
 
-        function getYear(iso) {
-            return iso.split('-')[0];
-        }
-
-        let currentPage = 1;
         let filteredPosts = ALL_POSTS.slice();
 
         // Populate category filter
         const categories = [...new Set(ALL_POSTS.map(p => p.category))].sort();
         const select = document.getElementById('category-filter');
-        categories.forEach(cat => {
+        categories.forEach(function (cat) {
             const opt = document.createElement('option');
             opt.value = cat;
             opt.textContent = cat;
@@ -420,26 +362,18 @@
         });
 
         select.addEventListener('change', function () {
-            const val = this.value;
-            filteredPosts = val ? ALL_POSTS.filter(p => p.category === val) : ALL_POSTS.slice();
-            currentPage = 1;
+            filteredPosts = this.value ? ALL_POSTS.filter(p => p.category === this.value) : ALL_POSTS.slice();
             render();
         });
 
         function render() {
             const total = filteredPosts.length;
-            const totalPages = Math.ceil(total / POSTS_PER_PAGE);
-            const start = (currentPage - 1) * POSTS_PER_PAGE;
-            const end = Math.min(start + POSTS_PER_PAGE, total);
-            const pagePosts = filteredPosts.slice(start, end);
 
             // Count
             const countEl = document.getElementById('archives-count');
-            if (total === 0) {
-                countEl.innerHTML = 'No posts found';
-            } else {
-                countEl.innerHTML = 'Showing <strong>' + (start + 1) + '&ndash;' + end + '</strong> of <strong>' + total + '</strong> posts';
-            }
+            countEl.innerHTML = total === 0
+                ? 'No posts found'
+                : '<strong>' + total + '</strong> post' + (total === 1 ? '' : 's');
 
             // List
             const listEl = document.getElementById('archives-list');
@@ -447,18 +381,24 @@
 
             if (total === 0) {
                 listEl.innerHTML = '<div class="archives-empty"><strong>No posts in this category.</strong><p>Try selecting a different filter above.</p></div>';
-            } else {
-                let lastYear = null;
-                pagePosts.forEach(function (post) {
-                    const year = getYear(post.date);
-                    if (year !== lastYear) {
-                        lastYear = year;
-                        const divider = document.createElement('div');
-                        divider.className = 'year-divider';
-                        divider.innerHTML = '<span class="year-label">' + year + '</span><span class="year-line"></span>';
-                        listEl.appendChild(divider);
-                    }
+                return;
+            }
 
+            // Group by year
+            const byYear = {};
+            filteredPosts.forEach(function (post) {
+                const year = post.date.split('-')[0];
+                if (!byYear[year]) byYear[year] = [];
+                byYear[year].push(post);
+            });
+
+            Object.keys(byYear).sort(function (a, b) { return b - a; }).forEach(function (year) {
+                const divider = document.createElement('div');
+                divider.className = 'year-divider';
+                divider.innerHTML = '<span class="year-label">' + year + '</span><span class="year-line"></span>';
+                listEl.appendChild(divider);
+
+                byYear[year].forEach(function (post) {
                     const a = document.createElement('a');
                     a.href = post.url;
                     a.className = 'archive-item';
@@ -470,44 +410,7 @@
                         '</span>';
                     listEl.appendChild(a);
                 });
-            }
-
-            // Pagination
-            const pagEl = document.getElementById('pagination');
-            pagEl.innerHTML = '';
-            if (totalPages <= 1) return;
-
-            function btn(label, page, disabled, active) {
-                const b = document.createElement('button');
-                b.className = 'page-btn' + (active ? ' active' : '');
-                b.textContent = label;
-                b.disabled = !!disabled;
-                if (!disabled && !active) {
-                    b.addEventListener('click', function () {
-                        currentPage = page;
-                        render();
-                        document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
-                    });
-                }
-                return b;
-            }
-
-            pagEl.appendChild(btn('\u2190 Prev', currentPage - 1, currentPage === 1));
-
-            for (let p = 1; p <= totalPages; p++) {
-                if (totalPages > 7 && p > 2 && p < totalPages - 1 && Math.abs(p - currentPage) > 1) {
-                    if ((p === 3 && currentPage > 4) || (p === totalPages - 2 && currentPage < totalPages - 3)) {
-                        const dots = document.createElement('span');
-                        dots.className = 'page-ellipsis';
-                        dots.textContent = '\u2026';
-                        pagEl.appendChild(dots);
-                    }
-                    continue;
-                }
-                pagEl.appendChild(btn(p, p, false, p === currentPage));
-            }
-
-            pagEl.appendChild(btn('Next \u2192', currentPage + 1, currentPage === totalPages));
+            });
         }
 
         render();
