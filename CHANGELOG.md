@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.23.0] - 2026-04-14
+
+### Added
+- `blog/jf-notify-plugin-internals.html` — new blog post: "Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts" (2026-04-14)
+
+### Removed
+- `blog/images/family-dashboard.png` — unreferenced PNG; `blog/family-dashboard.html` uses `family-dashboard.svg` for all image references
+- `blog/images/save-to-my-blog.png` — unreferenced PNG; `blog/save-to-my-blog.html` uses `save-to-my-blog.svg` for all image references
+- `blog/images/telegram-pi-bot.png` — unreferenced PNG; `blog/telegram-pi-monitoring-bot.html` uses `telegram-pi-bot.svg` for all image references
+- `blog/images/watch-list.png` — unreferenced PNG; all Watch List posts (`watch-list-pwa.html`, `watch-list-internals.html`, `watch-list-vercel-deploy.html`) use `watch-list-pwa.svg` and/or JPEG screenshots
+
+### Updated
+- `sitemap.xml` — added `jf-notify-plugin-internals.html` entry (2026-04-14); updated `lastmod` for `/`, `/blog/`, and `/feed.xml` entries to `2026-04-14`
+- `feed.xml` — added `jf-notify-plugin-internals.html` as newest item; removed oldest item (`jf-website-monitor-content-change-detection.html`, Thu 27 Mar 2026) to maintain 10-item cap; updated `lastBuildDate` to `Tue, 14 Apr 2026`
+
+### Reviewed
+- All 37 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs (v1.22.0 review reported 36 posts; that count was correct at the time; `jf-notify-plugin-internals.html` brings the total to 37)
+- `blog/images/` directory audited — 4 unreferenced PNG files identified and removed (see Removed section above); directory confirmed clean after removal
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 37 blog posts present, dates accurate; no changes required
+- `feed.xml` reviewed — 10 most recent posts correct, all in descending date order; no changes required
+- No other unnecessary or stale files found for removal
+
+### Known Issues (Carried Forward from v1.8.0)
+- `blog/images/raspberry-pi-agent.svg` is missing; referenced by `blog/raspberry-pi-agent.html` as both OG image and inline hero image
+- `blog/images/wpe-central-command.png` is missing; referenced by both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` as OG image and inline hero image
+
 ## [1.22.0] - 2026-04-13
 
 ### Added
