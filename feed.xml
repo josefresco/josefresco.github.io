@@ -5,8 +5,48 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts</title>
+      <link>https://josefresco.com/blog/jf-notify-plugin-internals.html</link>
+      <description>A technical deep-dive into the JF Notify plugin — PHP action hooks, Gravity Forms entry data, Telegram Bot API message formatting, per-form enable/disable toggles, MarkdownV2 escaping, multipart field handling, and the credential filter pattern that keeps bot tokens out of the WordPress database for teams with stricter security requirements.</description>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/jf-notify-plugin-internals.html</guid>
+    </item>
+
+    <item>
+      <title>Deploying Watch List on Vercel: TMDB Setup, Environment Variables, and PWA Installation</title>
+      <link>https://josefresco.com/blog/watch-list-vercel-deploy.html</link>
+      <description>A step-by-step guide to deploying the Watch List PWA on Vercel — covering TMDB API credentials, the non-obvious three-step session ID flow, build-time credential injection via build.js, configuring MY_SERVICES and EXCLUDED_PROVIDERS streaming filters, and installing the app as a native PWA on iOS, Android, and desktop.</description>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/watch-list-vercel-deploy.html</guid>
+    </item>
+
+    <item>
+      <title>Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups</title>
+      <link>https://josefresco.com/blog/pi-backups-encryption.html</link>
+      <description>How the pi-backups April 2026 update adds AES-256 GPG encryption of backup archives and an automated restore verification script — protecting Pi application data, configs, and credentials even from your own hosting provider. Covers symmetric vs asymmetric GPG, the updated backup script, the new verify.sh script, weekly cron scheduling, raspberry-pi-agent integration, and a migration guide from the original rsync-based setup.</description>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-encryption.html</guid>
+    </item>
+
+    <item>
+      <title>Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos</title>
+      <link>https://josefresco.com/blog/arpy-assist-coding-agent.html</link>
+      <description>How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching via raspberry-pi-agent, and repo management from any browser. Covers the task runner architecture, workspace setup, Claude Code invocation, git commit flow, smart button system, and security model.</description>
+      <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/arpy-assist-coding-agent.html</guid>
+    </item>
+
+    <item>
+      <title>Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</title>
+      <link>https://josefresco.com/blog/watch-list-internals.html</link>
+      <description>A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters including MY_SERVICES and EXCLUDED_PROVIDERS constants.</description>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/watch-list-internals.html</guid>
+    </item>
 
     <item>
       <title>Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks</title>
@@ -48,44 +88,5 @@
       <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
     </item>
 
-    <item>
-      <title>WPE Central Command Helper: The WordPress Plugin That Closes the WP Engine API Gap</title>
-      <link>https://josefresco.com/blog/wpe-central-command-helper.html</link>
-      <description>A deep-dive into wpe-central-command-helper — the PHP WordPress plugin that exposes WordPress-level data the WP Engine API can't provide, powering the WPE Central Command fleet dashboard with core version, pending updates, active plugins, maintenance mode state, and upload directory size through a single secured REST endpoint.</description>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/wpe-central-command-helper.html</guid>
-    </item>
-
-    <item>
-      <title>JF Website Monitor: How Content Change Detection Works Under the Hood</title>
-      <link>https://josefresco.com/blog/jf-website-monitor-content-change-detection.html</link>
-      <description>A technical deep-dive into how JF Website Monitor's content change detection engine works — from HTML normalization and SHA-256 fingerprinting to CSS selector targeting and alert cooldowns that prevent notification fatigue.</description>
-      <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-website-monitor-content-change-detection.html</guid>
-    </item>
-
-    <item>
-      <title>Raspberry Pi Agent: A Python Command Dispatcher for Pi Automation</title>
-      <link>https://josefresco.com/blog/raspberry-pi-agent.html</link>
-      <description>How I built a Python-based command dispatcher that unifies shell execution, service checks, log tailing, and system stats across my entire Pi automation stack — the backend layer behind Arpy Assist, the Telegram bot, and Pi Backups.</description>
-      <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/raspberry-pi-agent.html</guid>
-    </item>
-
-    <item>
-      <title>Who Dis: Building a Right-Click IP Lookup Chrome Extension</title>
-      <link>https://josefresco.com/blog/who-dis-chrome-extension.html</link>
-      <description>How I built Who Dis — a lightweight Chrome Manifest V3 extension that puts instant IP geolocation, ASN, and ISP data one right-click away. No new tab, no copy-paste, no context switch.</description>
-      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/who-dis-chrome-extension.html</guid>
-    </item>
-
-    <item>
-      <title>WPE Central Command: A Custom Dashboard for Managing Multiple WP Engine Sites</title>
-      <link>https://josefresco.com/blog/wpe-central-command.html</link>
-      <description>How I built WPE Central Command — a custom JavaScript dashboard with a PHP helper plugin for managing multiple WP Engine WordPress sites from one place, with bulk operations and at-a-glance health monitoring.</description>
-      <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/wpe-central-command.html</guid>
-    </item>
   </channel>
 </rss>

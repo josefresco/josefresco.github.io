@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arpy Assist: Qwen CLI Web Interface for Raspberry Pi - Jose Fresco</title>
-    <meta name="description" content="Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.">
+    <meta name="description" content="Introducing Arpy Assist — a Flask web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel. The origin story before it became a full coding agent.">
     <link rel="canonical" href="https://josefresco.com/blog/arpy-assist-qwen-web-interface.html">
     <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,26 +17,25 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//github.com">
-    <link rel="dns-prefetch" href="//linkedin.com">
     <link rel="preload" href="../script.js" as="script">
 
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Arpy Assist: Qwen CLI Web Interface for Raspberry Pi - Jose Fresco">
-    <meta property="og:description" content="Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.">
+    <meta property="og:description" content="Introducing Arpy Assist — a Flask web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel. The origin story before it became a full coding agent.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/arpy-assist-qwen-web-interface.html">
     <meta property="og:image" content="https://josefresco.com/blog/images/arpy-assist-og.jpg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-03-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-11T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="AI & Automation">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Arpy Assist: Qwen CLI Web Interface for Raspberry Pi - Jose Fresco">
-    <meta name="twitter:description" content="Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.">
+    <meta name="twitter:description" content="Introducing Arpy Assist — a Flask web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel. The origin story before it became a full coding agent.">
     <meta name="twitter:image" content="https://josefresco.com/blog/images/arpy-assist-og.jpg">
 
     <!-- Schema.org Structured Data -->
@@ -49,7 +48,7 @@
         "@id": "https://josefresco.com/blog/arpy-assist-qwen-web-interface.html"
       },
       "headline": "Arpy Assist: Qwen CLI Web Interface for Raspberry Pi",
-      "description": "Introducing Arpy Assist — a web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel.",
+      "description": "Introducing Arpy Assist — a Flask web interface for Qwen CLI running on Raspberry Pi, accessible from anywhere via Cloudflare Tunnel. The origin story before it became a full coding agent.",
       "image": "https://josefresco.com/blog/images/arpy-assist-og.jpg",
       "author": {
         "@type": "Person",
@@ -66,8 +65,8 @@
         }
       },
       "datePublished": "2026-03-18T00:00:00+00:00",
-      "dateModified": "2026-03-18T00:00:00+00:00",
-      "keywords": "Raspberry Pi, Qwen CLI, AI, Web Interface, Cloudflare Tunnel, Automation, Arpy Assist",
+      "dateModified": "2026-04-11T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Qwen CLI, AI, Web Interface, Cloudflare Tunnel, Automation, Arpy Assist, Flask, Python",
       "articleSection": "AI & Automation",
       "inLanguage": "en-US"
     }
@@ -107,8 +106,11 @@
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
                 <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="#contact" class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -126,7 +128,7 @@
 
                 <div class="blog-post-content">
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                        <strong style="color: var(--text-primary);">TL;DR:</strong> Arpy Assist is a new web interface for the Qwen CLI running on Raspberry Pi. Access your AI assistant from anywhere via Cloudflare Tunnel, with smart buttons for quick actions, mobile-friendly design, and autonomous execution mode. Perfect for managing repos, updating docs, and automating tasks.
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Arpy Assist started as a Flask web interface wrapping the Qwen CLI on a Raspberry Pi 4 — accessible remotely via Cloudflare Tunnel, with smart buttons for common tasks and YOLO mode for autonomous execution. This is the origin story. It has since evolved into a full Claude Code-powered coding agent; see <a href="/blog/arpy-assist-coding-agent.html" style="color: var(--neural-primary);">Arpy Assist Becomes a Coding Agent</a> for where it is now.
                     </div>
 
                     <div class="blog-post-image">
@@ -134,55 +136,87 @@
                     </div>
 
                     <h2>Introduction</h2>
-                    <p>I'm excited to introduce <strong>Arpy Assist</strong> — a web-based interface for the Qwen CLI that runs on my Raspberry Pi and is accessible from anywhere. This project represents the evolution of my AI-assisted development workflow, combining the power of Qwen's code generation capabilities with the convenience of a modern web interface.</p>
+                    <p>In March 2026 I introduced <strong>Arpy Assist</strong> — a web-based interface for the Qwen CLI that runs on my Raspberry Pi and is accessible from anywhere via Cloudflare Tunnel. This post covers that original version: a clean, Flask-powered chat window that made Qwen's code generation capabilities available on any device without touching a terminal.</p>
 
-                    <h2>What is Arpy Assist?</h2>
-                    <p>Arpy Assist transforms the command-line Qwen experience into an accessible web application. Instead of typing commands in a terminal, you can now interact with Qwen through a clean, intuitive web interface that works on any device — from your desktop browser to your phone.</p>
+                    <p>If you want to skip ahead to the current state of the project — now a full autonomous coding agent running Claude Code — read <a href="/blog/arpy-assist-coding-agent.html">Arpy Assist Becomes a Coding Agent</a>. This post is the origin story.</p>
+
+                    <h2>The Problem</h2>
+                    <p>My Raspberry Pi 4 (8 GB) had been running Qwen CLI for local AI-assisted coding since I set it up as an <a href="/blog/pi-qwen-cli-workflow.html">AI development station</a>. The workflow was good but bound to one device: to use Qwen, you needed SSH or a terminal session on the Pi itself.</p>
+
+                    <p>The goal was simple: make that same capability available from a phone, a tablet, or any browser — without port-forwarding, without VPN configuration, and without carrying SSH credentials around.</p>
+
+                    <h2>What Arpy Assist v1 Did</h2>
+                    <p>Arpy Assist v1 transformed the command-line Qwen experience into an accessible web application. Instead of typing commands in a terminal, you could interact with Qwen through a clean web interface on any device.</p>
 
                     <h3>Key Features</h3>
                     <ul>
-                        <li><strong>💬 Direct Qwen CLI Chat</strong> — Natural conversation interface for coding tasks</li>
-                        <li><strong>🔘 Smart Buttons</strong> — Context-aware quick actions for common tasks</li>
-                        <li><strong>🌐 Cloudflare Tunnel</strong> — Secure access from anywhere without port forwarding</li>
-                        <li><strong>📱 Mobile-Friendly</strong> — Responsive design that works on any device</li>
-                        <li><strong>⚡ Autonomous Execution</strong> — YOLO mode with <code>--yolo --continue</code> flags enabled</li>
+                        <li><strong>Direct Qwen CLI Chat</strong> — Natural conversation interface that proxied input to the Qwen subprocess and streamed output back to the browser</li>
+                        <li><strong>Smart Buttons</strong> — Pre-built prompts for common tasks (list repos, fix a bug, update docs, get help)</li>
+                        <li><strong>Cloudflare Tunnel</strong> — Secure remote access without port forwarding or VPN</li>
+                        <li><strong>Mobile-Friendly Design</strong> — Responsive layout that worked on iPhone without pinching or scrolling around</li>
+                        <li><strong>YOLO Mode</strong> — <code>--yolo --continue</code> flags passed to Qwen for autonomous, non-interactive execution</li>
+                    </ul>
+
+                    <h2>How It Was Built</h2>
+
+                    <h3>Flask Backend</h3>
+                    <p>The backend was a minimal Flask app with two routes: one serving the HTML UI, one accepting POST requests with the user's prompt and streaming Qwen's output back via server-sent events.</p>
+
+                    <pre><code>from flask import Flask, request, stream_with_context, Response
+import subprocess
+
+app = Flask(__name__)
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    prompt = request.json.get('prompt', '')
+
+    def generate():
+        proc = subprocess.Popen(
+            ['qwen', '--yolo', '--continue', prompt],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True
+        )
+        for line in proc.stdout:
+            yield f"data: {line}\n\n"
+
+    return Response(stream_with_context(generate()), mimetype='text/event-stream')</code></pre>
+
+                    <h3>Cloudflare Tunnel</h3>
+                    <p>Cloudflare Tunnel handles the remote access. The <code>cloudflared</code> daemon runs as a systemd service on the Pi, maintaining a persistent outbound connection to Cloudflare's edge. Incoming requests to the configured hostname are routed through that tunnel to the local Flask app — no inbound firewall rules required.</p>
+
+                    <pre><code># /etc/cloudflared/config.yml
+tunnel: &lt;your-tunnel-id&gt;
+credentials-file: /home/pi/.cloudflared/&lt;tunnel-id&gt;.json
+
+ingress:
+  - hostname: arpy.yourdomain.com
+    service: http://localhost:5000
+  - service: http_status:404</code></pre>
+
+                    <p>The only thing standing between the public internet and the Flask app was Cloudflare's HTTP Basic Auth (configured at the Cloudflare Access level). For a personal tool on personal hardware, that was sufficient.</p>
+
+                    <h3>Smart Buttons</h3>
+                    <p>The smart buttons were hardcoded prompt templates injected into the chat input on click. No server involvement — purely a frontend convenience. Four buttons covered 80% of what I actually used Qwen for day-to-day:</p>
+                    <ul>
+                        <li>📁 <strong>My Repos</strong> — "List all my GitHub repos and their descriptions"</li>
+                        <li>🔧 <strong>Fix something</strong> — "Review the last error in the logs and suggest a fix"</li>
+                        <li>📝 <strong>Update docs</strong> — "Update the README for the current repo to reflect recent changes"</li>
+                        <li>❓ <strong>Help</strong> — "What can you help me with right now?"</li>
                     </ul>
 
                     <h2>Quick Start</h2>
-                    <p>Getting started with Arpy Assist is straightforward:</p>
+                    <p>Getting the original version running required only a Python virtual environment and a Qwen CLI installation:</p>
 
-                    <h3>1. Install Dependencies</h3>
                     <pre><code>cd /path/to/arpy-assist
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt</code></pre>
+pip install -r requirements.txt
+python web_app.py</code></pre>
 
-                    <h3>2. Start the Web Interface</h3>
-                    <pre><code>python web_app.py</code></pre>
+                    <p>Local access was at <code>http://localhost:5000</code>. Remote access via Cloudflare Tunnel at your configured hostname. The <code>config/config.yaml</code> held the model and repo settings:</p>
 
-                    <h3>3. Access the Interface</h3>
-                    <ul>
-                        <li><strong>Local:</strong> http://localhost:5000</li>
-                        <li><strong>Remote:</strong> Via Cloudflare Tunnel (configure your own domain)</li>
-                    </ul>
-
-                    <h2>Usage</h2>
-
-                    <h3>Chat Interface</h3>
-                    <p>Simply type your requests naturally, just like you would in a conversation:</p>
-                    <pre><code>Clone my-repo and add a joke to README</code></pre>
-
-                    <h3>Smart Buttons</h3>
-                    <p>Quick action buttons for common tasks:</p>
-                    <ul>
-                        <li>📁 My Repos</li>
-                        <li>🔧 Fix something</li>
-                        <li>📝 Update docs</li>
-                        <li>❓ Help</li>
-                    </ul>
-
-                    <h2>Configuration</h2>
-                    <p>Arpy Assist is configured via <code>config/config.yaml</code>:</p>
                     <pre><code>llm:
   model: "qwen-coder-plus"
   yolo_mode: true
@@ -192,39 +226,20 @@ repos:
   - your-username/your-repo-1
   - your-username/your-repo-2</code></pre>
 
-                    <h2>Cloudflare Tunnel Integration</h2>
-                    <p>One of the standout features is the Cloudflare Tunnel integration. This allows secure access to Arpy Assist from anywhere without exposing your home network or dealing with port forwarding.</p>
-                    <p>Configure your own domain by setting up a Cloudflare Tunnel pointing to your local Flask server. Tunnel configuration typically lives at <code>/etc/cloudflared/config.yml</code>.</p>
+                    <h2>What This Version Couldn't Do</h2>
+                    <p>The v1 web interface was read-only in a meaningful sense. Qwen would generate code, explain a bug, or draft a README update — but applying those changes still required manual copy-paste into a terminal. The interface had no write access to the filesystem, no git integration, no way to commit or push. It was AI as oracle, not AI as actor.</p>
 
-                    <h2>Logging</h2>
-                    <p>For debugging and monitoring:</p>
-                    <ul>
-                        <li><strong>Web app logs:</strong> <code>logs/web_app.log</code></li>
-                        <li><strong>Cloudflare logs:</strong> <code>sudo journalctl -u cloudflared -f</code></li>
-                    </ul>
+                    <p>That limitation drove the next phase of development. If Qwen (and later Claude Code) could tell me exactly what to change and where, why was I still the one making the changes?</p>
 
-                    <h2>Why Arpy Assist?</h2>
-                    <p>This project builds on my previous work with AI-assisted development workflows. After migrating my website to GitHub Pages and repurposing my Raspberry Pi as an AI command center, Arpy Assist represents the next logical step — making that AI power accessible through a modern, user-friendly interface.</p>
-                    <p>The combination of:</p>
-                    <ul>
-                        <li>Raspberry Pi 4 (8 GB) as dedicated hardware</li>
-                        <li>Qwen CLI for powerful code generation</li>
-                        <li>Flask web interface for accessibility</li>
-                        <li>Cloudflare Tunnel for secure remote access</li>
-                    </ul>
-                    <p>...creates a robust, low-cost AI development station that's always available and ready to help.</p>
+                    <p>The answer to that question is the follow-up post: <strong><a href="/blog/arpy-assist-coding-agent.html">Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos →</a></strong></p>
 
-                    <h2>Getting the Code</h2>
-                    <p>Arpy Assist is available on GitHub. Check out the repository to explore the code, contribute, or set up your own instance.</p>
-
-                    <h2>Conclusion</h2>
-                    <p>Arpy Assist represents my continued exploration of AI-assisted development workflows. By combining the Qwen CLI with a web interface and Cloudflare Tunnel, I've created a tool that makes AI-powered coding assistance accessible from anywhere, on any device.</p>
-                    <p>This is more than just a convenience tool — it's a demonstration of how modern AI tools, affordable hardware, and clever networking can create powerful development workflows without breaking the bank.</p>
+                    <h2>Why It Still Matters</h2>
+                    <p>Even after the upgrade to a full coding agent, the v1 architecture is worth understanding. The Flask streaming layer, the Cloudflare Tunnel setup, and the smart button system all carried forward. The agent layer was added <em>on top of</em> this foundation, not instead of it. If you're building something similar and don't need full autonomous execution, the v1 pattern — Flask proxy, Cloudflare Tunnel, streamed subprocess output — is a clean starting point.</p>
                 </div>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="/projects" class="btn-primary">View Projects →</a>
+                    <a href="/blog/arpy-assist-coding-agent.html" class="btn-primary">See the Coding Agent →</a>
                 </div>
             </div>
         </section>
@@ -232,17 +247,38 @@ repos:
 
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
 
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Want to Build Your Own AI-Powered Dev Tool?</h2>
+                <p class="cta-description">
+                    Flask, Cloudflare Tunnel, and a Raspberry Pi add up to a capable home automation platform. Whether you want
+                    help setting up a similar stack or building something more ambitious, let's talk.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Automation Tool Project&body=Hi Jose,%0D%0A%0D%0AI read your Arpy Assist post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

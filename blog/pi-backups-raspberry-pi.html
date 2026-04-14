@@ -28,7 +28,7 @@
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-03-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-12T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Raspberry Pi">
 
@@ -65,7 +65,7 @@
         }
       },
       "datePublished": "2026-03-23T00:00:00+00:00",
-      "dateModified": "2026-03-23T00:00:00+00:00",
+      "dateModified": "2026-04-12T00:00:00+00:00",
       "keywords": "Raspberry Pi, Backup, Shell Script, rsync, cron, SSH, Automation, Linux, Self-hosting",
       "articleSection": "Raspberry Pi",
       "inLanguage": "en-US"
@@ -106,9 +106,12 @@
             <div class="nav-links" id="nav-links">
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -120,7 +123,7 @@
                     <h1 class="blog-post-title">Pi Backups: Automating Offsite Backups for Raspberry Pi Applications</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Raspberry Pi</span>
-                        <span class="blog-date">March 2026</span>
+                        <span class="blog-date">March 2026 <span style="color: var(--neural-primary); font-size: 0.85em;">(Updated April 2026)</span></span>
                     </div>
                 </div>
 
@@ -320,12 +323,21 @@ crontab -e
                     <h2>Conclusion</h2>
                     <p>The Pi had been running without backups for too long. Every time an SD card corruption story popped up online, I felt a pang of anxiety about the data I'd lose if mine failed that day.</p>
                     <p>The backup scripts took about two hours to write and test. They've been running unattended every night since, confirming success with a Telegram message I barely notice anymore. That's exactly how infrastructure should work — invisible until you need it, and reliable when you do.</p>
-                    <p>The full source is available on GitHub. It's intentionally simple — read it, understand it, and adapt it to your own Pi's layout.</p>
+                    <p>The full source is available on GitHub at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener">github.com/josefresco/pi-backups</a>. It's intentionally simple — read it, understand it, and adapt it to your own Pi's layout.</p>
+
+                    <h2>April 2026 Update</h2>
+                    <p>The April 2026 release adds two significant upgrades to the backup pipeline:</p>
+                    <ul>
+                        <li><strong>GPG encryption</strong> — Backup archives are now encrypted with AES-256 before transfer. Files on the remote server are ciphertext; your hosting provider can no longer read application data, configs, or credentials stored in the backup set.</li>
+                        <li><strong>Automated restore verification</strong> — A new <code>verify.sh</code> script runs weekly via cron: it downloads the most recent backup archive from the remote, decrypts it, lists the archive contents, and checks that all expected paths are present. Pass or fail is reported via Telegram. A backup you've never verified is a backup you don't actually have.</li>
+                    </ul>
+                    <p>Both scripts are also registered as named commands in <a href="/blog/raspberry-pi-agent.html">raspberry-pi-agent</a>, making them triggerable on-demand from the <a href="/blog/arpy-assist-coding-agent.html">Arpy Assist</a> browser interface. The core architecture — rsync-based archiving, SSH key auth, nightly cron, 30-day retention — is unchanged.</p>
+                    <p>Full details in the follow-up post: <a href="/blog/pi-backups-encryption.html">Encrypted Offsite Backups: Adding GPG and Restore Verification to Pi Backups →</a></p>
                 </div>
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                    <a href="/blog/pi-backups-encryption.html" class="btn-primary">April 2026 Update →</a>
                 </div>
             </div>
         </section>

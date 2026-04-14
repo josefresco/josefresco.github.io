@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth - Jose Fresco</title>
+    <meta name="description" content="A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters.">
+    <link rel="canonical" href="https://josefresco.com/blog/watch-list-internals.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth - Jose Fresco">
+    <meta property="og:description" content="A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/watch-list-internals.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/watch-list-pwa.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-10T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth - Jose Fresco">
+    <meta name="twitter:description" content="A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/watch-list-pwa.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/watch-list-internals.html"
+      },
+      "headline": "Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth",
+      "description": "A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters.",
+      "image": "https://josefresco.com/blog/images/watch-list-pwa.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-10T00:00:00+00:00",
+      "dateModified": "2026-04-10T00:00:00+00:00",
+      "keywords": "PWA, Progressive Web App, TMDB, Single-File, Build.js, Credential Injection, Session Authentication, Streaming Providers, Vercel, JavaScript, TypeScript",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth", "item": "https://josefresco.com/blog/watch-list-internals.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener">watch-list repo</a> is a private streaming tracker PWA that lives entirely in one HTML file. Secrets never enter version control — a <code>build.js</code> script injects environment variables at deploy time via token substitution. TMDB session authentication syncs the watchlist to a real TMDB account. Streaming providers are filtered by configurable constants (<code>MY_SERVICES</code>, <code>EXCLUDED_PROVIDERS</code>), and an optional PIN gates adult content. This post covers the architecture decisions behind each of those choices.
+                    </div>
+
+                    <h2>Why a Single File?</h2>
+
+                    <p>The previous post on Watch List covered <em>why</em> it exists — a private, ad-free alternative to JustWatch. This one covers <em>how</em> it's built. The most unusual decision is that the entire application lives in a single <code>index.html</code> file: HTML structure, CSS, and JavaScript all in one place.</p>
+
+                    <p>This isn't laziness or a temporary shortcut — it's a deliberate architectural choice that pays off in several ways:</p>
+
+                    <ul>
+                        <li><strong>Zero build complexity</strong> — no bundler config, no import graph, no module system to reason about. The file is what the browser gets.</li>
+                        <li><strong>Instant PWA installation</strong> — a single-file app caches perfectly with a service worker. One cache entry covers the entire application shell.</li>
+                        <li><strong>Deployable anywhere</strong> — drop the file on any static host and it runs. No npm install, no build step on the host.</li>
+                        <li><strong>Easy to audit</strong> — every line of the application is in one place. No barrel files, no re-exports, no "it's defined somewhere in node_modules."</li>
+                    </ul>
+
+                    <p>The trade-off is obvious: a very large HTML file gets unwieldy. For Watch List, the file stays manageable because the app has a focused scope — search, details, watchlist. No feature creep, no growing surface area. The constraint is self-enforcing.</p>
+
+                    <h2>The File Structure</h2>
+
+                    <p>Despite being a single file, the directory still has meaningful supporting files:</p>
+
+                    <pre><code>watch-list/
+├── index.html          # Complete application — HTML, CSS, JS
+├── build.js            # Credential injection script (runs at deploy time)
+├── vercel.json         # Vercel configuration
+├── favicon.svg         # App icon (vector, scales to any size)
+├── apple-touch-icon.png # iOS home screen icon
+└── .gitignore          # Excludes .env and build artifacts</code></pre>
+
+                    <p>The <code>build.js</code> script is the interesting piece. Let's look at how it works.</p>
+
+                    <h2>Build-Time Credential Injection</h2>
+
+                    <p>Watch List needs a TMDB API key, a TMDB session ID (for watchlist sync), and an optional adult content PIN. These are secrets — they can't live in version control, but the app is a static HTML file with no server-side rendering to inject them at request time.</p>
+
+                    <p>The solution: token substitution at build time. The source <code>index.html</code> contains placeholder tokens:</p>
+
+                    <pre><code>&lt;!-- Inside index.html (source) --&gt;
+&lt;script&gt;
+  const TMDB_API_KEY = '%%TMDB_API_KEY%%';
+  const TMDB_SESSION_ID = '%%TMDB_SESSION_ID%%';
+  const ADULT_PIN = '%%ADULT_PIN%%';
+  const MY_SERVICES = ['Netflix', 'Max', 'Disney Plus', 'Hulu'];
+  const EXCLUDED_PROVIDERS = ['Peacock Premium Plus'];
+&lt;/script&gt;</code></pre>
+
+                    <p>The <code>build.js</code> script reads the HTML, replaces each <code>%%TOKEN%%</code> with the corresponding environment variable, and writes the result to a dist file that Vercel serves:</p>
+
+                    <pre><code>// build.js
+const fs = require('fs');
+
+let html = fs.readFileSync('index.html', 'utf8');
+
+const replacements = {
+  '%%TMDB_API_KEY%%': process.env.TMDB_API_KEY || '',
+  '%%TMDB_SESSION_ID%%': process.env.TMDB_SESSION_ID || '',
+  '%%ADULT_PIN%%': process.env.ADULT_PIN || '',
+};
+
+for (const [token, value] of Object.entries(replacements)) {
+  html = html.replaceAll(token, value);
+}
+
+fs.writeFileSync('dist/index.html', html);
+console.log('Build complete — credentials injected.');</code></pre>
+
+                    <p>Vercel's build step runs <code>node build.js</code> before deployment, pulling values from the project's environment variable configuration. The repo itself never contains the actual keys — only the tokens. A fresh clone of the repo is safe to share publicly.</p>
+
+                    <h3>Why Not a .env File?</h3>
+
+                    <p>A <code>.env</code> file would work for local development, and Watch List uses one for that purpose (gitignored). But for production, the environment variables live in Vercel's project settings — encrypted at rest, injected only at build time, never in the file system of the deployed artifact. Token substitution bridges the gap between "static file" and "has secrets."</p>
+
+                    <h2>TMDB Session Authentication</h2>
+
+                    <p>The watchlist persistence is the most technically interesting piece. The earlier Watch List version stored the watchlist in <code>localStorage</code> — simple, private, but device-local. You couldn't pick up your list on a different device or browser.</p>
+
+                    <p>The current version uses TMDB's session authentication to sync the watchlist to your TMDB account. TMDB's watchlist API is the same one their official apps use — it's robust, free, and doesn't require building any backend infrastructure.</p>
+
+                    <p>The session flow works like this:</p>
+
+                    <ol>
+                        <li>Generate a <strong>request token</strong> via <code>/authentication/token/new</code></li>
+                        <li>Redirect the user to TMDB's approval page: <code>https://www.themoviedb.org/authenticate/{request_token}</code></li>
+                        <li>After approval, exchange the approved request token for a <strong>session ID</strong> via <code>/authentication/session/new</code></li>
+                        <li>Store the session ID — this is the <code>TMDB_SESSION_ID</code> environment variable injected at build time</li>
+                    </ol>
+
+                    <p>With a valid session ID, the app can call <code>/account/{account_id}/watchlist/movies</code> to read the watchlist and <code>/account/{account_id}/watchlist</code> (POST) to add or remove titles. The watchlist lives on TMDB's servers and is visible across every device where you're logged in.</p>
+
+                    <pre><code>// Adding a movie to the TMDB watchlist
+async function addToWatchlist(mediaId, mediaType = 'movie') {
+  const accountId = await getAccountId(); // cached after first call
+
+  await fetch(
+    `https://api.themoviedb.org/3/account/${accountId}/watchlist`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${TMDB_API_KEY}`,
+      },
+      body: JSON.stringify({
+        media_type: mediaType,
+        media_id: mediaId,
+        watchlist: true,
+      }),
+    }
+  );
+}</code></pre>
+
+                    <p>The session ID is a long-lived token (it doesn't expire unless manually revoked), which makes it suitable for the build-time injection pattern. Generate it once, put it in Vercel's environment variables, and it works until you decide to rotate it.</p>
+
+                    <h2>Streaming Provider Customization</h2>
+
+                    <p>One of the sharpest differences between Watch List and JustWatch is how streaming providers are displayed. JustWatch shows every available service for every region — useful if you want to rent a title, but noisy if you only care about services you subscribe to.</p>
+
+                    <p>Watch List uses two constants to control what you see:</p>
+
+                    <pre><code>// Configured in index.html — set these to your actual subscriptions
+const MY_SERVICES = ['Netflix', 'Max', 'Disney Plus', 'Hulu'];
+const EXCLUDED_PROVIDERS = ['Peacock Premium Plus', 'Paramount Plus Showtime'];</code></pre>
+
+                    <p><code>MY_SERVICES</code> is a priority list — providers in this array appear first in the streaming availability section, highlighted as services you have. <code>EXCLUDED_PROVIDERS</code> is a blocklist — providers here are filtered out entirely, regardless of what TMDB returns.</p>
+
+                    <p>The result: a movie detail page that immediately answers "can I watch this tonight?" without scrolling past a dozen services you don't have. The TMDB watch providers endpoint returns data for dozens of providers per region; the filter cuts it down to what's actually relevant.</p>
+
+                    <pre><code>function filterProviders(providers) {
+  // Remove excluded providers entirely
+  const filtered = providers.filter(
+    p => !EXCLUDED_PROVIDERS.includes(p.provider_name)
+  );
+
+  // Sort: subscribed services first, then alphabetical
+  return filtered.sort((a, b) => {
+    const aOwned = MY_SERVICES.includes(a.provider_name);
+    const bOwned = MY_SERVICES.includes(b.provider_name);
+    if (aOwned && !bOwned) return -1;
+    if (!aOwned && bOwned) return 1;
+    return a.provider_name.localeCompare(b.provider_name);
+  });
+}</code></pre>
+
+                    <h2>Parental Controls via ADULT_PIN</h2>
+
+                    <p>TMDB's API can return adult content if the account is configured to allow it. Watch List includes an optional PIN gate for this: if <code>ADULT_PIN</code> is set as an environment variable (and injected at build time), adult content results are hidden behind a PIN prompt rather than displayed openly.</p>
+
+                    <p>This is a household feature — useful if the app is pinned to a shared family device. The PIN doesn't authenticate against any server; it's a client-side check against the injected constant. Anyone with DevTools access can see the PIN in the source. But for a family-oriented access control on a trusted device, it's exactly the right level of security — enough friction to keep it out of casual view, not a security boundary against a determined user.</p>
+
+                    <pre><code>function checkAdultPin() {
+  if (!ADULT_PIN) return true; // No PIN set — adult content allowed
+
+  const entered = prompt('Enter PIN to view adult content:');
+  return entered === ADULT_PIN;
+}</code></pre>
+
+                    <h2>PWA Installation and the Service Worker</h2>
+
+                    <p>Watch List is installable on iOS, Android, and desktop Chromium browsers. The installation experience uses a Web App Manifest and a service worker that caches the application shell.</p>
+
+                    <p>The manifest configuration in <code>vercel.json</code> ensures the right headers are served, and the inline manifest in <code>index.html</code> describes the app to the browser:</p>
+
+                    <pre><code>&lt;!-- Inline manifest reference --&gt;
+&lt;link rel="manifest" href="/manifest.json"&gt;
+&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;</code></pre>
+
+                    <p>The service worker strategy is cache-first for the app shell and network-first for TMDB API responses. The app shell (the HTML file itself) loads instantly on repeat visits; search results and movie details always come from the network to ensure freshness. Streaming availability data, which changes infrequently, gets a short cache TTL — typically five minutes.</p>
+
+                    <p>Because the entire app is one file, cache invalidation is straightforward: bump the service worker cache name when deploying an update. On the next visit, the old cache is replaced and the new single-file app is served.</p>
+
+                    <h2>Vercel Deployment Pipeline</h2>
+
+                    <p>The <code>vercel.json</code> configuration wires the build step into the Vercel deployment:</p>
+
+                    <pre><code>{
+  "buildCommand": "node build.js",
+  "outputDirectory": "dist",
+  "framework": null
+}</code></pre>
+
+                    <p><code>framework: null</code> tells Vercel this isn't a Next.js, Vite, or CRA project — it's a plain Node.js script. Vercel runs <code>node build.js</code>, which reads <code>index.html</code>, injects the environment variables, and writes the output to <code>dist/</code>. Vercel serves the <code>dist/</code> directory as a static site.</p>
+
+                    <p>The deployment pipeline is triggered by every push to <code>master</code>. Preview deployments are generated for every branch — useful for testing provider filter changes or new UI features without affecting the production app.</p>
+
+                    <h2>What the Single-File Constraint Rules Out</h2>
+
+                    <p>Choosing a single-file architecture means some things are deliberately off the table:</p>
+
+                    <ul>
+                        <li><strong>Code splitting</strong> — there's nothing to split. The entire app loads on first visit. For an app this size, that's not a problem; for a large application, it would be.</li>
+                        <li><strong>TypeScript type-checking</strong> — you can write TypeScript in a <code>&lt;script type="ts"&gt;</code> tag with some tooling help, but it's not idiomatic. Watch List is plain JavaScript.</li>
+                        <li><strong>Component isolation</strong> — CSS and JavaScript for all features live in the same scope. Naming discipline substitutes for the scoping that frameworks provide.</li>
+                        <li><strong>Automated testing</strong> — testing a browser-rendered single-file app with a test framework requires a headless browser. For a personal project, manual testing is sufficient. For a production app, it wouldn't be.</li>
+                    </ul>
+
+                    <p>None of these are dealbreakers for a private personal tool. They would matter for a team project or a public product.</p>
+
+                    <h2>Lessons from the Build</h2>
+
+                    <p>The most transferable insight from Watch List is the <strong>build-time credential injection pattern</strong>. It solves the "secrets in a static file" problem cleanly for Vercel-hosted projects, and the pattern works for any static site that needs to embed secrets — not just single-file apps. If you're building a static frontend that talks directly to an API and don't want to route everything through a serverless function, token substitution at build time is a straightforward approach worth considering.</p>
+
+                    <p>The second takeaway is about PWA installation. The gap between "website" and "app" is smaller than most developers assume. A service worker, a manifest, and an apple-touch-icon are enough to make something installable and indistinguishable from a native app on the home screen. For personal tools and internal dashboards, this is often the right deployment target — zero app store friction, zero review process, instant updates.</p>
+
+                    <p>The repo is at <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener">github.com/josefresco/watch-list</a>. The single-file approach, build script, and provider filter are all there to read and adapt.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Focused, Fast Web Tool Built?</h2>
+                <p class="cta-description">
+                    From single-file PWAs to full-stack web applications, I build tools that do exactly what
+                    they need to and nothing else — fast, maintainable, and deployed without unnecessary complexity.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Tool Project&body=Hi Jose,%0D%0A%0D%0AI read your Watch List internals post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

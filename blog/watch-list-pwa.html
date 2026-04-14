@@ -28,7 +28,7 @@
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2026-03-15T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-03-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-10T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
@@ -65,7 +65,7 @@
         }
       },
       "datePublished": "2026-03-15T00:00:00+00:00",
-      "dateModified": "2026-03-28T00:00:00+00:00",
+      "dateModified": "2026-04-10T00:00:00+00:00",
       "keywords": "PWA, Progressive Web App, TMDB, JustWatch, Movie Tracker, Streaming, JavaScript, Privacy",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
@@ -110,7 +110,7 @@
                 <a href="/ai-tools" class="nav-link">AI Tools</a>
                 <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -122,7 +122,7 @@
                     <h1 class="blog-post-title">Watch List: A Private JustWatch Alternative PWA Powered by TMDB</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Web Development</span>
-                        <span class="blog-date">March 2026</span>
+                        <span class="blog-date">March 2026 <span style="color: var(--neural-primary); font-size: 0.85em;">(Updated April 2026)</span></span>
                     </div>
                 </div>
 
@@ -226,15 +226,15 @@
 
                     <p>The trade-off is that it's not going to get new features driven by A/B tests and product managers. That's fine. It does what I need.</p>
 
-                    <h2>What I'd Add Next</h2>
-                    <p>A few things on the list for future iterations:</p>
+                    <h2>What Shipped Since Launch</h2>
+                    <p>Several features that were on the roadmap are now live:</p>
                     <ul>
-                        <li><strong>Filter by streaming service</strong> — show only titles available on services I subscribe to</li>
-                        <li><strong>Watchlist sync</strong> — optional export/import or sync via a simple self-hosted endpoint</li>
-                        <li><strong>Watched history</strong> — mark titles as watched, separate from the watchlist</li>
-                        <li><strong>Person search</strong> — look up an actor or director and browse their filmography</li>
-                        <li><strong>Notifications</strong> — alert when a watchlisted title becomes available on a specific service</li>
+                        <li><strong>Filter by streaming service</strong> — <code>MY_SERVICES</code> and <code>EXCLUDED_PROVIDERS</code> constants let you configure exactly which providers appear and in what priority order. Services you subscribe to surface first; unwanted providers are hidden entirely.</li>
+                        <li><strong>Watchlist sync via TMDB session auth</strong> — the watchlist now syncs to your TMDB account using a session token injected at build time. Your list is available across every device where the app is installed.</li>
+                        <li><strong>Parental controls PIN</strong> — an optional <code>ADULT_PIN</code> environment variable gates adult content behind a PIN prompt, useful on shared family devices.</li>
                     </ul>
+                    <p>Still on the list: watched history, person search (browse by actor or director), and streaming availability notifications when a watchlisted title lands on one of your services.</p>
+                    <p>The technical details behind how these features are implemented — build-time credential injection, TMDB session auth, and provider filtering — are covered in the follow-up post: <a href="/blog/watch-list-internals.html">Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</a>.</p>
 
                     <h2>Lessons from the Build</h2>
                     <p>A few things stood out building this:</p>
@@ -253,7 +253,7 @@
 
                 <div class="blog-navigation">
                     <a href="/blog" class="btn-secondary">← Back to Blog</a>
-                    <a href="https://www.themoviedb.org/documentation/api" target="_blank" rel="noopener" class="btn-primary">TMDB API Docs →</a>
+                    <a href="https://github.com/josefresco/watch-list" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
                 </div>
             </div>
         </section>

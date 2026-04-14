@@ -1,4 +1,4 @@
-const CACHE_NAME = 'josefresco-v2';
+const CACHE_NAME = 'josefresco-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -14,6 +14,7 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(ASSETS_TO_CACHE);
@@ -37,7 +38,17 @@ self.addEventListener('fetch', event => {
           });
         }
 
-        // For other assets, try cache first, then network
+        // For CSS and JS, also use network first so updates are always picked up
+        if (event.request.destination === 'style' || event.request.destination === 'script') {
+          return fetch(event.request).then(networkResponse => {
+            if (networkResponse.ok) {
+              cache.put(event.request, networkResponse.clone());
+            }
+            return networkResponse;
+          }).catch(() => response);
+        }
+
+        // For other assets (images, fonts), cache first
         return response || fetch(event.request).then(networkResponse => {
           // Add to cache if successfully fetched
           if (networkResponse.ok) {
