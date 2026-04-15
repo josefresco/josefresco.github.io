@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="650" cy="100" r="120" fill="#229ED9" opacity="0.04"/>
+
+  <!-- Pi board (left) -->
+  <rect x="40" y="130" width="160" height="140" rx="8" fill="#0f1117" stroke="#22c55e" stroke-width="1.5"/>
+  <rect x="52" y="142" width="136" height="90" rx="4" fill="#0d1a0d"/>
+  <!-- GPIO pins -->
+  <g fill="#22c55e" opacity="0.6">
+    <circle cx="68" cy="155" r="3"/><circle cx="80" cy="155" r="3"/><circle cx="92" cy="155" r="3"/>
+    <circle cx="104" cy="155" r="3"/><circle cx="116" cy="155" r="3"/><circle cx="128" cy="155" r="3"/>
+    <circle cx="68" cy="167" r="3"/><circle cx="80" cy="167" r="3"/><circle cx="92" cy="167" r="3"/>
+  </g>
+  <!-- CPU -->
+  <rect x="78" y="180" width="60" height="36" rx="4" fill="#1a2e1a" stroke="#22c55e" stroke-width="1"/>
+  <text x="108" y="203" font-family="monospace" font-size="8" fill="#22c55e" text-anchor="middle">Pi 4B</text>
+  <!-- Stats rows -->
+  <g transform="translate(52,242)">
+    <rect width="136" height="10" rx="3" fill="#1a2e1a"/>
+    <rect width="85" height="10" rx="3" fill="#22c55e" opacity="0.6"/>
+    <text x="140" y="9" font-family="monospace" font-size="7" fill="#94a3b8">CPU 62%</text>
+  </g>
+  <g transform="translate(52,256)">
+    <rect width="136" height="10" rx="3" fill="#1a2e1a"/>
+    <rect width="48" height="10" rx="3" fill="#f59e0b" opacity="0.6"/>
+    <text x="140" y="9" font-family="monospace" font-size="7" fill="#94a3b8">MEM 35%</text>
+  </g>
+  <text x="120" y="290" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Raspberry Pi</text>
+
+  <!-- Python bot (centre) -->
+  <rect x="280" y="110" width="240" height="190" rx="12" fill="#0f1117" stroke="#7c3aed" stroke-width="2"/>
+  <text x="400" y="140" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#7c3aed" text-anchor="middle">Telegram Bot</text>
+  <text x="400" y="157" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">python-telegram-bot</text>
+  <!-- Code block -->
+  <rect x="295" y="165" width="210" height="120" rx="6" fill="#0a0b0f"/>
+  <text x="303" y="181" font-family="monospace" font-size="8" fill="#94a3b8">@bot.command('status')</text>
+  <text x="303" y="195" font-family="monospace" font-size="8" fill="#00d4ff">def status(update, ctx):</text>
+  <text x="303" y="209" font-family="monospace" font-size="8" fill="#f59e0b">  cpu = psutil.cpu_percent()</text>
+  <text x="303" y="223" font-family="monospace" font-size="8" fill="#f59e0b">  mem = psutil.virtual_memory()</text>
+  <text x="303" y="237" font-family="monospace" font-size="8" fill="#94a3b8">  temp = get_cpu_temp()</text>
+  <text x="303" y="251" font-family="monospace" font-size="8" fill="#22c55e">  bot.send_message(...)</text>
+  <text x="303" y="265" font-family="monospace" font-size="8" fill="#94a3b8">  # subprocess for cmds</text>
+
+  <!-- Arrows -->
+  <line x1="202" y1="200" x2="276" y2="200" stroke="#22c55e" stroke-width="1.5"/>
+  <polygon points="272,195 280,200 272,205" fill="#22c55e"/>
+  <line x1="522" y1="200" x2="568" y2="200" stroke="#229ED9" stroke-width="1.5"/>
+  <polygon points="564,195 572,200 564,205" fill="#229ED9"/>
+
+  <!-- Telegram chat (right) -->
+  <rect x="572" y="85" width="190" height="265" rx="10" fill="#0f1117" stroke="#229ED9" stroke-width="1.5"/>
+  <rect x="572" y="85" width="190" height="36" rx="10" fill="#1a3a4a"/>
+  <rect x="572" y="108" width="190" height="13" fill="#1a3a4a"/>
+  <circle cx="592" cy="103" r="10" fill="#229ED9"/>
+  <text x="592" y="107" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">🤖</text>
+  <text x="645" y="102" font-family="Inter,sans-serif" font-size="10" fill="white" font-weight="600">Pi Monitor Bot</text>
+  <text x="645" y="114" font-family="Inter,sans-serif" font-size="8" fill="#22c55e">● online</text>
+
+  <!-- Chat messages -->
+  <g transform="translate(582,130)">
+    <!-- User command -->
+    <rect x="80" y="0" width="90" height="22" rx="10" rx="10" fill="#1a4a6e"/>
+    <text x="125" y="15" font-family="monospace" font-size="8" fill="white" text-anchor="middle">/status</text>
+    <!-- Bot reply -->
+    <rect y="28" width="150" height="72" rx="8" fill="#1e2533"/>
+    <text x="8" y="42" font-family="monospace" font-size="8" fill="#229ED9">🖥 System Status</text>
+    <text x="8" y="56" font-family="monospace" font-size="8" fill="#e0e0e0">CPU: 62% @ 48°C</text>
+    <text x="8" y="69" font-family="monospace" font-size="8" fill="#e0e0e0">RAM: 1.4 / 4.0 GB</text>
+    <text x="8" y="82" font-family="monospace" font-size="8" fill="#e0e0e0">Disk: 22 / 64 GB</text>
+    <text x="8" y="95" font-family="monospace" font-size="8" fill="#22c55e">Uptime: 12d 4h</text>
+    <!-- User command 2 -->
+    <rect x="90" y="108" width="80" height="22" rx="10" fill="#1a4a6e"/>
+    <text x="130" y="123" font-family="monospace" font-size="8" fill="white" text-anchor="middle">/restart nginx</text>
+    <!-- Bot reply 2 -->
+    <rect y="136" width="150" height="36" rx="8" fill="#1e2533"/>
+    <text x="8" y="150" font-family="monospace" font-size="8" fill="#229ED9">✓ nginx restarted</text>
+    <text x="8" y="163" font-family="monospace" font-size="8" fill="#22c55e">Service is active</text>
+  </g>
+
+  <text x="400" y="393" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">Telegram Pi Monitoring Bot</text>
+  <text x="400" y="416" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">Python · psutil · Remote Commands · Real-time Alerts</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0f"/><stop offset="100%" stop-color="#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="progress" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Timeline axis -->
+  <line x1="60" y1="200" x2="740" y2="200" stroke="#2a2d3a" stroke-width="2"/>
+
+  <!-- Version nodes -->
+  <!-- v3.7 -->
+  <circle cx="110" cy="200" r="10" fill="#1a1d29" stroke="#2a2d3a" stroke-width="2"/>
+  <text x="110" y="225" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">v3.7</text>
+  <rect x="55" y="110" width="110" height="70" rx="8" fill="#0f1117" stroke="#2a2d3a" stroke-width="1.5"/>
+  <text x="110" y="130" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Origin</text>
+  <text x="110" y="145" font-family="monospace" font-size="8" fill="#7689a1" text-anchor="middle">Basic weather</text>
+  <text x="110" y="158" font-family="monospace" font-size="8" fill="#7689a1" text-anchor="middle">+ calendar</text>
+  <text x="110" y="171" font-family="monospace" font-size="8" fill="#7689a1" text-anchor="middle">static layout</text>
+  <line x1="110" y1="180" x2="110" y2="190" stroke="#2a2d3a" stroke-width="1.5"/>
+
+  <!-- v3.10 -->
+  <circle cx="250" cy="200" r="10" fill="#1a1d29" stroke="#f59e0b" stroke-width="2"/>
+  <text x="250" y="225" font-family="monospace" font-size="10" fill="#f59e0b" text-anchor="middle">v3.10</text>
+  <rect x="195" y="240" width="110" height="70" rx="8" fill="#0f1117" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="250" y="260" font-family="Inter,sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle">Cleanup</text>
+  <text x="250" y="275" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">2,000-line</text>
+  <text x="250" y="288" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">code purge</text>
+  <text x="250" y="301" font-family="monospace" font-size="8" fill="#22c55e" text-anchor="middle">-40% bundle</text>
+  <line x1="250" y1="210" x2="250" y2="238" stroke="#f59e0b" stroke-width="1.5"/>
+
+  <!-- v3.18 -->
+  <circle cx="390" cy="200" r="10" fill="#1a1d29" stroke="#7c3aed" stroke-width="2"/>
+  <text x="390" y="225" font-family="monospace" font-size="10" fill="#7c3aed" text-anchor="middle">v3.18</text>
+  <rect x="335" y="110" width="110" height="70" rx="8" fill="#0f1117" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="390" y="130" font-family="Inter,sans-serif" font-size="10" fill="#7c3aed" text-anchor="middle">CalDAV</text>
+  <text x="390" y="145" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Bulletproof</text>
+  <text x="390" y="158" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">multi-account</text>
+  <text x="390" y="171" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">sync engine</text>
+  <line x1="390" y1="180" x2="390" y2="190" stroke="#7c3aed" stroke-width="1.5"/>
+
+  <!-- v3.26 -->
+  <circle cx="530" cy="200" r="10" fill="#1a1d29" stroke="#00d4ff" stroke-width="2"/>
+  <text x="530" y="225" font-family="monospace" font-size="10" fill="#00d4ff" text-anchor="middle">v3.26</text>
+  <rect x="475" y="240" width="110" height="70" rx="8" fill="#0f1117" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="530" y="260" font-family="Inter,sans-serif" font-size="10" fill="#00d4ff" text-anchor="middle">Personality</text>
+  <text x="530" y="275" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Weather</text>
+  <text x="530" y="288" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">narrative AI</text>
+  <text x="530" y="301" font-family="monospace" font-size="8" fill="#22c55e" text-anchor="middle">one-liner text</text>
+  <line x1="530" y1="210" x2="530" y2="238" stroke="#00d4ff" stroke-width="1.5"/>
+
+  <!-- v3.30 (latest) -->
+  <circle cx="690" cy="200" r="14" fill="#00d4ff" opacity="0.15" stroke="#00d4ff" stroke-width="2"/>
+  <circle cx="690" cy="200" r="6" fill="#00d4ff"/>
+  <text x="690" y="225" font-family="monospace" font-size="10" fill="#00d4ff" text-anchor="middle" font-weight="700">v3.30</text>
+  <rect x="625" y="110" width="130" height="76" rx="8" fill="#0f1117" stroke="#00d4ff" stroke-width="2"/>
+  <text x="690" y="131" font-family="Inter,sans-serif" font-size="10" fill="#00d4ff" text-anchor="middle" font-weight="700">Latest</text>
+  <text x="690" y="146" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Extreme weather</text>
+  <text x="690" y="159" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Birthday detect</text>
+  <text x="690" y="172" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">57% size ↓</text>
+  <text x="690" y="180" font-family="monospace" font-size="7" fill="#22c55e" text-anchor="middle">temp shift alerts</text>
+  <line x1="690" y1="186" x2="690" y2="190" stroke="#00d4ff" stroke-width="1.5"/>
+
+  <!-- Progress fill on axis between nodes -->
+  <line x1="120" y1="200" x2="240" y2="200" stroke="url(#progress)" stroke-width="3" opacity="0.4"/>
+  <line x1="260" y1="200" x2="380" y2="200" stroke="url(#progress)" stroke-width="3" opacity="0.4"/>
+  <line x1="400" y1="200" x2="520" y2="200" stroke="url(#progress)" stroke-width="3" opacity="0.4"/>
+  <line x1="540" y1="200" x2="676" y2="200" stroke="url(#progress)" stroke-width="3" opacity="0.6"/>
+
+  <text x="400" y="370" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">Family Dashboard Evolution</text>
+  <text x="400" y="393" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle">v3.7 → v3.30 · Personality · CalDAV · 2,000-line Purge</text>
+</svg>
