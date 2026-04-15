@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.24.0] - 2026-04-15
+
+### Added
+- `blog/images/raspberry-pi-agent.svg` — SVG hero illustration for `blog/raspberry-pi-agent.html`; resolves Known Issue carried forward since v1.8.0
+- `blog/images/wpe-central-command.svg` — SVG hero illustration replacing the missing `wpe-central-command.png`; both `blog/wpe-central-command.html` and `blog/wpe-central-command-helper.html` updated to reference `.svg`; resolves Known Issue carried forward since v1.8.0
+- `blog/images/jf-website-monitor-content-change.svg` — SVG hero for `blog/jf-website-monitor-content-change-detection.html`
+- `blog/images/jf-notify-website.svg` — SVG hero for `blog/jf-notify-website.html`
+- `blog/images/developer-portfolio-performance.svg` — SVG hero for `blog/developer-portfolio-performance.html`
+- `blog/images/watch-list-internals.svg` — SVG hero for `blog/watch-list-internals.html`
+- `blog/images/arpy-assist-coding-agent.svg` — SVG hero for `blog/arpy-assist-coding-agent.html`
+- `blog/images/pi-backups-encryption.svg` — SVG hero for `blog/pi-backups-encryption.html`
+- `blog/images/watch-list-vercel-deploy.svg` — SVG hero for `blog/watch-list-vercel-deploy.html`
+- `blog/images/jf-notify-plugin-internals.svg` — SVG hero for `blog/jf-notify-plugin-internals.html`
+- `blog/archives.html` — new blog archives page listing all posts grouped by year (no pagination)
+
+### Changed
+- `now/index.html` — replaced static "Working On" content with a live GitHub repository feed (fetches and displays recently updated repos via the GitHub API)
+- `blog/archives.html` — simplified from paginated listing to grouped-by-year listing shortly after initial creation
+
+### Fixed
+- `sw.js` — service worker now includes a version-busted cache key so browsers receive updated CSS after deploys instead of serving stale assets
+- `about/index.html` — GitHub Projects stat now fetches the live count from the GitHub API rather than using a hardcoded value
+- `now/index.html` — repo description layout and text overflow corrected
+- `index.html` — removed non-functional newsletter subscribe section from homepage
+- `contact/index.html` — contact page layout no longer squishes on desktop viewports
+
+### Updated
+- `sitemap.xml` — added `blog/archives.html` entry (2026-04-14); updated `lastmod` for `/about/`, `/contact/`, and `/now/` entries to `2026-04-14` to reflect their changes
+
+### Reviewed
+- All 37 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory audited — all images confirmed referenced; no unreferenced or duplicate files found
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 37 blog posts present, dates accurate after this version's updates
+- `feed.xml` reviewed — 10 most recent posts correct, all in descending date order; no changes required
+- No unnecessary or stale files found for removal
+
 ## [1.23.0] - 2026-04-14
 
 ### Added
