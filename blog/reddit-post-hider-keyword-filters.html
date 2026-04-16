@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes - Jose Fresco</title>
+    <meta name="description" content="How Reddit Post Hider evolved from a one-click hide tool into a full filtering system — adding keyword rules, subreddit blocklists, persistent localStorage sync, and a resilient MutationObserver strategy for Reddit's constantly shifting DOM.">
+    <link rel="canonical" href="https://josefresco.com/blog/reddit-post-hider-keyword-filters.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes - Jose Fresco">
+    <meta property="og:description" content="How Reddit Post Hider evolved from a one-click hide tool into a full filtering system — adding keyword rules, subreddit blocklists, persistent localStorage sync, and a resilient MutationObserver strategy for Reddit's constantly shifting DOM.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/reddit-post-hider-keyword-filters.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/reddit-post-hider-keyword-filters.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-16T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Browser Extension">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes - Jose Fresco">
+    <meta name="twitter:description" content="How Reddit Post Hider evolved from a one-click hide tool into a full filtering system — adding keyword rules, subreddit blocklists, persistent localStorage sync, and a resilient MutationObserver strategy for Reddit's constantly shifting DOM.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/reddit-post-hider-keyword-filters.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/reddit-post-hider-keyword-filters.html"
+      },
+      "headline": "Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes",
+      "description": "How Reddit Post Hider evolved from a one-click hide tool into a full filtering system — adding keyword rules, subreddit blocklists, persistent localStorage sync, and a resilient MutationObserver strategy for Reddit's constantly shifting DOM.",
+      "image": "https://josefresco.com/blog/images/reddit-post-hider-keyword-filters.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-16T00:00:00+00:00",
+      "dateModified": "2026-04-16T00:00:00+00:00",
+      "keywords": "Reddit, Chrome Extension, Manifest V3, Content Script, MutationObserver, Keyword Filter, Subreddit Blocklist, JavaScript, Browser Extension, localStorage",
+      "articleSection": "Browser Extension",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes", "item": "https://josefresco.com/blog/reddit-post-hider-keyword-filters.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Browser Extension</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/reddit-post-hider-keyword-filters.svg" type="image/svg+xml">
+                        <img src="images/reddit-post-hider-keyword-filters.svg" alt="Reddit Post Hider keyword filter panel showing hidden posts and filter rules" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The 2026 update to <a href="https://github.com/josefresco/reddit-post-hider" target="_blank" rel="noopener" style="color: var(--neural-primary);">Reddit Post Hider</a> adds two automatic filtering modes on top of the original one-click hide: keyword rules that match post titles and subreddit blocklists that hide entire communities. Both use <code>chrome.storage.sync</code> for cross-device persistence and a <code>MutationObserver</code> to catch posts added by Reddit's infinite-scroll loader. This post covers the filter architecture, the storage model, and the <code>MutationObserver</code> approach that keeps the extension working despite Reddit's frequent DOM structure changes.
+                    </div>
+
+                    <h2>Where It Started</h2>
+                    <p>Reddit Post Hider began as the simplest possible thing: a content script that puts a small ✕ button next to each post. Click it, the post collapses. The list of hidden post IDs gets written to <code>chrome.storage.local</code> so they stay hidden on your next visit. That was the whole extension — about 80 lines of JavaScript.</p>
+                    <p>That was enough to be genuinely useful. But over time the limitation became clear: hiding posts one by one still means <em>seeing</em> them first. If you want to stop seeing posts from a specific subreddit that keeps showing up in your home feed — or any post that contains the word "sponsored" — you had to click every single one.</p>
+                    <p>The 2026 update adds two automatic filter types that run before you ever have to click anything.</p>
+
+                    <h2>Two New Filter Types</h2>
+
+                    <h3>Keyword Filters</h3>
+                    <p>Keyword filters match against the post title text. Any post whose title contains a configured keyword (case-insensitive) is automatically hidden without any user interaction.</p>
+                    <p>The use cases are exactly what you'd expect:</p>
+                    <ul>
+                        <li><strong>Noise reduction:</strong> Hide posts with "sponsored," "promoted," or "ad" to cut promotional content</li>
+                        <li><strong>Topic filtering:</strong> Hide posts mentioning specific topics you're not interested in</li>
+                        <li><strong>Quality filtering:</strong> Filter out low-signal patterns like "what's your [x]" or "hot take:"</li>
+                    </ul>
+                    <p>Keywords are stored as an array of lowercase strings. Matching is done with a simple <code>includes()</code> check on the normalized post title — no regex, intentionally. Regex would be more powerful but would also make the rules harder to write and audit. Plain substring matching covers 90% of actual use cases.</p>
+                    <pre><code>function matchesKeywordFilter(titleText, keywords) {
+    const normalized = titleText.toLowerCase().trim();
+    return keywords.some(kw => normalized.includes(kw.toLowerCase()));
+}</code></pre>
+
+                    <h3>Subreddit Blocklists</h3>
+                    <p>Subreddit filters hide every post from a specific community, regardless of title. On the home feed and popular feed, Reddit surfaces posts from subreddits you don't follow. Blocking <code>r/mildlyinfuriating</code> or <code>r/AskReddit</code> removes that entire category from your feed in one rule.</p>
+                    <p>The subreddit name is extracted from each post's source link element. Reddit renders the subreddit as a visible link in the post metadata — parsing the DOM element is more reliable than parsing the URL, because Reddit's URL structure has changed more often than its rendered metadata.</p>
+                    <pre><code>function getPostSubreddit(postEl) {
+    // Primary: subreddit link in post metadata
+    const subLink = postEl.querySelector('a[href^="/r/"]');
+    if (subLink) {
+        const match = subLink.getAttribute('href').match(/^\/r\/([^/]+)/);
+        return match ? match[1].toLowerCase() : null;
+    }
+    return null;
+}</code></pre>
+
+                    <h2>Storage Architecture</h2>
+                    <p>The original extension used <code>chrome.storage.local</code> for the manually-hidden post ID list. The new filter rules use <code>chrome.storage.sync</code> instead.</p>
+                    <p>The distinction matters:</p>
+                    <ul>
+                        <li><strong><code>chrome.storage.local</code></strong> stores data on the current device only. Good for the hide list — the posts you've explicitly dismissed are device-specific, and syncing thousands of post IDs across devices would hit the sync storage quota quickly.</li>
+                        <li><strong><code>chrome.storage.sync</code></strong> replicates data across all signed-in Chrome instances (up to 100KB total, 8KB per key). Filter rules are small and should be consistent everywhere you use Reddit.</li>
+                    </ul>
+                    <p>The storage schema keeps the two concerns separate:</p>
+                    <pre><code>// chrome.storage.local (device-specific)
+{
+    hiddenPosts: ["t3_abc123", "t3_def456", ...]  // manually hidden post IDs
+}
+
+// chrome.storage.sync (cross-device)
+{
+    keywordFilters: ["sponsored", "promoted", "clickbait"],
+    subredditFilters: ["askreddit", "mildlyinfuriating", "todayilearned"]
+}</code></pre>
+                    <p>On content script startup, both storage areas are read in a single parallel call:</p>
+                    <pre><code>async function loadFilters() {
+    const [local, sync] = await Promise.all([
+        chrome.storage.local.get({ hiddenPosts: [] }),
+        chrome.storage.sync.get({ keywordFilters: [], subredditFilters: [] })
+    ]);
+
+    state.hiddenPosts     = new Set(local.hiddenPosts);
+    state.keywordFilters  = sync.keywordFilters;
+    state.subredditFilters = new Set(sync.subredditFilters.map(s => s.toLowerCase()));
+}</code></pre>
+                    <p>Using a <code>Set</code> for <code>hiddenPosts</code> and <code>subredditFilters</code> gives O(1) lookup instead of O(n) array scan — important when the hidden list grows into the hundreds or thousands.</p>
+
+                    <h2>The MutationObserver Problem</h2>
+                    <p>This is the part that makes Reddit extension development genuinely tricky.</p>
+                    <p>Reddit's home feed is an infinite scroll — as you scroll down, new posts are injected into the DOM without a page navigation. A content script that runs once at page load will correctly hide the initial batch of posts, but any post loaded after that initial render won't be processed.</p>
+                    <p>The solution is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank" rel="noopener"><code>MutationObserver</code></a> watching the feed container for new child elements:</p>
+                    <pre><code>function startObserver() {
+    const feedContainer = document.querySelector(
+        'div[data-testid="posts-list"], .rpBJOHq2PR60pnwJlUyP0'
+    );
+
+    if (!feedContainer) {
+        // Feed container not found yet — retry after brief delay
+        setTimeout(startObserver, 500);
+        return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    processPost(node);
+                    // Also check descendants — Reddit sometimes wraps posts
+                    node.querySelectorAll('[data-testid="post-container"]')
+                        .forEach(processPost);
+                }
+            }
+        }
+    });
+
+    observer.observe(feedContainer, { childList: true, subtree: true });
+}</code></pre>
+                    <p>The CSS selector for the feed container is the fragile part. Reddit has changed its class names and <code>data-testid</code> values repeatedly. The current approach uses two selectors in priority order: the stable <code>data-testid</code> attribute (which Reddit has kept more consistent) and the generated class name as a fallback. When Reddit pushes a redesign, this selector is likely the first thing that breaks — and it's the first thing to check when users report the extension has stopped working.</p>
+
+                    <h3>Selector Resilience Strategy</h3>
+                    <p>Hardcoding class names is fragile by design (Reddit generates them with a build tool). The more resilient approach is to identify the feed by its structural position rather than its class:</p>
+                    <pre><code>function findFeedContainer() {
+    // Prefer semantic attribute — more stable than generated class names
+    const byTestId = document.querySelector('[data-testid="posts-list"]');
+    if (byTestId) return byTestId;
+
+    // Fallback: find the first element containing multiple post containers
+    const posts = document.querySelectorAll('[data-testid="post-container"]');
+    if (posts.length > 1) return posts[0].parentElement;
+
+    return null;
+}</code></pre>
+                    <p>This strategy — anchor to the children you know (<code>[data-testid="post-container"]</code>) and infer the parent — is more resilient to redesigns than looking for the parent directly. Reddit has kept the post-level <code>data-testid</code> attributes more stable than the feed-level ones.</p>
+
+                    <h2>The Popup UI</h2>
+                    <p>Filter rules are managed through the extension popup — the small panel that appears when you click the extension icon in the Chrome toolbar. The popup communicates with the content script via <code>chrome.runtime.sendMessage</code> / <code>chrome.runtime.onMessage</code>.</p>
+                    <p>The message protocol is intentionally simple:</p>
+                    <pre><code>// popup.js → background/content
+{ action: 'getFilters' }                              // get current rules
+{ action: 'addKeyword',   keyword: 'sponsored' }      // add keyword rule
+{ action: 'removeKeyword', keyword: 'sponsored' }     // remove keyword rule
+{ action: 'addSubreddit',   subreddit: 'askreddit' }  // add subreddit rule
+{ action: 'removeSubreddit', subreddit: 'askreddit' } // remove subreddit rule
+{ action: 'getStats' }                                // posts hidden this session</code></pre>
+                    <p>When a rule is added or removed, the content script updates its in-memory state immediately and re-processes all currently visible posts. This means adding a keyword filter causes already-rendered posts matching that keyword to disappear in real time — no page reload required.</p>
+
+                    <h2>Session Stats</h2>
+                    <p>The popup now shows a "hidden this session" count — the number of posts suppressed by all three mechanisms (manual hide, keyword filter, subreddit filter) since the tab was opened. This is stored in memory only (<code>let sessionCount = 0</code> in the content script), not persisted.</p>
+                    <p>Persisting the count across sessions added complexity without adding useful information. The interesting number is "how much noise did filters remove right now," not "total posts hidden since I installed the extension."</p>
+
+                    <h2>What Didn't Make the Cut</h2>
+                    <p>A few features were considered and intentionally excluded:</p>
+                    <ul>
+                        <li><strong>Regex keyword matching:</strong> More powerful but makes rules harder to audit and debug. Substring matching covers the practical cases.</li>
+                        <li><strong>Flair-based filtering:</strong> Reddit post flair is useful for filtering (hide all "Discussion" flair in a subreddit you follow for news only), but flair rendering is inconsistent across Reddit's new and old interfaces.</li>
+                        <li><strong>Export/import:</strong> Sync storage handles cross-device sharing automatically for signed-in Chrome users. A JSON export would only be needed if the user switches browsers or loses their sync data — a rare case that adds a visible UI element for an uncommon use case.</li>
+                        <li><strong>Whitelist mode:</strong> "Show only posts matching these keywords" inverts the logic. Useful in theory, confusing in practice — especially when combined with both keyword and subreddit rules.</li>
+                    </ul>
+
+                    <h2>Manifest V3 and Service Workers</h2>
+                    <p>Reddit Post Hider has been on <a href="https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3" target="_blank" rel="noopener">Manifest V3</a> since the v3.0 refactor. The 2026 update doesn't change the manifest version but does remove the last reference to the background <em>page</em> pattern — the extension now uses a service worker exclusively for the background context.</p>
+                    <p>In practice, this means the background context doesn't hold persistent state. The content script manages its own state in memory for the tab's lifetime, and durable state lives in <code>chrome.storage</code>. The service worker is only invoked for storage writes and message routing between popup and content script.</p>
+                    <p>This aligns with Chrome's direction: service workers are the MV3 model, and extensions that depend on a persistent background page will need to migrate eventually anyway.</p>
+
+                    <h2>Getting the Extension</h2>
+                    <p>Reddit Post Hider is open source. The source is on GitHub:</p>
+                    <pre><code>git clone https://github.com/josefresco/reddit-post-hider.git
+cd reddit-post-hider</code></pre>
+                    <p>To load it locally:</p>
+                    <ol>
+                        <li>Open Chrome and navigate to <code>chrome://extensions</code></li>
+                        <li>Enable "Developer mode" (toggle in the top right)</li>
+                        <li>Click "Load unpacked" and select the <code>reddit-post-hider</code> directory</li>
+                        <li>Navigate to Reddit — the extension icon appears in your toolbar</li>
+                    </ol>
+                    <p>Previous posts in this series: <a href="/blog/reddit-post-hider.html">original build</a> and the <a href="/blog/reddit-post-hider-v3.html">v3.0 reliability refactor</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Inspired by What You've Read?</h2>
+                    <p class="cta-description">
+                        These projects represent just a glimpse of what's possible. Whether you need a custom web application,
+                        browser extension, or automation tool, let's build something amazing together.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="mailto:josefresco@gmail.com?subject=Project Collaboration&body=Hi Jose,%0D%0A%0D%0AI've been reading your blog and would like to discuss a project collaboration.%0D%0A%0D%0AWhat I need:%0D%0A- [Brief description of your project]%0D%0A%0D%0ALet's set up a time to discuss this further.%0D%0A%0D%0ABest regards," class="btn-cta">
+                            Start a Project
+                        </a>
+                        <a href="/projects" class="btn-secondary">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

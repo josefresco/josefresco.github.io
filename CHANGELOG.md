@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-04-16
+
+### Added
+- `blog/reddit-post-hider-keyword-filters.html` — new blog post: "Reddit Post Hider: Keyword Filters, Subreddit Blocklists, and Surviving DOM Changes" (2026-04-16); covers keyword rule matching, subreddit blocklists, `chrome.storage.sync` architecture, and `MutationObserver` resilience strategy
+- `blog/images/reddit-post-hider-keyword-filters.svg` — SVG hero illustration for the new blog post; shows filter panel, blocked posts, and session stats
+
+### Changed
+- `blog/safeshare-reddit-bookmarklet.html` — updated hero image from PNG to SVG (`safeshare-reddit.svg`); updated `article:modified_time`, `dateModified` schema field, and `<picture>` element to reference the SVG; both OG and Twitter Card image tags updated to match
+- `index.html` — updated "Latest Blog Post" section to feature `reddit-post-hider-keyword-filters.html`
+- `blog/index.html` — updated two featured blog cards: new post replaces previous #1; previous #1 (`jf-notify-plugin-internals.html`) moves to #2
+- `blog/archives.html` — added `reddit-post-hider-keyword-filters.html` as newest entry in `ALL_POSTS` array (2026-04-16, Browser Extension)
+
+### Updated
+- `sitemap.xml` — added `blog/reddit-post-hider-keyword-filters.html` entry (2026-04-16); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, `safeshare-reddit-bookmarklet.html`, and `/feed.xml` entries to `2026-04-16`
+- `feed.xml` — added `reddit-post-hider-keyword-filters.html` as newest item; removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to `Thu, 16 Apr 2026`
+
+### Reviewed
+- All 38 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory audited — all images confirmed referenced; no unreferenced or duplicate files found
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 38 blog posts present, dates accurate after this version's updates
+- `feed.xml` reviewed — 10 most recent posts correct, all in descending date order; no changes required
+- No unnecessary or stale files found for removal
+
 ## [1.24.0] - 2026-04-15
 
 ### Added
