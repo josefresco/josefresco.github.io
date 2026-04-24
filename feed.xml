@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills</title>
+      <link>https://josefresco.com/blog/pi-backups-monitoring.html</link>
+      <description>The latest pi-backups update adds three companion shell scripts: healthcheck.sh, a dead-man switch that fires a Telegram alert if no backup archive has landed on the remote in the past 24 hours; retention.sh, which prunes GPG-encrypted archives older than a configurable threshold from the remote server on a weekly cron; and recover.sh, an automated restore drill that decrypts and unpacks the latest archive into a staging directory to verify recoverability before you ever need it.</description>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-monitoring.html</guid>
+    </item>
 
     <item>
       <title>Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts</title>
@@ -80,13 +88,6 @@
       <guid>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</guid>
     </item>
 
-    <item>
-      <title>Building the JF Notify Marketing Site with Eleventy</title>
-      <link>https://josefresco.com/blog/jf-notify-website.html</link>
-      <description>How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.</description>
-      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
-    </item>
 
   </channel>
 </rss>

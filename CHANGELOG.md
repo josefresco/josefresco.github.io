@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-04-24
+
+### Added
+- `blog/pi-backups-monitoring.html` — new blog post: "Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills" (2026-04-24); Part 3 of the pi-backups series covering `healthcheck.sh` (dead-man Telegram alert), `retention.sh` (automated archive pruning), and `recover.sh` (weekly restore drill)
+- `blog/images/pi-backups-monitoring.svg` — SVG hero illustration for the new pi-backups monitoring post; shows the healthcheck cron flow, Telegram alert path, retention pruning, and recovery drill stages
+
+### Changed
+- `blog/index.html` — updated featured posts: `pi-backups-monitoring.html` is now first featured post; `jf-notify-plugin-internals.html` is second; post count remains 2 per policy
+- `index.html` — updated "Latest Blog Post" homepage section to feature `pi-backups-monitoring.html`
+
+### Updated
+- `blog/pi-backups-raspberry-pi.html` — updated `dateModified` to 2026-04-24; added "April 24, 2026 Update" section summarising the three new monitoring scripts; updated blog navigation buttons to reflect Part 1 → Part 2 → Part 3 series structure
+- `sitemap.xml` — added `pi-backups-monitoring.html` entry (2026-04-24); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, and `pi-backups-raspberry-pi.html` to 2026-04-24
+- `feed.xml` — added `pi-backups-monitoring.html` as newest item; removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to `Fri, 24 Apr 2026`
+- `blog/archives.html` — added `pi-backups-monitoring.html` entry at top of `ALL_POSTS` array (2026-04-24)
+
+### Reviewed
+- All 38 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory audited — all images confirmed referenced; no unreferenced or duplicate files found
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — all 38 blog posts present, dates accurate after this version's updates
+- `feed.xml` reviewed — 10 most recent posts correct, all in descending date order
+- No unnecessary or stale files found for removal
+
 ## [1.24.0] - 2026-04-15
 
 ### Added

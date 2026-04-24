@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills - Jose Fresco</title>
+    <meta name="description" content="The latest pi-backups update adds three new shell scripts: a healthcheck dead-man switch that fires Telegram alerts when a backup goes missing, a retention pruner for old archives, and a recovery drill that verifies your backups are actually restorable before disaster strikes.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-monitoring.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills - Jose Fresco">
+    <meta property="og:description" content="The latest pi-backups update adds three new shell scripts: a healthcheck dead-man switch that fires Telegram alerts when a backup goes missing, a retention pruner for old archives, and a recovery drill that verifies your backups are actually restorable before disaster strikes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-monitoring.html">
+    <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-24T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills - Jose Fresco">
+    <meta name="twitter:description" content="The latest pi-backups update adds three new shell scripts: a healthcheck dead-man switch that fires Telegram alerts when a backup goes missing, a retention pruner for old archives, and a recovery drill that verifies your backups are actually restorable before disaster strikes.">
+    <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-monitoring.html"
+      },
+      "headline": "Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills",
+      "description": "The latest pi-backups update adds three new shell scripts: a healthcheck dead-man switch that fires Telegram alerts when a backup goes missing, a retention pruner for old archives, and a recovery drill that verifies your backups are actually restorable before disaster strikes.",
+      "image": "https://josefresco.com/images/og-image.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-24T00:00:00+00:00",
+      "dateModified": "2026-04-24T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Backup, Healthcheck, Shell Script, Automation, Monitoring, Retention, Recovery, Telegram, cron",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills", "item": "https://josefresco.com/blog/pi-backups-monitoring.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Pi Backups: Healthcheck Alerts, Retention Pruning, and Automated Recovery Drills</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups-monitoring.svg" type="image/svg+xml">
+                        <img src="images/pi-backups-monitoring.svg" alt="Pi Backups monitoring diagram showing healthcheck cron, Telegram alerts, retention pruning, and recovery drill flow" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The April 2026 <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">pi-backups</a> update adds three companion scripts: <code>healthcheck.sh</code> runs at 3 AM via cron and fires a Telegram alert if no backup archive has landed on the remote in the past 24 hours (a dead-man switch for silent failures); <code>retention.sh</code> runs weekly and deletes GPG-encrypted archives older than a configurable number of days; and <code>recover.sh</code> is an automated restore drill that decrypts and unpacks the latest archive into a staging directory, reports file counts and total size, then removes the staging copy. Together they close the gap between "backups are running" and "backups are working."
+                    </div>
+
+                    <h2>The Gap the Original System Left Open</h2>
+                    <p>The <a href="/blog/pi-backups-raspberry-pi.html">original pi-backups post</a> covered the nightly rsync workflow that gets Pi application data off the SD card and onto a remote server. The <a href="/blog/pi-backups-encryption.html">follow-up post</a> added GPG encryption so the archives are safe even if the remote server is compromised. But both posts assumed the backup was actually running.</p>
+                    <p>In practice, backups fail silently all the time:</p>
+                    <ul>
+                        <li>SSH key rotated on the remote, breaking passwordless auth</li>
+                        <li>Remote disk full — rsync exits cleanly but writes nothing</li>
+                        <li>Cron entry accidentally deleted during a system config cleanup</li>
+                        <li>Pi rebooted at 2 AM exactly (cron jobs don't reschedule missed runs by default)</li>
+                    </ul>
+                    <p>You don't find out about any of these until the moment you need a restore. The three scripts in this update are designed to surface failures before that moment, not after.</p>
+
+                    <h2>healthcheck.sh — The Dead-Man Switch</h2>
+                    <p>A dead-man switch is a mechanism that fires when something expected <em>stops happening</em>. The healthcheck script doesn't monitor the backup process — it checks for its output. Once per day, at 3 AM, it SSHes to the remote server and checks the modification timestamp of the most recent archive. If that timestamp is more than 24 hours old, it fires a Telegram alert.</p>
+                    <pre><code>#!/bin/bash
+# healthcheck.sh — alert if no backup has landed in the past 24 hours
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_BACKUP_PATH="/backups/pi"
+MAX_AGE_HOURS=24
+
+BOT_TOKEN="${TELEGRAM_BOT_TOKEN}"
+CHAT_ID="${TELEGRAM_CHAT_ID}"
+
+send_telegram() {
+    curl -s -X POST \
+        "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+        -d "chat_id=${CHAT_ID}" \
+        --data-urlencode "text=$1" \
+        > /dev/null
+}
+
+# Find the most recently modified .gpg archive on the remote
+LATEST_MTIME=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "find ${REMOTE_BACKUP_PATH} -name '*.gpg' -printf '%T@\n' 2>/dev/null | sort -n | tail -1")
+
+if [ -z "$LATEST_MTIME" ]; then
+    send_telegram "⚠️ Pi backup healthcheck: no archives found at ${REMOTE_BACKUP_PATH}"
+    exit 1
+fi
+
+NOW=$(date +%s)
+AGE_SECONDS=$(( NOW - ${LATEST_MTIME%.*} ))
+AGE_HOURS=$(( AGE_SECONDS / 3600 ))
+
+if [ "$AGE_HOURS" -gt "$MAX_AGE_HOURS" ]; then
+    send_telegram "⚠️ Pi backup overdue: last archive is ${AGE_HOURS}h old (threshold: ${MAX_AGE_HOURS}h). Check cron and SSH auth."
+    exit 1
+fi
+
+# Backup is current — no alert needed (silent success)</code></pre>
+                    <p>A few design decisions worth explaining:</p>
+                    <ul>
+                        <li><strong>Silent success.</strong> The script sends no message when the backup is current. A daily "everything is fine" notification would train you to ignore it, which defeats the purpose. Alerts should mean something is wrong.</li>
+                        <li><strong>It checks the output, not the process.</strong> Monitoring whether cron ran <code>backup.sh</code> is less useful than monitoring whether a fresh archive actually exists. The backup script could run and fail in ways cron monitoring wouldn't catch.</li>
+                        <li><strong>Credentials from environment variables.</strong> <code>TELEGRAM_BOT_TOKEN</code> and <code>TELEGRAM_CHAT_ID</code> are loaded from the environment, not hardcoded. On Raspberry Pi, source them from <code>~/.bashrc</code> or a dedicated <code>~/.env</code> file that cron loads via the <code>BASH_ENV</code> variable.</li>
+                    </ul>
+
+                    <h3>Loading Credentials for Cron</h3>
+                    <p>Cron doesn't source <code>~/.bashrc</code>. To pass environment variables to the healthcheck script, create a credentials file:</p>
+                    <pre><code># ~/.pi-backups-env
+export TELEGRAM_BOT_TOKEN="your-bot-token"
+export TELEGRAM_CHAT_ID="your-chat-id"</code></pre>
+                    <p>Then source it in the cron entry:</p>
+                    <pre><code># /etc/crontab
+0 3 * * * pi bash -c 'source /home/pi/.pi-backups-env && /home/pi/scripts/healthcheck.sh'</code></pre>
+                    <p>This keeps credentials out of the crontab file itself (which is world-readable on many systems) and centralizes them in one place that all backup scripts can share.</p>
+
+                    <h2>retention.sh — Pruning Old Archives</h2>
+                    <p>The backup script creates a new date-stamped archive every night. Without a retention policy, those archives accumulate indefinitely. <code>retention.sh</code> runs weekly — Sunday morning, after the nightly backup has had time to complete — and removes archives older than a configurable threshold.</p>
+                    <pre><code>#!/bin/bash
+# retention.sh — remove backup archives older than KEEP_DAYS days
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_BACKUP_PATH="/backups/pi"
+KEEP_DAYS=30
+
+LOG_FILE="/var/log/pi-backups.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [retention] $1" | tee -a "$LOG_FILE"
+}
+
+log "Running retention policy (keep last ${KEEP_DAYS} days)..."
+
+# Count archives before pruning
+BEFORE=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "find ${REMOTE_BACKUP_PATH} -name '*.gpg' | wc -l")
+
+# Delete archives older than KEEP_DAYS
+DELETED=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "find ${REMOTE_BACKUP_PATH} -name '*.gpg' -mtime +${KEEP_DAYS} -print -delete | wc -l")
+
+# Count archives after pruning
+AFTER=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "find ${REMOTE_BACKUP_PATH} -name '*.gpg' | wc -l")
+
+log "Retention complete: ${BEFORE} archives before, ${DELETED} removed, ${AFTER} remaining."</code></pre>
+                    <p>The script logs counts before and after so you can audit what was removed. If you see the archive count drop unexpectedly, the log entry gives you the numbers to investigate.</p>
+                    <p>Thirty days covers the most common recovery scenario — "I deleted something important last week" — without consuming unlimited remote disk space. The <code>KEEP_DAYS</code> variable is at the top of the script so you can tune it per deployment without hunting through the code.</p>
+
+                    <h3>Why Not Use find's -delete on the Remote Directly?</h3>
+                    <p>The <code>-print -delete</code> combination in <code>find</code> prints each deleted path before removing it, which gives us the count. Running this via SSH means the deletion happens on the remote server without transferring any file data over the network — only the command is sent, not the archives themselves.</p>
+
+                    <h2>recover.sh — The Automated Restore Drill</h2>
+                    <p>This is the most important script in this update. A backup you've never tested restoring is a backup you can't trust. <code>recover.sh</code> does exactly what you'd do in a real recovery scenario — it fetches the latest archive from the remote, decrypts it, unpacks it into a staging directory, and reports what came out — but it does it automatically, on a schedule, without requiring you to remember to do it.</p>
+                    <pre><code>#!/bin/bash
+# recover.sh — automated restore drill; decrypts and unpacks latest archive to staging
+
+REMOTE_USER="backup"
+REMOTE_HOST="your-remote-server.com"
+REMOTE_BACKUP_PATH="/backups/pi"
+STAGING_DIR="/tmp/pi-backup-drill"
+GPG_PASSPHRASE_FILE="/home/pi/.gpg-passphrase"
+
+LOG_FILE="/var/log/pi-backups.log"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [recover] $1" | tee -a "$LOG_FILE"
+}
+
+# Clean up staging dir on exit (success or failure)
+cleanup() {
+    rm -rf "$STAGING_DIR"
+    log "Staging directory cleaned up."
+}
+trap cleanup EXIT
+
+mkdir -p "$STAGING_DIR"
+log "Starting restore drill..."
+
+# Find the most recent archive on the remote
+LATEST=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+    "find ${REMOTE_BACKUP_PATH} -name '*.gpg' -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-")
+
+if [ -z "$LATEST" ]; then
+    log "ERROR: No archives found on remote. Drill failed."
+    exit 1
+fi
+
+log "Latest archive: ${LATEST}"
+
+# Download, decrypt, and unpack in one pipeline
+ssh "${REMOTE_USER}@${REMOTE_HOST}" "cat '${LATEST}'" \
+    | gpg --batch --yes \
+          --passphrase-file "$GPG_PASSPHRASE_FILE" \
+          --decrypt \
+    | tar -xzf - -C "$STAGING_DIR" 2>> "$LOG_FILE"
+
+if [ $? -ne 0 ]; then
+    log "ERROR: Decrypt/unpack failed. Drill FAILED — check GPG key and archive integrity."
+    exit 1
+fi
+
+# Report what was restored
+FILE_COUNT=$(find "$STAGING_DIR" -type f | wc -l)
+TOTAL_SIZE=$(du -sh "$STAGING_DIR" | cut -f1)
+
+log "Drill passed ✓ — ${FILE_COUNT} files, ${TOTAL_SIZE} total. Archive is restorable."
+# cleanup runs via trap</code></pre>
+                    <p>The pipeline is the heart of the script: <code>cat</code> streams the archive over the SSH connection, GPG decrypts it on the fly, and <code>tar</code> unpacks it to the staging directory. No temporary file is written to disk during transit — the encrypted bytes stream directly into the decryption process without ever being stored on the Pi in their encrypted form.</p>
+
+                    <h3>The cleanup Trap</h3>
+                    <p>The <code>trap cleanup EXIT</code> line ensures the staging directory is always removed when the script exits, whether it succeeds, fails, or is killed with Ctrl+C. Without this, a failed drill would leave a potentially large directory behind in <code>/tmp</code>. The trap pattern is the idiomatic way to handle cleanup in shell scripts — cleaner than duplicating <code>rm -rf</code> at every exit point.</p>
+
+                    <h3>What the Drill Validates</h3>
+                    <p>A successful drill confirms four things:</p>
+                    <ol>
+                        <li><strong>SSH access still works</strong> — if key auth broke, the drill fails at the <code>cat</code> step</li>
+                        <li><strong>The archive is intact</strong> — a corrupted download or write error would cause GPG or tar to fail</li>
+                        <li><strong>The GPG passphrase is correct</strong> — if you rotated the key, the drill catches the mismatch before a real recovery</li>
+                        <li><strong>The archive structure is valid</strong> — tar validates the archive format during unpack</li>
+                    </ol>
+                    <p>Running the drill weekly means you have at most a 7-day window between a backup becoming unrestorable and discovering it. For most self-hosted Pi workloads, that's an acceptable margin.</p>
+
+                    <h2>The Full Cron Schedule</h2>
+                    <p>All four scripts now run on a coordinated schedule:</p>
+                    <pre><code># /etc/crontab — pi-backups full schedule
+#
+# Nightly backup at 2:00 AM
+0  2  * * *  pi  bash -c 'source /home/pi/.pi-backups-env && /home/pi/scripts/backup.sh'
+
+# Healthcheck at 3:00 AM (after backup has had an hour to complete)
+0  3  * * *  pi  bash -c 'source /home/pi/.pi-backups-env && /home/pi/scripts/healthcheck.sh'
+
+# Weekly retention pruning, Sunday at 3:30 AM
+30 3  * * 0  pi  bash -c 'source /home/pi/.pi-backups-env && /home/pi/scripts/retention.sh'
+
+# Weekly restore drill, Sunday at 4:00 AM (after retention has run)
+0  4  * * 0  pi  bash -c 'source /home/pi/.pi-backups-env && /home/pi/scripts/recover.sh'</code></pre>
+                    <p>The Sunday morning window is deliberate. All four scripts run in sequence, spaced apart so each one has finished before the next starts. The retention script runs before the recovery drill so the drill is always testing a fresh archive, not one that's about to be deleted.</p>
+
+                    <h2>What the Series Has Built</h2>
+                    <p>Across three posts, pi-backups has grown from a single nightly rsync into a complete backup system:</p>
+                    <ul>
+                        <li><strong><a href="/blog/pi-backups-raspberry-pi.html">Part 1 — The Original System:</a></strong> rsync over SSH, cron scheduling, SSH key auth, Telegram success/failure alerts, and a 30-day retention strategy.</li>
+                        <li><strong><a href="/blog/pi-backups-encryption.html">Part 2 — Encryption:</a></strong> GPG AES-256 encryption of each archive before it leaves the Pi, so the remote server operator can't read your data. Restore verification with checksum validation.</li>
+                        <li><strong>Part 3 — Monitoring (this post):</strong> A dead-man healthcheck that alerts when backups stop landing, automated retention pruning, and a weekly restore drill that proves recoverability.</li>
+                    </ul>
+                    <p>The result is a backup system where silence means everything is working — and a Telegram alert means something needs attention. No dashboard to check, no manual process to remember. The Pi just handles it.</p>
+                    <p>The full source is on GitHub at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener">github.com/josefresco/pi-backups</a>.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-encryption.html" class="btn-secondary">← Part 2: Encryption</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Running Your Own Self-Hosted Stack?</h2>
+                <p class="cta-description">
+                    Shell scripts, cron jobs, and a Raspberry Pi are all you need for a resilient backup and monitoring system —
+                    no SaaS fees, no vendor lock-in, no agent to maintain. If you want help building something similar, I'm available.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Self-Hosted Infrastructure Project&body=Hi Jose,%0D%0A%0D%0AI read your pi-backups monitoring post and have a similar project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

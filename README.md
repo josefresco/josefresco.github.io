@@ -67,10 +67,11 @@ josefresco.github.io/
 ├── feed.xml                # RSS feed (10 most recent posts)
 ├── llms.txt                # AI agent optimization guide
 ├── blog/                   # Blog posts directory
-│   ├── index.html          # Blog listing page
+│   ├── index.html          # Blog listing page (2 featured posts)
+│   ├── archives.html       # Full archive of all posts (filterable by category)
 │   ├── blog.css            # Blog-specific styles
 │   ├── images/             # Blog post images (SVG, PNG, WebP)
-│   └── *.html              # Individual blog post files
+│   └── *.html              # Individual blog post files (38 posts)
 ├── projects/               # Project landing pages
 │   ├── index.html          # Projects overview
 │   ├── jf-notify.html      # JF Notify project page
