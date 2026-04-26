@@ -74,6 +74,13 @@
   </url>
 
   <url>
+    <loc>https://josefresco.com/blog/family-dash-self-hosted.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://josefresco.com/blog/pi-backups-encryption.html</loc>
     <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
