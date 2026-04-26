@@ -1157,6 +1157,18 @@ section {
 }
 
 @media (max-width: 768px) {
+    .blog-navigation {
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 5rem;
+    }
+
+    .blog-navigation .btn-secondary,
+    .blog-navigation .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
     .blog-card.featured {
         grid-template-columns: 1fr;
     }
