@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research - Jose Fresco</title>
+    <meta name="description" content="How people-also-ask works — a vanilla JavaScript bookmarklet that scrapes Google's PAA accordion, deduplicates questions, and exports them as JSON, CSV, or plain text for content research without any API key or backend.">
+    <link rel="canonical" href="https://josefresco.com/blog/people-also-ask.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research - Jose Fresco">
+    <meta property="og:description" content="How people-also-ask works — a vanilla JavaScript bookmarklet that scrapes Google's PAA accordion, deduplicates questions, and exports them as JSON, CSV, or plain text for content research without any API key or backend.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/people-also-ask.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/people-also-ask.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-04-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-29T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research - Jose Fresco">
+    <meta name="twitter:description" content="How people-also-ask works — a vanilla JavaScript bookmarklet that scrapes Google's PAA accordion, deduplicates questions, and exports them as JSON, CSV, or plain text for content research without any API key or backend.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/people-also-ask.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/people-also-ask.html"
+      },
+      "headline": "People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research",
+      "description": "How people-also-ask works — a vanilla JavaScript bookmarklet that scrapes Google's PAA accordion, deduplicates questions, and exports them as JSON, CSV, or plain text for content research without any API key or backend.",
+      "image": "https://josefresco.com/blog/images/people-also-ask.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-04-29T00:00:00+00:00",
+      "dateModified": "2026-04-29T00:00:00+00:00",
+      "keywords": "People Also Ask, PAA, Google SERP, Content Research, JavaScript, Bookmarklet, SEO, Content Creation, DOM Scraping, Keyword Research",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research", "item": "https://josefresco.com/blog/people-also-ask.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">April 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/people-also-ask.svg" type="image/svg+xml">
+                        <img src="images/people-also-ask.svg" alt="people-also-ask bookmarklet extracting PAA questions from Google into a JSON export panel" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" style="color: var(--neural-primary);">people-also-ask</a> is a vanilla JavaScript bookmarklet you install once from the repo. Run it on any Google search results page and it scrapes every visible "People Also Ask" question from the DOM, deduplicates the list, and surfaces a floating export panel with one-click Copy JSON, Copy CSV, and Copy Text options. No API key, no backend, no browser store review cycle — just a <code>javascript:</code> URI you drag to your bookmarks bar. This post covers the DOM targeting approach, the deduplication strategy, the floating overlay UI pattern, and why a bookmarklet beats a full extension for a tool you use occasionally during research sessions.
+                    </div>
+
+                    <h2>Why PAA Questions Are the Best Signal You're Not Using</h2>
+                    <p>Google's "People Also Ask" boxes surface the literal questions people are typing into search — not keyword variations a tool infers, but real queries with enough search volume that Google decided they deserved a dedicated accordion UI. For content creators, that's extraordinarily valuable data. Each question is a potential blog post angle, a FAQ item, a section heading, or a long-tail keyword your article should cover.</p>
+                    <p>The problem is that collecting these questions manually is tedious. You open a search, expand a few PAA rows (which dynamically loads more), copy the questions one at a time into a doc or spreadsheet, repeat for every query in your research session. That friction is enough to make most people skip the step entirely.</p>
+                    <p>The tool exists to eliminate that friction. One click, all the questions, in a format you can paste wherever you need them.</p>
+
+                    <h2>The Bookmarklet Deployment Pattern</h2>
+                    <p>The first design decision was delivery method: browser extension vs. bookmarklet. A Chrome extension would need a manifest, a store listing, a review cycle, periodic updates to stay compatible with Manifest V3 requirements, and a user who's willing to install something from an unknown publisher. A bookmarklet is a <code>javascript:</code> URI — you get it from the repo README, drag it to your bookmarks bar once, and it runs on any page you invoke it on.</p>
+                    <p>For a tool you use occasionally during research sessions (not constantly in the background), the bookmarklet pattern wins on simplicity. There's no install surface, no permissions prompt beyond what the page already has, and no update to push when Google changes its UI. The user gets a new version by copying a new URI from the repo.</p>
+                    <pre><code>// The installed bookmarklet (minified, lives in your browser)
+javascript:(function(){
+  const s = document.createElement('script');
+  s.src = 'https://raw.githubusercontent.com/josefresco/people-also-ask/main/paa.js?' + Date.now();
+  document.head.appendChild(s);
+})();</code></pre>
+                    <p>The bookmarklet itself is a two-line loader — it injects the actual script from the repo at runtime, which means the logic can be updated without the user reinstalling anything. The <code>Date.now()</code> cache-busting parameter ensures they always get the current version.</p>
+
+                    <h2>Targeting the PAA DOM Without Brittle Class Names</h2>
+                    <p>Google's rendered HTML uses obfuscated, auto-generated class names that change with every UI update. Any scraper that targets <code>.related-question-pair</code> or similar semantic names will break within weeks. The solution is to target structural and content-based attributes instead.</p>
+                    <p>PAA question rows have a few stable characteristics regardless of class name churn:</p>
+                    <ul>
+                        <li>They live inside an element with <code>data-sgrd</code> or similar data attributes marking them as expandable accordion items</li>
+                        <li>The question text is always the direct text content of a heading-level element inside each row</li>
+                        <li>Each row has an ARIA role of <code>button</code> or contains a <code>[role="button"]</code> descendant for the expand trigger</li>
+                        <li>The containing section has visible text "People also ask" somewhere above it in the DOM</li>
+                    </ul>
+                    <pre><code>function extractQuestions() {
+  const questions = new Set(); // deduplicate automatically
+
+  // Target expandable question rows by ARIA role
+  const rows = document.querySelectorAll('[role="button"][jsname], [data-ved][jsaction]');
+
+  rows.forEach(row => {
+    // Find the first meaningful text node — the question text
+    const textEl = row.querySelector('span[jsname], div[data-mb]');
+    if (!textEl) return;
+
+    const text = textEl.textContent.trim();
+
+    // Filter: questions end with "?" and are 20–200 chars
+    if (text.endsWith('?') && text.length > 20 && text.length < 200) {
+      questions.add(text);
+    }
+  });
+
+  return [...questions];
+}</code></pre>
+                    <p>The length filter (<code>&gt; 20 && &lt; 200</code>) catches genuine questions while excluding UI chrome text that accidentally matches the selector. The Set deduplication handles Google's behavior of repeating questions when PAA boxes load dynamically — the same question can appear in multiple PAA clusters on the same results page.</p>
+
+                    <h2>Expanding Hidden Questions</h2>
+                    <p>Google's PAA boxes are lazy — they render four questions initially and load more when you expand any of them. The tool handles this in two ways. First, it scrapes what's currently visible. Second, it optionally auto-expands all visible PAA rows before scraping, triggering Google's dynamic loading.</p>
+                    <pre><code>async function expandAndScrape() {
+  // Expand all current PAA rows to trigger Google's lazy-load
+  const expandables = document.querySelectorAll('[role="button"][jsname]');
+
+  for (const btn of expandables) {
+    btn.click();
+    // Small delay — Google's JS needs a tick to inject new rows
+    await new Promise(r => setTimeout(r, 120));
+  }
+
+  // Wait for DOM to settle after the last expansion
+  await new Promise(r => setTimeout(r, 400));
+
+  return extractQuestions();
+}</code></pre>
+                    <p>The 120ms inter-click delay and 400ms final settle time are empirically tuned. Too fast and Google's mutation-based renderer hasn't had time to inject the new question rows; too slow and the user is waiting noticeably. At these values, a page with three PAA clusters and eight questions each takes about two seconds to fully expand and scrape — fast enough to feel responsive.</p>
+
+                    <h2>The Floating Overlay UI</h2>
+                    <p>The result panel injects a positioned overlay into the current page rather than opening a new window or tab. This keeps the context visible — you can see the search results alongside the extracted questions, which is useful when you want to cross-reference.</p>
+                    <pre><code>function renderOverlay(questions) {
+  // Remove any previous overlay
+  document.getElementById('paa-overlay')?.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'paa-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 420px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #1a1d29;
+    border: 1px solid #00d4ff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    z-index: 99999;
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    color: #e2e8f0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  `;
+
+  overlay.innerHTML = buildOverlayHTML(questions);
+  document.body.appendChild(overlay);
+
+  // Wire up export buttons
+  overlay.querySelector('#paa-copy-json')
+    .addEventListener('click', () => copyToClipboard(JSON.stringify(questions, null, 2)));
+  overlay.querySelector('#paa-copy-csv')
+    .addEventListener('click', () => copyToClipboard(questions.map(q => `"${q.replace(/"/g, '""')}"`).join('\n')));
+  overlay.querySelector('#paa-copy-text')
+    .addEventListener('click', () => copyToClipboard(questions.join('\n')));
+  overlay.querySelector('#paa-close')
+    .addEventListener('click', () => overlay.remove());
+}</code></pre>
+                    <p>The overlay is entirely self-contained — inline styles so no external stylesheet is needed, a single <code>removeEventListener</code>-free close button that just removes the element from the DOM, and no globals leaked onto the page. Running the bookmarklet again replaces the existing overlay rather than stacking a second one.</p>
+
+                    <h2>Export Formats</h2>
+                    <p>Three export targets cover the downstream use cases:</p>
+                    <ul>
+                        <li><strong>JSON</strong> — A structured array. Paste into a file, feed into a script, or use as input to an AI prompt asking it to outline a blog post from the questions.</li>
+                        <li><strong>CSV</strong> — One question per line, double-quote-escaped. Drop directly into a spreadsheet for a content calendar or keyword tracking sheet.</li>
+                        <li><strong>Plain text</strong> — A newline-separated list. Paste into a doc, a Notion page, or anywhere plain text belongs. Good for a quick brain-dump without structural overhead.</li>
+                    </ul>
+                    <p>All three use the browser's <code>navigator.clipboard.writeText()</code> API, which requires the page to be in focus. If the clipboard write fails (clipboard permission denied, which is rare on modern browsers for user-triggered actions), the tool falls back to selecting the text in a temporary <code>&lt;textarea&gt;</code> and calling <code>document.execCommand('copy')</code>.</p>
+
+                    <h2>Use Cases</h2>
+                    <p>The tool solves a specific workflow: you're researching a topic, you've done several Google searches, and you want to capture all the audience intent signals from those sessions without copying questions by hand.</p>
+                    <ul>
+                        <li><strong>Blog post outlines</strong> — Run it on three related queries, copy the questions as JSON, ask an AI to cluster them into section headings. You have an outline in under a minute.</li>
+                        <li><strong>FAQ sections</strong> — Product pages and support docs benefit from answering the literal questions people ask. PAA questions are a better source than guesswork.</li>
+                        <li><strong>Content gap analysis</strong> — Compare the PAA questions for your topic against your existing posts. Any question not covered is a content gap.</li>
+                        <li><strong>Long-tail keyword research</strong> — PAA questions often contain natural-language phrasing that matches voice search queries — phrases that traditional keyword tools undercount.</li>
+                    </ul>
+
+                    <h2>Limitations</h2>
+                    <p>The tool is honest about what it can't do. Google's DOM is not a stable API — the selector approach that works today will eventually need updating as Google ships UI changes. The repo includes a simple test page for validating the selectors without running live against Google. When the selectors break, the fix is typically a one-line update to the query string.</p>
+                    <p>The tool also doesn't paginate. It extracts questions from the current SERP only. If you need deeper coverage — questions from 10 related queries, say — you run it on each search manually. Automating multi-query scraping would require a headless browser and crosses into territory that violates Google's Terms of Service.</p>
+                    <p>Finally, the auto-expand feature has a ceiling. Google limits how many PAA rows it will lazy-load in a single page session. In practice you get around 15–20 unique questions per query before the "See more" button stops producing new rows — which is usually more than enough for a content research session.</p>
+
+                    <h2>The Repo</h2>
+                    <p>The source is at <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/people-also-ask</a>. The README has the bookmarklet URI, installation instructions, and the test page for validating selectors after Google UI updates. The entire implementation is a single ~150-line JavaScript file — small enough to read and audit in a few minutes before trusting it on your browser.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Need a Custom Research or Automation Tool?</h2>
+                    <p class="cta-description">
+                        Browser bookmarklets, Chrome extensions, scraping utilities — if there's a repetitive research
+                        or data-collection task slowing you down, let's build something that eliminates it.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="mailto:josefresco@gmail.com?subject=Tool Development&body=Hi Jose,%0D%0A%0D%0AI read your People Also Ask post and have an idea for a similar tool.%0D%0A%0D%0AWhat I need:%0D%0A- [Brief description]%0D%0A%0D%0ABest regards," class="btn-cta">
+                            Start a Project
+                        </a>
+                        <a href="/projects" class="btn-secondary">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

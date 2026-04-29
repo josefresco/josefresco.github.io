@@ -29,7 +29,7 @@
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
     <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-29T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Browser Extension">
 
@@ -66,7 +66,7 @@
         }
       },
       "datePublished": "2025-08-01T00:00:00+00:00",
-      "dateModified": "2025-08-01T00:00:00+00:00",
+      "dateModified": "2026-04-29T00:00:00+00:00",
       "keywords": "Reddit, Browser Extension, JavaScript, Content Filtering, User Experience",
       "articleSection": "Browser Extension",
       "inLanguage": "en-US"
@@ -106,9 +106,12 @@
             <div class="nav-links" id="nav-links">
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
                 <a href="/contact" class="nav-link">Contact</a>
-                <a href="mailto:josefresco@gmail.com?subject=Let's Work Together&body=Hi Jose,%0D%0A%0D%0AI'm interested in working with you on a project. Let's discuss how we can collaborate.%0D%0A%0D%0ABest regards," class="btn-cta btn-cta-nav">Hire Me</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
             </div>
         </nav>
     </header>
@@ -125,11 +128,14 @@
                 </div>
 
                 <div class="blog-post-image">
-                    <img src="images/reddit-post-hider.png" alt="Reddit Post Hider browser extension interface showing filtered posts" class="blog-hero-image">
+                    <picture>
+                        <source srcset="images/reddit-post-hider.svg" type="image/svg+xml">
+                        <img src="images/reddit-post-hider.svg" alt="Reddit Post Hider browser extension interface showing filtered posts" class="blog-hero-image">
+                    </picture>
                 </div>
 
                 <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                    <p><strong>TLDR:</strong> This post introduces the Reddit Post Hider, a browser extension designed to improve the Reddit browsing experience by allowing users to hide repetitive posts and block entire subreddits. The post discusses the technical challenges of building such an extension, particularly the difficulties posed by Reddit's dynamic and varied DOM structure. It also touches on user experience insights, such as the preference for clicking over keyboard shortcuts and the importance of preventing "flashing" of hidden content.</p>
+                    <strong style="color: var(--text-primary);">TL;DR:</strong> Reddit Post Hider is a Chrome extension that adds a one-click hide button to every post on Reddit's home feed and popular pages, storing dismissed post IDs and blocked subreddits in <code>chrome.storage.local</code> so they stay hidden across sessions. A <code>MutationObserver</code> applies filters to posts loaded by infinite scroll in real time. This post covers the original v1/v2 implementation; for the v3.0 refactor with improved DOM compatibility, see <a href="/blog/reddit-post-hider-v3.html" style="color: var(--neural-primary);">Reddit Post Hider v3.0: Major Refactor for Reliability</a>.
                 </div>
 
                 <div class="blog-post-content">
@@ -218,11 +224,7 @@
                 </div>
             </div>
         </section>
-    </main>
-
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
-
-    <section class="cta-section">
+        <section class="cta-section">
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Need a Browser Extension?</h2>
@@ -237,8 +239,10 @@
                     <a href="/projects" class="btn-secondary">View More Projects</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
 
     <footer class="footer">
         <div class="container">
@@ -246,12 +250,14 @@
                 <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
                 <div class="footer-links">
                     <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="../global-header.js" defer></script>
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
 </body>
 </html>

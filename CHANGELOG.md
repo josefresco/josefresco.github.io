@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-04-29
+
+### Added
+- `blog/people-also-ask.html` — new blog post: "People Also Ask: Building a Bookmarklet to Mine Google's Question Boxes for Content Research" (2026-04-29)
+- `blog/images/people-also-ask.svg` — SVG hero illustration for `blog/people-also-ask.html`
+
+### Changed
+- `blog/index.html` — reduced featured posts from 3 to 2; replaced with `people-also-ask.html` (new) and `family-dash-self-hosted.html`; task instruction requires only 2 featured posts on the blog page
+- `index.html` — updated "Latest Blog Post" section to feature `people-also-ask.html`
+
+### Updated
+- `blog/archives.html` — added `people-also-ask.html` entry (2026-04-29) at top of ALL_POSTS array; total post count is now 39
+- `sitemap.xml` — added `people-also-ask.html` entry (2026-04-29); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, `/blog/reddit-post-hider.html`, and `/feed.xml` entries to `2026-04-29`
+- `feed.xml` — added `people-also-ask.html` as newest item; removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to `Wed, 29 Apr 2026`
+
+### Revised
+- `blog/reddit-post-hider.html` — updated nav to include Skills, AI Tools, Now links; fixed hero image from PNG to SVG using `<picture>` element; reformatted TL;DR to match current site standard; added cross-link to `reddit-post-hider-v3.html`; moved CTA section inside `<main>`; added full footer links; added `defer` to script tag; updated `dateModified` to `2026-04-29`
+
+### Reviewed
+- All 39 blog post HTML files verified against `sitemap.xml` — all entries accounted for
+- `blog/images/` directory audited — all images confirmed referenced; no unreferenced files found
+- `README.md` reviewed — accurate and up to date; no changes required
+- No unnecessary or stale files found for removal
+
 ## [1.24.0] - 2026-04-15
 
 ### Added

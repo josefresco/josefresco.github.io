@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <linearGradient id="paa-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="paa-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0a0b0f;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#paa-bg)"/>
+  <radialGradient id="glow1" cx="25%" cy="50%" r="50%">
+    <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.12"/>
+    <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0"/>
+  </radialGradient>
+  <radialGradient id="glow2" cx="75%" cy="30%" r="50%">
+    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.10"/>
+    <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0"/>
+  </radialGradient>
+  <rect width="800" height="420" fill="url(#glow1)"/>
+  <rect width="800" height="420" fill="url(#glow2)"/>
+
+  <!-- LEFT PANEL: Google SERP mockup -->
+  <rect x="28" y="32" width="330" height="356" rx="14" fill="#111318" stroke="#1e2130" stroke-width="1.5"/>
+
+  <!-- Browser bar -->
+  <rect x="28" y="32" width="330" height="40" rx="14" fill="#0d0f14"/>
+  <rect x="28" y="58" width="330" height="14" fill="#0d0f14"/>
+  <circle cx="52" cy="52" r="5" fill="#ff5f57"/>
+  <circle cx="70" cy="52" r="5" fill="#febc2e"/>
+  <circle cx="88" cy="52" r="5" fill="#28c840"/>
+  <rect x="108" y="44" width="230" height="16" rx="8" fill="#1a1d29"/>
+  <text x="223" y="56" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">content ideas for blog posts</text>
+  <text x="328" y="56" text-anchor="end" font-family="sans-serif" font-size="10" fill="#00d4ff">⌕</text>
+
+  <!-- PAA section label -->
+  <text x="46" y="100" font-family="-apple-system,sans-serif" font-size="13" font-weight="700" fill="#e2e8f0">People also ask</text>
+
+  <!-- PAA row 1 -->
+  <rect x="40" y="110" width="306" height="38" rx="7" fill="#0d1017" stroke="#1e2335" stroke-width="1"/>
+  <text x="55" y="133" font-family="-apple-system,sans-serif" font-size="10.5" fill="#c8d0e0">How do you find content ideas using questions?</text>
+  <text x="334" y="134" text-anchor="end" font-family="sans-serif" font-size="13" fill="#4a5568">▾</text>
+
+  <!-- PAA row 2 — highlighted/active -->
+  <rect x="40" y="152" width="306" height="38" rx="7" fill="#0f1520" stroke="#00d4ff" stroke-width="1.2"/>
+  <text x="55" y="175" font-family="-apple-system,sans-serif" font-size="10.5" fill="#e2e8f0">What are People Also Ask questions in SEO?</text>
+  <text x="334" y="176" text-anchor="end" font-family="sans-serif" font-size="13" fill="#00d4ff">▴</text>
+
+  <!-- PAA row 3 -->
+  <rect x="40" y="194" width="306" height="38" rx="7" fill="#0d1017" stroke="#1e2335" stroke-width="1"/>
+  <text x="55" y="217" font-family="-apple-system,sans-serif" font-size="10.5" fill="#c8d0e0">How to extract PAA questions automatically?</text>
+  <text x="334" y="218" text-anchor="end" font-family="sans-serif" font-size="13" fill="#4a5568">▾</text>
+
+  <!-- PAA row 4 -->
+  <rect x="40" y="236" width="306" height="38" rx="7" fill="#0d1017" stroke="#1e2335" stroke-width="1"/>
+  <text x="55" y="259" font-family="-apple-system,sans-serif" font-size="10.5" fill="#c8d0e0">What tools help with keyword research questions?</text>
+  <text x="334" y="260" text-anchor="end" font-family="sans-serif" font-size="13" fill="#4a5568">▾</text>
+
+  <!-- See more -->
+  <rect x="40" y="282" width="110" height="26" rx="6" fill="rgba(0,212,255,0.08)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="95" y="299" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" fill="#00d4ff">See more</text>
+
+  <!-- Bookmarklet badge -->
+  <rect x="40" y="330" width="148" height="30" rx="8" fill="url(#paa-grad)"/>
+  <text x="114" y="350" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="600" fill="#fff">▶ Run Bookmarklet</text>
+
+  <!-- FLOW ARROW CENTER -->
+  <line x1="374" y1="208" x2="424" y2="208" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="422,203 434,208 422,213" fill="#00d4ff"/>
+  <circle cx="399" cy="208" r="26" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="1.2"/>
+  <text x="399" y="205" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#00d4ff">JS</text>
+  <text x="399" y="218" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">DOM</text>
+
+  <!-- RIGHT PANEL: Extracted output -->
+  <rect x="442" y="32" width="330" height="356" rx="14" fill="#111318" stroke="#1e2130" stroke-width="1.5"/>
+
+  <!-- Panel header -->
+  <rect x="442" y="32" width="330" height="44" rx="14" fill="#0d0f14"/>
+  <rect x="442" y="60" width="330" height="16" fill="#0d0f14"/>
+  <circle cx="467" cy="54" r="5" fill="#ff5f57"/>
+  <circle cx="485" cy="54" r="5" fill="#febc2e"/>
+  <circle cx="503" cy="54" r="5" fill="#28c840"/>
+  <text x="607" y="62" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#00d4ff">Extracted Questions (4)</text>
+
+  <!-- JSON block -->
+  <text x="460" y="100" font-family="monospace" font-size="10" fill="#7c3aed">[</text>
+  <text x="472" y="117" font-family="monospace" font-size="10" fill="#64748b">{</text>
+  <text x="484" y="133" font-family="monospace" font-size="10" fill="#94a3b8">"question":</text>
+  <text x="484" y="148" font-family="monospace" font-size="9.5" fill="#86efac">  "How do you find content ideas..."</text>
+  <text x="472" y="163" font-family="monospace" font-size="10" fill="#64748b">},</text>
+
+  <text x="472" y="178" font-family="monospace" font-size="10" fill="#64748b">{</text>
+  <text x="484" y="193" font-family="monospace" font-size="10" fill="#94a3b8">"question":</text>
+  <text x="484" y="208" font-family="monospace" font-size="9.5" fill="#86efac">  "What are People Also Ask questions..."</text>
+  <text x="472" y="223" font-family="monospace" font-size="10" fill="#64748b">},</text>
+
+  <text x="472" y="238" font-family="monospace" font-size="10" fill="#64748b">{</text>
+  <text x="484" y="253" font-family="monospace" font-size="10" fill="#94a3b8">"question":</text>
+  <text x="484" y="268" font-family="monospace" font-size="9.5" fill="#86efac">  "How to extract PAA questions..."</text>
+  <text x="472" y="283" font-family="monospace" font-size="10" fill="#64748b">},</text>
+
+  <text x="472" y="298" font-family="monospace" font-size="10" fill="#64748b">{</text>
+  <text x="484" y="313" font-family="monospace" font-size="9.5" fill="#86efac">  "What tools help with keyword research..."</text>
+  <text x="472" y="328" font-family="monospace" font-size="10" fill="#64748b">}</text>
+  <text x="460" y="343" font-family="monospace" font-size="10" fill="#7c3aed">]</text>
+
+  <!-- Export buttons -->
+  <rect x="458" y="352" width="72" height="24" rx="6" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="494" y="369" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9.5" fill="#00d4ff">Copy JSON</text>
+  <rect x="538" y="352" width="60" height="24" rx="6" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1"/>
+  <text x="568" y="369" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9.5" fill="#00d4ff">Copy CSV</text>
+  <rect x="606" y="352" width="64" height="24" rx="6" fill="rgba(124,58,237,0.15)" stroke="#7c3aed" stroke-width="1"/>
+  <text x="638" y="369" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9.5" fill="#c4b5fd">Copy Text</text>
+
+  <!-- Bottom caption -->
+  <text x="400" y="406" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="#4a5568">people-also-ask — Mine Google's question boxes for content research</text>
+</svg>
