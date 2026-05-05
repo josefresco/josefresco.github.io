@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research</title>
+      <link>https://josefresco.com/blog/people-also-ask-miner.html</link>
+      <description>A lightweight Node.js server that extracts People Also Ask questions from Google search results via SerpApi — zero npm dependencies, a clean browser UI with one-click copy, a CORS proxy for standalone use, and a Windows batch launcher. Covers the server architecture, CORS proxy, frontend copy UX, Windows launcher, the SerpApi vs. direct-scraping tradeoff, and the zero-dependency constraint that keeps setup to a single node command.</description>
+      <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/people-also-ask-miner.html</guid>
+    </item>
 
     <item>
       <title>Inside JF Notify: How a WordPress Plugin Hooks into Gravity Forms and Fires Telegram Alerts</title>
@@ -80,13 +88,6 @@
       <guid>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</guid>
     </item>
 
-    <item>
-      <title>Building the JF Notify Marketing Site with Eleventy</title>
-      <link>https://josefresco.com/blog/jf-notify-website.html</link>
-      <description>How I built the jfnotify.com marketing site using Eleventy (11ty), Nunjucks templating, and serverless functions — a static-first approach to launching a WordPress plugin product.</description>
-      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/jf-notify-website.html</guid>
-    </item>
 
   </channel>
 </rss>

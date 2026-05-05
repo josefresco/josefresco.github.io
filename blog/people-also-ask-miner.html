@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research - Jose Fresco</title>
+    <meta name="description" content="How I built a lightweight Node.js tool that extracts People Also Ask questions from Google search results via SerpApi — zero npm dependencies, a clean web UI, and one-click copy for content planning.">
+    <link rel="canonical" href="https://josefresco.com/blog/people-also-ask-miner.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research - Jose Fresco">
+    <meta property="og:description" content="How I built a lightweight Node.js tool that extracts People Also Ask questions from Google search results via SerpApi — zero npm dependencies, a clean web UI, and one-click copy for content planning.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/people-also-ask-miner.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/people-also-ask.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-05-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-05T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Content Tools">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research - Jose Fresco">
+    <meta name="twitter:description" content="How I built a lightweight Node.js tool that extracts People Also Ask questions from Google search results via SerpApi — zero npm dependencies, a clean web UI, and one-click copy for content planning.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/people-also-ask.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/people-also-ask-miner.html"
+      },
+      "headline": "People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research",
+      "description": "How I built a lightweight Node.js tool that extracts People Also Ask questions from Google search results via SerpApi — zero npm dependencies, a clean web UI, and one-click copy for content planning.",
+      "image": "https://josefresco.com/blog/images/people-also-ask.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-05-05T00:00:00+00:00",
+      "dateModified": "2026-05-05T00:00:00+00:00",
+      "keywords": "Node.js, People Also Ask, PAA, SerpApi, Content Research, SEO, Content Creation, FAQ, Zero Dependencies, JavaScript",
+      "articleSection": "Content Tools",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "People Also Ask Miner", "item": "https://josefresco.com/blog/people-also-ask-miner.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Content Tools</span>
+                        <span class="blog-date">May 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/people-also-ask.svg" type="image/svg+xml">
+                        <img src="images/people-also-ask.svg" alt="People Also Ask Miner architecture showing search query expanding into question cards" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" style="color: var(--neural-primary);">people-also-ask</a> is a lightweight Node.js server that accepts a search keyphrase, queries SerpApi, and returns up to 10 "People Also Ask" questions as a JSON array. It ships with a clean browser UI and one-click copy — and it has zero npm dependencies. The whole stack is four files: a server, a CORS proxy, an HTML frontend, and a Windows batch launcher.
+                    </div>
+
+                    <h2>Why PAA Questions Matter for Content</h2>
+
+                    <p>The "People Also Ask" box that appears in Google search results is one of the more useful signals in SEO — not because it tells you what to rank for, but because it tells you what questions real users are already asking around a topic. Those questions are the raw material for FAQ sections, blog subheadings, video scripts, and structured Q&amp;A markup that search engines reward.</p>
+
+                    <p>The problem with PAA questions is that gathering them manually is tedious. You type a search, screenshot the PAA box, copy each question by hand, and repeat for every keyphrase you're researching. It takes five minutes per query when you need it to take five seconds.</p>
+
+                    <p>I needed a way to pipe keyphrases in and get questions out — fast, with clipboard copy, without installing a browser extension or signing up for a SaaS dashboard. So I built one.</p>
+
+                    <h2>The Tool: Four Files, Zero Dependencies</h2>
+
+                    <p>The repo is intentionally minimal:</p>
+
+                    <pre><code>people-also-ask/
+├── paa-server.js      # HTTP server on port 3131
+├── paa-proxy.js       # CORS proxy for standalone use
+├── paa-miner.html     # Browser frontend
+└── paa-miner.bat      # Windows one-click launcher</code></pre>
+
+                    <p>There are no <code>node_modules</code>, no <code>package.json</code> dependencies, no bundler. The server uses Node's built-in <code>http</code> and <code>https</code> modules, which have been part of Node's standard library since v0.x. If you have Node.js v14 or later installed, you can run this with a single <code>node paa-server.js</code> and it works.</p>
+
+                    <h2>How the Server Works</h2>
+
+                    <p>The server exposes one endpoint:</p>
+
+                    <pre><code>GET /search?q=&lt;keyphrase&gt;</code></pre>
+
+                    <p>When a request comes in, the server constructs a SerpApi URL with the search query and your API key, fetches the response over HTTPS, and plucks the <code>related_questions</code> array from the JSON payload. It caps the result at 10 questions and returns them as a JSON array of question strings:</p>
+
+                    <pre><code>["What are the best free tools for content research?",
+ "How do bloggers find SEO keywords for free?",
+ "What is the People Also Ask box on Google?",
+ "How do I use SerpApi for content marketing?",
+ ...]</code></pre>
+
+                    <p>The implementation uses Node's native <code>https.get()</code> rather than <code>fetch</code> or an HTTP library, which is the key to keeping the dependency count at zero:</p>
+
+                    <pre><code>const https = require('https');
+const http = require('http');
+const url = require('url');
+
+const SERPAPI_KEY = 'YOUR_SERPAPI_KEY_HERE';
+const PORT = 3131;
+
+const server = http.createServer((req, res) => {
+  const parsed = url.parse(req.url, true);
+
+  if (parsed.pathname !== '/search') {
+    res.writeHead(404);
+    return res.end('Not found');
+  }
+
+  const q = parsed.query.q || '';
+  if (!q) {
+    res.writeHead(400);
+    return res.end(JSON.stringify({ error: 'Missing query parameter: q' }));
+  }
+
+  const apiUrl = `https://serpapi.com/search.json?q=${encodeURIComponent(q)}&api_key=${SERPAPI_KEY}&engine=google`;
+
+  https.get(apiUrl, (apiRes) => {
+    let data = '';
+    apiRes.on('data', chunk => { data += chunk; });
+    apiRes.on('end', () => {
+      const json = JSON.parse(data);
+      const questions = (json.related_questions || [])
+        .slice(0, 10)
+        .map(q => q.question);
+
+      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+      res.end(JSON.stringify(questions));
+    });
+  }).on('error', (err) => {
+    res.writeHead(500);
+    res.end(JSON.stringify({ error: err.message }));
+  });
+});
+
+server.listen(PORT, () => console.log(`PAA server running at http://localhost:${PORT}`));</code></pre>
+
+                    <p>The <code>Access-Control-Allow-Origin: *</code> header means the API can be called directly from the browser frontend without a proxy — though the proxy is there for environments where that's needed.</p>
+
+                    <h2>The CORS Proxy</h2>
+
+                    <p><code>paa-proxy.js</code> is an alternative entry point for environments where you want to serve the frontend HTML directly from the Node process rather than via a separate file server. It handles the same <code>/search</code> endpoint but also serves <code>paa-miner.html</code> at the root path, which means you can point your browser at <code>http://localhost:3131/</code> and get both the UI and the API from one process.</p>
+
+                    <p>The proxy approach is useful on Windows where running two command-line processes and keeping track of ports is friction the tool doesn't need to add. One command, one URL, done.</p>
+
+                    <h2>The Browser Frontend</h2>
+
+                    <p><code>paa-miner.html</code> is a single self-contained HTML file with no external dependencies. It has an input field for the keyphrase, a submit button that calls <code>/search?q=</code>, and a results list that renders each question. The two pieces of UI that matter most are:</p>
+
+                    <p><strong>Per-question copy buttons.</strong> Each result renders with a clipboard icon button. Clicking it copies just that question to the clipboard — useful when you want to pull one question into a doc without selecting and copying the text manually.</p>
+
+                    <p><strong>Copy All button.</strong> When you've got 8–10 questions back and want to paste them all into a spreadsheet or document, Copy All copies the full list as newline-separated text. One click, everything on the clipboard.</p>
+
+                    <p>The frontend's fetch call is straightforward:</p>
+
+                    <pre><code>async function search(query) {
+  const res = await fetch(`/search?q=${encodeURIComponent(query)}`);
+  const questions = await res.json();
+  renderResults(questions);
+}
+
+function renderResults(questions) {
+  const list = document.getElementById('results');
+  list.innerHTML = '';
+  questions.forEach(q => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      &lt;span class="question-text"&gt;${q}&lt;/span&gt;
+      &lt;button onclick="copyToClipboard('${q.replace(/'/g, "\\'")}')"&gt;⎘&lt;/button&gt;
+    `;
+    list.appendChild(li);
+  });
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text);
+}
+
+function copyAll() {
+  const questions = [...document.querySelectorAll('.question-text')]
+    .map(el => el.textContent)
+    .join('\n');
+  navigator.clipboard.writeText(questions);
+}</code></pre>
+
+                    <h2>The Windows Launcher</h2>
+
+                    <p><code>paa-miner.bat</code> is a batch file for Windows users who don't want to open a terminal, type a command, and then separately open a browser. Double-clicking the <code>.bat</code> file starts the Node server and opens the browser to <code>http://localhost:3131/</code> in one shot:</p>
+
+                    <pre><code>@echo off
+start "" http://localhost:3131/
+node paa-proxy.js
+pause</code></pre>
+
+                    <p>The <code>start</code> command fires the browser open immediately, then Node starts. In practice the server is ready within a few hundred milliseconds, well before the browser finishes loading, so there's no race condition in normal use. The <code>pause</code> at the end keeps the terminal window open so you can see any error output if something goes wrong.</p>
+
+                    <h2>SerpApi vs. Direct Scraping</h2>
+
+                    <p>The tool uses <a href="https://serpapi.com" target="_blank" rel="noopener">SerpApi</a> rather than scraping Google directly. That's a deliberate choice, not a limitation.</p>
+
+                    <p>Scraping Google's HTML directly is fragile — Google changes its markup without notice, CAPTCHAs appear under load, and IP-based rate limiting kicks in quickly when you're running searches programmatically. SerpApi handles all of that: it maintains parsers for Google's current markup, provides structured JSON responses, and takes responsibility for the scraping infrastructure. The free tier includes 100 searches per month, which is more than enough for periodic content research sessions.</p>
+
+                    <p>The tradeoff is that you need an API key and a SerpApi account. For a personal content research tool that runs locally, that's an acceptable dependency — it's a credential, not a library.</p>
+
+                    <h2>Practical Workflow</h2>
+
+                    <p>The typical session looks like this: I open <code>paa-miner.bat</code> (or <code>node paa-proxy.js</code> on Mac/Linux), type the topic I'm writing about, and get back 8–10 questions in about a second. I scan the list for questions that match what I want to cover, hit Copy All, and paste into a doc. Then I type the next keyphrase.</p>
+
+                    <p>Where this pays off most is FAQ section planning. A well-structured FAQ with 5–8 questions per page, each drawn from actual PAA results, tends to pick up featured snippet placement for the questions it answers. The tool removes the manual friction that made that process feel like more work than it was worth.</p>
+
+                    <h2>Setup in Three Steps</h2>
+
+                    <ol>
+                        <li>Clone the repo: <code>git clone https://github.com/josefresco/people-also-ask.git</code></li>
+                        <li>Open <code>paa-server.js</code> and replace <code>YOUR_SERPAPI_KEY_HERE</code> with your <a href="https://serpapi.com/manage-api-key" target="_blank" rel="noopener">SerpApi key</a></li>
+                        <li>Run <code>node paa-proxy.js</code> (or double-click <code>paa-miner.bat</code> on Windows) and open <a href="http://localhost:3131">http://localhost:3131</a></li>
+                    </ol>
+
+                    <p>No install step. No build step. The tool is ready to use in the time it takes to paste an API key.</p>
+
+                    <h2>What I Might Add Next</h2>
+
+                    <p>A few things that would make this more useful without compromising the zero-dependency principle:</p>
+
+                    <ul>
+                        <li><strong>Batch input:</strong> Accept a newline-separated list of keyphrases and process them sequentially, outputting all results to a single downloadable text file. Useful for pre-research sessions before starting a content calendar.</li>
+                        <li><strong>Local result caching:</strong> Write results to a JSON file keyed by query, so repeated lookups for the same term don't consume API quota. Node's built-in <code>fs</code> module handles this without adding a dependency.</li>
+                        <li><strong>Category grouping:</strong> SerpApi's response includes context for some PAA questions. Grouping results by intent cluster (how-to, what-is, comparison) could make the list easier to scan.</li>
+                    </ul>
+
+                    <p>For now the tool does what it needs to: take a keyphrase, return questions, copy to clipboard. That's the whole job, and keeping it that focused is most of the reason the implementation stayed this simple.</p>
+
+                    <h2>The Zero-Dependency Constraint</h2>
+
+                    <p>The no-npm-dependencies rule wasn't a design principle when I started — it emerged from wanting the tool to be immediately runnable. No <code>npm install</code> means no lockfile drift, no vulnerability alerts for transitive dependencies you didn't choose, and no moment where someone clones the repo and hits a Node version mismatch in a dependency.</p>
+
+                    <p>Node's built-in <code>http</code>, <code>https</code>, <code>url</code>, and <code>fs</code> modules cover everything this tool needs. They're stable, well-documented, and available anywhere Node runs. For tools that are primarily configuration wrappers around an external API, that's often enough.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom Content Research Tool?</h2>
+                <p class="cta-description">
+                    From lightweight local tools to full web applications, I build focused utilities
+                    that eliminate manual friction in your workflow.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Content Tool Project&body=Hi Jose,%0D%0A%0D%0AI read your PAA Miner post and have a similar project in mind.%0D%0A%0D%0ADetails:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Get In Touch
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-05-05
+
+### Added
+- `blog/people-also-ask-miner.html` — new blog post: "People Also Ask Miner: A Zero-Dependency Node.js Tool for Content Research" (2026-05-05); covers the four-file Node.js architecture, SerpApi integration, zero-dependency approach, CORS proxy, and Windows batch launcher
+- `blog/images/people-also-ask.svg` — SVG hero illustration for `blog/people-also-ask-miner.html`
+
+### Changed
+- `blog/index.html` — reduced featured posts from 3 to 2; replaced with new `people-also-ask-miner.html` (May 2026) and `family-dash-self-hosted.html` (April 2026)
+- `index.html` — updated home page "Latest Blog Post" card to reference `blog/people-also-ask-miner.html`
+- `blog/archives.html` — added `people-also-ask-miner.html` as first entry in `ALL_POSTS` array (2026-05-05, Content Tools)
+
+### Fixed
+- `blog/jf-notify-website.html` — added missing `<link rel="stylesheet" href="blog.css">` (only blog post without it); corrected `og:image`, `twitter:image`, and schema `"image"` from generic `og-image.jpg` to the blog-specific `jf-notify-website.svg`; updated `dateModified` to 2026-05-05
+
+### Updated
+- `sitemap.xml` — added `people-also-ask-miner.html` entry (2026-05-05); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, `/blog/jf-notify-website.html`, and `/feed.xml` to 2026-05-05
+- `feed.xml` — added `people-also-ask-miner.html` as newest item (Tue 05 May 2026); removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to Tue, 05 May 2026
+
+### Reviewed
+- `README.md` — reviewed and confirmed accurate; no changes required
+- All 39 blog post HTML files on disk verified — `people-also-ask-miner.html` confirmed present; `jf-notify-website.html` blog.css fix verified; no orphaned URLs
+- `blog/images/` directory — `people-also-ask.svg` added; all images confirmed referenced; no unreferenced or duplicate files
+- No unnecessary or stale files found for removal
+
 ## [1.24.0] - 2026-04-15
 
 ### Added
