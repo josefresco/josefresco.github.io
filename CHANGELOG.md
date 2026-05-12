@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-05-12
+
+### Added
+- `blog/people-also-ask.html` — new blog post: "people-also-ask: Mining Google's Question Graph for Content Ideas" (2026-05-12); covers the BFS traversal algorithm, Puppeteer click-and-collect mechanics, CLI flag reference, and three content workflows
+- `blog/images/people-also-ask.svg` — SVG hero illustration for `blog/people-also-ask.html`
+
+### Changed
+- `blog/index.html` — reduced featured posts from 3 to 2; new lead post is `people-also-ask.html` (May 2026); second post is `family-dash-self-hosted.html` (April 2026)
+- `index.html` — updated "Latest Blog Post" section to feature `people-also-ask.html`
+
+### Fixed
+- `blog/arpy-assist-qwen-web-interface.html` — corrected broken OG/Twitter image reference (`arpy-assist-og.jpg` → `og-image.jpg`); moved hero image out of content div into a dedicated `blog-post-image` section (matches all other posts' structure); switched hero image from PNG screenshot to `arpy-assist.svg` for consistency
+
+### Updated
+- `blog/archives.html` — added `people-also-ask.html` entry at top of `ALL_POSTS` array (2026-05-12, Web Development)
+- `sitemap.xml` — added `people-also-ask.html` entry (2026-05-12); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, `/feed.xml`, and `arpy-assist-qwen-web-interface.html` entries to `2026-05-12`
+- `feed.xml` — added `people-also-ask.html` as newest item; removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to `Tue, 12 May 2026`
+
+### Reviewed
+- All 38 blog post HTML files on disk verified against `sitemap.xml` — all entries accounted for, no orphaned or missing URLs
+- `blog/images/` directory audited — all images confirmed referenced; no unreferenced or duplicate files found
+- `README.md` reviewed — accurate and up to date; post count updated to 38; no other changes required
+- `sitemap.xml` reviewed — all 38 blog posts present, dates accurate after this version's updates
+- `feed.xml` reviewed — 10 most recent posts correct, all in descending date order
+- No unnecessary or stale files found for removal
+
 ## [1.24.0] - 2026-04-15
 
 ### Added
