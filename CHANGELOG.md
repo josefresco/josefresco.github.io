@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.26.0] - 2026-05-24
+
+### Fixed
+- `blog/people-also-ask.html` — corrected `og:image`, `twitter:image`, and schema `"image"` from generic `og-image.jpg` to the post-specific `blog/images/people-also-ask.svg`; updated `dateModified` to 2026-05-24
+- `blog/jf-notify-website.html` — added missing `<link rel="stylesheet" href="blog.css">` (was the only post without it); corrected `og:image`, `twitter:image`, and schema `"image"` from generic `og-image.jpg` to the post-specific `blog/images/jf-notify-website.svg`; updated `dateModified` to 2026-05-24
+
+### Updated
+- `sitemap.xml` — updated `lastmod` for `blog/people-also-ask.html` and `blog/jf-notify-website.html` to 2026-05-24
+
+### Reviewed
+- All blog post HTML files audited for `og:image` and schema `"image"` accuracy — `people-also-ask.html` and `jf-notify-website.html` were the only two still referencing the generic `og-image.jpg`; both corrected
+
 ## [1.25.0] - 2026-05-19
 
 ### Added
