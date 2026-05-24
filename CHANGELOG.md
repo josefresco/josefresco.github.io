@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-05-19
+
+### Added
+- `blog/people-also-ask.html` — new blog post: "People Also Ask Miner: Scraping Google's PAA Box for Content Research" (2026-05-19)
+- `blog/images/people-also-ask.svg` — SVG hero illustration for the new PAA Miner blog post
+
+### Changed
+- `blog/index.html` — reduced featured posts from 3 to 2; new `people-also-ask.html` now appears as the first (latest) featured post; `pi-backups-encryption.html` card removed from the featured grid
+- `index.html` — homepage "Latest Blog Post" section updated to feature `people-also-ask.html`
+
+### Fixed
+- `blog/arpy-assist-qwen-web-interface.html` — corrected broken OG/Twitter image reference (`arpy-assist-og.jpg` → `og-image.jpg`); moved hero image out of content div into a dedicated `blog-post-image` section (matches all other posts' structure); switched hero image from PNG screenshot to `arpy-assist.svg` for consistency
+
+### Updated
+- `blog/pi-backups-raspberry-pi.html` — hero image switched from `pi-backups.png` to `pi-backups.svg`; OG/Twitter card images updated to canonical `og-image.jpg`; `dateModified` updated to 2026-05-19; "May 2026 Update" section added covering per-target retention configuration and the new dry-run summary report
+- `blog/archives.html` — added `people-also-ask.html` entry (2026-05-19) at the top of `ALL_POSTS`
+- `sitemap.xml` — added `people-also-ask.html` entry (2026-05-19); updated `lastmod` for `/`, `/blog/`, `/blog/archives.html`, `/now/`, `/feed.xml`, `arpy-assist-qwen-web-interface.html`, and `pi-backups-raspberry-pi.html` to 2026-05-19
+- `feed.xml` — added `people-also-ask.html` as newest item; removed oldest item (`jf-notify-website.html`, Fri 03 Apr 2026) to maintain 10-item cap; updated `lastBuildDate` to `Tue, 19 May 2026`
+
+### Removed
+- `projects/recommended-service-providers.html` — orphaned stub page with no internal links, no sitemap entry, and minimal content; deleted to keep the project clean
+- `blog/images/arpy-assist-screenshot.png` — unreferenced PNG after `arpy-assist-qwen-web-interface.html` hero updated to `arpy-assist.svg`
+- `blog/images/safeshare-reddit.svg` — unreferenced SVG; `safeshare-reddit-bookmarklet.html` uses `safeshare-reddit.png`
+
+### Reviewed
+- All 39 blog post HTML files verified against `sitemap.xml` — all entries accounted for
+- `blog/images/` directory audited — all images confirmed referenced; `people-also-ask.svg` added; no orphaned files
+- `projects/` directory audited — `recommended-service-providers.html` identified as orphaned and removed; remaining files (`index.html`, `jf-notify.html`, `jf-website-monitor.html`) all properly linked
+- `README.md` reviewed — accurate and up to date; no changes required
+- `sitemap.xml` reviewed — 45 URLs, all entries current
+- `feed.xml` verified — 10 most recent posts in descending date order
+
 ## [1.24.0] - 2026-04-15
 
 ### Added
