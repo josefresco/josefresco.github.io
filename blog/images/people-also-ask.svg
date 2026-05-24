@@ -1,146 +1,132 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="People Also Ask Miner — question mining pipeline diagram">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0b0f"/>
-      <stop offset="100%" style="stop-color:#1a1d29"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0b0f"/>
+      <stop offset="100%" stop-color="#1a1d29"/>
     </linearGradient>
-    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00d4ff"/>
-      <stop offset="100%" style="stop-color:#7c3aed"/>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
-    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(26,29,41,0.9)"/>
-      <stop offset="100%" style="stop-color:rgba(26,29,41,0.6)"/>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
     </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="subtleGlow">
-      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00d4ff" opacity="0.7"/>
+    </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="420" fill="url(#bgGrad)"/>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <ellipse cx="150" cy="200" rx="200" ry="150" fill="rgba(124,58,237,0.08)"/>
+  <ellipse cx="650" cy="300" rx="200" ry="150" fill="rgba(0,212,255,0.06)"/>
 
-  <!-- Background radial glow effects -->
-  <circle cx="150" cy="210" r="200" fill="rgba(124,58,237,0.06)"/>
-  <circle cx="650" cy="120" r="180" fill="rgba(0,212,255,0.06)"/>
+  <!-- Title -->
+  <text x="400" y="46" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="url(#cyan)">People Also Ask Miner</text>
+  <text x="400" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#94a3b8">Mine "People Also Ask" questions from Google SERP for content research</text>
 
-  <!-- Title area -->
-  <text x="50" y="58" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#00d4ff" letter-spacing="2" text-anchor="start" filter="url(#subtleGlow)">CONTENT RESEARCH TOOL</text>
-  <text x="50" y="92" font-family="Inter, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="start">people-also-ask</text>
-  <text x="50" y="116" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#94a3b8" text-anchor="start">Mining Google's question graph for content ideas</text>
+  <!-- Step 1: Keyword Input -->
+  <rect x="40" y="100" width="160" height="80" rx="12" fill="rgba(26,29,41,0.9)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="120" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#7c3aed">KEYWORD INPUT</text>
+  <rect x="56" y="136" width="128" height="22" rx="5" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.4)" stroke-width="1"/>
+  <text x="120" y="151" text-anchor="middle" font-family="monospace" font-size="10" fill="#e2e8f0">"raspberry pi backup"</text>
+  <text x="120" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">+ optional depth limit</text>
 
-  <!-- Divider line -->
-  <line x1="50" y1="134" x2="400" y2="134" stroke="url(#primaryGrad)" stroke-width="1.5" opacity="0.6"/>
+  <!-- Arrow 1→2 -->
+  <line x1="202" y1="140" x2="240" y2="140" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
 
-  <!-- Search bar mock-up -->
-  <rect x="50" y="150" width="340" height="38" rx="8" fill="rgba(26,29,41,0.9)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
-  <circle cx="73" cy="169" r="8" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.8"/>
-  <line x1="79" y1="175" x2="83" y2="179" stroke="#00d4ff" stroke-width="1.5" opacity="0.8"/>
-  <text x="92" y="174" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#94a3b8">How does content SEO work?</text>
-  <rect x="355" y="155" width="28" height="28" rx="6" fill="url(#primaryGrad)" opacity="0.9"/>
-  <text x="369" y="173" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">→</text>
+  <!-- Step 2: Scraper Engine -->
+  <rect x="242" y="100" width="160" height="80" rx="12" fill="rgba(26,29,41,0.9)" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="322" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#00d4ff">SCRAPER ENGINE</text>
+  <text x="322" y="145" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">puppeteer / playwright</text>
+  <text x="322" y="160" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">google.com/search?q=…</text>
+  <text x="322" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">headless browser → DOM parse</text>
 
-  <!-- PAA Question cards (staggered) -->
-  <!-- Card 1 -->
-  <rect x="50" y="204" width="340" height="36" rx="7" fill="rgba(26,29,41,0.85)" stroke="rgba(0,212,255,0.25)" stroke-width="1"/>
-  <rect x="50" y="204" width="4" height="36" rx="2" fill="url(#primaryGrad)"/>
-  <text x="65" y="219" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="500" fill="#ffffff">What is a People Also Ask box?</text>
-  <text x="65" y="234" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#94a3b8">Depth: 1 — 4 related questions found</text>
+  <!-- Arrow 2→3 -->
+  <line x1="404" y1="140" x2="442" y2="140" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
 
-  <!-- Card 2 -->
-  <rect x="50" y="246" width="340" height="36" rx="7" fill="rgba(26,29,41,0.85)" stroke="rgba(124,58,237,0.25)" stroke-width="1"/>
-  <rect x="50" y="246" width="4" height="36" rx="2" fill="#7c3aed"/>
-  <text x="65" y="261" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="500" fill="#ffffff">How do I optimize for featured snippets?</text>
-  <text x="65" y="276" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#94a3b8">Depth: 2 — 3 related questions found</text>
+  <!-- Step 3: PAA Extractor -->
+  <rect x="444" y="100" width="160" height="80" rx="12" fill="rgba(26,29,41,0.9)" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="524" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#00d4ff">PAA EXTRACTOR</text>
+  <text x="524" y="145" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">querySelectorAll('.related')</text>
+  <text x="524" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#94a3b8">deduplicate → queue</text>
+  <text x="524" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">recursive expand (depth N)</text>
 
-  <!-- Card 3 -->
-  <rect x="50" y="288" width="340" height="36" rx="7" fill="rgba(26,29,41,0.85)" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
-  <rect x="50" y="288" width="4" height="36" rx="2" fill="#f59e0b"/>
-  <text x="65" y="303" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="500" fill="#ffffff">What makes a good pillar page?</text>
-  <text x="65" y="318" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#94a3b8">Depth: 3 — 5 related questions found</text>
+  <!-- Arrow 3→4 -->
+  <line x1="606" y1="140" x2="644" y2="140" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
 
-  <!-- Card 4 (partially visible) -->
-  <rect x="50" y="330" width="340" height="36" rx="7" fill="rgba(26,29,41,0.85)" stroke="rgba(0,212,255,0.15)" stroke-width="1" opacity="0.6"/>
-  <rect x="50" y="330" width="4" height="36" rx="2" fill="url(#primaryGrad)" opacity="0.6"/>
-  <text x="65" y="345" font-family="Inter, -apple-system, sans-serif" font-size="11.5" font-weight="500" fill="#ffffff" opacity="0.6">How long should a blog post be for SEO?</text>
+  <!-- Step 4: Output -->
+  <rect x="646" y="100" width="118" height="80" rx="12" fill="rgba(26,29,41,0.9)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="705" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#f59e0b">OUTPUT</text>
+  <text x="705" y="144" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">questions.json</text>
+  <text x="705" y="158" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8">questions.csv</text>
+  <text x="705" y="172" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">clipboard-ready</text>
 
-  <!-- Fade out gradient at bottom of cards -->
-  <rect x="50" y="340" width="340" height="54" fill="url(#bgGrad)" opacity="0.7" rx="4"/>
+  <!-- Sample question boxes -->
+  <text x="40" y="216" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#94a3b8">Mined Questions</text>
+  <line x1="40" y1="222" x2="760" y2="222" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
 
-  <!-- Right side: Code / output panel -->
-  <rect x="432" y="140" width="320" height="255" rx="10" fill="rgba(26,29,41,0.9)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <!-- Editor dots -->
-  <circle cx="452" cy="158" r="5" fill="#ff5f57"/>
-  <circle cx="467" cy="158" r="5" fill="#ffbd2e"/>
-  <circle cx="482" cy="158" r="5" fill="#28c840"/>
-  <text x="500" y="163" font-family="monospace" font-size="10" fill="#94a3b8">output.json</text>
+  <!-- Q boxes row 1 -->
+  <rect x="40" y="232" width="220" height="36" rx="8" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+  <text x="52" y="248" font-family="Inter,sans-serif" font-size="10" fill="#00d4ff">?</text>
+  <text x="66" y="248" font-family="Inter,sans-serif" font-size="10" fill="#e2e8f0">How do I backup a Raspberry Pi SD card?</text>
+  <text x="66" y="261" font-family="Inter,sans-serif" font-size="9" fill="#64748b">depth 1 · 4 child questions</text>
 
-  <!-- Code content -->
-  <line x1="432" y1="172" x2="752" y2="172" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="272" y="232" width="220" height="36" rx="8" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+  <text x="284" y="248" font-family="Inter,sans-serif" font-size="10" fill="#00d4ff">?</text>
+  <text x="298" y="248" font-family="Inter,sans-serif" font-size="10" fill="#e2e8f0">What is the best offsite backup for Pi?</text>
+  <text x="298" y="261" font-family="Inter,sans-serif" font-size="9" fill="#64748b">depth 1 · 6 child questions</text>
 
-  <text x="448" y="191" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">1</text>
-  <text x="466" y="191" font-family="'Courier New', monospace" font-size="10.5" fill="#00d4ff">{</text>
+  <rect x="504" y="232" width="256" height="36" rx="8" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+  <text x="516" y="248" font-family="Inter,sans-serif" font-size="10" fill="#00d4ff">?</text>
+  <text x="530" y="248" font-family="Inter,sans-serif" font-size="10" fill="#e2e8f0">Does rsync work over SSH on Raspberry Pi?</text>
+  <text x="530" y="261" font-family="Inter,sans-serif" font-size="9" fill="#64748b">depth 1 · 3 child questions</text>
 
-  <text x="448" y="208" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">2</text>
-  <text x="466" y="208" font-family="'Courier New', monospace" font-size="10.5" fill="#f59e0b">  "query"</text>
-  <text x="523" y="208" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">:</text>
-  <text x="532" y="208" font-family="'Courier New', monospace" font-size="10.5" fill="#4ade80"> "content SEO"</text>
-  <text x="628" y="208" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">,</text>
+  <!-- Q boxes row 2 (depth 2, slightly dimmer) -->
+  <rect x="40" y="278" width="220" height="36" rx="8" fill="rgba(124,58,237,0.06)" stroke="rgba(124,58,237,0.2)" stroke-width="1"/>
+  <text x="52" y="294" font-family="Inter,sans-serif" font-size="10" fill="#7c3aed">?</text>
+  <text x="66" y="294" font-family="Inter,sans-serif" font-size="10" fill="#cbd5e1">Can you backup Raspberry Pi to NAS?</text>
+  <text x="66" y="307" font-family="Inter,sans-serif" font-size="9" fill="#475569">depth 2 · from Q1</text>
 
-  <text x="448" y="225" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">3</text>
-  <text x="466" y="225" font-family="'Courier New', monospace" font-size="10.5" fill="#f59e0b">  "depth"</text>
-  <text x="514" y="225" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">:</text>
-  <text x="523" y="225" font-family="'Courier New', monospace" font-size="10.5" fill="#7c3aed"> 3</text>
-  <text x="532" y="225" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">,</text>
+  <rect x="272" y="278" width="220" height="36" rx="8" fill="rgba(124,58,237,0.06)" stroke="rgba(124,58,237,0.2)" stroke-width="1"/>
+  <text x="284" y="294" font-family="Inter,sans-serif" font-size="10" fill="#7c3aed">?</text>
+  <text x="298" y="294" font-family="Inter,sans-serif" font-size="10" fill="#cbd5e1">Is Backblaze B2 free for Raspberry Pi?</text>
+  <text x="298" y="307" font-family="Inter,sans-serif" font-size="9" fill="#475569">depth 2 · from Q2</text>
 
-  <text x="448" y="242" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">4</text>
-  <text x="466" y="242" font-family="'Courier New', monospace" font-size="10.5" fill="#f59e0b">  "questions"</text>
-  <text x="538" y="242" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">: [</text>
+  <rect x="504" y="278" width="256" height="36" rx="8" fill="rgba(124,58,237,0.06)" stroke="rgba(124,58,237,0.2)" stroke-width="1"/>
+  <text x="516" y="294" font-family="Inter,sans-serif" font-size="10" fill="#7c3aed">?</text>
+  <text x="530" y="294" font-family="Inter,sans-serif" font-size="10" fill="#cbd5e1">How to automate rsync with cron on Linux?</text>
+  <text x="530" y="307" font-family="Inter,sans-serif" font-size="9" fill="#475569">depth 2 · from Q3</text>
 
-  <text x="448" y="259" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">5</text>
-  <text x="466" y="259" font-family="'Courier New', monospace" font-size="10.5" fill="#4ade80">    "What is PAA?"</text>
+  <!-- Stat bar -->
+  <rect x="40" y="336" width="720" height="56" rx="10" fill="rgba(26,29,41,0.7)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="120" y="357" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#00d4ff">47</text>
+  <text x="120" y="374" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">questions mined</text>
 
-  <text x="448" y="276" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">6</text>
-  <text x="466" y="276" font-family="'Courier New', monospace" font-size="10.5" fill="#4ade80">    "How to get snippets?"</text>
+  <line x1="200" y1="344" x2="200" y2="384" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="310" y="357" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#7c3aed">3</text>
+  <text x="310" y="374" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">depth levels</text>
 
-  <text x="448" y="293" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">7</text>
-  <text x="466" y="293" font-family="'Courier New', monospace" font-size="10.5" fill="#4ade80">    "What is pillar page?"</text>
+  <line x1="400" y1="344" x2="400" y2="384" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="500" y="357" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#f59e0b">JSON + CSV</text>
+  <text x="500" y="374" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">export formats</text>
 
-  <text x="448" y="310" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">8</text>
-  <text x="466" y="310" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">    ...</text>
+  <line x1="600" y1="344" x2="600" y2="384" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="680" y="357" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#00d4ff">0</text>
+  <text x="680" y="374" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#64748b">API keys required</text>
 
-  <text x="448" y="327" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">9</text>
-  <text x="466" y="327" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">  ]</text>
-
-  <text x="448" y="344" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">10</text>
-  <text x="469" y="344" font-family="'Courier New', monospace" font-size="10.5" fill="#f59e0b">  "total"</text>
-  <text x="515" y="344" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">:</text>
-  <text x="524" y="344" font-family="'Courier New', monospace" font-size="10.5" fill="#7c3aed"> 23</text>
-
-  <text x="448" y="361" font-family="'Courier New', monospace" font-size="10.5" fill="#94a3b8">11</text>
-  <text x="469" y="361" font-family="'Courier New', monospace" font-size="10.5" fill="#00d4ff">}</text>
-
-  <!-- Stats bar at bottom -->
-  <rect x="50" y="378" width="702" height="30" rx="8" fill="rgba(26,29,41,0.7)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-
-  <!-- Stats -->
-  <circle cx="76" cy="393" r="5" fill="#00d4ff" opacity="0.9" filter="url(#subtleGlow)"/>
-  <text x="88" y="397" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8">23 questions mined</text>
-
-  <circle cx="222" cy="393" r="5" fill="#7c3aed" opacity="0.9"/>
-  <text x="234" y="397" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8">Depth: 3 levels</text>
-
-  <circle cx="348" cy="393" r="5" fill="#f59e0b" opacity="0.9"/>
-  <text x="360" y="397" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8">BFS traversal</text>
-
-  <circle cx="472" cy="393" r="5" fill="#4ade80" opacity="0.9"/>
-  <text x="484" y="397" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8">JSON &amp; CSV export</text>
-
-  <circle cx="608" cy="393" r="5" fill="#00d4ff" opacity="0.5"/>
-  <text x="620" y="397" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8">github.com/josefresco</text>
+  <!-- CLI demo line -->
+  <rect x="40" y="406" width="720" height="50" rx="8" fill="rgba(0,0,0,0.5)" stroke="rgba(0,212,255,0.15)" stroke-width="1"/>
+  <text x="56" y="426" font-family="monospace" font-size="11" fill="#64748b">$</text>
+  <text x="68" y="426" font-family="monospace" font-size="11" fill="#00d4ff">node index.js</text>
+  <text x="180" y="426" font-family="monospace" font-size="11" fill="#f59e0b">--keyword</text>
+  <text x="252" y="426" font-family="monospace" font-size="11" fill="#e2e8f0">"raspberry pi backup"</text>
+  <text x="456" y="426" font-family="monospace" font-size="11" fill="#f59e0b">--depth</text>
+  <text x="508" y="426" font-family="monospace" font-size="11" fill="#e2e8f0">3</text>
+  <text x="56" y="446" font-family="monospace" font-size="10" fill="#475569">→ Saved 47 questions to questions.json and questions.csv</text>
 </svg>

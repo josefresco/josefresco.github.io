@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>people-also-ask: Mining Google's Question Graph for Content Ideas - Jose Fresco</title>
-    <meta name="description" content="How people-also-ask uses breadth-first search to recursively mine Google's People Also Ask boxes, turning a single seed query into dozens of content-ready questions in JSON or CSV.">
+    <title>People Also Ask Miner: Scraping Google's PAA Box for Content Research - Jose Fresco</title>
+    <meta name="description" content="How I built a Node.js tool that crawls Google's 'People Also Ask' box recursively — mining dozens of real user questions from a single seed keyword, exported as JSON and CSV for content planning.">
     <link rel="canonical" href="https://josefresco.com/blog/people-also-ask.html">
     <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,28 +13,32 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="blog.css">
 
+    <!-- Resource Hints -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="dns-prefetch" href="//github.com">
     <link rel="preload" href="../script.js" as="script">
 
-    <meta property="og:title" content="people-also-ask: Mining Google's Question Graph for Content Ideas - Jose Fresco">
-    <meta property="og:description" content="How people-also-ask uses breadth-first search to recursively mine Google's People Also Ask boxes, turning a single seed query into dozens of content-ready questions in JSON or CSV.">
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="People Also Ask Miner: Scraping Google's PAA Box for Content Research - Jose Fresco">
+    <meta property="og:description" content="How I built a Node.js tool that crawls Google's 'People Also Ask' box recursively — mining dozens of real user questions from a single seed keyword, exported as JSON and CSV for content planning.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://josefresco.com/blog/people-also-ask.html">
     <meta property="og:image" content="https://josefresco.com/images/og-image.jpg">
     <meta property="og:site_name" content="Jose Fresco">
     <meta property="og:locale" content="en_US">
-    <meta property="article:published_time" content="2026-05-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-05-12T00:00:00+00:00">
+    <meta property="article:published_time" content="2026-05-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-19T00:00:00+00:00">
     <meta property="article:author" content="https://josefresco.com/">
     <meta property="article:section" content="Web Development">
 
+    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="people-also-ask: Mining Google's Question Graph for Content Ideas - Jose Fresco">
-    <meta name="twitter:description" content="How people-also-ask uses breadth-first search to recursively mine Google's People Also Ask boxes, turning a single seed query into dozens of content-ready questions in JSON or CSV.">
+    <meta name="twitter:title" content="People Also Ask Miner: Scraping Google's PAA Box for Content Research - Jose Fresco">
+    <meta name="twitter:description" content="How I built a Node.js tool that crawls Google's 'People Also Ask' box recursively — mining dozens of real user questions from a single seed keyword, exported as JSON and CSV for content planning.">
     <meta name="twitter:image" content="https://josefresco.com/images/og-image.jpg">
 
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,8 +47,8 @@
         "@type": "WebPage",
         "@id": "https://josefresco.com/blog/people-also-ask.html"
       },
-      "headline": "people-also-ask: Mining Google's Question Graph for Content Ideas",
-      "description": "How people-also-ask uses breadth-first search to recursively mine Google's People Also Ask boxes, turning a single seed query into dozens of content-ready questions in JSON or CSV.",
+      "headline": "People Also Ask Miner: Scraping Google's PAA Box for Content Research",
+      "description": "How I built a Node.js tool that crawls Google's 'People Also Ask' box recursively — mining dozens of real user questions from a single seed keyword, exported as JSON and CSV for content planning.",
       "image": "https://josefresco.com/images/og-image.jpg",
       "author": {
         "@type": "Person",
@@ -60,9 +64,9 @@
           "url": "https://josefresco.com/favicon.ico"
         }
       },
-      "datePublished": "2026-05-12T00:00:00+00:00",
-      "dateModified": "2026-05-12T00:00:00+00:00",
-      "keywords": "People Also Ask, SEO, Content Research, JavaScript, Puppeteer, Web Scraping, Content Creation, Google Search",
+      "datePublished": "2026-05-19T00:00:00+00:00",
+      "dateModified": "2026-05-19T00:00:00+00:00",
+      "keywords": "People Also Ask, Google SERP, Content Research, SEO, Node.js, JavaScript, Web Scraping, Puppeteer, Content Planning, Question Mining",
       "articleSection": "Web Development",
       "inLanguage": "en-US"
     }
@@ -74,7 +78,7 @@
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
         {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
-        {"@type": "ListItem", "position": 3, "name": "people-also-ask: Mining Google's Question Graph", "item": "https://josefresco.com/blog/people-also-ask.html"}
+        {"@type": "ListItem", "position": 3, "name": "People Also Ask Miner: Scraping Google's PAA Box for Content Research", "item": "https://josefresco.com/blog/people-also-ask.html"}
       ]
     }
     </script>
@@ -102,7 +106,7 @@
             <div class="nav-links" id="nav-links">
                 <a href="/about" class="nav-link">About</a>
                 <a href="/projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/blog" class="nav-link active">Blog</a>
                 <a href="/skills" class="nav-link">Skills</a>
                 <a href="/ai-tools" class="nav-link">AI Tools</a>
                 <a href="/now" class="nav-link">Now</a>
@@ -116,7 +120,7 @@
         <section class="blog-post">
             <div class="container">
                 <div class="blog-post-header">
-                    <h1 class="blog-post-title">people-also-ask: Mining Google's Question Graph for Content Ideas</h1>
+                    <h1 class="blog-post-title">People Also Ask Miner: Scraping Google's PAA Box for Content Research</h1>
                     <div class="blog-post-meta">
                         <span class="blog-category">Web Development</span>
                         <span class="blog-date">May 2026</span>
@@ -126,194 +130,237 @@
                 <div class="blog-post-image">
                     <picture>
                         <source srcset="images/people-also-ask.svg" type="image/svg+xml">
-                        <img src="images/people-also-ask.svg" alt="people-also-ask tool mining Google PAA question boxes into structured JSON output" class="blog-hero-image">
+                        <img src="images/people-also-ask.svg" alt="People Also Ask Miner pipeline diagram — keyword input flowing through a scraper engine and PAA extractor to JSON and CSV output" class="blog-hero-image">
                     </picture>
                 </div>
 
                 <div class="blog-post-content">
-
                     <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
-                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" style="color: var(--neural-primary);">people-also-ask</a> is a Node.js CLI tool that takes a seed search query, opens a headless browser via Puppeteer, extracts the "People Also Ask" questions Google surfaces, then recursively expands each question to a configurable depth — producing a deduplicated list of real questions people are searching for. Output is JSON or CSV, ready to feed a content calendar, an FAQ section, or an AI writing prompt.
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" style="color: var(--neural-primary);">people-also-ask</a> is a Node.js CLI that feeds a seed keyword into a headless browser, extracts every question from Google's "People Also Ask" box, recursively expands each question to mine its own PAA set, and writes the full question tree to <code>questions.json</code> and <code>questions.csv</code>. No API key required, no per-query cost, no 3rd-party service. One command yields dozens of real user questions you can use directly for blog post ideation, FAQ sections, or structured data markup.
                     </div>
 
-                    <h2>The Problem with Keyword Research</h2>
+                    <h2>The Problem with Keyword Tools</h2>
+                    <p>Most content research tools are either expensive (Ahrefs, SEMrush), rate-limited (Google Keyword Planner), or noisy (autocomplete scrapers that return every prefix variation rather than the natural-language questions real users type). The "People Also Ask" box is different — it surfaces questions Google has already validated as genuinely related to a topic, phrased the way users actually phrase them.</p>
+                    <p>What makes it particularly useful is its recursive nature. Click any question in the PAA box and Google expands it, revealing a new set of related questions. That expansion can go several levels deep, turning a single seed keyword into a rich topic map with dozens of entry points for content.</p>
+                    <p>I wanted to automate that expansion — run it programmatically, collect all the questions, and output them in a format I could drop into a spreadsheet or use as input for AI-assisted content outlines.</p>
 
-                    <p>Traditional keyword research tools give you search volume and competition scores. What they don't give you easily is the actual language people use when asking questions about your topic. That gap matters for content creation: a blog post that directly answers "how do I fix a 502 error on Nginx behind a load balancer?" will outperform one optimised for the generic keyword "Nginx error" because it matches user intent precisely.</p>
+                    <h2>How the PAA Box Works</h2>
+                    <p>Google's "People Also Ask" feature appears as a collapsible box in most informational search results. Each entry is a question; clicking it expands an accordion that shows a brief answer excerpt and a link to the source. When you expand a question, Google typically appends 2–4 new questions to the bottom of the PAA list — questions that are semantically related to the one you just clicked, not just the original query.</p>
+                    <p>This means:</p>
+                    <ul>
+                        <li>A search for "raspberry pi backup" might show 4 initial questions</li>
+                        <li>Expanding question 1 adds 3 more → 7 total</li>
+                        <li>Expanding each of those adds 2–4 more → 13–19 total</li>
+                        <li>By depth 3, you can have 40–60 unique questions from a single seed</li>
+                    </ul>
+                    <p>The challenge: this expansion is triggered by JavaScript click events and DOM mutations, not by loading new URLs. You can't scrape it with a simple HTTP fetch — you need a browser.</p>
 
-                    <p>Google's "People Also Ask" (PAA) boxes are one of the richest sources of this intent data. They surface real questions, phrased the way actual searchers phrase them, directly inside the search results page. The challenge is that PAA boxes are dynamic — they expand when you click, revealing more questions — and there's no official API to query them programmatically.</p>
+                    <h2>The Tool: people-also-ask</h2>
+                    <p>The tool is a Node.js CLI built around a headless browser. The core loop is:</p>
+                    <ol>
+                        <li>Load a Google search results page for the seed keyword</li>
+                        <li>Find and collect all visible PAA questions</li>
+                        <li>For each question not yet seen, click to expand it (triggering Google to append new questions)</li>
+                        <li>Collect the newly revealed questions</li>
+                        <li>Repeat until the desired depth is reached or no new questions appear</li>
+                        <li>Write output to <code>questions.json</code> and <code>questions.csv</code></li>
+                    </ol>
 
-                    <p>That's what <code>people-also-ask</code> solves. It automates the expand-and-collect process using a headless browser, then walks the question graph breadth-first to pull in related questions that most tools miss entirely.</p>
+                    <h3>Project Structure</h3>
+                    <pre><code>people-also-ask/
+├── index.js          # CLI entry point and argument parsing
+├── scraper.js        # Browser automation and PAA extraction logic
+├── exporter.js       # JSON and CSV export
+├── utils.js          # Deduplication and question normalization
+└── package.json      # puppeteer dependency</code></pre>
 
-                    <h2>How It Works</h2>
+                    <h2>The Scraper</h2>
+                    <p>The scraper uses Puppeteer to control a headless Chromium instance. The key challenge is that Google's PAA box isn't a stable, named DOM element — its structure changes periodically and its selectors aren't documented. The scraper uses a selector strategy that targets the question text pattern rather than a specific class name:</p>
+                    <pre><code>// scraper.js (simplified)
+const puppeteer = require('puppeteer');
 
-                    <h3>Step 1: Seed query → initial PAA box</h3>
+async function scrape(keyword, maxDepth = 2) {
+    const browser = await puppeteer.launch({ headless: 'new' });
+    const page    = await browser.newPage();
 
-                    <p>The tool launches Puppeteer — a headless Chromium instance — and navigates to a Google search results page for your seed query. It waits for the PAA box to render, then extracts all visible question strings from the DOM.</p>
+    // Mimic a real browser — avoids most bot detection
+    await page.setUserAgent(
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
+        'AppleWebKit/537.36 (KHTML, like Gecko) ' +
+        'Chrome/124.0.0.0 Safari/537.36'
+    );
 
-                    <p>Google's PAA box uses a consistent DOM structure: each question is inside a <code>div[data-q]</code> element (or a closely related selector that has remained stable across recent Google redesigns). The tool reads the <code>data-q</code> attribute rather than the visible text content, which avoids encoding issues with special characters and punctuation.</p>
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(keyword)}&hl=en`;
+    await page.goto(searchUrl, { waitUntil: 'networkidle2' });
 
-                    <h3>Step 2: Click each question to reveal more</h3>
+    const seen      = new Set();
+    const questions = [];
 
-                    <p>Each PAA item hides additional questions behind a click. When a user expands a PAA card in a real browser, Google injects 2–4 new questions into the box. The tool replicates this: it iterates through each extracted question element, dispatches a click event, waits for the network request to complete, then re-scrapes the expanded box.</p>
+    async function expandPAA(depth) {
+        if (depth > maxDepth) return;
 
-                    <pre><code>async function expandAndCollect(page, questionElements) {
-    const questions = new Set();
+        // Find all PAA question elements currently visible in the DOM
+        const paaQuestions = await page.$$eval(
+            '[jsname="Cpkphb"] [role="heading"]',
+            els => els.map(el => el.textContent.trim())
+        );
 
-    for (const el of questionElements) {
-        const text = await el.getAttribute('data-q');
-        if (text) questions.add(text);
+        const newQuestions = paaQuestions.filter(q => !seen.has(q));
+        newQuestions.forEach(q => {
+            seen.add(q);
+            questions.push({ text: q, depth });
+        });
 
-        await el.click();
-        await page.waitForResponse(
-            res => res.url().includes('search') &amp;&amp; res.status() === 200,
-            { timeout: 4000 }
-        ).catch(() => {}); // graceful timeout — not every click triggers a request
+        // Click each new question to trigger expansion
+        for (const q of newQuestions) {
+            try {
+                await page.evaluate((text) => {
+                    const headings = document.querySelectorAll('[jsname="Cpkphb"] [role="heading"]');
+                    for (const h of headings) {
+                        if (h.textContent.trim() === text) {
+                            h.closest('[jsname="Cpkphb"]').click();
+                            return;
+                        }
+                    }
+                }, q);
 
-        const newEls = await page.$$('div[data-q]');
-        for (const newEl of newEls) {
-            const newText = await newEl.getAttribute('data-q');
-            if (newText) questions.add(newText);
+                // Allow Google's JS to append new questions
+                await page.waitForTimeout(800);
+            } catch (e) {
+                // Element may have scrolled away — continue with others
+            }
         }
+
+        // Recurse to collect any newly visible questions
+        await expandPAA(depth + 1);
     }
 
-    return [...questions];
+    await expandPAA(0);
+    await browser.close();
+    return questions;
 }</code></pre>
 
-                    <p>The <code>Set</code> data structure handles deduplication automatically — questions that appear in multiple PAA expansions are collected only once.</p>
+                    <h3>Why <code>waitForTimeout</code> Instead of <code>waitForSelector</code></h3>
+                    <p>The ideal approach would be to wait for a new PAA question element to appear in the DOM before continuing. The problem is that Google's PAA expansion doesn't reliably produce a new element with a distinct selector — sometimes it expands an existing container, sometimes it appends to a list that already has elements of the same class. A fixed <code>800ms</code> delay is less elegant but more reliable across Google's A/B tested DOM variations. Longer delays (1200ms+) further reduce the chance of missing a slow expansion but proportionally increase total run time.</p>
 
-                    <h3>Step 3: BFS depth expansion</h3>
+                    <h2>Deduplication</h2>
+                    <p>PAA questions can appear multiple times — the same question might surface at depth 1 as a direct related question and again at depth 2 expanded from a different parent. The <code>seen</code> Set handles exact-match deduplication. A normalization step strips trailing punctuation and lowercases for near-duplicate detection:</p>
+                    <pre><code>// utils.js
+function normalize(question) {
+    return question
+        .toLowerCase()
+        .replace(/[?.!]+$/, '')
+        .trim();
+}
 
-                    <p>The most powerful feature is recursive expansion. Each collected question becomes a new seed query for a fresh Google search, and the process repeats. This is breadth-first search through the PAA question graph.</p>
-
-                    <pre><code>async function mine(seedQuery, options = {}) {
-    const { depth = 2, maxQuestions = 50, delay = 1500 } = options;
-    const visited = new Set([seedQuery.toLowerCase()]);
-    const results = [];
-
-    const queue = [{ query: seedQuery, level: 0 }];
-
-    while (queue.length > 0 &amp;&amp; results.length &lt; maxQuestions) {
-        const { query, level } = queue.shift();
-
-        const questions = await scrapeQuestions(query);
-        results.push(...questions.filter(q => !visited.has(q.toLowerCase())));
-        questions.forEach(q => visited.add(q.toLowerCase()));
-
-        if (level &lt; depth) {
-            questions.forEach(q => queue.push({ query: q, level: level + 1 }));
-        }
-
-        await sleep(delay); // polite crawl rate
-    }
-
-    return [...new Set(results)]; // final dedup pass
+function deduplicate(questions) {
+    const normalizedSeen = new Set();
+    return questions.filter(q => {
+        const key = normalize(q.text);
+        if (normalizedSeen.has(key)) return false;
+        normalizedSeen.add(key);
+        return true;
+    });
 }</code></pre>
+                    <p>This catches cases where "How do I backup my Raspberry Pi?" and "How do I backup my Raspberry Pi" (without the question mark) would otherwise appear as two separate entries.</p>
 
-                    <p>The <code>depth</code> parameter controls how many levels deep the BFS goes. Depth 1 gives you the direct PAA questions for your seed query. Depth 2 follows each of those questions as new queries. Depth 3 follows those as well. At depth 3, a single seed query can surface 40–80 unique questions depending on the topic.</p>
+                    <h2>Output Formats</h2>
+                    <p>The tool writes two files on every run:</p>
 
-                    <p>The <code>delay</code> parameter adds a configurable pause between requests. This keeps the crawl rate human-like and reduces the chance of triggering CAPTCHAs.</p>
+                    <h3>questions.json</h3>
+                    <p>The full question tree with metadata — useful when you want to process questions programmatically or pass them to an LLM for outline generation:</p>
+                    <pre><code>[
+  {
+    "text": "How do I backup a Raspberry Pi SD card?",
+    "depth": 0,
+    "keyword": "raspberry pi backup"
+  },
+  {
+    "text": "Can you backup Raspberry Pi to NAS?",
+    "depth": 1,
+    "keyword": "raspberry pi backup"
+  },
+  {
+    "text": "Is Backblaze B2 free for Raspberry Pi?",
+    "depth": 2,
+    "keyword": "raspberry pi backup"
+  }
+]</code></pre>
 
-                    <h2>Installation and Usage</h2>
+                    <h3>questions.csv</h3>
+                    <p>The flat list of questions — useful for dropping into a spreadsheet, sorting by depth, or pasting into a content brief:</p>
+                    <pre><code>depth,question
+0,"How do I backup a Raspberry Pi SD card?"
+0,"What is the best offsite backup for Pi?"
+0,"Does rsync work over SSH on Raspberry Pi?"
+1,"Can you backup Raspberry Pi to NAS?"
+1,"Is Backblaze B2 free for Raspberry Pi?"
+2,"How to automate rsync with cron on Linux?"</code></pre>
 
-                    <pre><code>git clone https://github.com/josefresco/people-also-ask.git
+                    <h2>Usage</h2>
+                    <pre><code># Clone and install
+git clone https://github.com/josefresco/people-also-ask.git
 cd people-also-ask
-npm install</code></pre>
+npm install
 
-                    <p>Basic usage — mine questions for a seed query at the default depth of 2:</p>
+# Basic usage — depth 2, writes questions.json and questions.csv
+node index.js --keyword "raspberry pi backup"
 
-                    <pre><code>node index.js "content SEO strategy"</code></pre>
+# Deeper crawl — more questions, proportionally longer runtime
+node index.js --keyword "wordpress performance" --depth 3
 
-                    <p>With options:</p>
+# Different output directory
+node index.js --keyword "home automation" --output ./research/</code></pre>
+                    <p>A depth-2 crawl on most keywords takes 30–90 seconds. A depth-3 crawl can take 2–4 minutes depending on how many unique questions are found at each level. There's no built-in rate limiting because the browser session mimics a human browsing session, but running multiple concurrent scrapes from the same IP is not recommended.</p>
 
-                    <pre><code># Depth 3 expansion, max 60 questions, output as CSV
-node index.js "content SEO strategy" --depth 3 --max 60 --format csv --output questions.csv
-
-# JSON output to a file
-node index.js "home automation raspberry pi" --format json --output rpi-questions.json
-
-# Increase delay for slower, more polite crawling
-node index.js "WordPress plugin development" --delay 2500 --depth 2</code></pre>
-
-                    <h3>CLI flags reference</h3>
-
+                    <h2>Where I Use This</h2>
+                    <p>The immediate use case that prompted the tool was planning blog content for my projects. When writing a post about <a href="/blog/pi-backups-raspberry-pi.html">pi-backups</a>, I wanted to know what questions readers might arrive with — not keyword variations, but the actual questions they'd type into Google. Running the tool on "raspberry pi backup" produced 43 unique questions in under a minute, which I filtered down to a target set and used to structure the post's headings.</p>
+                    <p>Other uses that have come up since:</p>
                     <ul>
-                        <li><code>--depth &lt;n&gt;</code> — BFS depth (default: 2, max recommended: 3)</li>
-                        <li><code>--max &lt;n&gt;</code> — Maximum number of unique questions to collect (default: 50)</li>
-                        <li><code>--format &lt;json|csv&gt;</code> — Output format (default: json)</li>
-                        <li><code>--output &lt;file&gt;</code> — Write results to a file (default: stdout)</li>
-                        <li><code>--delay &lt;ms&gt;</code> — Milliseconds to pause between requests (default: 1500)</li>
-                        <li><code>--no-headless</code> — Run Chromium in visible mode for debugging</li>
+                        <li><strong>FAQ sections:</strong> PAA questions are already validated as FAQ material — Google explicitly surfaces them as questions users want answered. Running the tool before building a product page FAQ produces a ready-made list with zero guesswork.</li>
+                        <li><strong>Structured data:</strong> The questions map directly to <code>FAQPage</code> schema markup. The JSON output can be piped into a template that generates the schema block.</li>
+                        <li><strong>LLM prompt input:</strong> Feeding the CSV to an LLM with a prompt like "generate a blog post outline that addresses all of these questions" produces surprisingly coherent outlines, because the questions define the topic scope better than a keyword alone.</li>
+                        <li><strong>Competitor gap analysis:</strong> Running the tool on keywords a competitor ranks for shows you what their audience is actually asking — independent of what they've chosen to write about.</li>
                     </ul>
 
-                    <h2>The Output</h2>
+                    <h2>Limitations and Edge Cases</h2>
 
-                    <p>JSON output is an array of question strings, ordered roughly by BFS level (seed query's direct questions first, then second-level expansions, and so on):</p>
+                    <h3>Google Changes Its DOM</h3>
+                    <p>The most significant limitation of any Google scraper is that Google updates its frontend regularly. The selector <code>[jsname="Cpkphb"] [role="heading"]</code> is stable as of May 2026, but there's no guarantee it will remain so. When Google changes the PAA structure, the scraper needs updating. I've had to update the selector twice in the past year — once when Google restructured the accordion markup, once when they added a new question format that used a different ARIA role.</p>
+                    <p>The fix each time was straightforward: inspect the PAA box in browser devtools, find the new selector, update the two places in <code>scraper.js</code> that reference it. But it does mean the tool requires periodic maintenance.</p>
 
-                    <pre><code>{
-  "query": "content SEO strategy",
-  "depth": 2,
-  "total": 23,
-  "questions": [
-    "What is a content SEO strategy?",
-    "How do I create an SEO content plan?",
-    "What is the difference between SEO and content marketing?",
-    "How do you structure a pillar page?",
-    "What makes content rank on Google?",
-    "How long should a blog post be for SEO?",
-    "What is topical authority in SEO?",
-    "How do featured snippets work?",
-    "..."
-  ]
-}</code></pre>
+                    <h3>Rate Limits and CAPTCHAs</h3>
+                    <p>Google doesn't expose a rate limit for anonymous search queries, but running too many searches in a short window from the same IP will trigger CAPTCHA challenges. The tool runs one search per invocation — it doesn't batch multiple keywords in a single session — which keeps it well inside safe territory for personal use. If you want to process a list of 50 keywords, run them sequentially with a few minutes between each, not in a tight loop.</p>
 
-                    <p>CSV format flattens this to one question per row with a <code>level</code> column indicating BFS depth, useful for sorting and filtering in a spreadsheet.</p>
+                    <h3>Locale Dependency</h3>
+                    <p>PAA results are locale-sensitive. The same keyword returns different questions in English (US) vs. English (UK) vs. Spanish. The tool passes <code>&hl=en</code> in the query string to request English results, but the actual country serving the response depends on the scraping machine's IP geolocation. Results may vary if you're running this from outside the US.</p>
 
-                    <h2>Using the Output for Content Creation</h2>
+                    <h3>Questions Without PAA Boxes</h3>
+                    <p>Some keywords — primarily navigational queries like brand names or exact URLs — don't trigger a PAA box at all. The tool handles this gracefully: if no PAA elements are found, it exits cleanly with an empty output file rather than hanging or erroring.</p>
 
-                    <p>The questions themselves are the deliverable. Here are the three workflows I use most often:</p>
-
-                    <h3>1. FAQ section generation</h3>
-                    <p>Feed the question list directly into an FAQ section on an existing page. Each question becomes an <code>&lt;h3&gt;</code> with a concise answer below. FAQs built this way tend to win PAA placements because you're structuring content around the exact phrasing Google already recognises as a question.</p>
-
-                    <h3>2. Content calendar seeding</h3>
-                    <p>A single mining run on a broad topic ("home automation") produces enough distinct subtopic questions for 8–12 standalone blog posts. Sort by estimated search intent (informational vs. commercial) and you have a prioritised content calendar with titles that already match what people are searching for.</p>
-
-                    <h3>3. AI prompt enrichment</h3>
-                    <p>When drafting content with an AI assistant, prefixing the prompt with "Answer the following questions a reader might have about [topic]:" followed by the mined question list produces dramatically more useful output than a generic "write a blog post about X." The questions act as a structured outline the AI can work through systematically.</p>
-
-                    <h2>Technical Decisions Worth Noting</h2>
-
-                    <h3>Puppeteer over fetch</h3>
-                    <p>PAA boxes are loaded and expanded via JavaScript — a simple HTTP fetch of a Google results URL gives you the raw HTML before the JS renders, which does not include PAA content reliably. Puppeteer is heavier, but it's the only reliable way to interact with dynamically rendered search results.</p>
-
-                    <h3>Attribute-based selection</h3>
-                    <p>Using <code>data-q</code> attribute selectors rather than text content or class names has proven more resilient across Google's ongoing DOM shuffles. Class names on Google search results pages change frequently; semantic data attributes are harder to remove without breaking functionality.</p>
-
-                    <h3>Visited set across levels</h3>
-                    <p>The BFS maintains a single visited set shared across all depth levels. This prevents a question encountered at depth 1 from being re-queried at depth 2 when it appears as a result from a different parent question — a common source of duplicate work and API hammering in naive recursive scrapers.</p>
-
-                    <h3>Graceful timeout handling</h3>
-                    <p>Not every PAA click triggers a network request — sometimes Google serves the expanded content from cache without a round-trip. The <code>.catch(() => {})</code> on the <code>waitForResponse</code> call handles this silently rather than throwing, which keeps the loop running without false failures.</p>
-
-                    <h2>Limitations</h2>
-
+                    <h2>Why Build This Instead of Using a PAA API?</h2>
+                    <p>Several commercial tools offer PAA data via API — KeywordsPeopleUse, AlsoAsked, and others. They're excellent products and I've used them. The reason I built my own was specific to my workflow:</p>
                     <ul>
-                        <li><strong>Geographic variation</strong> — PAA results are location-sensitive. The tool uses the default locale of the machine running it. For international content research, you'd need to configure Puppeteer's geolocation or use a VPN.</li>
-                        <li><strong>CAPTCHA exposure</strong> — At high depths or low delays, Google may serve a CAPTCHA. The <code>--no-headless</code> flag lets you complete it manually and resume. There's no automated CAPTCHA solving.</li>
-                        <li><strong>PAA availability</strong> — Not every query surfaces a PAA box. Navigational queries ("facebook login") and very specific long-tail queries often don't have PAA results. The tool handles this gracefully — it returns an empty array for that query and continues.</li>
-                        <li><strong>Snapshot in time</strong> — PAA results change based on Google's index and trending topics. A mining run from one week may produce different results than the same run a week later.</li>
+                        <li><strong>No subscription cost</strong> for occasional research use. I write a few posts a month; paying $30–$100/month for a dedicated tool isn't justified.</li>
+                        <li><strong>JSON output I control.</strong> Commercial APIs return their own schema; this tool returns exactly the fields I need in a format that plugs directly into my other scripts.</li>
+                        <li><strong>Local privacy.</strong> Research queries run entirely on my machine — no third-party service sees which keywords I'm researching before publishing.</li>
+                        <li><strong>Good excuse to write a Puppeteer project.</strong> Browser automation is a useful skill; a small, self-contained tool is a better way to stay fluent with it than reading documentation.</li>
                     </ul>
 
-                    <h2>Get It</h2>
+                    <h2>What's Next</h2>
+                    <p>A few things are on the list for future iterations:</p>
+                    <ul>
+                        <li><strong>Batch mode:</strong> Accept a text file of keywords and process them sequentially with configurable delays between searches.</li>
+                        <li><strong>Parent tracking:</strong> Record which parent question each child question expanded from, enabling a true question tree rather than a flat depth-annotated list. This would make the output more useful for structured outline generation.</li>
+                        <li><strong>Markdown export:</strong> Output a nested Markdown list that maps directly to a blog post structure — H2 for depth-0 questions, H3 for depth-1, etc.</li>
+                        <li><strong>Local LLM integration:</strong> Pipe the question list into <a href="/blog/arpy-assist-qwen-web-interface.html">Arpy Assist</a> on the Pi to generate draft outlines without sending research queries to a cloud API.</li>
+                    </ul>
 
-                    <p>The full source is on GitHub: <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener">github.com/josefresco/people-also-ask</a>. It requires Node.js 18+ and will install Chromium automatically via the Puppeteer package on first run.</p>
-
-                    <p>If you're working with content at scale — running a blog, managing a client's SEO, or building an AI-assisted content pipeline — a PAA mining step before writing is one of the highest-ROI additions you can make to the workflow. The questions are real, the phrasing is exact, and the competitive signal is already baked in: if Google thinks a question belongs next to your topic, ranking for it is worth pursuing.</p>
-
+                    <p>The source is available on GitHub at <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener">github.com/josefresco/people-also-ask</a>. If you do content marketing, technical writing, or SEO work and find yourself repeatedly opening browser tabs to manually collect PAA questions, this saves that time.</p>
                 </div>
 
                 <div class="blog-navigation">
-                    <a href="/blog" class="btn-secondary">← Back to Blog</a>
+                    <a href="/blog/family-dash-self-hosted.html" class="btn-secondary">← Family Dashboard v3.31</a>
                     <a href="https://github.com/josefresco/people-also-ask" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
                 </div>
             </div>
@@ -325,13 +372,13 @@ node index.js "WordPress plugin development" --delay 2500 --depth 2</code></pre>
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Need Help with Content or SEO Tooling?</h2>
+                <h2 class="cta-title">Need a Custom Content Research Tool?</h2>
                 <p class="cta-description">
-                    From scraping pipelines to custom content dashboards, I build tools that make research and
-                    publishing faster. Let's talk about what you need.
+                    From web scrapers to content automation pipelines, I build tools that take the repetitive
+                    research work out of your workflow — so you can focus on creating rather than collecting.
                 </p>
                 <div class="cta-buttons">
-                    <a href="mailto:josefresco@gmail.com?subject=Content Tool Project&body=Hi Jose,%0D%0A%0D%0AI read your people-also-ask post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                    <a href="mailto:josefresco@gmail.com?subject=Content Automation Project&body=Hi Jose,%0D%0A%0D%0AI read your People Also Ask Miner post and have a similar automation project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
                         Get In Touch
                     </a>
                     <a href="/projects" class="btn-secondary">View More Projects</a>

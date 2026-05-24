@@ -5,14 +5,14 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <title>people-also-ask: Mining Google's Question Graph for Content Ideas</title>
+      <title>People Also Ask Miner: Scraping Google's PAA Box for Content Research</title>
       <link>https://josefresco.com/blog/people-also-ask.html</link>
-      <description>A Node.js CLI tool that takes a seed search query, extracts Google's "People Also Ask" questions via Puppeteer, then recursively expands each question breadth-first to a configurable depth — producing a deduplicated list of real questions people are searching for, in JSON or CSV format. Covers the BFS traversal algorithm, Puppeteer click-and-collect mechanics, CLI flag reference, and three practical workflows for turning the output into content.</description>
-      <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
+      <description>A Node.js CLI that recursively crawls Google's "People Also Ask" box — mining dozens of real user questions from a single seed keyword and exporting them as JSON and CSV. No API key, no subscription, no per-query cost. Covers the headless browser scraping strategy, deduplication, PAA expansion mechanics, output formats, and practical use cases for FAQ sections, structured data markup, and LLM-assisted content outlines.</description>
+      <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/people-also-ask.html</guid>
     </item>
 
