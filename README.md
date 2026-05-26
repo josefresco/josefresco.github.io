@@ -8,7 +8,7 @@ This repository contains the source code for my personal website and blog, [jose
 *   **Performance-Focused:** Built with critical CSS inlining, deferred script loading, and optimized assets
 *   **AI-Optimized:** Structured content with semantic HTML, schema markup, and TL;DR summaries for AI agents and web crawlers
 *   **Project Portfolio:** Curated showcase of featured projects with source code and live demos
-*   **Blog Platform:** Technical articles on web development, AI/ML, automation, and developer tools
+*   **Blog Platform:** 38 technical articles on web development, AI/ML, automation, Raspberry Pi, browser extensions, and developer tools
 
 ## Tech Stack
 

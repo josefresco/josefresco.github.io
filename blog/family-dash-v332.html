@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots - Jose Fresco</title>
+    <meta name="description" content="How Family Dashboard v3.32 adds a service worker cache layer so the wall display keeps showing stale-but-useful data through Pi reboots, network blips, and server restarts — plus a systemd unit that auto-starts the Express server on boot.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dash-v332.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots - Jose Fresco">
+    <meta property="og:description" content="How Family Dashboard v3.32 adds a service worker cache layer so the wall display keeps showing stale-but-useful data through Pi reboots, network blips, and server restarts — plus a systemd unit that auto-starts the Express server on boot.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/family-dash-v332.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dash-v332.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-05-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-26T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots - Jose Fresco">
+    <meta name="twitter:description" content="How Family Dashboard v3.32 adds a service worker cache layer so the wall display keeps showing stale-but-useful data through Pi reboots, network blips, and server restarts — plus a systemd unit that auto-starts the Express server on boot.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dash-v332.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/family-dash-v332.html"
+      },
+      "headline": "Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots",
+      "description": "How Family Dashboard v3.32 adds a service worker cache layer so the wall display keeps showing stale-but-useful data through Pi reboots, network blips, and server restarts — plus a systemd unit that auto-starts the Express server on boot.",
+      "image": "https://josefresco.com/blog/images/family-dash-v332.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-05-26T00:00:00+00:00",
+      "dateModified": "2026-05-26T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Service Worker, Offline, Family Dashboard, Node.js, Express, systemd, Cache, PWA, CalDAV",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots", "item": "https://josefresco.com/blog/family-dash-v332.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">May 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dash-v332.svg" type="image/svg+xml">
+                        <img src="images/family-dash-v332.svg" alt="Family Dashboard v3.32 service worker cache flow diagram showing offline caching and systemd auto-start" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Family Dashboard v3.32 registers a service worker that caches the app shell and uses a stale-while-revalidate strategy for weather and calendar data. When the Pi is unreachable — rebooting, updating packages, or just dropped from the network — the iPad keeps displaying the last known data instead of a blank screen. A <code>systemd</code> unit file handles auto-start on boot and automatic restart on crash, replacing the previous <code>pm2</code> recommendation.
+                    </div>
+
+                    <h2>The Problem v3.31 Created</h2>
+
+                    <p>Moving <a href="/blog/family-dash-self-hosted.html">Family Dashboard to a self-hosted Express server on Raspberry Pi</a> was the right call — credentials off the client, no Vercel cold starts, full control over the runtime. But it introduced a new failure mode that Vercel never had: the server can be genuinely unreachable.</p>
+
+                    <p>With Vercel, a serverless function either responds or returns a 5xx. The static files were always served from Vercel's CDN regardless of what happened to the function. Move to a Pi, and a <code>sudo apt upgrade</code> that triggers a reboot takes the whole thing offline for 90 seconds. The iPad on the kitchen wall goes blank. Someone asks "why is the dashboard broken?" The answer — "the Pi is rebooting" — is not the experience a wall display should deliver.</p>
+
+                    <p>v3.32 addresses this in two layers. The service worker handles the client-side resilience: cache what you can, serve stale data when the server is gone. The <code>systemd</code> unit handles the server-side resilience: come back up automatically, without intervention, as fast as possible.</p>
+
+                    <h2>Registering the Service Worker</h2>
+
+                    <p>The service worker file lives at <code>sw.js</code> in the project root, which puts it in the highest-level scope the server allows. Registration is straightforward — added to the bottom of <code>app-client.js</code> after the main initialization:</p>
+
+                    <pre><code>if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => {
+                console.log('[SW] registered, scope:', reg.scope);
+            })
+            .catch(err => {
+                console.warn('[SW] registration failed:', err);
+            });
+    });
+}</code></pre>
+
+                    <p>The <code>load</code> event timing matters here. Registering during <code>DOMContentLoaded</code> can compete with page resources and slow down initial paint on the older iPads the dashboard targets. Waiting for <code>load</code> gives the main thread a chance to finish first.</p>
+
+                    <h2>The App Shell Cache</h2>
+
+                    <p>The first thing the service worker does on <code>install</code> is pre-cache the app shell — the HTML, CSS, and JavaScript files that make up the dashboard skeleton. These files don't change between server restarts, so they're safe to cache aggressively:</p>
+
+                    <pre><code>const CACHE_NAME = 'family-dash-v1';
+const APP_SHELL = [
+    '/',
+    '/index.html',
+    '/style.css',
+    '/app-client.js',
+    '/caldav-client.js',
+    '/weather-client.js',
+    '/manifest.json'
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.addAll(APP_SHELL);
+        })
+    );
+    self.skipWaiting();
+});</code></pre>
+
+                    <p><code>skipWaiting()</code> means the new service worker activates immediately rather than waiting for all existing clients to close. For a wall display that might stay open for days, waiting for the old worker to be "naturally" replaced would mean the new cache never takes effect until someone manually refreshes the iPad — which defeats the purpose.</p>
+
+                    <h2>Stale-While-Revalidate for API Responses</h2>
+
+                    <p>The more interesting part is how the service worker handles the API routes — <code>/api/config</code>, <code>/api/weather</code>, and <code>/api/calendar</code>. For these, the right strategy is stale-while-revalidate: return what's in cache immediately (fast, always works), then fetch fresh data in the background and update the cache for next time.</p>
+
+                    <pre><code>const API_ROUTES = ['/api/config', '/api/weather', '/api/calendar'];
+
+self.addEventListener('fetch', event => {
+    const url = new URL(event.request.url);
+    const isApiRoute = API_ROUTES.some(r => url.pathname.startsWith(r));
+
+    if (isApiRoute) {
+        event.respondWith(staleWhileRevalidate(event.request));
+        return;
+    }
+
+    // App shell: cache-first
+    event.respondWith(
+        caches.match(event.request).then(cached => {
+            return cached || fetch(event.request);
+        })
+    );
+});
+
+async function staleWhileRevalidate(request) {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
+
+    const fetchPromise = fetch(request)
+        .then(response => {
+            if (response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        })
+        .catch(() => null);
+
+    return cached || await fetchPromise;
+}</code></pre>
+
+                    <p>The key line is the last one: <code>return cached || await fetchPromise</code>. If there's a cached response, it's returned immediately. The background fetch still happens — the cache gets updated for next time — but the client doesn't wait for it. If there's no cached response yet (first load, or cache was cleared), we wait for the network.</p>
+
+                    <p>What happens when both <code>cached</code> is null and the <code>fetchPromise</code> rejects (network unreachable, server down)? <code>fetchPromise</code> catches the error and returns <code>null</code>. The service worker returns <code>null</code> as the response. The main app handles a null API response the same way it handles a 500 — it leaves the last rendered data in place and schedules a retry. The widget doesn't clear; it just stops refreshing until the server comes back.</p>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-content">
+
+                    <h2>What Gets Cached and for How Long</h2>
+
+                    <p>Different data types have different staleness tolerances:</p>
+
+                    <ul>
+                        <li><strong>App shell</strong> (<code>/</code>, CSS, JS) — indefinitely, updated only when the service worker itself updates</li>
+                        <li><strong>/api/config</strong> — long-lived; the server location, timezone, and CalDAV account list rarely change</li>
+                        <li><strong>/api/weather</strong> — weather data is fetched every 10 minutes. A cached response is useful for up to an hour before it becomes misleading. Showing "72°F, Partly Cloudy" from an hour ago is fine; showing it from yesterday is not.</li>
+                        <li><strong>/api/calendar</strong> — calendar events are cached per <code>accountId</code>. Showing today's events from a 30-minute-old cache is acceptable. The cache is busted on the next successful fetch.</li>
+                    </ul>
+
+                    <p>The service worker doesn't implement TTL eviction itself — that complexity isn't worth it for this use case. Instead, each widget in the dashboard stamps a <code>data-fetched-at</code> attribute on its container when it successfully renders fresh data. A small client-side check runs every 5 minutes: if the most recent fetch timestamp is more than N minutes old, the widget shows a subtle "Last updated X minutes ago" indicator rather than pretending the data is live.</p>
+
+                    <pre><code>// In weather-client.js
+function renderWeather(data, fromCache = false) {
+    container.dataset.fetchedAt = Date.now();
+
+    if (fromCache) {
+        const age = Math.round((Date.now() - cachedAt) / 60000);
+        statusEl.textContent = `Cached · ${age} min ago`;
+        statusEl.style.color = 'var(--neural-accent)';
+    } else {
+        statusEl.textContent = '';
+    }
+
+    // ... render temperature, conditions, forecast
+}</code></pre>
+
+                    <p>The "cached" indicator only appears when the data is actually stale — during a normal refresh cycle the status line stays empty. The family doesn't need to know the plumbing is working; they only need to know when it isn't.</p>
+
+                    <h2>Cache Versioning and Updates</h2>
+
+                    <p>The cache name includes a version string: <code>family-dash-v1</code>. When a new version of the service worker ships, the version bumps. The <code>activate</code> handler cleans up old caches:</p>
+
+                    <pre><code>self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(
+                keys
+                    .filter(key => key !== CACHE_NAME)
+                    .map(key => caches.delete(key))
+            );
+        }).then(() => self.clients.claim())
+    );
+});</code></pre>
+
+                    <p><code>clients.claim()</code> immediately takes control of any open clients (the iPad tab) without waiting for a navigation event. Combined with <code>skipWaiting()</code> in the install handler, this means a service worker update takes effect on the next page load — or even on the current one if the tab was already open when the worker updated.</p>
+
+                    <p>In practice, the service worker version only needs to change when the app shell files change in a way that affects what gets pre-cached. Routine content updates — new calendar events, fresh weather data — flow through the stale-while-revalidate path and don't require a version bump.</p>
+
+                    <h2>The systemd Unit</h2>
+
+                    <p>Service worker caching handles the client-side resilience. But a wall display that stays blank for 10 minutes while the Pi comes back from a reboot is still a bad experience. The goal is to minimize that window — and ideally avoid it altogether for planned restarts.</p>
+
+                    <p>The previous recommendation in the Family Dashboard README was <code>pm2</code>. It works, but it adds a dependency and a daemon to manage. For a single-process Node.js server, <code>systemd</code> is simpler, has zero additional dependencies, and integrates cleanly with <code>journald</code> for log collection.</p>
+
+                    <p>The unit file at <code>/etc/systemd/system/family-dash.service</code>:</p>
+
+                    <pre><code>[Unit]
+Description=Family Dashboard Express Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/family-dash
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+EnvironmentFile=/home/pi/family-dash/.env
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=family-dash
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+                    <p>A few decisions worth explaining. <code>After=network-online.target</code> prevents the server from starting before the network is available — without this, on a Pi that boots faster than the router hands out a DHCP lease, the server starts, immediately fails its CalDAV fetches, and logs errors. Waiting for <code>network-online.target</code> costs a few seconds at boot but means the first fetch succeeds.</p>
+
+                    <p><code>Restart=always</code> with <code>RestartSec=5</code> means if the process exits for any reason — unhandled exception, OOM kill, whatever — systemd waits 5 seconds and starts it again. The 5-second gap is intentional: it prevents a crash loop from hammering the CPU. On a healthy Pi, crashes are rare; on an overloaded one, the delay gives the system a moment to recover.</p>
+
+                    <p><code>EnvironmentFile</code> points at the same <code>.env</code> the server already uses for credentials. No duplication, no separate secrets management.</p>
+
+                    <h2>Enabling and Managing the Service</h2>
+
+                    <pre><code># Enable and start
+sudo systemctl enable family-dash
+sudo systemctl start family-dash
+
+# Check status
+sudo systemctl status family-dash
+
+# Follow logs live
+sudo journalctl -u family-dash -f
+
+# Restart after a config change
+sudo systemctl restart family-dash</code></pre>
+
+                    <p><code>sudo systemctl enable family-dash</code> creates the symlink that makes the unit start at boot. Without this step, the service runs now but not after a reboot. It's easy to forget, so the updated README calls it out explicitly as a required step.</p>
+
+                    <h2>Combining Both Layers</h2>
+
+                    <p>The two resilience mechanisms complement each other at different time scales.</p>
+
+                    <p>For a <strong>brief network blip</strong> — router restarting, Pi losing the WiFi association for 30 seconds — the service worker handles it invisibly. The fetch fails, the cached data is returned, the dashboard keeps rendering. Most family members will never notice.</p>
+
+                    <p>For a <strong>planned Pi reboot</strong> — <code>sudo reboot</code> after a system update — the sequence is:</p>
+                    <ol>
+                        <li>The Express server shuts down. Fetch requests from the iPad start failing.</li>
+                        <li>The service worker intercepts failed fetches and returns cached responses.</li>
+                        <li>The Pi reboots. The systemd unit waits for <code>network-online.target</code>, then starts <code>node server.js</code>.</li>
+                        <li>Fresh fetches succeed again. The service worker updates its cache. The dashboard transitions back to live data.</li>
+                    </ol>
+
+                    <p>Total visible downtime for the wall display: zero, assuming the Pi comes back within the cache's staleness tolerance. For a short reboot (~90 seconds), the weather and calendar data shown during the gap are at most a few minutes old. Acceptable.</p>
+
+                    <p>For an <strong>extended outage</strong> — power cut, Pi hardware failure — the dashboard will show stale data until the cache TTL logic kicks in and flags the staleness. This is the right behavior: an old calendar view beats a blank screen, but the family should know it's not refreshing.</p>
+
+                    <h2>Migrating from pm2</h2>
+
+                    <p>If you followed the v3.31 setup guide and are running the server under pm2, the migration is straightforward. Stop and remove the pm2 entry, then set up the systemd unit:</p>
+
+                    <pre><code># Stop the pm2-managed process
+pm2 stop family-dash
+pm2 delete family-dash
+pm2 save  # update the saved process list
+
+# Create and enable the systemd unit
+sudo nano /etc/systemd/system/family-dash.service
+# (paste the unit file contents from above)
+
+sudo systemctl daemon-reload
+sudo systemctl enable family-dash
+sudo systemctl start family-dash
+
+# Confirm it's running
+sudo systemctl status family-dash</code></pre>
+
+                    <p>You can optionally uninstall pm2 entirely if Family Dashboard was the only process it was managing: <code>npm uninstall -g pm2</code>. If you have other processes running under pm2, leave it in place — the two process managers don't conflict.</p>
+
+                    <h2>What's Next</h2>
+
+                    <p>The next area I'm looking at is <strong>background sync</strong> — specifically syncing task list additions made while the server was unreachable. Right now, if you add a task to the dashboard during a Pi downtime, the request fails and the task is lost. Background sync would queue the mutation and replay it once connectivity is restored. The browser support story for Background Sync is reasonable on modern Safari (iOS 16+), which is what most wall iPads run.</p>
+
+                    <p>The other open item is <strong>push notifications</strong> for calendar reminders. The CalDAV data is already on the server — the information needed to fire a "Soccer Practice starts in 30 minutes" notification exists. The gap is getting that notification from the Pi to the iPad without a third-party push service. Web Push requires a public key infrastructure and a reachable endpoint; Telegram (already used elsewhere in the JF stack) is the more pragmatic option here.</p>
+
+                    <div class="cta-box">
+                        <h3>Explore Family Dashboard</h3>
+                        <p>Family Dashboard is open source and optimized for older iPads. Clone the repo and run it on your own Pi.</p>
+                        <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-cta">View on GitHub →</a>
+                    </div>
+
+                    <h2>Series Links</h2>
+                    <ul>
+                        <li><a href="/blog/family-dash-vercel-caldav-setup.html">Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon</a></li>
+                        <li><a href="/blog/family-dash-v330.html">v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection</a></li>
+                        <li><a href="/blog/family-dash-self-hosted.html">v3.31: Leaving Vercel for a Self-Hosted Raspberry Pi</a></li>
+                        <li><strong>v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots</strong> (this post)</li>
+                    </ul>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Enjoyed this post?</h2>
+                    <p class="cta-description">
+                        More posts on self-hosted projects, Raspberry Pi automation, and building reliable software with open-source tools.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="/blog" class="btn-secondary">View All Posts</a>
+                        <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">Family Dashboard on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
