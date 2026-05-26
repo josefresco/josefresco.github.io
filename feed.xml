@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots</title>
+      <link>https://josefresco.com/blog/family-dash-v332.html</link>
+      <description>How Family Dashboard v3.32 adds a service worker cache layer so the wall display keeps showing stale-but-useful data through Pi reboots, network blips, and server restarts. Covers the app shell pre-cache, stale-while-revalidate strategy for weather and calendar API routes, cache versioning and activation, a staleness indicator for family members, and a systemd unit file that replaces pm2 with auto-start on boot and automatic crash recovery.</description>
+      <pubDate>Tue, 26 May 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-v332.html</guid>
+    </item>
 
     <item>
       <title>People Also Ask Miner: Scraping Google's PAA Box for Content Research</title>
