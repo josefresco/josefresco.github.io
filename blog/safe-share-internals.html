@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View - Jose Fresco</title>
+    <meta name="description" content="How SafeShare bypasses Reddit's server-side API blocks by fetching post data in the browser, persisting snapshots to Vercel KV Redis, and serving a clean reader view — no Reddit credentials, no login walls.">
+    <link rel="canonical" href="https://josefresco.com/blog/safe-share-internals.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View - Jose Fresco">
+    <meta property="og:description" content="How SafeShare bypasses Reddit's server-side API blocks by fetching post data in the browser, persisting snapshots to Vercel KV Redis, and serving a clean reader view — no Reddit credentials, no login walls.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/safe-share-internals.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/safe-share-internals.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-06-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-02T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View - Jose Fresco">
+    <meta name="twitter:description" content="How SafeShare bypasses Reddit's server-side API blocks by fetching post data in the browser, persisting snapshots to Vercel KV Redis, and serving a clean reader view — no Reddit credentials, no login walls.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/safe-share-internals.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/safe-share-internals.html"
+      },
+      "headline": "SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View",
+      "description": "How SafeShare bypasses Reddit's server-side API blocks by fetching post data in the browser, persisting snapshots to Vercel KV Redis, and serving a clean reader view — no Reddit credentials, no login walls.",
+      "image": "https://josefresco.com/blog/images/safe-share-internals.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-06-02T00:00:00+00:00",
+      "dateModified": "2026-06-02T00:00:00+00:00",
+      "keywords": "Next.js, TypeScript, Redis, Vercel KV, App Router, Reddit API, PWA, Web Development, SafeShare, Reader View",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "SafeShare Internals", "item": "https://josefresco.com/blog/safe-share-internals.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">June 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/safe-share-internals.svg" type="image/svg+xml">
+                        <img src="images/safe-share-internals.svg" alt="SafeShare architecture: browser fetches Reddit data client-side, Next.js API route persists to Vercel KV Redis" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/safe-share" style="color: var(--neural-primary);" target="_blank" rel="noopener">SafeShare</a> solves a real constraint: Reddit's API blocks server-side requests from datacenter IPs. The fix is to flip the responsibility — the browser fetches the Reddit JSON, then POSTs it to a Next.js API route that writes it to Vercel KV with a 90-day TTL. The result is a shareable slug URL that renders a clean reader view with no Reddit login wall, no app install prompt, no ads. The whole thing is TypeScript on Next.js 16's App Router, deployed to Vercel in about three minutes.
+                    </div>
+
+                    <h2>Why SafeShare Exists</h2>
+
+                    <p>Sharing a Reddit post should be simple. Paste a link, the other person reads it. In practice, clicking a Reddit link on mobile triggers a full-screen app install prompt before you can see a single word of the post you were trying to read. On desktop, it's login walls, cookie banners, and a layout that seems designed to distract you from the thing you came to see.</p>
+
+                    <p>SafeShare is a workaround: paste a Reddit URL, get back a clean shareable link that shows just the post and top comments — nothing else. No account required on either end. The <a href="/blog/safeshare-reddit-bookmarklet.html" style="color: var(--neural-primary);">earlier post</a> covered the user-facing workflow and the one-click bookmarklet. This post is about how the data pipeline works under the hood, and why the architecture looks the way it does.</p>
+
+                    <h2>The Core Problem: Reddit Blocks Server-Side Requests</h2>
+
+                    <p>The obvious approach to building something like this is: user submits a Reddit URL, your server fetches the post data, you render it. Simple server-side fetch, render, done.</p>
+
+                    <p>That doesn't work. Reddit blocks server-side requests from datacenter IP ranges — the same IP ranges Vercel, AWS, and every other cloud platform sits on. A <code>fetch()</code> call from a Next.js API route to <code>reddit.com</code> returns a 403 or a redirect to a login page, not the post JSON.</p>
+
+                    <p>You can work around this with the official Reddit API (OAuth tokens, rate limits, API key registration), but that adds significant complexity and creates a dependency on Reddit's API terms staying favorable. For a personal tool used occasionally, that overhead isn't worth it.</p>
+
+                    <h2>The Solution: Flip Who Does the Fetching</h2>
+
+                    <p>The architecture in SafeShare inverts the usual pattern. Instead of the server fetching Reddit data, the <em>browser</em> does it — and then ships the result to the server for storage.</p>
+
+                    <p>Here's why this works: Reddit doesn't block browser requests from real user IP addresses. When you're logged into Reddit and click something, requests come from a residential or mobile IP, not a datacenter. SafeShare takes advantage of this by keeping the Reddit fetch entirely on the client side, using the user's own network connection and browser context.</p>
+
+                    <p>The flow looks like this:</p>
+
+                    <ol>
+                        <li>User pastes a Reddit URL into SafeShare's input field</li>
+                        <li>The browser appends <code>.json</code> to the Reddit URL and calls <code>fetch()</code> directly</li>
+                        <li>Reddit returns the post JSON because the request looks like a normal browser request</li>
+                        <li>The browser POSTs that JSON payload to a Next.js API route at <code>/api/snapshot</code></li>
+                        <li>The API route stores it in Vercel KV (Redis) under a generated slug with a 90-day TTL</li>
+                        <li>The API route returns the slug, and the browser redirects to <code>/s/&lt;slug&gt;</code></li>
+                        <li>Anyone with that link gets the clean reader view — served from Redis, no Reddit request needed</li>
+                    </ol>
+
+                    <p>No Reddit API credentials at any point. No server-to-Reddit network calls. The only thing the server ever receives is already-fetched JSON from a browser that Reddit was happy to serve.</p>
+
+                    <h2>The Next.js App Router Structure</h2>
+
+                    <p>SafeShare uses Next.js 16 with the App Router — the <code>app/</code> directory convention rather than <code>pages/</code>. The directory structure maps cleanly to the data flow:</p>
+
+                    <pre><code>app/
+  page.tsx              ← landing page with URL input form
+  api/
+    snapshot/
+      route.ts          ← POST handler: validates, stores to KV, returns slug
+  s/
+    [slug]/
+      page.tsx          ← dynamic reader view route
+lib/
+  reddit.ts             ← Reddit JSON parsing and normalization
+  kv.ts                 ← Vercel KV client wrappers
+  types.ts              ← shared TypeScript interfaces</code></pre>
+
+                    <p>The separation between <code>lib/reddit.ts</code> and the route handlers keeps the parsing logic testable and isolated. Reddit's JSON response is notoriously nested — a top-level array with two items, where <code>[0]</code> is post metadata and <code>[1]</code> is the comment forest. The <code>reddit.ts</code> module normalizes that into a flat <code>RedditPost</code> type that the rest of the app works with.</p>
+
+                    <h2>The Client-Side Fetch in Detail</h2>
+
+                    <p>The landing page's form submission triggers a client-side async function, not a server action. That distinction matters — it needs to run in the browser to use the user's network context for the Reddit request.</p>
+
+                    <pre><code>async function handleSubmit(url: string) {
+  // Reddit's .json endpoint returns the full post + comments tree
+  const redditUrl = url.replace(/\/?$/, '') + '.json?limit=50';
+
+  const response = await fetch(redditUrl, {
+    headers: {
+      'Accept': 'application/json',
+      // Reddit requires a User-Agent that isn't a generic fetch string
+      'User-Agent': 'SafeShare/1.0 (personal sharing tool)',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Reddit returned ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  // Ship the raw Reddit JSON to the API route for storage
+  const snapshot = await fetch('/api/snapshot', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ redditData: data, sourceUrl: url }),
+  });
+
+  const { slug } = await snapshot.json();
+  router.push(`/s/${slug}`);
+}</code></pre>
+
+                    <p>The <code>User-Agent</code> header matters. Reddit rejects requests with generic strings like <code>node-fetch/1.0</code> or no User-Agent at all. A descriptive, honest User-Agent is the right approach and consistent with Reddit's API guidelines for personal tools.</p>
+
+                    <h2>The API Route: Validation, Storage, Slug Generation</h2>
+
+                    <p>The <code>/api/snapshot/route.ts</code> handler receives the Reddit JSON and needs to do three things: validate the payload, generate a stable slug, and persist to Vercel KV.</p>
+
+                    <pre><code>import { kv } from '@vercel/kv';
+import { nanoid } from 'nanoid';
+import { parseRedditPost } from '@/lib/reddit';
+import type { NextRequest } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+
+  // Basic shape validation — reject clearly malformed payloads
+  if (!body?.redditData || !Array.isArray(body.redditData)) {
+    return Response.json({ error: 'Invalid payload' }, { status: 400 });
+  }
+
+  const post = parseRedditPost(body.redditData);
+
+  if (!post) {
+    return Response.json({ error: 'Could not parse Reddit post' }, { status: 422 });
+  }
+
+  const slug = nanoid(10);
+
+  // Store with 90-day TTL (in seconds)
+  await kv.set(`snapshot:${slug}`, post, { ex: 60 * 60 * 24 * 90 });
+
+  return Response.json({ slug });
+}</code></pre>
+
+                    <p><code>nanoid(10)</code> generates a 10-character URL-safe random ID — short enough for easy sharing, collision-resistant enough that you'd need millions of snapshots before duplicates become probable. The key prefix <code>snapshot:</code> keeps these entries namespaced in Redis in case the KV instance is shared with other data later.</p>
+
+                    <h2>The Redis Storage Model</h2>
+
+                    <p>Vercel KV is managed Redis. The integration is minimal: install <code>@vercel/kv</code>, pull the environment variables with <code>vercel env pull</code>, and you get a <code>kv</code> client that works both locally and in production with no configuration differences.</p>
+
+                    <p>Each snapshot stores a <code>RedditPost</code> object — the normalized form of the Reddit JSON — not the raw response. That has two benefits: the reader view page never has to re-parse the Reddit format, and the storage size is predictable (text posts are a few KB; image posts with gallery metadata might reach 50–100KB). Storing the raw Reddit JSON would add noise and increase key sizes unnecessarily.</p>
+
+                    <p>The 90-day TTL is a pragmatic call. Reddit posts are typically most relevant in the week or two after they're posted. 90 days covers essentially all real sharing use cases while preventing indefinite storage growth. Vercel KV's free tier has storage limits; automatic expiry keeps the instance healthy without any cleanup job.</p>
+
+                    <h2>The Reader View Page</h2>
+
+                    <p>The reader view at <code>/s/[slug]/page.tsx</code> is a standard Next.js dynamic route. It reads the slug from params, fetches from KV, and renders the post. Because the route is server-rendered, there's no loading state — the page either returns the full post or a 404.</p>
+
+                    <pre><code>import { kv } from '@vercel/kv';
+import { notFound } from 'next/navigation';
+import type { RedditPost } from '@/lib/types';
+
+export default async function SnapshotPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = await kv.get&lt;RedditPost&gt;(`snapshot:${params.slug}`);
+
+  if (!post) notFound();
+
+  return (
+    &lt;article className="max-w-2xl mx-auto px-4 py-8"&gt;
+      &lt;PostHeader post={post} /&gt;
+      &lt;PostBody post={post} /&gt;
+      &lt;CommentList comments={post.comments} /&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+
+                    <p>The Tailwind classes keep the reader layout deliberately minimal: constrained width, comfortable line height, no sidebars. The goal is that the person you share the link with reads the post, not navigates a UI.</p>
+
+                    <h2>Supported Content Types</h2>
+
+                    <p>Reddit posts come in several flavors, and the <code>parseRedditPost()</code> function in <code>lib/reddit.ts</code> normalizes them into a consistent <code>RedditPost</code> shape with a <code>type</code> discriminant:</p>
+
+                    <ul>
+                        <li><strong>Text posts</strong> — body rendered as Markdown via a lightweight parser</li>
+                        <li><strong>Image posts</strong> — direct image URL extracted from the <code>url</code> field</li>
+                        <li><strong>Gallery posts</strong> — <code>media_metadata</code> parsed into an ordered image array</li>
+                        <li><strong>Link posts</strong> — preview image shown with the external URL clearly labeled</li>
+                        <li><strong>Video posts</strong> — thumbnail shown with a note; Reddit's video format uses DASH streaming that's non-trivial to re-serve from a different domain</li>
+                    </ul>
+
+                    <p>Videos are the one rough edge. Reddit serves video and audio as separate DASH streams that the official player combines client-side. Reproducing that in a reader view would require proxying the streams, which crosses into territory that's both technically complex and legally murky. The current behavior — show the thumbnail, link back to Reddit for playback — is the honest tradeoff.</p>
+
+                    <h2>The Bookmarklet Bridge</h2>
+
+                    <p>The bookmarklet covered in the <a href="/blog/safeshare-reddit-bookmarklet.html" style="color: var(--neural-primary);">previous post</a> works by extracting the current page URL and opening SafeShare's home page with it pre-filled in the input. It's a one-liner that lives in your browser's bookmarks bar:</p>
+
+                    <pre><code>javascript:(function(){
+  window.open(
+    'https://safe-share-gamma.vercel.app/?url=' +
+    encodeURIComponent(location.href),
+    '_blank'
+  );
+})()</code></pre>
+
+                    <p>The home page checks for a <code>url</code> query parameter on mount and, if present, auto-submits the form. The result is that on any Reddit post, one bookmark click triggers the full pipeline: client-side fetch → API route → KV storage → redirect to reader view.</p>
+
+                    <h2>TypeScript Across the Stack</h2>
+
+                    <p>TypeScript accounts for 78% of the codebase, with the rest being the HTML shell and a small amount of config JavaScript. The type coverage pays off most in <code>lib/reddit.ts</code>, where Reddit's JSON structure is chaotic enough that a typed parser catches mismatches at build time rather than at runtime in production.</p>
+
+                    <p>The <code>RedditPost</code> interface is the central contract between the parser, the API route, and the reader view:</p>
+
+                    <pre><code>interface RedditPost {
+  id: string;
+  title: string;
+  author: string;
+  subreddit: string;
+  score: number;
+  created: number;
+  type: 'text' | 'image' | 'gallery' | 'link' | 'video';
+  body?: string;          // text posts
+  imageUrl?: string;      // image posts
+  gallery?: string[];     // gallery posts (ordered image URLs)
+  linkUrl?: string;       // link posts
+  previewUrl?: string;    // thumbnail for video/link posts
+  comments: RedditComment[];
+  sourceUrl: string;
+}</code></pre>
+
+                    <p>Having this defined once in <code>lib/types.ts</code> means the Vercel KV generic <code>kv.get&lt;RedditPost&gt;()</code> call in the reader route gives full autocompletion and type checking through to the JSX render. No casting, no <code>any</code>.</p>
+
+                    <h2>Deploying on Vercel</h2>
+
+                    <p>The deployment is straightforward. Connect the GitHub repo to a Vercel project, provision a KV store in the Vercel dashboard, and the environment variables (<code>KV_REST_API_URL</code>, <code>KV_REST_API_TOKEN</code>) are automatically injected into the build. <code>vercel env pull .env.local</code> brings them into the local dev environment.</p>
+
+                    <p>There's no build script beyond the standard Next.js <code>next build</code>. Unlike the <a href="/blog/watch-list-internals.html" style="color: var(--neural-primary);">Watch List project</a> which uses a custom <code>build.js</code> to inject credentials into a single-file HTML app, SafeShare uses Vercel's native environment variable system — which is the right tool when you're already in the Vercel ecosystem.</p>
+
+                    <h2>What's Next</h2>
+
+                    <p>A few things I'd add given more time:</p>
+
+                    <p><strong>Deduplication by source URL.</strong> Currently, sharing the same Reddit post twice creates two separate slugs. A lookup index from source URL to slug would avoid redundant KV entries and let you surface "this post was already shared" to the user.</p>
+
+                    <p><strong>Better video handling.</strong> The DASH stream limitation is the most visible gap. A server-side approach that fetches and remuxes the video stream — either on demand or at snapshot time — would make video posts first-class. The complexity is real, but so is the use case.</p>
+
+                    <p><strong>Comment threading.</strong> The current reader view flattens top-level comments. Reddit's comment tree is deeply nested; rendering it fully (collapsed by default past a certain depth) would make the reader view genuinely useful for discussion-heavy posts, not just link and text posts.</p>
+
+                    <p>The repo is at <a href="https://github.com/josefresco/safe-share" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/safe-share</a>. The client-side fetch trick — using the browser's network context to reach APIs that block server-side requests — is a pattern worth keeping in your toolkit. It shows up more than you'd expect once you start running into API blocks that OAuth overhead isn't worth solving.
+                    </p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/safeshare-reddit-bookmarklet.html" class="btn-secondary">← SafeShare: The Bookmarklet</a>
+                    <a href="https://github.com/josefresco/safe-share" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Custom Next.js or Full-Stack Web App?</h2>
+                <p class="cta-description">
+                    From TypeScript APIs to React frontends and serverless deployments, I build pragmatic web applications
+                    that solve real problems without unnecessary complexity. Let's talk about what you need.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Development Project&body=Hi Jose,%0D%0A%0D%0AI read your SafeShare internals post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

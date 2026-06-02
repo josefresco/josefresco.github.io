@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2235;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#141722;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="arrow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle radial glows -->
+  <circle cx="200" cy="315" r="300" fill="rgba(124,58,237,0.07)"/>
+  <circle cx="1000" cy="200" r="250" fill="rgba(0,212,255,0.07)"/>
+
+  <!-- Dot grid -->
+  <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.04)"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="600" y="72" font-family="Inter, -apple-system, sans-serif" font-size="32" font-weight="700" fill="white" text-anchor="middle">SafeShare Internals</text>
+  <text x="600" y="108" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="400" fill="#94a3b8" text-anchor="middle">Client-Side Reddit Fetching, Redis Snapshots &amp; Next.js App Router</text>
+
+  <!-- Cyan underline -->
+  <rect x="480" y="118" width="240" height="2" rx="1" fill="url(#cyan-grad)"/>
+
+  <!-- ── Box 1: Browser ── -->
+  <rect x="60" y="180" width="240" height="160" rx="12" fill="url(#box-grad)" stroke="rgba(0,212,255,0.35)" stroke-width="1.5"/>
+  <rect x="60" y="180" width="240" height="4" rx="2" fill="url(#cyan-grad)"/>
+  <text x="180" y="215" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#00d4ff" text-anchor="middle" filter="url(#glow)">BROWSER</text>
+  <text x="180" y="240" font-family="Inter, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">User pastes Reddit URL</text>
+  <rect x="80" y="254" width="200" height="28" rx="6" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.25)" stroke-width="1"/>
+  <text x="180" y="273" font-family="monospace, Courier New" font-size="11" fill="#00d4ff" text-anchor="middle">fetch(reddit.com/.json)</text>
+  <text x="180" y="314" font-family="Inter, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">No server involved — yet</text>
+
+  <!-- Arrow 1: Browser → Next.js API -->
+  <line x1="302" y1="260" x2="390" y2="260" stroke="url(#arrow-grad)" stroke-width="2"/>
+  <polygon points="390,255 402,260 390,265" fill="#00d4ff" opacity="0.8"/>
+  <text x="346" y="250" font-family="Inter, sans-serif" font-size="10" fill="#00d4ff" text-anchor="middle">POST snapshot</text>
+
+  <!-- ── Box 2: Next.js API Route ── -->
+  <rect x="404" y="180" width="240" height="160" rx="12" fill="url(#box-grad)" stroke="rgba(124,58,237,0.45)" stroke-width="1.5"/>
+  <rect x="404" y="180" width="240" height="4" rx="2" fill="url(#cyan-grad)"/>
+  <text x="524" y="215" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#a78bfa" text-anchor="middle" filter="url(#glow)">NEXT.JS API ROUTE</text>
+  <text x="524" y="238" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">app/api/snapshot/route.ts</text>
+  <rect x="424" y="250" width="200" height="28" rx="6" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+  <text x="524" y="269" font-family="monospace, Courier New" font-size="11" fill="#a78bfa" text-anchor="middle">kv.set(slug, postData, 90d)</text>
+  <text x="524" y="314" font-family="Inter, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Returns shareable slug URL</text>
+
+  <!-- Arrow 2: Next.js API → Redis -->
+  <line x1="646" y1="260" x2="734" y2="260" stroke="rgba(124,58,237,0.6)" stroke-width="2"/>
+  <polygon points="734,255 746,260 734,265" fill="#7c3aed" opacity="0.8"/>
+  <text x="690" y="250" font-family="Inter, sans-serif" font-size="10" fill="#a78bfa" text-anchor="middle">persist</text>
+
+  <!-- ── Box 3: Redis ── -->
+  <rect x="748" y="180" width="200" height="160" rx="12" fill="url(#box-grad)" stroke="rgba(245,158,11,0.4)" stroke-width="1.5"/>
+  <rect x="748" y="180" width="200" height="4" rx="2" fill="url(#cyan-grad)"/>
+  <text x="848" y="215" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#f59e0b" text-anchor="middle" filter="url(#glow)">VERCEL KV</text>
+  <text x="848" y="238" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">(Redis)</text>
+  <rect x="768" y="250" width="160" height="28" rx="6" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+  <text x="848" y="269" font-family="monospace, Courier New" font-size="11" fill="#f59e0b" text-anchor="middle">key → snapshot JSON</text>
+  <text x="848" y="314" font-family="Inter, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">90-day TTL</text>
+
+  <!-- Bottom arrow: share URL back to browser -->
+  <path d="M 848 342 Q 848 390 180 390 Q 180 380 180 370" stroke="rgba(0,212,255,0.3)" stroke-width="1.5" fill="none" stroke-dasharray="5,4"/>
+  <polygon points="175,372 180,360 185,372" fill="#00d4ff" opacity="0.5"/>
+  <text x="514" y="408" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">safeshare.vercel.app/s/&lt;slug&gt; — clean reader view, no Reddit login required</text>
+
+  <!-- Tech badges bottom -->
+  <rect x="140" y="480" width="130" height="28" rx="14" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="205" y="499" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#00d4ff" text-anchor="middle">Next.js 16</text>
+
+  <rect x="290" y="480" width="130" height="28" rx="14" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+  <text x="355" y="499" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#a78bfa" text-anchor="middle">TypeScript</text>
+
+  <rect x="440" y="480" width="130" height="28" rx="14" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  <text x="505" y="499" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#f59e0b" text-anchor="middle">Vercel KV</text>
+
+  <rect x="590" y="480" width="130" height="28" rx="14" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="655" y="499" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#00d4ff" text-anchor="middle">Tailwind CSS</text>
+
+  <rect x="740" y="480" width="130" height="28" rx="14" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+  <text x="805" y="499" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#a78bfa" text-anchor="middle">App Router</text>
+
+  <!-- Footer label -->
+  <text x="600" y="580" font-family="Inter, sans-serif" font-size="13" fill="#475569" text-anchor="middle">josefresco.com · github.com/josefresco/safe-share</text>
+</svg>
