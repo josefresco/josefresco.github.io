@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View</title>
+      <link>https://josefresco.com/blog/safe-share-internals.html</link>
+      <description>How SafeShare bypasses Reddit's server-side API blocks by fetching post data in the browser, persisting snapshots to Vercel KV Redis with a 90-day TTL, and serving a clean reader view — no Reddit credentials, no login walls, no app install prompts. Covers the inverted client-fetch architecture, the Next.js App Router structure, the Vercel KV storage model, TypeScript types across the stack, supported content types, the bookmarklet bridge, and what's missing.</description>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/safe-share-internals.html</guid>
+    </item>
 
     <item>
       <title>Family Dashboard v3.32: Service Workers, Offline Caching, and Surviving Pi Reboots</title>
@@ -86,14 +94,6 @@
       <description>A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.</description>
       <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</guid>
-    </item>
-
-    <item>
-      <title>Running Family Dashboard: From Clone to Kitchen Wall in One Afternoon</title>
-      <link>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</link>
-      <description>A complete setup guide for Family Dashboard — cloning the repo, configuring OpenWeather and CalDAV credentials, deploying the Vercel serverless proxy, and getting it running as a full-screen kiosk on an iPad.</description>
-      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/family-dash-vercel-caldav-setup.html</guid>
     </item>
 
 
