@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLEwebdev.org: A React App That Skips the Build Step Entirely - Jose Fresco</title>
+    <meta name="description" content="How COLEwebdev.org uses React 18 via CDN and Babel Standalone to run a full single-page app in the browser with no npm, no webpack, and no build pipeline — just a file server and five JSX files loaded in sequence.">
+    <link rel="canonical" href="https://josefresco.com/blog/colewebdev-react-no-build-step.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="COLEwebdev.org: A React App That Skips the Build Step Entirely - Jose Fresco">
+    <meta property="og:description" content="How COLEwebdev.org uses React 18 via CDN and Babel Standalone to run a full single-page app in the browser with no npm, no webpack, and no build pipeline — just a file server and five JSX files loaded in sequence.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/colewebdev-react-no-build-step.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/colewebdev-react-no-build-step.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-06-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-09T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="COLEwebdev.org: A React App That Skips the Build Step Entirely - Jose Fresco">
+    <meta name="twitter:description" content="How COLEwebdev.org uses React 18 via CDN and Babel Standalone to run a full single-page app in the browser with no npm, no webpack, and no build pipeline — just a file server and five JSX files loaded in sequence.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/colewebdev-react-no-build-step.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/colewebdev-react-no-build-step.html"
+      },
+      "headline": "COLEwebdev.org: A React App That Skips the Build Step Entirely",
+      "description": "How COLEwebdev.org uses React 18 via CDN and Babel Standalone to run a full single-page app in the browser with no npm, no webpack, and no build pipeline — just a file server and five JSX files loaded in sequence.",
+      "image": "https://josefresco.com/blog/images/colewebdev-react-no-build-step.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-06-09T00:00:00+00:00",
+      "dateModified": "2026-06-09T00:00:00+00:00",
+      "keywords": "React, Babel Standalone, CDN, No Build Tools, SPA, JavaScript, Web Development, COLEwebdev, Cape Cod, JSX, No npm, No webpack",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "COLEwebdev.org: React Without the Build Step", "item": "https://josefresco.com/blog/colewebdev-react-no-build-step.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">COLEwebdev.org: A React App That Skips the Build Step Entirely</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">June 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/colewebdev-react-no-build-step.svg" type="image/svg+xml">
+                        <img src="images/colewebdev-react-no-build-step.svg" alt="COLEwebdev.org architecture: React 18 and Babel Standalone loaded from CDN, five JSX files transpiled in-browser, no build step required" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/COLEwebdev.org" style="color: var(--neural-primary);" target="_blank" rel="noopener">COLEwebdev.org</a> is a React 18 single-page app for a Cape Cod web design studio. It loads React and Babel Standalone from CDN, splits the UI across five sequentially-loaded JSX files, and requires zero build tooling to develop or deploy. No <code>package.json</code>. No <code>node_modules</code>. No webpack config. Development is <code>python -m http.server 8080</code>. The tradeoff — Babel Standalone's ~900KB first-load — is the right call for a marketing site that values zero maintenance overhead over shaved milliseconds.
+                    </div>
+
+                    <h2>Why Skip the Build Step?</h2>
+
+                    <p>Most modern React setups start with a command like <code>npm create vite@latest</code> or Create React App. What follows is a <code>node_modules</code> directory, a lockfile, a build config, and a pipeline that turns source files into a deployable bundle. For a complex app with dozens of contributors and daily deployments, that infrastructure earns its weight.</p>
+
+                    <p>For a marketing site touched twice a year by different people, the calculus is different. Every <code>npm audit</code> warning needs a response. Dependency version drift silently breaks things. A developer cloning the repo three months later runs <code>npm install</code> and hits a peer dependency conflict before writing a single line of code. The toolchain becomes the project's second maintenance surface.</p>
+
+                    <p>COLEwebdev.org sidesteps all of that. React 18, ReactDOM, and Babel Standalone load from CDN. The component files are plain JSX, served as-is over HTTP. There is no build step because there is nothing to build.</p>
+
+                    <h2>How In-Browser JSX Transpilation Works</h2>
+
+                    <p>JSX is not valid JavaScript. A browser given a raw <code>.jsx</code> file will throw a syntax error at the first angle bracket it doesn't recognize. The usual solution is to run a compiler — Babel or esbuild — before the browser ever sees the code. COLEwebdev.org flips this: the compiler runs inside the browser, just before execution.</p>
+
+                    <p>Babel Standalone is a self-contained build of Babel that runs in any JavaScript environment, including browsers. When you load it via <code>&lt;script&gt;</code> and mark your component files with <code>type="text/babel"</code>, it intercepts those scripts before the JavaScript engine parses them, converts JSX into <code>React.createElement()</code> calls, and hands the result to the engine.</p>
+
+                    <pre><code>&lt;!-- React 18 + Babel loaded from CDN --&gt;
+&lt;script src="https://unpkg.com/react@18.3.1/umd/react.development.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Component files — transpiled by Babel in the browser --&gt;
+&lt;script src="tweaks-panel.jsx" type="text/babel"&gt;&lt;/script&gt;
+&lt;script src="parts-hero.jsx" type="text/babel"&gt;&lt;/script&gt;
+&lt;script src="parts-services.jsx" type="text/babel"&gt;&lt;/script&gt;
+&lt;script src="parts-rest.jsx" type="text/babel"&gt;&lt;/script&gt;
+&lt;script src="app.jsx" type="text/babel"&gt;&lt;/script&gt;</code></pre>
+
+                    <p>The <code>type="text/babel"</code> attribute is the only magic. Without it, the browser would parse the file as regular JavaScript and immediately fail on any JSX syntax. With it, Babel intercepts, transforms, and executes the converted code — all before the React render cycle even starts.</p>
+
+                    <h2>The Five-File Loading Architecture</h2>
+
+                    <p>Without a bundler to resolve imports, COLEwebdev.org uses a different module boundary strategy: five files loaded in a fixed sequence, each contributing components to a shared global scope that later files can reference.</p>
+
+                    <p>The order is not arbitrary:</p>
+
+                    <ol>
+                        <li><strong>tweaks-panel.jsx</strong> — defines the <code>useTweaks</code> hook first; every subsequent file that calls it depends on this loading first</li>
+                        <li><strong>parts-hero.jsx</strong> — Header and Hero components; Hero uses <code>useTweaks</code> to select its display variant</li>
+                        <li><strong>parts-services.jsx</strong> — Services grid, cost estimator, and AI showcase section</li>
+                        <li><strong>parts-rest.jsx</strong> — Portfolio, Testimonials, CTA, News section, and Footer</li>
+                        <li><strong>app.jsx</strong> — Root App component that assembles everything and calls <code>ReactDOM.createRoot()</code></li>
+                    </ol>
+
+                    <p>This mirrors the pattern classic JavaScript libraries used before ES modules: jQuery had to load before any plugin that referenced <code>$</code>. It's not the most elegant dependency model, but it's completely transparent — no module graph to trace, no bundler to debug when something loads in the wrong order.</p>
+
+                    <h2>The Component Tree</h2>
+
+                    <p>The root App component, defined in <code>app.jsx</code>, assembles the full page layout:</p>
+
+                    <pre><code>function App() {
+  return (
+    &lt;&gt;
+      &lt;Header /&gt;
+      &lt;main&gt;
+        &lt;Hero /&gt;
+        &lt;Trust /&gt;
+        &lt;Services /&gt;
+        &lt;Estimator /&gt;
+        &lt;AIShowcase /&gt;
+        &lt;Process /&gt;
+        &lt;Portfolio /&gt;
+        &lt;CTA /&gt;
+        &lt;Testimonial /&gt;
+        &lt;News /&gt;
+      &lt;/main&gt;
+      &lt;NewsletterBanner /&gt;
+      &lt;Footer /&gt;
+    &lt;/&gt;
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(&lt;App /&gt;);</code></pre>
+
+                    <p>Using React 18's <code>createRoot()</code> is correct even in a CDN-loaded setup — it enables concurrent rendering features and avoids the deprecation warning that <code>ReactDOM.render()</code> now logs. The CDN build includes the same runtime as any npm-installed version.</p>
+
+                    <h2>The Tweaks System: Design-Time UI Customization</h2>
+
+                    <p>The <code>tweaks-panel.jsx</code> file introduces a development-time design tool built directly into the app. The <code>useTweaks</code> hook manages a set of configurable settings — things like color palette, font size, layout density, and dark mode — and a floating <code>TweaksPanel</code> component exposes live controls for changing them.</p>
+
+                    <p>Changes made through the panel are reflected immediately via CSS variable updates on the <code>&lt;html&gt;</code> element. Persistence works through a message protocol: when a setting changes, the hook posts a message to the parent window, which rewrites the defaults in a comment-delimited EDITMODE block in the source file. The next time the page loads, the new defaults are read directly from source.</p>
+
+                    <p>In production — when no editor host is listening for those messages — the panel isn't shown, and the app simply uses whatever defaults were last baked into the source. There's no localStorage dependency, no feature flags, no build-time constant switching. The design-time state is just part of the file.</p>
+
+                    <p>The practical effect is a live design feedback loop that requires no hot module replacement, no Storybook, and no separate design toolchain. Change a setting, see it update immediately, and the source file records the decision.</p>
+
+                    <h2>The CSS Design System: Variables and Density Modes</h2>
+
+                    <p><code>styles.css</code> (~42KB) is the entire styling layer. It uses CSS custom properties for the brand palette:</p>
+
+                    <pre><code>:root {
+  --brand-blue:  #2563EB;
+  --brand-green: #059669;
+  --navy:        #0f172a;
+  --paper:       #EEFAF8;   /* green-blue tint, recently updated to v=10 */
+  --ink:         #1e293b;
+}</code></pre>
+
+                    <p>Density modes — compact, regular, comfy — are driven by a <code>data-density</code> attribute on the <code>&lt;html&gt;</code> element. An <code>useEffect</code> in the App component writes the current density setting:</p>
+
+                    <pre><code>useEffect(() => {
+  document.documentElement.setAttribute('data-density', tweaks.density);
+}, [tweaks.density]);</code></pre>
+
+                    <p>The CSS responds to that attribute directly:</p>
+
+                    <pre><code>[data-density="compact"] .section { padding: 2rem 0; }
+[data-density="regular"] .section { padding: 3.5rem 0; }
+[data-density="comfy"]   .section { padding: 5rem 0; }</code></pre>
+
+                    <p>Switching density modes triggers a CSS attribute change, not a JavaScript re-render of the component tree. The layout shift is immediate and smooth — no React reconciliation, no layout thrash, no flash of unstyled content.</p>
+
+                    <h2>Schema.org LocalBusiness: SEO Built into the HTML</h2>
+
+                    <p>The <code>index.html</code> <code>&lt;head&gt;</code> contains a detailed Schema.org structured data block that gives Google everything it needs to generate a local business knowledge panel:</p>
+
+                    <pre><code>{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "name": "Cole Web Development",
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "description": "Barnstable, Bourne, Brewster, Chatham, Dennis,
+                     Eastham, Falmouth, Harwich, Mashpee, Orleans,
+                     Provincetown, Sandwich, Truro, Wellfleet, Yarmouth"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "72"
+  }
+}</code></pre>
+
+                    <p>All 15 Cape Cod towns are enumerated in the service area. A full service catalog is included. This markup lives in a <code>&lt;script type="application/ld+json"&gt;</code> block — no CMS plugin, no SEO middleware, no build-time injection. It's just data in the document.</p>
+
+                    <p>For a local services business, this is the difference between appearing in Google's local 3-pack and not appearing at all. The fact that the app has no build step doesn't prevent it from having first-class structured data — the two concerns are completely independent.</p>
+
+                    <h2>The Development Workflow</h2>
+
+                    <p>The README's development setup section is one sentence:</p>
+
+                    <pre><code>python -m http.server 8080</code></pre>
+
+                    <p>Open <code>http://localhost:8080</code> and start editing. There is no <code>npm install</code>, no <code>npm run dev</code>, no Vite server to configure. Any text editor works. Any developer — regardless of Node.js version, npm configuration, or familiarity with modern JavaScript tooling — can be productive in under two minutes.</p>
+
+                    <p>The project has 201 commits. That sustained development pace, reached without a build system, is the real proof of concept. Babel Standalone adds a few hundred milliseconds to first paint during development; the developer experience gains more than compensate.</p>
+
+                    <h2>The Tradeoffs</h2>
+
+                    <p>This architecture isn't free. Understanding what you're trading is the point:</p>
+
+                    <p><strong>What you gain:</strong></p>
+                    <ul>
+                        <li>Zero toolchain maintenance — no lockfile conflicts, no npm audit surface, no breaking changes from bundler upgrades</li>
+                        <li>Universal contributor access — any HTTP server, any text editor, any OS</li>
+                        <li>Deployable as static files — copy to any web host, S3 bucket, or GitHub Pages. No build step in CI/CD</li>
+                        <li>Transparent dependency graph — every CDN version is pinned in <code>index.html</code> and human-readable at a glance</li>
+                    </ul>
+
+                    <p><strong>What you give up:</strong></p>
+                    <ul>
+                        <li>Babel Standalone is ~900KB — it's the dominant payload on first load (cached on return visits)</li>
+                        <li>No tree shaking — the full React development build loads, not an optimized production bundle</li>
+                        <li>No TypeScript type checking at build time — Babel can strip type annotations but won't verify them</li>
+                        <li>No hot module replacement — changes require a manual browser refresh</li>
+                        <li>Shared global scope between files — naming collisions are possible if components aren't prefixed carefully</li>
+                    </ul>
+
+                    <p>For a marketing site with a modest traffic volume, the performance costs are invisible to users. The browser caches the CDN resources after the first visit; subsequent page loads skip the Babel download entirely. For a high-traffic application where first-load performance is a conversion metric, you'd want pre-compiled assets.</p>
+
+                    <h2>When This Approach Makes Sense</h2>
+
+                    <p>The no-build pattern is a good fit for a specific category of projects:</p>
+
+                    <ul>
+                        <li><strong>Marketing and brochure sites</strong> that change infrequently and are maintained by a small, varied team</li>
+                        <li><strong>Internal tools</strong> where deployment complexity is a real friction and users are on company networks with fast connections</li>
+                        <li><strong>Prototypes and demos</strong> where the value is in the idea, not the infrastructure</li>
+                        <li><strong>Projects with non-technical contributors</strong> who need to make content edits without running a build pipeline</li>
+                    </ul>
+
+                    <p>It's a poor fit for SPAs with complex client-side routing, apps with sensitive credentials that must stay out of the CDN request chain, or anything where first-load performance is a business metric. The honest version of software engineering is choosing the right tool for the actual requirements — and for COLEwebdev.org, this is demonstrably the right tool.</p>
+
+                    <h2>What's Next</h2>
+
+                    <p>If performance ever became a priority, the natural upgrade path is incremental. Switch from React's development UMD build to the production build (<code>react.production.min.js</code>) — that alone roughly halves the React bundle size and removes development-mode runtime checks. Then, if Babel Standalone's 900KB becomes a real problem, a single-command tool like esbuild can pre-compile the JSX files into a single optimized bundle without touching the component architecture.</p>
+
+                    <p>The components don't care whether they were transpiled by Babel in the browser or esbuild on a CI server. The migration path from no-build to build is a deployment concern, not an application concern. That's a useful property to have.</p>
+
+                    <p>For now, the site has 201 commits, is actively maintained, and requires no more than a Python one-liner to develop. The repo is at <a href="https://github.com/josefresco/COLEwebdev.org" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/COLEwebdev.org</a>. The approach is worth knowing — you'll recognize the situations where it's exactly the right call.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/safe-share-internals.html" class="btn-secondary">← SafeShare Internals</a>
+                    <a href="https://github.com/josefresco/COLEwebdev.org" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Marketing Site or React App Built to Last?</h2>
+                <p class="cta-description">
+                    Whether you want a zero-maintenance static site, a full React application, or something in between,
+                    the right architecture depends on your actual requirements — not the current default. Let's figure out
+                    the right fit for your project.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Web Development Project&body=Hi Jose,%0D%0A%0D%0AI read your COLEwebdev post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

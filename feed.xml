@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>COLEwebdev.org: A React App That Skips the Build Step Entirely</title>
+      <link>https://josefresco.com/blog/colewebdev-react-no-build-step.html</link>
+      <description>How COLEwebdev.org uses React 18 via CDN and Babel Standalone to run a full single-page app in the browser with no npm, no webpack, and no build pipeline. Covers in-browser JSX transpilation, the five-file sequential loading architecture, the Tweaks design-time customization system, CSS variable density modes, Schema.org LocalBusiness markup, the one-command development workflow, and a clear-eyed look at the tradeoffs of skipping the build step entirely.</description>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/colewebdev-react-no-build-step.html</guid>
+    </item>
 
     <item>
       <title>SafeShare Internals: Client-Side Reddit Fetching, Redis Snapshots, and a Next.js Reader View</title>
@@ -86,14 +94,6 @@
       <description>How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction — all running on a retired iPad as a 24/7 wall display.</description>
       <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/family-dash-v330.html</guid>
-    </item>
-
-    <item>
-      <title>Inside Save to My Blog: Chrome Manifest V3, Service Workers, and the WordPress REST API</title>
-      <link>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</link>
-      <description>A technical deep-dive into how Save to My Blog works under the hood — Chrome Manifest V3 service workers, popup-to-worker message passing, WordPress Application Password auth, and the lessons learned building a zero-friction content curation tool.</description>
-      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/save-to-my-blog-extension-internals.html</guid>
     </item>
 
 

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.03)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="40" height="40">
+      <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="220" cy="315" r="320" fill="rgba(124,58,237,0.06)"/>
+  <circle cx="980" cy="200" r="260" fill="rgba(0,212,255,0.06)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="600" y="66" font-family="Inter, sans-serif" font-size="34" font-weight="700" fill="white" text-anchor="middle" filter="url(#glow)">COLEwebdev.org</text>
+  <text x="600" y="98" font-family="Inter, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Building a React App Without npm, webpack, or a Build Step</text>
+  <rect x="490" y="108" width="220" height="2" rx="1" fill="url(#cyan-grad)"/>
+
+  <!-- CDN column label -->
+  <text x="155" y="152" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">CDN (unpkg)</text>
+
+  <!-- React + ReactDOM box -->
+  <rect x="60" y="162" width="190" height="52" rx="10" fill="url(#box-grad)" stroke="rgba(0,212,255,0.45)" stroke-width="1.5"/>
+  <text x="155" y="183" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" text-anchor="middle" font-weight="600">react@18.3.1</text>
+  <text x="155" y="200" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">react-dom@18.3.1</text>
+
+  <!-- Babel box -->
+  <rect x="60" y="224" width="190" height="48" rx="10" fill="url(#box-grad)" stroke="rgba(245,158,11,0.45)" stroke-width="1.5"/>
+  <text x="155" y="245" font-family="Inter, sans-serif" font-size="11" fill="#f59e0b" text-anchor="middle" font-weight="600">@babel/standalone</text>
+  <text x="155" y="261" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">7.29.0 · ~900KB</text>
+
+  <!-- Fonts box -->
+  <rect x="60" y="282" width="190" height="48" rx="10" fill="url(#box-grad)" stroke="rgba(124,58,237,0.4)" stroke-width="1.5"/>
+  <text x="155" y="303" font-family="Inter, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle" font-weight="600">Google Fonts</text>
+  <text x="155" y="319" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Geist · Instrument Serif</text>
+
+  <!-- Arrow CDN → Browser -->
+  <line x1="252" y1="244" x2="340" y2="244" stroke="rgba(0,212,255,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="337,239 348,244 337,249" fill="rgba(0,212,255,0.7)"/>
+
+  <!-- Browser box -->
+  <rect x="350" y="168" width="215" height="178" rx="14" fill="url(#box-grad)" stroke="rgba(0,212,255,0.55)" stroke-width="2"/>
+  <!-- Browser chrome bar -->
+  <rect x="350" y="168" width="215" height="32" rx="14" fill="rgba(0,212,255,0.1)"/>
+  <rect x="350" y="188" width="215" height="12" fill="rgba(0,212,255,0.1)"/>
+  <!-- Traffic-light dots -->
+  <circle cx="369" cy="184" r="4" fill="rgba(255,90,90,0.6)"/>
+  <circle cx="383" cy="184" r="4" fill="rgba(255,200,50,0.6)"/>
+  <circle cx="397" cy="184" r="4" fill="rgba(80,200,80,0.6)"/>
+
+  <text x="457" y="225" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#00d4ff" text-anchor="middle" filter="url(#glow)">BROWSER</text>
+  <text x="457" y="247" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">In-Browser JSX</text>
+  <text x="457" y="263" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Transpilation</text>
+
+  <!-- Babel transform pill -->
+  <rect x="383" y="276" width="148" height="26" rx="6" fill="rgba(245,158,11,0.12)" stroke="rgba(245,158,11,0.4)" stroke-width="1"/>
+  <text x="457" y="293" font-family="Inter, sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="600">JSX → createElement()</text>
+
+  <!-- Arrow Browser → Files -->
+  <line x1="567" y1="254" x2="648" y2="254" stroke="rgba(0,212,255,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="645,249 656,254 645,259" fill="rgba(0,212,255,0.7)"/>
+
+  <!-- JSX Files column label -->
+  <text x="808" y="152" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">JSX COMPONENTS (load order)</text>
+
+  <!-- File 1 -->
+  <rect x="660" y="162" width="295" height="42" rx="8" fill="url(#box-grad)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+  <text x="686" y="180" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8">①</text>
+  <text x="700" y="180" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" font-weight="600">tweaks-panel.jsx</text>
+  <text x="700" y="196" font-family="Inter, sans-serif" font-size="10" fill="#64748b">useTweaks hook · design-time controls</text>
+
+  <!-- File 2 -->
+  <rect x="660" y="210" width="295" height="42" rx="8" fill="url(#box-grad)" stroke="rgba(0,212,255,0.32)" stroke-width="1"/>
+  <text x="686" y="228" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8">②</text>
+  <text x="700" y="228" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" font-weight="600">parts-hero.jsx</text>
+  <text x="700" y="244" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Header · Hero (orb / marquee / grid)</text>
+
+  <!-- File 3 -->
+  <rect x="660" y="258" width="295" height="42" rx="8" fill="url(#box-grad)" stroke="rgba(0,212,255,0.24)" stroke-width="1"/>
+  <text x="686" y="276" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8">③</text>
+  <text x="700" y="276" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" font-weight="600">parts-services.jsx</text>
+  <text x="700" y="292" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Services · Estimator · AIShowcase</text>
+
+  <!-- File 4 -->
+  <rect x="660" y="306" width="295" height="42" rx="8" fill="url(#box-grad)" stroke="rgba(0,212,255,0.18)" stroke-width="1"/>
+  <text x="686" y="324" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8">④</text>
+  <text x="700" y="324" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" font-weight="600">parts-rest.jsx</text>
+  <text x="700" y="340" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Portfolio · Testimonials · News · Footer</text>
+
+  <!-- File 5 -->
+  <rect x="660" y="354" width="295" height="42" rx="8" fill="url(#box-grad)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+  <text x="686" y="372" font-family="Inter, sans-serif" font-size="10" fill="#a78bfa">⑤</text>
+  <text x="700" y="372" font-family="Inter, sans-serif" font-size="11" fill="#a78bfa" font-weight="600">app.jsx</text>
+  <text x="700" y="388" font-family="Inter, sans-serif" font-size="10" fill="#64748b">Root App · ReactDOM.createRoot()</text>
+
+  <!-- Bottom tech badges -->
+  <rect x="80" y="480" width="148" height="28" rx="14" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="154" y="499" font-family="Inter, sans-serif" font-size="12" fill="#00d4ff" text-anchor="middle" font-weight="600">React 18 via CDN</text>
+
+  <rect x="244" y="480" width="154" height="28" rx="14" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  <text x="321" y="499" font-family="Inter, sans-serif" font-size="12" fill="#f59e0b" text-anchor="middle" font-weight="600">Babel Standalone</text>
+
+  <rect x="414" y="480" width="118" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="473" y="499" font-family="Inter, sans-serif" font-size="12" fill="#10b981" text-anchor="middle" font-weight="600">Zero npm</text>
+
+  <rect x="548" y="480" width="128" height="28" rx="14" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+  <text x="612" y="499" font-family="Inter, sans-serif" font-size="12" fill="#a78bfa" text-anchor="middle" font-weight="600">No Bundler</text>
+
+  <rect x="692" y="480" width="130" height="28" rx="14" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="757" y="499" font-family="Inter, sans-serif" font-size="12" fill="#00d4ff" text-anchor="middle" font-weight="600">201 Commits</text>
+
+  <rect x="838" y="480" width="192" height="28" rx="14" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  <text x="934" y="499" font-family="Inter, sans-serif" font-size="12" fill="#f59e0b" text-anchor="middle" font-weight="600">Cape Cod · 15 Towns</text>
+
+  <!-- Footer text -->
+  <text x="600" y="582" font-family="Inter, sans-serif" font-size="11" fill="#475569" text-anchor="middle">josefresco.com · github.com/josefresco/COLEwebdev.org</text>
+</svg>
