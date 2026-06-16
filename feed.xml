@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall</title>
+      <link>https://josefresco.com/blog/family-dash-v333.html</link>
+      <description>How Family Dashboard v3.33 adds a live wind direction compass — a large SVG arrow with cardinal label and wind speed — to the wall display. Also covers the weather narrative engine that turns OpenWeatherMap data into readable prose, multi-account CalDAV integration with server-side credential protection, the 30-day birthday and holiday lookahead, time-based view switching, and what it means to build a dashboard specifically for an older iPad mounted on a kitchen wall.</description>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-v333.html</guid>
+    </item>
 
     <item>
       <title>COLEwebdev.org: A React App That Skips the Build Step Entirely</title>

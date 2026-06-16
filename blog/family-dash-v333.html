@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall - Jose Fresco</title>
+    <meta name="description" content="How Family Dashboard v3.33 adds a live wind direction compass to the wall display, how the weather narrative engine turns raw API data into readable prose, and the credential-protection architecture that keeps passwords off the client.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dash-v333.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall - Jose Fresco">
+    <meta property="og:description" content="How Family Dashboard v3.33 adds a live wind direction compass to the wall display, how the weather narrative engine turns raw API data into readable prose, and the credential-protection architecture that keeps passwords off the client.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/family-dash-v333.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dash-v333.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-06-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-16T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall - Jose Fresco">
+    <meta name="twitter:description" content="How Family Dashboard v3.33 adds a live wind direction compass to the wall display, how the weather narrative engine turns raw API data into readable prose, and the credential-protection architecture that keeps passwords off the client.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dash-v333.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/family-dash-v333.html"
+      },
+      "headline": "Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall",
+      "description": "How Family Dashboard v3.33 adds a live wind direction compass to the wall display, how the weather narrative engine turns raw API data into readable prose, and the credential-protection architecture that keeps passwords off the client.",
+      "image": "https://josefresco.com/blog/images/family-dash-v333.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-06-16T00:00:00+00:00",
+      "dateModified": "2026-06-16T00:00:00+00:00",
+      "keywords": "Family Dashboard, Raspberry Pi, Node.js, Express, CalDAV, Google Calendar, OpenWeatherMap, Wind Direction, Weather Narrative, Self-Hosted, Wall Display, JavaScript, PWA",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Family Dashboard v3.33", "item": "https://josefresco.com/blog/family-dash-v333.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">June 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dash-v333.svg" type="image/svg+xml">
+                        <img src="images/family-dash-v333.svg" alt="Family Dashboard v3.33 wall display showing weather panel with wind direction compass arrow, color-coded calendar events across three CalDAV accounts, and a weekend preview section" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/family-dash" style="color: var(--neural-primary);" target="_blank" rel="noopener">Family Dashboard</a> is a self-hosted wall display running on a Raspberry Pi that shows weather (with narrative commentary), Google Calendar events across up to three CalDAV accounts, upcoming birthdays and holidays, and a weekend preview. Version 3.33.0 adds a live wind direction compass — a large directional arrow with cardinal label and wind speed — sourced from OpenWeatherMap's <code>wind.deg</code> field. Credentials never leave the server; the client sends only an account ID and the Express backend resolves passwords from <code>.env</code>.
+                    </div>
+
+                    <h2>What Family Dashboard Actually Is</h2>
+
+                    <p>Most wall displays are glorified digital photo frames running a slideshow. Family Dashboard is a different thing: a real-time information panel running on a Raspberry Pi, always on, always visible, mounted where the kitchen calendar used to be. The goal is a single glance that tells every family member what matters right now — weather, what's on the calendar today, what's coming up this weekend, and who has a birthday in the next thirty days.</p>
+
+                    <p>The technical stack is deliberately boring: Node.js and Express on the server, vanilla JavaScript in the browser, OpenWeatherMap for weather, and CalDAV for calendar data. There's no React, no build step, no database. The server fetches data from external APIs, hands it to the client as JSON, and the client renders it directly. Simple enough to debug at 6 AM when the display goes blank.</p>
+
+                    <p>It's been running on our kitchen wall since v3.30 and has accumulated a version history of genuinely useful features — extreme weather alerts, service workers for offline resilience (covered in the <a href="/blog/family-dash-v332.html" style="color: var(--neural-primary);">v3.32 post</a>), birthday detection, a systemd unit for auto-start on boot. Version 3.33.0 adds the wind direction compass, which turned out to be a more interesting engineering problem than it sounds.</p>
+
+                    <h2>The v3.33.0 Feature: Wind Direction as a Compass</h2>
+
+                    <p>The previous weather panel showed temperature, conditions, humidity, and wind speed as a plain number. Wind at 12 mph tells you something. Wind at 12 mph from the northeast tells you considerably more — especially if you're deciding whether to open windows, take a bike ride, or put chairs away before rain arrives.</p>
+
+                    <p>OpenWeatherMap's API already returns this data. The <code>wind</code> object in the current weather response includes both <code>speed</code> and <code>deg</code> — the wind direction in meteorological degrees, where 0° and 360° are north, 90° is east, 180° is south, 270° is west.</p>
+
+                    <pre><code>{
+  "wind": {
+    "speed": 5.14,
+    "deg": 45,
+    "gust": 8.23
+  }
+}</code></pre>
+
+                    <p>The v3.33.0 update routes this field through the weather payload to the client and renders it as a large directional arrow with a cardinal label. The conversion from degrees to cardinal direction is a standard lookup with eight segments:</p>
+
+                    <pre><code>function degToCardinal(deg) {
+  const dirs = ['N','NE','E','SE','S','SW','W','NW'];
+  return dirs[Math.round(deg / 45) % 8];
+}</code></pre>
+
+                    <p>The arrow itself is an SVG element rotated by the degree value, so it points in the actual wind direction. The visual is large enough to read from across a room — which matters when your display audience is standing at the kitchen counter rather than sitting at a desk.</p>
+
+                    <h2>The Weather Narrative Engine</h2>
+
+                    <p>Wind direction is the latest addition to a feature that's been running since v3.30: a weather narrative engine that generates a short prose description of current conditions instead of (or alongside) raw numbers.</p>
+
+                    <p>The engine lives in <code>weather-narrative-engine.js</code> on the server. It takes the full current weather object from OpenWeatherMap and returns one or two sentences describing what the weather actually feels like — the kind of summary a radio announcer might give rather than a data dashboard readout.</p>
+
+                    <p>The logic works by matching conditions to a set of templates with variable interpolation. Temperature, wind speed, cloud cover, humidity, and precipitation probability each contribute to the output. A few representative cases:</p>
+
+                    <ul>
+                        <li>Low wind + comfortable temperature + clear sky → "A beautiful day with light winds and plenty of sunshine."</li>
+                        <li>High humidity + moderate temperature → "It'll feel muggier than the thermometer suggests — humidity is running high."</li>
+                        <li>Wind speed above a threshold → the engine appends the cardinal direction: "Steady winds from the northeast at 14 mph."</li>
+                        <li>Precipitation probability above 60% → "Rain looks likely later — probably worth grabbing an umbrella."</li>
+                    </ul>
+
+                    <p>There's no machine learning here. It's a deterministic template system, which is exactly the right approach for a wall display. A language model could generate more varied output, but it would also introduce latency, API costs, and occasional hallucinations about the weather. A template engine is fast, free, and always factually grounded in the data it was given.</p>
+
+                    <p>The v3.33.0 update extends the narrative to include wind direction when wind speed crosses a display threshold, so the narrative and the compass arrow tell the same story from different angles.</p>
+
+                    <h2>Multi-Account CalDAV: Three Calendars, One Display</h2>
+
+                    <p>Most families don't run a single shared calendar. Ours has three: a shared family calendar in Google, a personal calendar for each adult, and a kids' activities calendar. Family Dashboard supports up to three simultaneous CalDAV connections, each with its own color code, so events from different accounts are visually distinct on the display.</p>
+
+                    <p>The CalDAV integration is handled by <code>caldav-client.js</code>, a server-side module that connects to CalDAV endpoints, parses event data from the iCalendar format, and normalizes it into a consistent structure the client can render. Google Calendar exposes CalDAV via a per-account URL; any compatible provider (iCloud, Fastmail, a self-hosted Nextcloud instance) works with the same client.</p>
+
+                    <p>The configuration is purely environment-variable based. Three accounts map to three blocks in <code>.env</code>:</p>
+
+                    <pre><code># Account 1 — shared family calendar
+CAL_URL_1=https://www.google.com/calendar/dav/family@gmail.com/events
+CAL_USERNAME_1=family@gmail.com
+CAL_PASSWORD_1=app-password-here
+
+# Account 2 — personal
+CAL_URL_2=https://www.google.com/calendar/dav/jose@gmail.com/events
+CAL_USERNAME_2=jose@gmail.com
+CAL_PASSWORD_2=app-password-here
+
+# Account 3 — kids
+CAL_URL_3=https://www.google.com/calendar/dav/kids@gmail.com/events
+CAL_USERNAME_3=kids@gmail.com
+CAL_PASSWORD_3=app-password-here</code></pre>
+
+                    <p>The server loads these at startup and exposes a <code>/api/calendar</code> route that accepts an account index. The browser never handles usernames or passwords — it sends <code>{ accountId: 1 }</code> and receives back a list of normalized events. This pattern is worth naming: credential indirection. The credentials live on the server, the client references them by index, and no sensitive values ever appear in browser DevTools, network logs, or client-side code.</p>
+
+                    <h2>The 30-Day Lookahead: Birthdays and Holidays</h2>
+
+                    <p>One of the dashboard's most-used features is the birthday and holiday lookahead: a rolling 30-day window that surfaces upcoming birthdays from the calendar and a built-in holiday list. If someone's birthday or a holiday falls in the next 30 days, it appears in the main view with a countdown.</p>
+
+                    <p>Birthdays are detected from calendar events whose titles match a pattern (configurable, defaults to entries containing "birthday"). The holiday list is a static data structure in the server-side code, keyed by month and day, so no external API call is needed for known fixed-date holidays.</p>
+
+                    <p>This feature was added in v3.30 and has been one of the most practically useful additions — the display doubles as a family reminder system that nobody has to actively check. The dashboard does the checking; you just have to walk past it.</p>
+
+                    <h2>Time-Based View Switching</h2>
+
+                    <p>The dashboard automatically changes what it shows based on the time of day. Before 5 PM Eastern, it displays today's events. After 5 PM, it switches to showing tomorrow's events, because by evening the relevant question has changed from "what's happening today" to "what do I need to know for tomorrow morning."</p>
+
+                    <p>This is handled entirely in server-side logic. The <code>/api/calendar</code> route checks the current time and returns the appropriate day's events without requiring any client-side configuration. The client just renders whatever the server returns.</p>
+
+                    <p>It's a small feature that solves a real annoyance: a wall display still showing today's 9 AM meeting at 9 PM is useless at best, mildly anxiety-inducing at worst. The auto-switch makes the display useful throughout the whole day without any interaction.</p>
+
+                    <h2>Running on a Raspberry Pi</h2>
+
+                    <p>The dashboard is designed to run on a Raspberry Pi — specifically the kind of always-on Pi that sits behind a wall-mounted display and does nothing else. The server process runs under either PM2 or a systemd unit (covered in detail in the <a href="/blog/family-dash-v332.html" style="color: var(--neural-primary);">v3.32 post</a>), nginx handles HTTPS termination and reverse-proxies to the Express server on port 3000, and the iPad browser that's mounted on the wall hits the nginx endpoint.</p>
+
+                    <p>The "optimized for older iPads" note in the README description is deliberate. We use a first-generation iPad Air as the wall display — it's long past its useful life as a handheld device but perfectly capable of running a browser in kiosk mode, and mounting it on the wall gave it a second useful life. The dashboard's CSS is specifically tested on that device's viewport dimensions and rendering engine.</p>
+
+                    <p>Setup from a fresh clone looks like this:</p>
+
+                    <pre><code># Install dependencies
+npm install
+
+# Copy the environment template
+cp .env.example .env
+
+# Fill in your OpenWeatherMap key, CalDAV credentials, city/coords
+nano .env
+
+# Start in development
+node server.js
+
+# Start with PM2 (production)
+pm2 start server.js --name family-dash
+pm2 save
+pm2 startup</code></pre>
+
+                    <p>The <code>.env.example</code> file documents every variable with comments. There's no browser-based setup wizard — the configuration surface is a single file, which makes it easy to version, back up, and restore.</p>
+
+                    <h2>The PWA Layer</h2>
+
+                    <p>Family Dashboard is a Progressive Web App. The service worker (added in v3.32) pre-caches the app shell and applies a stale-while-revalidate strategy to the weather and calendar API routes. This means the display keeps showing the last known data through Pi reboots, network blips, and brief server restarts — exactly the failure modes that come up on a wall-mounted device that nobody is actively watching.</p>
+
+                    <p>When data is served from cache rather than the live server, the display shows a staleness indicator — a subtle timestamp showing when the data was last updated — so family members know whether the weather reading is current or a few hours old. It's honest design: the dashboard tells you what it knows and when it learned it.</p>
+
+                    <h2>What v3.33.0 Ships</h2>
+
+                    <p>To summarize the v3.33.0 changes specifically:</p>
+
+                    <ul>
+                        <li><strong>Wind direction compass:</strong> A large SVG arrow with cardinal label (N, NE, E, etc.) displayed alongside the current temperature and wind speed. Sourced from <code>wind.deg</code> in the OpenWeatherMap response.</li>
+                        <li><strong>Narrative update:</strong> The weather narrative engine now incorporates wind direction into its prose output when wind speed exceeds the display threshold.</li>
+                        <li><strong>Weather payload extension:</strong> The <code>/api/weather</code> route now includes <code>windDeg</code> and <code>windCardinal</code> in its response alongside the existing fields.</li>
+                    </ul>
+
+                    <p>It's a small release by line count but a meaningful one for daily use. Wind direction is exactly the kind of contextual detail that makes a weather display useful rather than decorative.</p>
+
+                    <h2>Get It Running</h2>
+
+                    <p>The full project is at <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/family-dash</a>. The README covers setup from scratch — OpenWeatherMap key, Google App Passwords for CalDAV, the <code>.env</code> configuration, and deployment with PM2 or systemd. You need Node.js v18+ and about an afternoon to go from clone to wall.</p>
+
+                    <p>If you're running a previous version, the v3.33.0 upgrade is a <code>git pull</code> and an <code>npm install</code> — no database migrations, no configuration changes required. The new <code>windDeg</code> and <code>windCardinal</code> fields are added to the weather payload automatically; the client-side rendering picks them up on the next weather refresh.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/colewebdev-react-no-build-step.html" class="btn-secondary">← COLEwebdev React Post</a>
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Want a Custom Dashboard or Home Automation Tool?</h2>
+                <p class="cta-description">
+                    Family Dashboard started as a weekend project and turned into a tool our household uses every day.
+                    If you have a similar idea — a wall display, a home data aggregator, a Pi-powered automation —
+                    let's talk about building it.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Dashboard Project&body=Hi Jose,%0D%0A%0D%0AI read your Family Dashboard v3.33 post and have an idea for a project.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
