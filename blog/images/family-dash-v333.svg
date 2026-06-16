@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2235;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#141624;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#0099bb"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bg)"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="150" cy="200" rx="200" ry="150" fill="rgba(124,58,237,0.07)"/>
+  <ellipse cx="650" cy="180" rx="180" ry="140" fill="rgba(0,212,255,0.07)"/>
+
+  <!-- Dashboard card -->
+  <rect x="40" y="60" width="720" height="300" rx="16" fill="url(#cardGrad)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+
+  <!-- Top accent bar -->
+  <rect x="40" y="60" width="720" height="3" rx="2" fill="url(#cyanGrad)"/>
+
+  <!-- Dashboard title -->
+  <text x="72" y="100" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="rgba(148,163,184,0.7)" letter-spacing="2">FAMILY DASHBOARD v3.33</text>
+
+  <!-- Weather section (left panel) -->
+  <rect x="60" y="120" width="220" height="210" rx="10" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.15)" stroke-width="1"/>
+
+  <!-- Temperature -->
+  <text x="90" y="165" font-family="'Inter', sans-serif" font-size="48" font-weight="700" fill="#ffffff" filter="url(#glow)">72°</text>
+  <text x="155" y="148" font-family="'Inter', sans-serif" font-size="12" fill="#00d4ff">F</text>
+
+  <!-- Condition -->
+  <text x="90" y="185" font-family="'Inter', sans-serif" font-size="12" fill="rgba(148,163,184,0.9)">Partly Cloudy</text>
+
+  <!-- Wind direction arrow (the v3.33 feature!) -->
+  <g transform="translate(90, 230)">
+    <!-- Arrow circle background -->
+    <circle cx="28" cy="28" r="26" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+    <!-- Compass cardinal labels -->
+    <text x="25" y="10" font-family="'Inter', sans-serif" font-size="8" fill="rgba(0,212,255,0.7)" text-anchor="middle">N</text>
+    <text x="25" y="50" font-family="'Inter', sans-serif" font-size="8" fill="rgba(148,163,184,0.5)" text-anchor="middle">S</text>
+    <text x="6" y="32" font-family="'Inter', sans-serif" font-size="8" fill="rgba(148,163,184,0.5)" text-anchor="middle">W</text>
+    <text x="44" y="32" font-family="'Inter', sans-serif" font-size="8" fill="rgba(148,163,184,0.5)" text-anchor="middle">E</text>
+    <!-- Arrow pointing NE (wind from SW) -->
+    <line x1="28" y1="28" x2="38" y2="14" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="38,14 32,20 42,20" fill="#00d4ff" filter="url(#glow)"/>
+  </g>
+
+  <!-- Wind label -->
+  <text x="128" y="242" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#00d4ff">NE</text>
+  <text x="128" y="257" font-family="'Inter', sans-serif" font-size="10" fill="rgba(148,163,184,0.7)">12 mph</text>
+  <text x="128" y="272" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.5)">wind direction</text>
+
+  <!-- NEW badge for wind feature -->
+  <rect x="155" y="230" width="34" height="16" rx="8" fill="rgba(0,212,255,0.2)" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+  <text x="172" y="242" font-family="'Inter', sans-serif" font-size="9" font-weight="700" fill="#00d4ff" text-anchor="middle">NEW</text>
+
+  <!-- Weather narrative -->
+  <text x="90" y="313" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.6)" font-style="italic">"A comfortable afternoon with</text>
+  <text x="90" y="326" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.6)" font-style="italic">light winds from the northeast."</text>
+
+  <!-- Calendar section (middle panel) -->
+  <rect x="302" y="120" width="230" height="210" rx="10" fill="rgba(124,58,237,0.05)" stroke="rgba(124,58,237,0.2)" stroke-width="1"/>
+
+  <text x="320" y="147" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="rgba(148,163,184,0.7)" letter-spacing="1">CALENDAR</text>
+
+  <!-- Calendar events -->
+  <rect x="314" y="158" width="4" height="38" rx="2" fill="#00d4ff"/>
+  <text x="324" y="172" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#ffffff">Soccer Practice</text>
+  <text x="324" y="187" font-family="'Inter', sans-serif" font-size="10" fill="rgba(148,163,184,0.6)">4:00 PM · Today</text>
+
+  <rect x="314" y="204" width="4" height="38" rx="2" fill="#7c3aed"/>
+  <text x="324" y="218" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#ffffff">Dad WFH</text>
+  <text x="324" y="233" font-family="'Inter', sans-serif" font-size="10" fill="rgba(148,163,184,0.6)">All day · Tomorrow</text>
+
+  <rect x="314" y="250" width="4" height="38" rx="2" fill="#f59e0b"/>
+  <text x="324" y="264" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#ffffff">🎂 Emma's Birthday</text>
+  <text x="324" y="279" font-family="'Inter', sans-serif" font-size="10" fill="rgba(148,163,184,0.6)">In 4 days</text>
+
+  <!-- Multi-account label -->
+  <text x="320" y="314" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.5)">3 accounts · CalDAV · color-coded</text>
+
+  <!-- Weekend preview section (right panel) -->
+  <rect x="554" y="120" width="186" height="210" rx="10" fill="rgba(245,158,11,0.05)" stroke="rgba(245,158,11,0.15)" stroke-width="1"/>
+
+  <text x="572" y="147" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="rgba(148,163,184,0.7)" letter-spacing="1">WEEKEND</text>
+
+  <!-- Weekend events -->
+  <text x="572" y="170" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#f59e0b">Saturday</text>
+  <text x="572" y="187" font-family="'Inter', sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">• Farmers Market 9AM</text>
+  <text x="572" y="202" font-family="'Inter', sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">• Movie Night 7PM</text>
+
+  <text x="572" y="225" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#f59e0b">Sunday</text>
+  <text x="572" y="242" font-family="'Inter', sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">• Brunch 11AM</text>
+  <text x="572" y="257" font-family="'Inter', sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">• Park cleanup 2PM</text>
+
+  <!-- Pi / tech stack labels -->
+  <text x="572" y="295" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.5)">Raspberry Pi · Node.js</text>
+  <text x="572" y="310" font-family="'Inter', sans-serif" font-size="9" fill="rgba(148,163,184,0.5)">Express · OpenWeatherMap</text>
+
+  <!-- Bottom bar with version/status -->
+  <rect x="40" y="348" width="720" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+  <text x="72" y="368" font-family="'Inter', sans-serif" font-size="11" fill="rgba(148,163,184,0.4)">github.com/josefresco/family-dash</text>
+  <text x="600" y="368" font-family="'Inter', sans-serif" font-size="11" fill="rgba(0,212,255,0.5)">v3.33.0 · June 2026</text>
+
+  <!-- Decorative dots -->
+  <circle cx="70" cy="95" r="3" fill="rgba(255,90,90,0.7)"/>
+  <circle cx="82" cy="95" r="3" fill="rgba(255,200,50,0.7)"/>
+  <circle cx="94" cy="95" r="3" fill="rgba(50,200,100,0.7)"/>
+</svg>
