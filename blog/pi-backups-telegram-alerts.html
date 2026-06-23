@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports - Jose Fresco</title>
+    <meta name="description" content="How the pi-backups June 2026 update adds Telegram notifications for every backup run — success confirmations with size and duration, failure alerts with the exact exit code, and a weekly digest that summarizes the past seven days across all jobs.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-telegram-alerts.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports - Jose Fresco">
+    <meta property="og:description" content="How the pi-backups June 2026 update adds Telegram notifications for every backup run — success confirmations with size and duration, failure alerts with the exact exit code, and a weekly digest that summarizes the past seven days across all jobs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-telegram-alerts.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/pi-backups-telegram-alerts.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-06-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-23T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports - Jose Fresco">
+    <meta name="twitter:description" content="How the pi-backups June 2026 update adds Telegram notifications for every backup run — success confirmations with size and duration, failure alerts with the exact exit code, and a weekly digest that summarizes the past seven days across all jobs.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/pi-backups-telegram-alerts.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-telegram-alerts.html"
+      },
+      "headline": "Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports",
+      "description": "How the pi-backups June 2026 update adds Telegram notifications for every backup run — success confirmations with size and duration, failure alerts with the exact exit code, and a weekly digest that summarizes the past seven days across all jobs.",
+      "image": "https://josefresco.com/blog/images/pi-backups-telegram-alerts.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-06-23T00:00:00+00:00",
+      "dateModified": "2026-06-23T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Bash, Shell Script, Telegram Bot API, Offsite Backup, rsync, GPG, Cron, Notification, pi-backups, Self-Hosted, Backup Monitoring",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Pi Backups: Telegram Alerts", "item": "https://josefresco.com/blog/pi-backups-telegram-alerts.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">June 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups-telegram-alerts.svg" type="image/svg+xml">
+                        <img src="images/pi-backups-telegram-alerts.svg" alt="Diagram of a Raspberry Pi running backup.sh with rsync and GPG, sending Telegram notifications showing a green success message with job name, compressed size, and duration, a red failure alert with SSH exit code, and a weekly digest summary" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/pi-backups" style="color: var(--neural-primary);" target="_blank" rel="noopener">pi-backups</a> is a shell-script system that backs up Raspberry Pi application data offsite with rsync and GPG encryption. The June 2026 update adds Telegram notifications via the Bot API: a success message with job name, compressed size, and elapsed time after every clean run; a failure alert with the exact shell exit code when something goes wrong; and a weekly cron digest that summarizes all jobs across the past seven days. Two environment variables — <code>TELEGRAM_BOT_TOKEN</code> and <code>TELEGRAM_CHAT_ID</code> — are all the configuration required.
+                    </div>
+
+                    <h2>What pi-backups Is</h2>
+
+                    <p>A Raspberry Pi running 24/7 home services has one uncomfortable vulnerability: SD card failure. When the card dies, everything on it goes with it — application data, configuration files, credentials, years of accumulated setup. There's no RAID, no hot spare, and typically no warning before it happens.</p>
+
+                    <p><a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">pi-backups</a> solves this with a set of shell scripts that copy defined application directories to a remote destination using rsync over SSH. The <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original March 2026 release</a> covered the core rsync setup, SSH key auth, and the nightly cron job. The <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">April 2026 update</a> added GPG encryption — backup archives are AES-256 encrypted before transfer, so the data is unreadable to the remote host — plus a <code>verify.sh</code> script that decrypts and checksums the most recent archive to confirm restore readiness.</p>
+
+                    <p>This June update adds the one thing that was still missing: visibility. Cron jobs run silently at 2 AM. You only discover a failure when you go looking for it — usually after the thing you needed to restore is already gone.</p>
+
+                    <h2>The Silent Cron Problem</h2>
+
+                    <p>Cron's default failure mode is silence. A script exits with code 255 because the SSH connection was refused. The next night it happens again. And the night after. Three weeks later, the SD card dies and you find out — for the first time — that backups stopped working a month ago.</p>
+
+                    <p>The traditional fix is <code>MAILTO</code> in the crontab: cron emails stdout/stderr from failed jobs. This works, but requires a local mail transfer agent and an SMTP relay, and most self-hosters end up with mail going to spam or the MTA being misconfigured. It's more infrastructure than the problem warrants.</p>
+
+                    <p>The pi-backups project already uses Telegram elsewhere — the related <a href="/blog/telegram-pi-monitoring-bot.html" style="color: var(--neural-primary);">Telegram Pi Monitoring Bot</a> sends alerts for high CPU temperature, disk pressure, and service restarts. The Bot API is a <code>curl</code> call to a single HTTPS endpoint. Every Pi already has <code>curl</code>. This is the right tool.</p>
+
+                    <h2>How the Telegram Integration Works</h2>
+
+                    <p>The Telegram Bot API sends a message in a single HTTP POST:</p>
+
+                    <pre><code>curl -s -X POST \
+  "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+  -d chat_id="${TELEGRAM_CHAT_ID}" \
+  -d parse_mode="HTML" \
+  -d text="$MESSAGE" \
+  > /dev/null</code></pre>
+
+                    <p>The message content is just a string — plain text or HTML-formatted with bold, code spans, and line breaks. No SDK, no dependency installation, no library version to maintain. The entire notification layer is eight lines of shell.</p>
+
+                    <p>The two required credentials live in <code>.env</code> alongside the existing backup configuration:</p>
+
+                    <pre><code># Telegram Bot credentials (optional — notifications disabled if unset)
+TELEGRAM_BOT_TOKEN=1234567890:ABCDEFghijklmnopqrstuvwxyz
+TELEGRAM_CHAT_ID=987654321</code></pre>
+
+                    <p>If either variable is unset, the notification function exits silently. The backup itself still runs normally. This makes the Telegram integration genuinely optional — adding it requires no changes to the backup logic, just two new variables in <code>.env</code>.</p>
+
+                    <h2>Success Notifications: What Gets Reported</h2>
+
+                    <p>After a clean backup run, the script sends a green-bordered success message with four fields:</p>
+
+                    <pre><code>✅ &lt;b&gt;Backup Complete&lt;/b&gt;
+
+Job:       family-dash
+Size:      128 MB → 31 MB (GPG)
+Duration:  42s
+Remote:    backup-server.local ✔</code></pre>
+
+                    <p>The size field deserves a note. The script captures both the pre-encryption directory size (via <code>du -sh</code>) and the final encrypted archive size. The ratio — 128 MB down to 31 MB in the example above — tells you something useful: if the ratio changes dramatically from run to run, something unexpected changed in the source directory.</p>
+
+                    <p>Duration is measured with <code>SECONDS</code>, a built-in Bash variable that counts elapsed seconds since the shell started. The backup script resets it to zero at the start of each job and reads it after rsync completes. No <code>date</code> arithmetic required.</p>
+
+                    <pre><code>SECONDS=0
+
+# ... rsync and gpg commands ...
+
+ELAPSED=$SECONDS</code></pre>
+
+                    <p>The remote host confirmation (the ✔ after the hostname) is the result of a quick SSH no-op after the rsync completes, confirming the destination is still reachable at the end of the transfer. It's not a full integrity check — that's <code>verify.sh</code>'s job — but it confirms the connection didn't drop midway through.</p>
+
+                    <h2>Failure Alerts: Surface the Exit Code</h2>
+
+                    <p>When any command in the backup pipeline fails, the script sends a failure alert immediately rather than waiting for the job to finish:</p>
+
+                    <pre><code>⚠️ &lt;b&gt;Backup FAILED&lt;/b&gt;
+
+Job:   watch-list
+Error: SSH connection refused (exit 255)</code></pre>
+
+                    <p>The key design decision here is trapping exit codes explicitly rather than relying on <code>set -e</code>. Bash's <code>set -e</code> exits the script on any error, but it doesn't tell you which command failed or with what code. The backup script uses a wrapper function instead:</p>
+
+                    <pre><code>run_step() {
+    local desc="$1"
+    shift
+    "$@"
+    local code=$?
+    if [[ $code -ne 0 ]]; then
+        tg_notify "⚠️ &lt;b&gt;Backup FAILED&lt;/b&gt;\n\nJob:   ${JOB_NAME}\nError: ${desc} (exit ${code})"
+        exit $code
+    fi
+}</code></pre>
+
+                    <p>Each step in the pipeline is wrapped:</p>
+
+                    <pre><code>run_step "SSH connection refused" \
+    ssh -q "${REMOTE_USER}@${REMOTE_HOST}" "mkdir -p ${REMOTE_PATH}"
+
+run_step "rsync transfer failed" \
+    rsync -az --delete "${SOURCE_DIR}/" \
+    "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/"
+
+run_step "GPG encryption failed" \
+    gpg --batch --yes --symmetric --cipher-algo AES256 \
+    --passphrase-file "${GPG_PASSFILE}" \
+    --output "${REMOTE_PATH}/${JOB_NAME}.tar.gz.gpg" \
+    "${ARCHIVE_TMP}"</code></pre>
+
+                    <p>The description string ("SSH connection refused", "rsync transfer failed") is passed in at the call site, so the Telegram message tells you exactly which step broke without requiring you to read a log file. SSH returning exit 255 specifically means the connection was refused or timed out — a common failure mode when the remote host is rebooted or the port changes.</p>
+
+                    <h2>The Weekly Digest</h2>
+
+                    <p>Per-job notifications tell you when something breaks. The weekly digest tells you how healthy the backup system has been over the past seven days — useful for catching intermittent failures that individually got fixed but are happening more often than they should.</p>
+
+                    <p>A separate script, <code>digest.sh</code>, reads the backup log files (<code>/var/log/pi-backups/</code>) and counts successes and failures per job over the previous seven days. It fires every Sunday at 02:15 via a separate cron entry:</p>
+
+                    <pre><code># Weekly backup health digest (Sundays at 02:15)
+15 2 * * 0 /opt/pi-backups/digest.sh</code></pre>
+
+                    <p>The message format is compact — one line per job, a 7-day success ratio, and a total bytes-saved figure:</p>
+
+                    <pre><code>📊 &lt;b&gt;Weekly Backup Digest&lt;/b&gt;
+
+✅ family-dash    7/7 runs
+⚠️ watch-list    6/7 runs (1 fail: Tue)
+✅ pi-config      7/7 runs
+
+Total saved this week: 3.1 GB</code></pre>
+
+                    <p>The log parsing is intentionally simple. Each backup run appends a single-line record to its job log:</p>
+
+                    <pre><code>2026-06-17T02:15:42 family-dash OK 128MB 31MB 42s
+2026-06-18T02:15:38 family-dash OK 129MB 31MB 41s
+2026-06-18T03:15:11 watch-list FAIL 255</code></pre>
+
+                    <p><code>digest.sh</code> greps the last seven days of entries, counts OK vs FAIL per job, and computes the total bytes saved by summing the pre-encryption size column. No database, no complex parsing — just awk and grep on a flat log file.</p>
+
+                    <h2>Setting Up the Telegram Bot</h2>
+
+                    <p>Creating the bot takes about two minutes:</p>
+
+                    <ol>
+                        <li>Message <code>@BotFather</code> on Telegram and send <code>/newbot</code></li>
+                        <li>Follow the prompts — you'll get a bot token in the format <code>1234567890:ABCDEFxyz</code></li>
+                        <li>Start a conversation with your new bot (search for it by username and send any message)</li>
+                        <li>Get your chat ID by visiting <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> in a browser and reading the <code>chat.id</code> value from the response</li>
+                        <li>Add both values to <code>.env</code></li>
+                    </ol>
+
+                    <p>If you want the alerts to go to a group chat instead of a direct message — useful if multiple people should see the alerts — add the bot to the group, and use the group's chat ID (which will be a negative number, like <code>-1001234567890</code>).</p>
+
+                    <h2>Log Rotation and Storage</h2>
+
+                    <p>The log files in <code>/var/log/pi-backups/</code> grow by one line per backup run. At one line per job per night, even a setup with five jobs will accumulate under 2,000 lines per year — small enough that log rotation is not strictly necessary. The digest script uses only the last seven days of entries, so old lines are harmless.</p>
+
+                    <p>That said, the update includes a <code>logrotate</code> config snippet for users who prefer bounded log files:</p>
+
+                    <pre><code>/var/log/pi-backups/*.log {
+    weekly
+    rotate 12
+    compress
+    missingok
+    notifempty
+}</code></pre>
+
+                    <p>Drop this in <code>/etc/logrotate.d/pi-backups</code> and <code>logrotate</code> handles the rest automatically.</p>
+
+                    <h2>What the June 2026 Update Ships</h2>
+
+                    <p>To summarize the changes in this release:</p>
+
+                    <ul>
+                        <li><strong>Telegram notifications:</strong> A <code>tg_notify()</code> function in <code>backup.sh</code> that sends success or failure messages after each job. Activated by setting <code>TELEGRAM_BOT_TOKEN</code> and <code>TELEGRAM_CHAT_ID</code> in <code>.env</code>; silently skipped if either is unset.</li>
+                        <li><strong>Structured exit-code trapping:</strong> The <code>run_step()</code> wrapper replaces bare command execution with named, trap-aware steps that include the failing command's description and exit code in the Telegram alert.</li>
+                        <li><strong>Per-run log records:</strong> Each job appends a structured line to <code>/var/log/pi-backups/&lt;job&gt;.log</code> with timestamp, status, pre-encryption size, encrypted size, and elapsed seconds.</li>
+                        <li><strong>Weekly digest:</strong> A new <code>digest.sh</code> script that reads the past seven days of log entries, computes per-job success ratios, and sends a summary Telegram message every Sunday morning.</li>
+                        <li><strong>logrotate config:</strong> An optional <code>/etc/logrotate.d/pi-backups</code> snippet for sites that prefer bounded log files.</li>
+                    </ul>
+
+                    <h2>Upgrading from the Previous Version</h2>
+
+                    <p>The June update is backward compatible. Existing <code>.env</code> files work unchanged — the Telegram notification is off by default until you add the two new variables. The log file format is new (previous runs generated no log records), so the first weekly digest will only cover runs since the upgrade date.</p>
+
+                    <pre><code># Pull the latest version
+git pull origin main
+
+# Add to your .env (optional — notifications disabled if skipped)
+echo "TELEGRAM_BOT_TOKEN=your-token-here" >> .env
+echo "TELEGRAM_CHAT_ID=your-chat-id-here" >> .env
+
+# Add the weekly digest cron entry
+(crontab -l; echo "15 2 * * 0 /opt/pi-backups/digest.sh") | crontab -
+
+# Test the notification manually
+source .env && bash notify-test.sh</code></pre>
+
+                    <p>The <code>notify-test.sh</code> script (included in the update) sends a test message to your Telegram chat so you can confirm the credentials are correct before the next real backup run.</p>
+
+                    <h2>Get It Running</h2>
+
+                    <p>The full project is at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/pi-backups</a>. The README covers the full setup from scratch: SSH key configuration, rsync target setup, GPG passphrase generation, cron entries, and now the optional Telegram notification layer. The <code>.env.example</code> file documents every variable.</p>
+
+                    <p>If this is your first time setting up pi-backups, start with the <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original post</a> for the rsync foundation, the <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">encryption post</a> for GPG, and then add Telegram notifications last — in that order. Each layer works independently and you can stop at whichever level of complexity fits your setup.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-encryption.html" class="btn-secondary">← Pi Backups Encryption</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Reliable Self-Hosted Backup System?</h2>
+                <p class="cta-description">
+                    pi-backups started as a personal safeguard against SD card failure and grew into
+                    a layered system with encryption, restore verification, and now live alerting.
+                    If you want something similar for your own Pi — or need help designing a backup
+                    strategy for a production self-hosted stack — let's talk.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Pi Backup System&body=Hi Jose,%0D%0A%0D%0AI read your pi-backups Telegram alerts post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

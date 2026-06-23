@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports</title>
+      <link>https://josefresco.com/blog/pi-backups-telegram-alerts.html</link>
+      <description>How the pi-backups June 2026 update adds Telegram notifications for every backup run — success confirmations with job name, compressed size, and elapsed time; failure alerts with the exact shell exit code; and a weekly digest that summarizes all jobs across the past seven days. Covers the tg_notify() function, the run_step() exit-code trapping wrapper, per-run log records, digest.sh, logrotate configuration, and a migration guide from the previous version.</description>
+      <pubDate>Mon, 23 Jun 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-telegram-alerts.html</guid>
+    </item>
 
     <item>
       <title>Family Dashboard v3.33: Wind Direction, Weather Narratives, and Building for the Wall</title>

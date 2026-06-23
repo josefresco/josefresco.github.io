@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="piGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a6b3c"/>
+      <stop offset="100%" style="stop-color:#0d4a2a"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="subtleGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.04" stroke="#00d4ff" stroke-width="0.5">
+    <line x1="0" y1="70" x2="800" y2="70"/>
+    <line x1="0" y1="140" x2="800" y2="140"/>
+    <line x1="0" y1="210" x2="800" y2="210"/>
+    <line x1="0" y1="280" x2="800" y2="280"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="133" y1="0" x2="133" y2="420"/>
+    <line x1="266" y1="0" x2="266" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="420"/>
+    <line x1="534" y1="0" x2="534" y2="420"/>
+    <line x1="667" y1="0" x2="667" y2="420"/>
+  </g>
+
+  <!-- =============================== -->
+  <!-- LEFT PANEL: Raspberry Pi Board  -->
+  <!-- =============================== -->
+  <rect x="28" y="70" width="168" height="280" rx="8" fill="url(#piGrad)" stroke="#2a8a50" stroke-width="1.5"/>
+
+  <!-- GPIO header row 1 -->
+  <g fill="#b0b0b0">
+    <rect x="40" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="51" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="62" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="73" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="84" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="95" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="106" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="117" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="128" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="139" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="150" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="161" y="76" width="7" height="11" rx="1.5"/>
+    <rect x="172" y="76" width="7" height="11" rx="1.5"/>
+  </g>
+  <!-- GPIO header row 2 -->
+  <g fill="#909090">
+    <rect x="40" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="51" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="62" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="73" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="84" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="95" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="106" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="117" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="128" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="139" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="150" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="161" y="87" width="7" height="11" rx="1.5"/>
+    <rect x="172" y="87" width="7" height="11" rx="1.5"/>
+  </g>
+
+  <!-- CPU chip -->
+  <rect x="76" y="120" width="72" height="72" rx="5" fill="#0d2a50" stroke="#00d4ff" stroke-width="1.5"/>
+  <rect x="81" y="125" width="62" height="62" rx="3" fill="#071828"/>
+  <!-- Chip legs left -->
+  <g stroke="#4ade80" stroke-width="1" opacity="0.5">
+    <line x1="52" y1="135" x2="76" y2="135"/>
+    <line x1="52" y1="147" x2="76" y2="147"/>
+    <line x1="52" y1="159" x2="76" y2="159"/>
+    <line x1="52" y1="171" x2="76" y2="171"/>
+    <line x1="52" y1="183" x2="76" y2="183"/>
+  </g>
+  <!-- Chip legs right -->
+  <g stroke="#4ade80" stroke-width="1" opacity="0.5">
+    <line x1="148" y1="135" x2="172" y2="135"/>
+    <line x1="148" y1="147" x2="172" y2="147"/>
+    <line x1="148" y1="159" x2="172" y2="159"/>
+    <line x1="148" y1="171" x2="172" y2="171"/>
+    <line x1="148" y1="183" x2="172" y2="183"/>
+  </g>
+  <text x="112" y="152" font-family="Inter, monospace" font-size="10" fill="#00d4ff" text-anchor="middle" font-weight="700">BCM</text>
+  <text x="112" y="166" font-family="Inter, monospace" font-size="10" fill="#00d4ff" text-anchor="middle">2711</text>
+  <text x="112" y="180" font-family="Inter, monospace" font-size="7" fill="#4ade80" text-anchor="middle">Pi 4</text>
+
+  <!-- USB & Ethernet ports (right edge) -->
+  <rect x="190" y="118" width="6" height="24" rx="1" fill="#333" stroke="#555" stroke-width="0.5"/>
+  <rect x="190" y="148" width="6" height="24" rx="1" fill="#333" stroke="#555" stroke-width="0.5"/>
+  <rect x="190" y="180" width="6" height="20" rx="1" fill="#214080" stroke="#2a60b0" stroke-width="0.5"/>
+
+  <!-- microSD slot -->
+  <rect x="48" y="335" width="38" height="12" rx="2" fill="#999" stroke="#bbb" stroke-width="0.5"/>
+  <text x="67" y="344" font-family="Inter, sans-serif" font-size="6.5" fill="#333" text-anchor="middle" font-weight="600">SD</text>
+
+  <!-- Running script label -->
+  <rect x="40" y="215" width="144" height="58" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1"/>
+  <!-- Active indicator dot -->
+  <circle cx="53" cy="227" r="4" fill="#4ade80" filter="url(#glow)"/>
+  <text x="62" y="230" font-family="Inter, monospace" font-size="8.5" fill="#94a3b8">$ cron 02:15</text>
+  <text x="52" y="246" font-family="Inter, monospace" font-size="9.5" fill="#00d4ff" font-weight="600">backup.sh</text>
+  <rect x="130" y="237" width="4" height="9" fill="#00d4ff" opacity="0.8"/>
+  <text x="52" y="263" font-family="Inter, monospace" font-size="7.5" fill="#4ade80">rsync · gpg · notify</text>
+
+  <!-- Raspberry Pi label -->
+  <text x="112" y="300" font-family="Inter, sans-serif" font-size="10" fill="#4ade80" text-anchor="middle" font-weight="600">Raspberry Pi</text>
+  <text x="112" y="315" font-family="Inter, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">pi-backups v2.1</text>
+
+  <!-- =============================== -->
+  <!-- CENTER: Data Flow Arrows        -->
+  <!-- =============================== -->
+  <!-- Arrow: Pi → Telegram -->
+  <line x1="200" y1="170" x2="348" y2="170" stroke="url(#cyanGrad)" stroke-width="2.5" stroke-dasharray="8,4" filter="url(#glow)"/>
+  <polygon points="348,164 360,170 348,176" fill="#7c3aed" filter="url(#glow)"/>
+
+  <!-- rsync label badge -->
+  <rect x="218" y="148" width="100" height="18" rx="4" fill="rgba(10,11,15,0.9)" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+  <text x="268" y="161" font-family="Inter, monospace" font-size="8.5" fill="#00d4ff" text-anchor="middle" font-weight="500">rsync + GPG</text>
+
+  <!-- GPG lock icon (center) -->
+  <g transform="translate(268, 198)">
+    <rect x="-10" y="-4" width="20" height="14" rx="3" fill="rgba(124,58,237,0.25)" stroke="#7c3aed" stroke-width="1.5"/>
+    <path d="M-5,-4 A5,5 0 0,1 5,-4" stroke="#7c3aed" stroke-width="1.5" fill="none"/>
+    <circle cx="0" cy="4" r="2.5" fill="#7c3aed"/>
+    <line x1="0" y1="4" x2="0" y2="8" stroke="#7c3aed" stroke-width="1.5"/>
+  </g>
+  <text x="268" y="225" font-family="Inter, sans-serif" font-size="8" fill="#7c3aed" text-anchor="middle">AES-256 encrypted</text>
+
+  <!-- Data packet icons -->
+  <g fill="#00d4ff" opacity="0.55">
+    <rect x="218" y="163" width="12" height="14" rx="2"/>
+    <rect x="244" y="163" width="12" height="14" rx="2"/>
+    <rect x="270" y="163" width="12" height="14" rx="2"/>
+    <rect x="296" y="163" width="12" height="14" rx="2"/>
+  </g>
+
+  <!-- Notification arrow below (Telegram notification going back) -->
+  <line x1="360" y1="248" x2="210" y2="248" stroke="#229ED9" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="210,243 198,248 210,253" fill="#229ED9" opacity="0.6"/>
+  <text x="280" y="242" font-family="Inter, sans-serif" font-size="7.5" fill="#229ED9" text-anchor="middle" opacity="0.8">notification sent</text>
+
+  <!-- =============================== -->
+  <!-- RIGHT PANEL: Telegram Chat      -->
+  <!-- =============================== -->
+  <rect x="368" y="52" width="404" height="318" rx="14" fill="rgba(18,22,36,0.85)" stroke="rgba(34,158,217,0.2)" stroke-width="1"/>
+
+  <!-- Telegram app header -->
+  <rect x="368" y="52" width="404" height="50" rx="14" fill="#1a3a5c"/>
+  <rect x="368" y="82" width="404" height="20" fill="#1a3a5c"/>
+
+  <!-- Telegram logo circle -->
+  <circle cx="397" cy="77" r="16" fill="#229ED9"/>
+  <!-- Simplified paper plane -->
+  <path d="M389,74 L407,77 L389,80 L393,77 Z" fill="white" opacity="0.95"/>
+
+  <text x="420" y="73" font-family="Inter, sans-serif" font-size="13" fill="white" font-weight="700">Pi Backups Bot</text>
+  <text x="420" y="89" font-family="Inter, sans-serif" font-size="9" fill="#90CAF9">&#x1F7E2; online · Raspberry Pi</text>
+
+  <!-- Timestamp for first message -->
+  <text x="565" y="113" font-family="Inter, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">Today 02:15</text>
+
+  <!-- Success message bubble -->
+  <rect x="382" y="118" width="375" height="114" rx="10" fill="#229ED9"/>
+  <text x="398" y="138" font-family="Inter, sans-serif" font-size="10.5" fill="white" font-weight="700">&#x2705; Backup Complete</text>
+  <text x="398" y="156" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Job:       family-dash</text>
+  <text x="398" y="171" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Size:      128 MB &#x2192; 31 MB (GPG)</text>
+  <text x="398" y="186" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Duration:  42s</text>
+  <text x="398" y="201" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Remote:    backup-server.local &#x2714;</text>
+  <text x="743" y="224" font-family="Inter, sans-serif" font-size="8" fill="rgba(255,255,255,0.55)" text-anchor="end">02:15 &#x2713;&#x2713;</text>
+
+  <!-- Failure message bubble -->
+  <text x="565" y="244" font-family="Inter, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">Today 03:15</text>
+  <rect x="382" y="250" width="375" height="80" rx="10" fill="#c0392b"/>
+  <text x="398" y="270" font-family="Inter, sans-serif" font-size="10.5" fill="white" font-weight="700">&#x26A0;&#xFE0F; Backup FAILED</text>
+  <text x="398" y="288" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Job:   watch-list</text>
+  <text x="398" y="303" font-family="Inter, monospace" font-size="9" fill="rgba(255,255,255,0.92)">Error: SSH connection refused (exit 255)</text>
+  <text x="743" y="322" font-family="Inter, sans-serif" font-size="8" fill="rgba(255,255,255,0.55)" text-anchor="end">03:15 &#x2713;&#x2713;</text>
+
+  <!-- Weekly digest message -->
+  <text x="565" y="345" font-family="Inter, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">Sun 02:15</text>
+  <rect x="382" y="350" width="375" height="14" rx="4" fill="rgba(34,158,217,0.12)" stroke="rgba(34,158,217,0.3)" stroke-width="1"/>
+  <text x="570" y="361" font-family="Inter, sans-serif" font-size="8" fill="#229ED9" text-anchor="middle">&#x1F4CA; Weekly Digest: 20/21 runs OK · 3.1 GB saved</text>
+
+  <!-- =============================== -->
+  <!-- BOTTOM STATUS BAR               -->
+  <!-- =============================== -->
+  <rect x="28" y="382" width="744" height="32" rx="6" fill="rgba(26,29,41,0.6)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+  <!-- Status items -->
+  <circle cx="46" cy="398" r="4" fill="#4ade80" filter="url(#glow)"/>
+  <text x="55" y="402" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">family-dash</text>
+
+  <circle cx="140" cy="398" r="4" fill="#f59e0b" filter="url(#glow)"/>
+  <text x="149" y="402" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">watch-list (SSH err)</text>
+
+  <circle cx="275" cy="398" r="4" fill="#4ade80" filter="url(#glow)"/>
+  <text x="284" y="402" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">pi-config</text>
+
+  <text x="380" y="402" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8" text-anchor="middle">pi-backups · Telegram Alerts &amp; Weekly Digest · June 2026</text>
+
+  <text x="750" y="402" font-family="Inter, sans-serif" font-size="8.5" fill="#4ade80" text-anchor="end">github.com/josefresco/pi-backups</text>
+</svg>
