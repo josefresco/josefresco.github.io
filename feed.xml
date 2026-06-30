@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain</title>
+      <link>https://josefresco.com/blog/family-dash-caldav-collection-discovery.html</link>
+      <description>How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip. Covers the current-user-principal lookup, calendar-home-set discovery, Depth: 1 collection enumeration with VEVENT filtering, UID-based deduplication, server-side credential protection via Express and environment variables, and graceful fallback behavior when a CalDAV provider doesn't support collection discovery.</description>
+      <pubDate>Mon, 30 Jun 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-caldav-collection-discovery.html</guid>
+    </item>
 
     <item>
       <title>Pi Backups: Adding Telegram Alerts and Weekly Backup Health Reports</title>
@@ -78,38 +86,6 @@
       <description>How the pi-backups April 2026 update adds AES-256 GPG encryption of backup archives and an automated restore verification script — protecting Pi application data, configs, and credentials even from your own hosting provider. Covers symmetric vs asymmetric GPG, the updated backup script, the new verify.sh script, weekly cron scheduling, raspberry-pi-agent integration, and a migration guide from the original rsync-based setup.</description>
       <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/pi-backups-encryption.html</guid>
-    </item>
-
-    <item>
-      <title>Arpy Assist Becomes a Coding Agent: Claude Code, Autonomous Commits, and a Pi That Manages Its Own Repos</title>
-      <link>https://josefresco.com/blog/arpy-assist-coding-agent.html</link>
-      <description>How Arpy Assist evolved from a Qwen CLI web interface into a full Claude Code-powered coding agent on Raspberry Pi — autonomous git workflows, command dispatching via raspberry-pi-agent, and repo management from any browser. Covers the task runner architecture, workspace setup, Claude Code invocation, git commit flow, smart button system, and security model.</description>
-      <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/arpy-assist-coding-agent.html</guid>
-    </item>
-
-    <item>
-      <title>Watch List Internals: Single-File PWA Architecture, Build-Time Credential Injection, and TMDB Session Auth</title>
-      <link>https://josefresco.com/blog/watch-list-internals.html</link>
-      <description>A technical deep-dive into how Watch List works under the hood — a single-file PWA with build-time secret injection via build.js, TMDB session authentication for persistent watchlists, and configurable streaming provider filters including MY_SERVICES and EXCLUDED_PROVIDERS constants.</description>
-      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/watch-list-internals.html</guid>
-    </item>
-
-    <item>
-      <title>Building a Fast Developer Portfolio: Critical CSS, Service Workers, and Why I Skipped Frameworks</title>
-      <link>https://josefresco.com/blog/developer-portfolio-performance.html</link>
-      <description>How the josefresco.github.io portfolio achieves fast load times through inlined critical CSS, deferred scripts, a service worker cache, and Schema.org structured data — with no framework, no build pipeline, and no bundler in sight.</description>
-      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/developer-portfolio-performance.html</guid>
-    </item>
-
-    <item>
-      <title>Family Dashboard v3.30: Extreme Weather Alerts, Temperature Shifts, and Birthday Detection</title>
-      <link>https://josefresco.com/blog/family-dash-v330.html</link>
-      <description>How Family Dashboard grew from v3.26 to v3.30 with extreme weather overlays, temperature shift alerts, multi-account CalDAV, birthday/holiday detection, and a 57% bundle size reduction — all running on a retired iPad as a 24/7 wall display.</description>
-      <pubDate>Wed, 08 Apr 2026 00:00:00 GMT</pubDate>
-      <guid>https://josefresco.com/blog/family-dash-v330.html</guid>
     </item>
 
 

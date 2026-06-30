@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480" role="img" aria-label="Three-step CalDAV collection discovery chain diagram">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1d29;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0f1118;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="arrow1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00d4ff" opacity="0.9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" fill="url(#bg)" rx="12"/>
+
+  <!-- Subtle grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.15" opacity="0.06"/>
+  </pattern>
+  <rect width="900" height="480" fill="url(#grid)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="44" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff">CalDAV Collection Discovery</text>
+  <text x="450" y="66" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Three-step PROPFIND chain for shared &amp; invited calendars</text>
+
+  <!-- Step badges -->
+  <!-- Step 1 -->
+  <rect x="40" y="105" width="220" height="220" rx="12" fill="url(#cardGrad)" stroke="#00d4ff" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="40" y="105" width="220" height="4" rx="2" fill="#00d4ff" opacity="0.8"/>
+  <text x="150" y="130" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#00d4ff" letter-spacing="2">STEP 1</text>
+  <text x="150" y="152" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff">User Principal</text>
+  <line x1="60" y1="165" x2="240" y2="165" stroke="#ffffff" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- Step 1 detail box -->
+  <rect x="58" y="176" width="184" height="46" rx="6" fill="#0a0b0f" fill-opacity="0.6"/>
+  <text x="150" y="194" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#94a3b8">PROPFIND /caldav/v2/</text>
+  <text x="150" y="208" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#00d4ff">current-user-principal</text>
+  <text x="150" y="221" text-anchor="middle" font-family="monospace, Consolas" font-size="8.5" fill="#94a3b8">Depth: 0</text>
+
+  <text x="150" y="250" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Discovers the authenticated</text>
+  <text x="150" y="265" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">user's principal resource</text>
+  <text x="150" y="283" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">URL — the foundation for</text>
+  <text x="150" y="298" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">all subsequent lookups</text>
+
+  <!-- Arrow 1 → 2 -->
+  <line x1="265" y1="215" x2="330" y2="215" stroke="url(#arrow1)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="297" y="205" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#7c3aed">principal</text>
+  <text x="297" y="216" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#7c3aed">URL</text>
+
+  <!-- Step 2 -->
+  <rect x="335" y="105" width="220" height="220" rx="12" fill="url(#cardGrad)" stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="335" y="105" width="220" height="4" rx="2" fill="#7c3aed" opacity="0.8"/>
+  <text x="445" y="130" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#7c3aed" letter-spacing="2">STEP 2</text>
+  <text x="445" y="152" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Calendar Home</text>
+  <line x1="355" y1="165" x2="535" y2="165" stroke="#ffffff" stroke-width="0.5" opacity="0.12"/>
+
+  <rect x="353" y="176" width="184" height="46" rx="6" fill="#0a0b0f" fill-opacity="0.6"/>
+  <text x="445" y="194" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#94a3b8">PROPFIND /principals/</text>
+  <text x="445" y="208" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#7c3aed">calendar-home-set</text>
+  <text x="445" y="221" text-anchor="middle" font-family="monospace, Consolas" font-size="8.5" fill="#94a3b8">Depth: 0</text>
+
+  <text x="445" y="250" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Locates the container</text>
+  <text x="445" y="265" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">holding all calendar</text>
+  <text x="445" y="283" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">collections — relative</text>
+  <text x="445" y="298" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">URLs resolved to absolute</text>
+
+  <!-- Arrow 2 → 3 -->
+  <line x1="560" y1="215" x2="625" y2="215" stroke="url(#arrow1)" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="592" y="205" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#f59e0b">home</text>
+  <text x="592" y="216" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#f59e0b">URL</text>
+
+  <!-- Step 3 -->
+  <rect x="630" y="105" width="230" height="220" rx="12" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="630" y="105" width="230" height="4" rx="2" fill="#f59e0b" opacity="0.8"/>
+  <text x="745" y="130" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#f59e0b" letter-spacing="2">STEP 3</text>
+  <text x="745" y="152" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff">Collection Enumeration</text>
+  <line x1="648" y1="165" x2="842" y2="165" stroke="#ffffff" stroke-width="0.5" opacity="0.12"/>
+
+  <rect x="648" y="176" width="194" height="46" rx="6" fill="#0a0b0f" fill-opacity="0.6"/>
+  <text x="745" y="194" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#94a3b8">PROPFIND /calendars/</text>
+  <text x="745" y="208" text-anchor="middle" font-family="monospace, Consolas" font-size="9.5" fill="#f59e0b">resourcetype + components</text>
+  <text x="745" y="221" text-anchor="middle" font-family="monospace, Consolas" font-size="8.5" fill="#94a3b8">Depth: 1</text>
+
+  <text x="745" y="250" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Enumerates all VEVENT-</text>
+  <text x="745" y="265" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">capable collections — own,</text>
+  <text x="745" y="283" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">shared, invited calendars</text>
+  <text x="745" y="298" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">all included automatically</text>
+
+  <!-- Result section -->
+  <rect x="40" y="355" width="820" height="94" rx="10" fill="#0a0b0f" fill-opacity="0.8" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="450" y="378" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#00d4ff" letter-spacing="1.5">RESULT</text>
+
+  <!-- Result items -->
+  <circle cx="110" cy="400" r="4" fill="#00d4ff" opacity="0.8"/>
+  <text x="122" y="404" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">All VEVENT collections returned</text>
+
+  <circle cx="305" cy="400" r="4" fill="#7c3aed" opacity="0.8"/>
+  <text x="317" y="404" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Shared &amp; invited calendars included</text>
+
+  <circle cx="540" cy="400" r="4" fill="#f59e0b" opacity="0.8"/>
+  <text x="552" y="404" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Events deduplicated by UID</text>
+
+  <circle cx="725" cy="400" r="4" fill="#00d4ff" opacity="0.8"/>
+  <text x="737" y="404" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#94a3b8">Credentials never leave server</text>
+
+  <!-- Footer note -->
+  <text x="450" y="430" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8" opacity="0.7">family-dash · github.com/josefresco/family-dash</text>
+</svg>
