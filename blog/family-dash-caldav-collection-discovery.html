@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain - Jose Fresco</title>
+    <meta name="description" content="How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip, and why it matters for a family wall display.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dash-caldav-collection-discovery.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain - Jose Fresco">
+    <meta property="og:description" content="How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip, and why it matters for a family wall display.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/family-dash-caldav-collection-discovery.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dash-caldav-collection-discovery.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-06-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-30T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain - Jose Fresco">
+    <meta name="twitter:description" content="How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip, and why it matters for a family wall display.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dash-caldav-collection-discovery.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/family-dash-caldav-collection-discovery.html"
+      },
+      "headline": "Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain",
+      "description": "How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip, and why it matters for a family wall display.",
+      "image": "https://josefresco.com/blog/images/family-dash-caldav-collection-discovery.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-06-30T00:00:00+00:00",
+      "dateModified": "2026-06-30T00:00:00+00:00",
+      "keywords": "CalDAV, PROPFIND, Calendar Discovery, Google Calendar, Family Dashboard, Raspberry Pi, Node.js, iCloud, Shared Calendars",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Family Dashboard CalDAV Deep Dive", "item": "https://josefresco.com/blog/family-dash-caldav-collection-discovery.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link active">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--neural-primary);text-decoration:none;">Blog</a> &rsaquo; Raspberry Pi
+                    </p>
+                    <h1 class="blog-post-title">Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">June 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dash-caldav-collection-discovery.svg" type="image/svg+xml">
+                        <img src="images/family-dash-caldav-collection-discovery.svg" alt="Three-step CalDAV collection discovery chain: User Principal, Calendar Home, Collection Enumeration" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem 1.25rem; margin: 1.5rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> When a basic CalDAV URL only shows your own calendar, the fix is a three-step PROPFIND chain — discover the user principal, find the calendar home, enumerate all collections with <code>Depth: 1</code>. This is what <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" style="color:var(--neural-primary);">family-dash</a> does server-side so shared and invited Google Calendar events appear on the wall display automatically, without any extra setup.
+                    </div>
+
+                    <h2>The Problem With a Single CalDAV URL</h2>
+                    <p>
+                        The simplest CalDAV integration looks like this: take a hardcoded endpoint URL, attach Basic Auth credentials, fire a <code>REPORT</code> request, parse the ICS response. For a personal calendar with no shares, this works fine. For a family dashboard showing multiple people's schedules — each account having their own calendar, shared family calendars, and events they've been invited to by others — it falls apart immediately.
+                    </p>
+                    <p>
+                        The issue is structural. Google's CalDAV implementation stores each calendar as a separate collection under the user's calendar home. A shared family calendar that your partner owns and you're a member of lives under <em>their</em> calendar home URL, not yours. But a CalDAV server will still surface it to you — if you ask the right way. The wrong way is hitting <code>/caldav/v2/user@gmail.com/events/</code> directly and hoping for the best. That returns only the primary calendar collection. Shared calendars, birthday calendars, subscribed calendars — they're all absent.
+                    </p>
+                    <p>
+                        Family Dashboard v3.32 fixed this with a proper collection discovery implementation. The short description in the changelog reads "expanded CalDAV collection discovery to query all collections, including shared and invited calendars through a 3-step PROPFIND chain." This post digs into exactly what those three steps are and why each one is necessary.
+                    </p>
+
+                    <h2>Step 1: Discover the Current User Principal</h2>
+                    <p>
+                        The discovery chain starts with the only URL you're guaranteed to have: the initial CalDAV endpoint configured in <code>.env</code>. For Google that's <code>https://apidata.googleusercontent.com/caldav/v2/</code>; for iCloud it's <code>https://caldav.icloud.com/</code>.
+                    </p>
+                    <p>
+                        The first PROPFIND request asks the server for the <code>current-user-principal</code> property. This is a WebDAV property defined in RFC 5397 that every CalDAV-compliant server is required to support. It returns the URL of the authenticated user's principal resource — essentially a pointer to "who you are" on this server.
+                    </p>
+
+                    <pre><code>PROPFIND /caldav/v2/ HTTP/1.1
+Host: apidata.googleusercontent.com
+Authorization: Basic dXNlcjpwYXNz
+Depth: 0
+Content-Type: application/xml
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;d:propfind xmlns:d="DAV:"&gt;
+  &lt;d:prop&gt;
+    &lt;d:current-user-principal/&gt;
+  &lt;/d:prop&gt;
+&lt;/d:propfind&gt;</code></pre>
+
+                    <p>
+                        The server responds with a <code>207 Multi-Status</code> containing the principal URL — something like <code>/caldav/v2/user%40gmail.com/user/</code>. This value is extracted from the XML response and passed to step two. If this request fails or returns no principal, the implementation logs the error and returns an empty array, falling back to whatever events the primary URL provides.
+                    </p>
+
+                    <h2>Step 2: Find the Calendar Home Set</h2>
+                    <p>
+                        The principal URL from step one isn't a calendar — it's an identity resource. What you actually need is the <em>calendar home set</em>: the container that holds all of a user's calendar collections. That's defined in RFC 4791 as the <code>calendar-home-set</code> DAV property, and you retrieve it with a second PROPFIND request directed at the principal URL.
+                    </p>
+
+                    <pre><code>PROPFIND /caldav/v2/user%40gmail.com/user/ HTTP/1.1
+Host: apidata.googleusercontent.com
+Authorization: Basic dXNlcjpwYXNz
+Depth: 0
+Content-Type: application/xml
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;d:propfind xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav"&gt;
+  &lt;d:prop&gt;
+    &lt;c:calendar-home-set/&gt;
+  &lt;/d:prop&gt;
+&lt;/d:propfind&gt;</code></pre>
+
+                    <p>
+                        The response is another <code>207</code> containing an <code>href</code> element inside the <code>calendar-home-set</code> property — something like <code>/caldav/v2/user%40gmail.com/</code>. Importantly, this value can be either an absolute URL or a relative path. The implementation resolves relative paths to absolute URLs using the base URL of the initial endpoint before proceeding, which matters for iCloud and generic CalDAV providers whose home set paths are often relative.
+                    </p>
+
+                    <h2>Step 3: Enumerate All Calendar Collections</h2>
+                    <p>
+                        With the calendar home URL in hand, the third PROPFIND is the one that does the real work. It requests all resources directly beneath the calendar home with <code>Depth: 1</code>, asking for two specific properties on each: <code>resourcetype</code> (to confirm it's actually a calendar collection) and <code>supported-calendar-component-set</code> (to confirm it supports VEVENT components — as opposed to VTODO-only task calendars or VJOURNAL collections).
+                    </p>
+
+                    <pre><code>PROPFIND /caldav/v2/user%40gmail.com/ HTTP/1.1
+Host: apidata.googleusercontent.com
+Authorization: Basic dXNlcjpwYXNz
+Depth: 1
+Content-Type: application/xml
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;d:propfind xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav"&gt;
+  &lt;d:prop&gt;
+    &lt;d:resourcetype/&gt;
+    &lt;d:displayname/&gt;
+    &lt;c:supported-calendar-component-set/&gt;
+  &lt;/d:prop&gt;
+&lt;/d:propfind&gt;</code></pre>
+
+                    <p>
+                        The response lists every resource under the home set. For each one, the implementation checks two conditions before including it as a queryable calendar:
+                    </p>
+                    <ul>
+                        <li>The <code>resourcetype</code> must declare both <code>collection</code> and <code>calendar</code> — filtering out principal resources, inbox and outbox folders, and other WebDAV resources that live alongside calendars</li>
+                        <li>The <code>supported-calendar-component-set</code> must include VEVENT — filtering out task lists and journal collections that don't contain events</li>
+                    </ul>
+                    <p>
+                        Collections that pass both checks are returned as an array of objects containing the collection URL and display name. This is where shared and invited calendars appear. Because Google's CalDAV implementation surfaces all calendars visible to the authenticated user under the same home set — regardless of who owns them — a family calendar shared by another account shows up automatically in this enumeration step without any additional configuration.
+                    </p>
+
+                    <h2>Why the Three Steps Can't Be Collapsed</h2>
+                    <p>
+                        The obvious question is whether steps one and two could be skipped by just guessing the calendar home URL from the initial endpoint. The answer is: sometimes, but not reliably across providers.
+                    </p>
+                    <p>
+                        Google's URL structure is predictable enough that you could guess <code>/caldav/v2/user%40gmail.com/</code> as the calendar home. But iCloud's home set path is constructed differently, and generic CalDAV servers — Nextcloud, Radicale, Baikal — use wildly different URL structures. The PROPFIND chain is provider-agnostic. It works against any RFC 4791-compliant server because the protocol itself defines where to find each piece of information.
+                    </p>
+                    <p>
+                        There's also a less obvious reason: URL encoding. A Gmail address like <code>user+tag@gmail.com</code> encodes differently depending on the server. Following the href values returned by the server itself, rather than constructing URLs from email addresses, avoids encoding mismatches that would silently return empty results instead of raising an error.
+                    </p>
+
+                    <h2>Credentials Never Leave the Server</h2>
+                    <p>
+                        All three PROPFIND requests run inside the Express route handler at <code>/api/calendar</code>, not in the browser. The client sends only an <code>accountId</code> — a sanitized index like <code>acc_1</code> — and the server retrieves the corresponding username and password from environment variables:
+                    </p>
+
+                    <pre><code>// Simplified credential lookup in /api/calendar
+const idx = accountId.replace(/^acc_/, '');
+const username = process.env[`CALDAV_${idx}_USERNAME`];
+const password = process.env[`CALDAV_${idx}_PASSWORD`];
+const authHeader = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64');</code></pre>
+
+                    <p>
+                        The <code>authHeader</code> is passed through all three PROPFIND requests and the final REPORT that fetches event data. The browser never touches the credentials. This architecture — introduced in v3.31 when the dashboard moved from Vercel to a self-hosted Raspberry Pi — is what makes Google App Passwords a viable authentication strategy here. App Passwords are long-lived but narrowly scoped; losing one doesn't compromise the whole Google account. Keeping them in a server-side <code>.env</code> file means they never appear in network traffic observable from the iPad's browser.
+                    </p>
+
+                    <h2>Deduplication After Discovery</h2>
+                    <p>
+                        Running VEVENT REPORT queries against every discovered collection introduces a new problem: the same event can appear in multiple collections. An event on the family calendar that was created by one account and accepted by another will often appear in both the owner's primary calendar and the invitee's collection. Without deduplication the wall display would show duplicate entries for every shared event.
+                    </p>
+                    <p>
+                        The implementation deduplicates by <code>UID</code> after all collection results are merged. Each VEVENT in an ICS file carries a globally unique identifier in the <code>UID</code> property. Collecting all parsed events into a Map keyed by UID and then converting back to an array drops duplicates while keeping whichever version of the event was encountered first — which is fine for display purposes since both copies have the same summary, start time, and end time.
+                    </p>
+
+                    <h2>What Gets Unlocked</h2>
+                    <p>
+                        Before the three-step PROPFIND chain, family-dash showed events only from whichever calendar collection was at the hardcoded primary URL — typically the account's default calendar. After the change, the wall display automatically includes:
+                    </p>
+                    <ul>
+                        <li><strong>Shared family calendars</strong> — calendars owned by one account member and shared with others at any permission level</li>
+                        <li><strong>Invited events</strong> — individual events from other calendars that the user has accepted, which Google surfaces as a separate collection</li>
+                        <li><strong>Subscribed calendars</strong> — read-only calendars like national holidays or school schedules that are visible under the user's home set</li>
+                        <li><strong>Birthday calendars</strong> — Google's auto-generated birthday collection appears as a VEVENT calendar in the enumeration and is now included in the 30-day lookahead</li>
+                    </ul>
+                    <p>
+                        None of this requires any additional configuration in <code>.env</code>. As long as an account's credentials are set up correctly, every calendar that account can see in Google Calendar will appear on the dashboard automatically.
+                    </p>
+
+                    <h2>Fallback Behavior</h2>
+                    <p>
+                        Each of the three discovery steps is wrapped in its own try-catch. If the first PROPFIND fails — bad credentials, network timeout, a server that doesn't return a current-user-principal — the function logs the error and returns an empty array. The caller then falls back to querying just the primary URL configured for that account, which is the behavior from before v3.32.
+                    </p>
+                    <p>
+                        If step one succeeds but step two or three fails, the same graceful degradation applies. This makes the discovery opt-in at a per-account level: if a generic CalDAV server doesn't support RFC 5397, the dashboard still works — it just won't discover additional collections for that account.
+                    </p>
+
+                    <h2>Practical Setup</h2>
+                    <p>
+                        From a configuration perspective nothing changes. The <code>.env</code> setup remains the same as described in the <a href="/blog/family-dash-vercel-caldav-setup.html" style="color:var(--neural-primary);">initial CalDAV setup post</a>: provider, username, and App Password per account. The discovery chain runs automatically on every calendar fetch. There's no flag to enable it and no discovery cache to invalidate when calendars are added or removed — the three PROPFIND requests run fresh on each fetch cycle, so a newly shared calendar shows up on the next refresh without a server restart.
+                    </p>
+
+                    <div class="blog-navigation" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;">
+                        <a href="/blog/family-dash-v333.html" class="btn-secondary" style="text-decoration:none;">← Family Dashboard v3.33</a>
+                        <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary" style="text-decoration:none;">View on GitHub →</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need CalDAV Integration or a Custom Dashboard?</h2>
+                <p class="cta-description">
+                    Building a wall display, home automation interface, or anything that needs to pull calendar data from multiple providers? I've worked through the protocol quirks so you don't have to.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com" class="btn-cta">Start a Project</a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
