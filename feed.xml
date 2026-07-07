@@ -5,13 +5,21 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm</title>
+      <link>https://josefresco.com/blog/colewebdev-github-pages-estimator.html</link>
+      <description>How COLEwebdev.org deploys a no-build React 18 app to GitHub Pages with a single git push and zero CI configuration. Covers the deployment model that eliminates GitHub Actions entirely, then dives into three client-facing components: an interactive project cost estimator built with useState and a synchronous pricing lookup table, a tabbed AI showcase using useReducer to keep tab-switching and before/after toggle state in sync, and a dismissible newsletter banner that uses sessionStorage to persist its dismissed state within a session. All three use only React's built-in hooks — no Redux, no Zustand, no animation library, no Formik.</description>
+      <pubDate>Tue, 07 Jul 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/colewebdev-github-pages-estimator.html</guid>
+    </item>
 
     <item>
       <title>Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain</title>
       <link>https://josefresco.com/blog/family-dash-caldav-collection-discovery.html</link>
-      <description>How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip. Covers the current-user-principal lookup, calendar-home-set discovery, Depth: 1 collection enumeration with VEVENT filtering, UID-based deduplication, server-side credential protection via Express and environment variables, and graceful fallback behavior when a CalDAV provider doesn't support collection discovery.</description>
+      <description>How Family Dashboard uses a three-step PROPFIND chain to discover shared and invited Google Calendar collections — the CalDAV protocol dance that most implementations skip, and why skipping it means missing half the family's events. Covers the current-user-principal lookup, calendar-home-set discovery, Depth: 1 collection enumeration with VEVENT filtering, UID-based deduplication, server-side credential protection via Express and environment variables, and graceful fallback behavior when a CalDAV provider doesn't support collection discovery.</description>
       <pubDate>Mon, 30 Jun 2026 00:00:00 GMT</pubDate>
       <guid>https://josefresco.com/blog/family-dash-caldav-collection-discovery.html</guid>
     </item>

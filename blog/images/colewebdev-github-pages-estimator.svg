@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="amber-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.03)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="40" height="40">
+      <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="200" cy="280" r="340" fill="rgba(124,58,237,0.06)"/>
+  <circle cx="1000" cy="180" r="280" fill="rgba(0,212,255,0.06)"/>
+  <circle cx="600" cy="550" r="200" fill="rgba(245,158,11,0.04)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="600" y="58" font-family="Inter, sans-serif" font-size="30" font-weight="700" fill="white" text-anchor="middle" filter="url(#glow)">COLEwebdev.org</text>
+  <text x="600" y="87" font-family="Inter, sans-serif" font-size="15" fill="#94a3b8" text-anchor="middle">GitHub Pages Deployment · Project Cost Estimator · 230+ Commits</text>
+  <rect x="480" y="97" width="240" height="2" rx="1" fill="url(#cyan-grad)"/>
+
+  <!-- STEP 1: Edit -->
+  <text x="118" y="140" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">STEP 1</text>
+  <rect x="28" y="150" width="180" height="96" rx="12" fill="url(#box-grad)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+  <text x="118" y="174" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#00d4ff" text-anchor="middle">Edit JSX Files</text>
+  <text x="118" y="193" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">tweaks-panel.jsx</text>
+  <text x="118" y="209" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">parts-services.jsx</text>
+  <text x="118" y="225" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">app.jsx … any editor</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="210" y1="198" x2="268" y2="198" stroke="rgba(0,212,255,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="265,193 276,198 265,203" fill="rgba(0,212,255,0.7)"/>
+  <text x="243" y="190" font-family="Inter, sans-serif" font-size="9" fill="#475569" text-anchor="middle">git push</text>
+
+  <!-- STEP 2: GitHub Pages -->
+  <text x="370" y="140" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">STEP 2</text>
+  <rect x="278" y="150" width="184" height="96" rx="12" fill="url(#box-grad)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+  <text x="370" y="174" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#a78bfa" text-anchor="middle">GitHub Pages</text>
+  <text x="370" y="193" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">No build step required</text>
+  <text x="370" y="209" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">No GitHub Actions YAML</text>
+  <text x="370" y="225" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Files served as-is</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="464" y1="198" x2="522" y2="198" stroke="rgba(124,58,237,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="519,193 530,198 519,203" fill="rgba(124,58,237,0.7)"/>
+  <text x="493" y="190" font-family="Inter, sans-serif" font-size="9" fill="#475569" text-anchor="middle">CDN fetch</text>
+
+  <!-- STEP 3: Browser -->
+  <text x="640" y="140" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">STEP 3</text>
+  <rect x="532" y="150" width="216" height="96" rx="12" fill="url(#box-grad)" stroke="rgba(0,212,255,0.55)" stroke-width="2"/>
+  <rect x="532" y="150" width="216" height="30" rx="12" fill="rgba(0,212,255,0.08)"/>
+  <rect x="532" y="170" width="216" height="10" fill="rgba(0,212,255,0.08)"/>
+  <circle cx="549" cy="165" r="4" fill="rgba(255,90,90,0.6)"/>
+  <circle cx="562" cy="165" r="4" fill="rgba(255,200,50,0.6)"/>
+  <circle cx="575" cy="165" r="4" fill="rgba(80,200,80,0.6)"/>
+  <text x="640" y="203" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#00d4ff" text-anchor="middle">Browser Renders</text>
+  <text x="640" y="221" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Babel transpiles JSX in-tab</text>
+  <text x="640" y="237" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">React 18 mounts the app</text>
+
+  <!-- Feature Cards row -->
+  <!-- Estimator -->
+  <rect x="28" y="290" width="245" height="148" rx="12" fill="url(#box-grad)" stroke="rgba(245,158,11,0.45)" stroke-width="1.5"/>
+  <rect x="28" y="290" width="245" height="38" rx="12" fill="rgba(245,158,11,0.1)"/>
+  <rect x="28" y="316" width="245" height="12" fill="rgba(245,158,11,0.1)"/>
+  <text x="150" y="313" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#f59e0b" text-anchor="middle">Project Cost Estimator</text>
+  <text x="150" y="347" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Service type selector</text>
+  <text x="150" y="363" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Feature toggles → live price range</text>
+  <text x="150" y="379" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">useState · no external library</text>
+  <text x="150" y="395" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Pre-fills mailto inquiry link</text>
+  <rect x="50" y="410" width="200" height="18" rx="9" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+  <text x="150" y="423" font-family="Inter, sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="600">parts-services.jsx · &lt;Estimator /&gt;</text>
+
+  <!-- AI Showcase -->
+  <rect x="287" y="290" width="245" height="148" rx="12" fill="url(#box-grad)" stroke="rgba(124,58,237,0.45)" stroke-width="1.5"/>
+  <rect x="287" y="290" width="245" height="38" rx="12" fill="rgba(124,58,237,0.1)"/>
+  <rect x="287" y="316" width="245" height="12" fill="rgba(124,58,237,0.1)"/>
+  <text x="409" y="313" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#a78bfa" text-anchor="middle">AI Showcase</text>
+  <text x="409" y="347" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Highlights AI-assisted workflows</text>
+  <text x="409" y="363" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Tab switcher · before/after panels</text>
+  <text x="409" y="379" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">useReducer for tab state</text>
+  <text x="409" y="395" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">CSS transitions, no animation lib</text>
+  <rect x="309" y="410" width="200" height="18" rx="9" fill="rgba(124,58,237,0.15)" stroke="rgba(124,58,237,0.35)" stroke-width="1"/>
+  <text x="409" y="423" font-family="Inter, sans-serif" font-size="10" fill="#a78bfa" text-anchor="middle" font-weight="600">parts-services.jsx · &lt;AIShowcase /&gt;</text>
+
+  <!-- Newsletter Banner -->
+  <rect x="546" y="290" width="245" height="148" rx="12" fill="url(#box-grad)" stroke="rgba(16,185,129,0.45)" stroke-width="1.5"/>
+  <rect x="546" y="290" width="245" height="38" rx="12" fill="rgba(16,185,129,0.1)"/>
+  <rect x="546" y="316" width="245" height="12" fill="rgba(16,185,129,0.1)"/>
+  <text x="668" y="313" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#10b981" text-anchor="middle">Newsletter Banner</text>
+  <text x="668" y="347" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Sticky bottom bar · dismissible</text>
+  <text x="668" y="363" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">sessionStorage dismiss flag</text>
+  <text x="668" y="379" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Email capture → mailto fallback</text>
+  <text x="668" y="395" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Respects prefers-reduced-motion</text>
+  <rect x="568" y="410" width="200" height="18" rx="9" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.35)" stroke-width="1"/>
+  <text x="668" y="423" font-family="Inter, sans-serif" font-size="10" fill="#10b981" text-anchor="middle" font-weight="600">app.jsx · &lt;NewsletterBanner /&gt;</text>
+
+  <!-- GitHub Pages zero-config badge -->
+  <rect x="805" y="290" width="362" height="148" rx="12" fill="url(#box-grad)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+  <text x="986" y="318" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#00d4ff" text-anchor="middle">Zero-Config Deployment</text>
+  <text x="986" y="341" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">No GitHub Actions YAML needed</text>
+  <text x="986" y="359" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">No build artifacts to manage</text>
+  <text x="986" y="377" font-family="Inter, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">git push origin main → live in 30s</text>
+  <!-- mini code block -->
+  <rect x="830" y="392" width="312" height="32" rx="6" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="986" y="412" font-family="'Courier New', monospace" font-size="11" fill="#00d4ff" text-anchor="middle">$ git push origin main</text>
+
+  <!-- Bottom tech badges -->
+  <rect x="60" y="476" width="148" height="26" rx="13" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="134" y="494" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" text-anchor="middle" font-weight="600">React 18 via CDN</text>
+
+  <rect x="222" y="476" width="148" height="26" rx="13" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  <text x="296" y="494" font-family="Inter, sans-serif" font-size="11" fill="#f59e0b" text-anchor="middle" font-weight="600">Babel Standalone</text>
+
+  <rect x="384" y="476" width="128" height="26" rx="13" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
+  <text x="448" y="494" font-family="Inter, sans-serif" font-size="11" fill="#a78bfa" text-anchor="middle" font-weight="600">GitHub Pages</text>
+
+  <rect x="526" y="476" width="128" height="26" rx="13" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="590" y="494" font-family="Inter, sans-serif" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">Zero npm</text>
+
+  <rect x="668" y="476" width="148" height="26" rx="13" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="742" y="494" font-family="Inter, sans-serif" font-size="11" fill="#00d4ff" text-anchor="middle" font-weight="600">230+ Commits</text>
+
+  <rect x="830" y="476" width="180" height="26" rx="13" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+  <text x="920" y="494" font-family="Inter, sans-serif" font-size="11" fill="#f59e0b" text-anchor="middle" font-weight="600">Cape Cod · 15 Towns</text>
+
+  <!-- Footer text -->
+  <text x="600" y="578" font-family="Inter, sans-serif" font-size="11" fill="#475569" text-anchor="middle">josefresco.com · github.com/josefresco/COLEwebdev.org</text>
+</svg>

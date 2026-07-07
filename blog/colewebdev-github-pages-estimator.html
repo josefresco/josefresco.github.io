@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm - Jose Fresco</title>
+    <meta name="description" content="How COLEwebdev.org deploys a no-build React 18 app to GitHub Pages with a single git push, and how the interactive project cost estimator, AI showcase, and newsletter banner are built entirely with React hooks — no external libraries required.">
+    <link rel="canonical" href="https://josefresco.com/blog/colewebdev-github-pages-estimator.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm - Jose Fresco">
+    <meta property="og:description" content="How COLEwebdev.org deploys a no-build React 18 app to GitHub Pages with a single git push, and how the interactive project cost estimator, AI showcase, and newsletter banner are built entirely with React hooks — no external libraries required.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/colewebdev-github-pages-estimator.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/colewebdev-github-pages-estimator.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-07-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-07T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Web Development">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm - Jose Fresco">
+    <meta name="twitter:description" content="How COLEwebdev.org deploys a no-build React 18 app to GitHub Pages with a single git push, and how the interactive project cost estimator, AI showcase, and newsletter banner are built entirely with React hooks — no external libraries required.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/colewebdev-github-pages-estimator.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/colewebdev-github-pages-estimator.html"
+      },
+      "headline": "COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm",
+      "description": "How COLEwebdev.org deploys a no-build React 18 app to GitHub Pages with a single git push, and how the interactive project cost estimator, AI showcase, and newsletter banner are built entirely with React hooks — no external libraries required.",
+      "image": "https://josefresco.com/blog/images/colewebdev-github-pages-estimator.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-07-07T00:00:00+00:00",
+      "dateModified": "2026-07-07T00:00:00+00:00",
+      "keywords": "React, GitHub Pages, No Build Tools, Project Cost Estimator, React Hooks, useState, useReducer, CDN, COLEwebdev, Cape Cod, Babel Standalone, Web Development, SPA",
+      "articleSection": "Web Development",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "COLEwebdev.org: GitHub Pages Deployment and Project Cost Estimator", "item": "https://josefresco.com/blog/colewebdev-github-pages-estimator.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Web Development</span>
+                        <span class="blog-date">July 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/colewebdev-github-pages-estimator.svg" type="image/svg+xml">
+                        <img src="images/colewebdev-github-pages-estimator.svg" alt="COLEwebdev.org deployment flow: edit JSX files, git push to GitHub Pages, browser renders with Babel in-browser transpilation — plus the Estimator, AIShowcase, and NewsletterBanner components" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/COLEwebdev.org" style="color: var(--neural-primary);" target="_blank" rel="noopener">COLEwebdev.org</a> deploys to GitHub Pages with a single <code>git push</code> and zero CI configuration — because there is nothing to build. This post covers how that deployment model works, then dives into three client-facing features that live inside the five-file no-build architecture: an interactive project cost estimator built with <code>useState</code>, a tabbed AI showcase using <code>useReducer</code>, and a dismissible newsletter banner that stores its dismissed state in <code>sessionStorage</code>. All three use only React's built-in hooks. No Redux, no Zustand, no Formik, no animation library.
+                    </div>
+
+                    <h2>Where the Previous Post Left Off</h2>
+
+                    <p>The <a href="/blog/colewebdev-react-no-build-step.html" style="color: var(--neural-primary);">last COLEwebdev.org post</a> established the foundation: React 18 and Babel Standalone loaded from CDN, five JSX files transpiled in-browser, and a development workflow that starts and ends with <code>python -m http.server 8080</code>. That post focused on the architecture. This one focuses on what that architecture makes possible once you deploy it — and on three specific components that demonstrate what React hooks look like when there is no bundler, no tree-shaking, and no module system other than sequential script loading.</p>
+
+                    <p>The repo has crossed 230 commits since that post. The site continues to be actively maintained for a real Cape Cod web design studio. Understanding how its interactive features are built is useful both for the specific techniques and for what they say about the no-build tradeoff at scale.</p>
+
+                    <h2>The Deployment Story: Why GitHub Pages Is the Ideal Host</h2>
+
+                    <p>Most React apps require a build step before deployment. The output of <code>npm run build</code> is a directory of static assets — HTML, minified JS bundles, chunked CSS files — that a host like Netlify or Vercel serves. The build pipeline is a prerequisite, not an option.</p>
+
+                    <p>COLEwebdev.org sidesteps this entirely. Its source files <em>are</em> its deployment artifacts. The five JSX files, <code>styles.css</code>, and <code>index.html</code> that a developer edits locally are the exact files the browser downloads in production. There is no compilation, no bundling, no output directory. This makes GitHub Pages the natural choice.</p>
+
+                    <p>GitHub Pages serves a repository's files directly from a branch — typically <code>main</code> or a designated <code>gh-pages</code> branch — over HTTPS with a CDN layer. For a conventional React app, you'd write a GitHub Actions workflow that runs <code>npm ci &amp;&amp; npm run build</code>, then deploys the <code>dist/</code> folder. For COLEwebdev.org, that workflow doesn't exist:</p>
+
+                    <pre><code># .github/workflows/ — this directory doesn't exist in the repo.
+# There is no CI pipeline because there is nothing to build.
+#
+# Deployment is:
+#   git add .
+#   git commit -m "update services section"
+#   git push origin main
+# GitHub Pages picks up the push and serves the updated files
+# within about 30 seconds.</code></pre>
+
+                    <p>This isn't a simplification of the deployment process — it's the elimination of it. A content update to the services section, a new portfolio item, a revised testimonial: all go live with a git push. There's no deployment queue to wait in, no build to fail, no artifact to debug. The feedback loop from commit to live site is measured in seconds.</p>
+
+                    <p>The one configuration required is a custom domain. GitHub Pages supports custom domains via a <code>CNAME</code> file in the repository root and a DNS record pointing to GitHub's servers. Once that's set, the domain just works — no environment variable, no build-time injection, no CDN purge step.</p>
+
+                    <h2>The Interactive Project Cost Estimator</h2>
+
+                    <p>The most conversion-critical feature on any web agency site is the one that answers "how much does this cost?" before the prospect has to ask. COLEwebdev.org's <code>&lt;Estimator /&gt;</code> component, defined inside <code>parts-services.jsx</code>, handles this with a multi-step form that calculates a project cost range in real time.</p>
+
+                    <p>The component manages its state entirely with <code>useState</code>. A single state object holds the current selections:</p>
+
+                    <pre><code>const [config, setConfig] = React.useState({
+  projectType: 'brochure',   // 'brochure' | 'ecommerce' | 'webapp'
+  pageCount:   'small',      // 'small' | 'medium' | 'large'
+  features: {
+    cms:      false,
+    seo:      false,
+    forms:    false,
+    auth:     false,
+    api:      false,
+  },
+  timeline:    'standard',   // 'standard' | 'rush'
+});</code></pre>
+
+                    <p>Each selection maps to a cost modifier in a lookup table. The project type sets a base range, page count scales it, each feature toggle adds a fixed increment, and the rush timeline multiplier applies last:</p>
+
+                    <pre><code>const BASE = {
+  brochure:  [1200, 2800],
+  ecommerce: [3500, 7500],
+  webapp:    [6000, 18000],
+};
+
+const PAGE_SCALE = { small: 1.0, medium: 1.35, large: 1.75 };
+
+const FEATURE_ADD = { cms: 600, seo: 350, forms: 400, auth: 800, api: 1200 };
+
+const RUSH_MULT = { standard: 1.0, rush: 1.3 };
+
+function calcRange(cfg) {
+  const [lo, hi] = BASE[cfg.projectType];
+  const scale    = PAGE_SCALE[cfg.pageCount];
+  const extras   = Object.entries(cfg.features)
+    .filter(([, on]) => on)
+    .reduce((sum, [k]) => sum + FEATURE_ADD[k], 0);
+  const mult     = RUSH_MULT[cfg.timeline];
+  return [
+    Math.round((lo * scale + extras) * mult / 100) * 100,
+    Math.round((hi * scale + extras) * mult / 100) * 100,
+  ];
+}</code></pre>
+
+                    <p>Every time a selection changes, React re-renders and the displayed range updates immediately. There's no debounce, no async fetch, no server-side pricing logic — the entire calculation runs synchronously in the browser. The output is a range rather than a fixed number, which is honest about the estimate's precision and avoids the commitment anxiety that a hard quote triggers.</p>
+
+                    <h2>The Contact Integration: Mailto as a Data Bridge</h2>
+
+                    <p>The estimator closes with a "Get a Precise Quote" button. Clicking it doesn't open a modal or submit a form to a backend — it opens the user's email client with a pre-filled message that includes their exact configuration:</p>
+
+                    <pre><code>function buildMailto(cfg, range) {
+  const features = Object.entries(cfg.features)
+    .filter(([, on]) => on)
+    .map(([k]) => k)
+    .join(', ') || 'none selected';
+
+  const body = [
+    `Project type: ${cfg.projectType}`,
+    `Page count: ${cfg.pageCount}`,
+    `Features: ${features}`,
+    `Timeline: ${cfg.timeline}`,
+    `Estimated range: $${range[0].toLocaleString()} – $${range[1].toLocaleString()}`,
+    '',
+    'Additional details:',
+  ].join('%0D%0A');
+
+  return `mailto:hello@colewebdev.org?subject=Project%20Quote%20Request&body=${body}`;
+}</code></pre>
+
+                    <p>The mailto approach eliminates backend infrastructure entirely. No contact form API, no email service integration, no spam filtering layer, no rate limiting. The email lands in the studio's inbox looking like a pre-filled quote form that the prospect submitted. From the prospect's perspective, they clicked a button and their email client opened with their project details already filled in. The friction between "interested" and "in contact" is one click.</p>
+
+                    <p>The tradeoff is that the email client must be configured and accessible. For mobile users — which represents the majority of marketing site traffic — this is almost always true. For users in locked-down enterprise environments, a fallback copy-to-clipboard button displays if the mailto link fails to open within 500ms. The detection is imperfect, but the fallback is better than nothing.</p>
+
+                    <h2>The AI Showcase: useReducer for Tab State</h2>
+
+                    <p>The <code>&lt;AIShowcase /&gt;</code> component, also in <code>parts-services.jsx</code>, presents a tabbed interface that demonstrates AI-assisted development workflows available to COLEwebdev clients. Each tab shows a before/after example: what the task looked like before AI tooling, and what the outcome looked like after.</p>
+
+                    <p>Tab state uses <code>useReducer</code> rather than <code>useState</code> because the component has two interacting state dimensions — which tab is active and whether the before/after toggle is in its "after" position — and update logic that depends on both:</p>
+
+                    <pre><code>const initialState = { activeTab: 0, showAfter: false };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SELECT_TAB':
+      return { activeTab: action.index, showAfter: false };
+    case 'TOGGLE_VIEW':
+      return { ...state, showAfter: !state.showAfter };
+    default:
+      return state;
+  }
+}
+
+function AIShowcase() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  // ...
+}</code></pre>
+
+                    <p>Switching tabs resets the before/after toggle to "before" — that's encoded in the <code>SELECT_TAB</code> case. If each dimension were a separate <code>useState</code>, you'd need a <code>useEffect</code> to reset the toggle when the tab changes, which introduces a render cycle and a potential stale-closure bug. The reducer makes the relationship between the two dimensions explicit and co-located.</p>
+
+                    <p>The tab transition animation uses CSS alone — a combination of <code>opacity</code>, <code>transform: translateY()</code>, and a class toggled by the active tab index. No animation library, no <code>requestAnimationFrame</code>, no JavaScript-driven interpolation. The browser handles easing, compositing, and GPU acceleration automatically:</p>
+
+                    <pre><code>.showcase-panel {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.showcase-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}</code></pre>
+
+                    <p>The before/after panels within each tab use the same pattern — a CSS class driven by the <code>showAfter</code> state value. The transition gives users a clear visual signal that the view has changed without the motion being distracting. The <code>prefers-reduced-motion</code> media query suppresses both transitions for users who have configured that preference:</p>
+
+                    <pre><code>@media (prefers-reduced-motion: reduce) {
+  .showcase-panel,
+  .showcase-before-after {
+    transition: none;
+  }
+}</code></pre>
+
+                    <h2>The Newsletter Banner: sessionStorage as the State Backend</h2>
+
+                    <p>The <code>&lt;NewsletterBanner /&gt;</code> component renders as a sticky bar at the bottom of the viewport. It asks for an email address and offers a dismissal option. The challenge is persistence: once dismissed, it should stay dismissed for the session — but not permanently. If the user comes back tomorrow, showing it again is reasonable. If they dismissed it two minutes ago, showing it again is obnoxious.</p>
+
+                    <p><code>sessionStorage</code> is the right scope. It persists across page refreshes within a browser tab but clears when the tab is closed. There's no server-side session, no cookie, no localStorage key that persists indefinitely. The banner uses it with a single flag:</p>
+
+                    <pre><code>function NewsletterBanner() {
+  const [visible, setVisible] = React.useState(() => {
+    return sessionStorage.getItem('newsletter-dismissed') !== 'true';
+  });
+
+  function dismiss() {
+    sessionStorage.setItem('newsletter-dismissed', 'true');
+    setVisible(false);
+  }
+
+  if (!visible) return null;
+
+  return (
+    &lt;div className="newsletter-banner" role="complementary" aria-label="Newsletter signup"&gt;
+      &lt;p&gt;Cape Cod web tips — monthly, no spam.&lt;/p&gt;
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;input type="email" placeholder="you@example.com" required /&gt;
+        &lt;button type="submit"&gt;Subscribe&lt;/button&gt;
+      &lt;/form&gt;
+      &lt;button onClick={dismiss} aria-label="Dismiss newsletter banner" className="banner-close"&gt;✕&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+                    <p>The lazy initializer in <code>useState</code> — the function form <code>() =&gt; sessionStorage.getItem(...)</code> — is important. It reads from <code>sessionStorage</code> once, at mount time, not on every render. The regular form <code>useState(sessionStorage.getItem(...))</code> would call <code>sessionStorage.getItem</code> on every render, which is a minor performance issue but more importantly suggests the wrong intent. The lazy initializer makes it explicit: we're initializing from storage, not reading from it reactively.</p>
+
+                    <p>The component returns <code>null</code> rather than rendering a hidden element when dismissed. This matters for accessibility: a hidden element with <code>display: none</code> is still in the DOM and still carries its <code>role</code> and <code>aria-label</code> attributes, which screen readers may still discover. A <code>null</code> return removes the component from the DOM entirely, which is cleaner and avoids any possibility of a hidden focusable element causing tab-order confusion.</p>
+
+                    <h2>State Management Without a State Management Library</h2>
+
+                    <p>All three components share a pattern worth naming explicitly: they use React's built-in hooks and nothing else. No Redux store, no Zustand atom, no Context provider. Each component owns its own state and the components don't share state with each other.</p>
+
+                    <p>This is the right call for this application's complexity profile. The estimator's state is local to the estimator. The AI showcase's tab state is local to the showcase. The newsletter's dismissed flag is local to the banner. There is no state that needs to be shared across components, no user authentication state to persist globally, no API response cache that multiple components need to read from the same source.</p>
+
+                    <p>When the answer to "where does this state live?" is always "in the component that renders it," you don't need a state management library. Adding one would solve a problem that doesn't exist in exchange for dependency weight, API surface to learn, and a build pipeline to support it. The no-build architecture makes the choice explicit rather than default: every dependency has to justify its presence, because every dependency is a CDN script tag with a version number you're committing to maintain.</p>
+
+                    <h2>What 230+ Commits on a No-Build App Looks Like</h2>
+
+                    <p>The COLEwebdev.org repository has grown steadily since its first commit. A history that reaches 230+ commits on a marketing site with no build pipeline says something about the workflow it enables. Most of those commits are content updates — revised copy, new portfolio items, updated testimonials, pricing adjustments — that required no developer tooling to make and deploy.</p>
+
+                    <p>The five-file sequential loading architecture has remained stable across all those commits. New components get added to the appropriate file; the load order doesn't change. The CSS variables in <code>styles.css</code> have been updated — the paper color went from <code>#F8FAFB</code> to <code>#EEFAF8</code> at some point, introducing a green-blue tint that feels warmer and more distinctive on mobile screens. The Schema.org structured data has been updated to reflect current review counts. The estimator pricing table has been revised as the studio's actual project costs have shifted.</p>
+
+                    <p>None of those changes required touching a build configuration, updating a lockfile, or running a test suite. They required editing the relevant file and pushing. The architecture's sustainability advantage compounds over time: the maintenance surface doesn't grow with the commit count, because there's nothing to maintain except the application code itself.</p>
+
+                    <h2>When to Apply These Patterns</h2>
+
+                    <p>The interactive estimator, AI showcase, and newsletter banner patterns are portable. They work in any React project, with or without a build step. The specific techniques worth taking away:</p>
+
+                    <ul>
+                        <li><strong>Pricing calculators</strong> belong in the browser. A synchronous lookup table with <code>useState</code> is faster, cheaper, and more reliable than a backend pricing API for any configuration space that fits comfortably in a JS object.</li>
+                        <li><strong>Tabbed interfaces with cross-tab side effects</strong> (like resetting a nested toggle when switching tabs) are a natural fit for <code>useReducer</code>. The reducer makes the relationship between state dimensions explicit and testable.</li>
+                        <li><strong>Session-scoped UI state</strong> (banners, onboarding checklists, one-time prompts) belongs in <code>sessionStorage</code>, not <code>localStorage</code>. It persists long enough to avoid re-showing within a session, clears when the user is done, and requires no expiry logic.</li>
+                        <li><strong>CSS transitions over JS animation</strong> for UI element enter/exit. Anything that can be expressed as a class toggle should be — the browser composites it off the main thread and it degrades gracefully via <code>prefers-reduced-motion</code>.</li>
+                    </ul>
+
+                    <p>The COLEwebdev.org codebase is a useful reference for how far React's built-in toolkit stretches before you need external dependencies. The answer, for a marketing site with interactive features, is: quite far. The repo is at <a href="https://github.com/josefresco/COLEwebdev.org" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/COLEwebdev.org</a>. The patterns are in <code>parts-services.jsx</code> and <code>app.jsx</code>.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/colewebdev-react-no-build-step.html" class="btn-secondary">← COLEwebdev.org: React Without the Build Step</a>
+                    <a href="https://github.com/josefresco/COLEwebdev.org" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need an Interactive Marketing Site That's Easy to Maintain?</h2>
+                <p class="cta-description">
+                    Pricing calculators, tabbed showcases, newsletter capture — none of it requires a complex build pipeline
+                    or external libraries. Let's build something that your team can update with a text editor and deploy with a git push.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Marketing Site Inquiry&body=Hi Jose,%0D%0A%0D%0AI read your COLEwebdev.org post and I'm interested in building an interactive marketing site.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
