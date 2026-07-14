@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-label="Pi Backups rclone cloud sync architecture: Raspberry Pi to GPG encryption to rclone to Backblaze B2">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a1d29;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="piGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c3483;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#a94da0;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gpgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#2e6da4;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="rcloneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#145a32;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1e8449;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="b2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7d3c01;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7b2d8b;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:0.8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3498db" opacity="0.9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="100" x2="900" y2="100"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="400" x2="900" y2="400"/>
+    <line x1="150" y1="0" x2="150" y2="500"/>
+    <line x1="300" y1="0" x2="300" y2="500"/>
+    <line x1="450" y1="0" x2="450" y2="500"/>
+    <line x1="600" y1="0" x2="600" y2="500"/>
+    <line x1="750" y1="0" x2="750" y2="500"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="50" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700" fill="#e8eaf6" letter-spacing="0.5">Pi Backups: Cloud Sync with rclone + Backblaze B2</text>
+  <text x="450" y="76" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#8892a4">GPG-encrypted archives synced offsite automatically after every backup run</text>
+
+  <!-- === STEP 1: Raspberry Pi === -->
+  <rect x="40" y="130" width="160" height="220" rx="12" fill="url(#piGrad)" stroke="rgba(169,77,160,0.5)" stroke-width="1.5"/>
+  <!-- Pi board icon -->
+  <rect x="70" y="155" width="100" height="70" rx="6" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <!-- GPIO pins -->
+  <g fill="rgba(200,200,200,0.7)">
+    <rect x="75" y="150" width="4" height="10" rx="1"/>
+    <rect x="84" y="150" width="4" height="10" rx="1"/>
+    <rect x="93" y="150" width="4" height="10" rx="1"/>
+    <rect x="102" y="150" width="4" height="10" rx="1"/>
+    <rect x="111" y="150" width="4" height="10" rx="1"/>
+    <rect x="120" y="150" width="4" height="10" rx="1"/>
+    <rect x="129" y="150" width="4" height="10" rx="1"/>
+    <rect x="138" y="150" width="4" height="10" rx="1"/>
+  </g>
+  <!-- Pi CPU -->
+  <rect x="95" y="173" width="30" height="30" rx="3" fill="rgba(169,77,160,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="110" y="192" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.8)">BCM</text>
+  <!-- USB/HDMI ports -->
+  <rect x="165" y="168" width="8" height="15" rx="2" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <rect x="165" y="188" width="8" height="15" rx="2" fill="rgba(0,0,0,0.6)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <!-- Script label -->
+  <rect x="60" y="235" width="120" height="50" rx="6" fill="rgba(0,0,0,0.35)"/>
+  <text x="120" y="254" text-anchor="middle" font-family="monospace" font-size="10" fill="#ce93d8">$ backup.sh</text>
+  <text x="120" y="270" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)">tar → rsync</text>
+  <text x="120" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)">./verify.sh</text>
+  <!-- Label -->
+  <text x="120" y="322" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#e8eaf6">Raspberry Pi</text>
+  <text x="120" y="339" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#ce93d8">backup source</text>
+
+  <!-- Arrow 1 -->
+  <line x1="202" y1="240" x2="248" y2="240" stroke="url(#arrowGrad)" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <text x="225" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#8892a4">.tar.gz</text>
+
+  <!-- === STEP 2: GPG Encryption === -->
+  <rect x="250" y="130" width="160" height="220" rx="12" fill="url(#gpgGrad)" stroke="rgba(46,109,164,0.5)" stroke-width="1.5"/>
+  <!-- Lock icon -->
+  <rect x="305" y="163" width="50" height="40" rx="6" fill="rgba(0,0,0,0.4)" stroke="rgba(100,160,220,0.4)" stroke-width="1.5"/>
+  <path d="M315 163 Q315 148 330 148 Q345 148 345 163" fill="none" stroke="rgba(100,160,220,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="330" cy="183" r="5" fill="rgba(100,160,220,0.8)"/>
+  <line x1="330" y1="188" x2="330" y2="196" stroke="rgba(100,160,220,0.8)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- GPG command -->
+  <rect x="265" y="216" width="130" height="70" rx="6" fill="rgba(0,0,0,0.35)"/>
+  <text x="330" y="233" text-anchor="middle" font-family="monospace" font-size="9" fill="#90caf9">gpg --symmetric</text>
+  <text x="330" y="248" text-anchor="middle" font-family="monospace" font-size="9" fill="#90caf9">--cipher-algo</text>
+  <text x="330" y="263" text-anchor="middle" font-family="monospace" font-size="9" fill="#90caf9">AES256</text>
+  <text x="330" y="278" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.4)">archive.tar.gz.gpg</text>
+  <!-- Label -->
+  <text x="330" y="322" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#e8eaf6">GPG Encryption</text>
+  <text x="330" y="339" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#90caf9">AES-256 symmetric</text>
+
+  <!-- Arrow 2 -->
+  <line x1="412" y1="240" x2="458" y2="240" stroke="url(#arrowGrad)" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <text x="435" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#8892a4">.gpg</text>
+
+  <!-- === STEP 3: rclone === -->
+  <rect x="460" y="130" width="160" height="220" rx="12" fill="url(#rcloneGrad)" stroke="rgba(30,132,73,0.5)" stroke-width="1.5"/>
+  <!-- rclone logo-ish arrows -->
+  <g filter="url(#glow)">
+    <path d="M520 165 L540 185 L520 205" fill="none" stroke="rgba(46,204,113,0.8)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M540 165 L520 185 L540 205" fill="none" stroke="rgba(46,204,113,0.6)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <!-- rclone config -->
+  <rect x="474" y="217" width="132" height="70" rx="6" fill="rgba(0,0,0,0.35)"/>
+  <text x="540" y="233" text-anchor="middle" font-family="monospace" font-size="9" fill="#a9dfbf">rclone copy</text>
+  <text x="540" y="248" text-anchor="middle" font-family="monospace" font-size="9" fill="#a9dfbf">archive.gpg</text>
+  <text x="540" y="263" text-anchor="middle" font-family="monospace" font-size="9" fill="#a9dfbf">b2:bucket/pi/</text>
+  <text x="540" y="278" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.4)">--checksum</text>
+  <!-- Label -->
+  <text x="540" y="322" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#e8eaf6">rclone</text>
+  <text x="540" y="339" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#a9dfbf">cloud sync engine</text>
+
+  <!-- Arrow 3 -->
+  <line x1="622" y1="240" x2="668" y2="240" stroke="url(#arrowGrad)" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+  <text x="645" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#8892a4">HTTPS</text>
+
+  <!-- === STEP 4: Backblaze B2 === -->
+  <rect x="670" y="130" width="200" height="220" rx="12" fill="url(#b2Grad)" stroke="rgba(230,126,34,0.5)" stroke-width="1.5"/>
+  <!-- Cloud icon -->
+  <ellipse cx="770" cy="175" rx="40" ry="22" fill="rgba(0,0,0,0.3)" stroke="rgba(230,126,34,0.5)" stroke-width="1.5"/>
+  <ellipse cx="748" cy="183" rx="22" ry="16" fill="rgba(0,0,0,0.3)" stroke="rgba(230,126,34,0.5)" stroke-width="1.5"/>
+  <ellipse cx="792" cy="181" rx="18" ry="14" fill="rgba(0,0,0,0.3)" stroke="rgba(230,126,34,0.5)" stroke-width="1.5"/>
+  <rect x="730" y="183" width="80" height="18" rx="0" fill="rgba(0,0,0,0.3)"/>
+  <!-- File stack in cloud -->
+  <g fill="rgba(230,126,34,0.5)" stroke="rgba(255,200,100,0.4)" stroke-width="0.5">
+    <rect x="750" y="159" width="24" height="28" rx="2"/>
+    <rect x="756" y="155" width="24" height="28" rx="2"/>
+    <rect x="762" y="151" width="24" height="28" rx="2"/>
+  </g>
+  <text x="770" y="170" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.7)">.gpg</text>
+  <!-- B2 details -->
+  <rect x="682" y="215" width="176" height="82" rx="6" fill="rgba(0,0,0,0.35)"/>
+  <text x="770" y="232" text-anchor="middle" font-family="monospace" font-size="9" fill="#f0a500">Backblaze B2</text>
+  <text x="770" y="248" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.6)">bucket: pi-backups</text>
+  <text x="770" y="264" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)">retention: 30 days</text>
+  <text x="770" y="280" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)">$0.006 / GB / mo</text>
+  <!-- Label -->
+  <text x="770" y="322" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#e8eaf6">Backblaze B2</text>
+  <text x="770" y="339" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f0a500">offsite object storage</text>
+
+  <!-- Bottom flow label -->
+  <text x="450" y="395" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#8892a4">Triggered automatically by cloud_sync() after every successful backup run</text>
+
+  <!-- Step numbers -->
+  <circle cx="120" cy="120" r="14" fill="rgba(169,77,160,0.3)" stroke="rgba(169,77,160,0.6)" stroke-width="1.5"/>
+  <text x="120" y="125" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#ce93d8">1</text>
+  <circle cx="330" cy="120" r="14" fill="rgba(46,109,164,0.3)" stroke="rgba(46,109,164,0.6)" stroke-width="1.5"/>
+  <text x="330" y="125" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#90caf9">2</text>
+  <circle cx="540" cy="120" r="14" fill="rgba(30,132,73,0.3)" stroke="rgba(30,132,73,0.6)" stroke-width="1.5"/>
+  <text x="540" y="125" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a9dfbf">3</text>
+  <circle cx="770" cy="120" r="14" fill="rgba(230,126,34,0.3)" stroke="rgba(230,126,34,0.6)" stroke-width="1.5"/>
+  <text x="770" y="125" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#f0a500">4</text>
+
+  <!-- Bottom checksum bar -->
+  <rect x="40" y="415" width="820" height="50" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+  <text x="450" y="436" text-anchor="middle" font-family="monospace" font-size="10" fill="#8892a4">SHA-256 checksum verified at each stage  ·  Telegram notification on success or failure  ·  rclone delete prunes copies older than 30 days</text>
+  <text x="450" y="454" text-anchor="middle" font-family="monospace" font-size="10" fill="#4a5568">github.com/josefresco/pi-backups  ·  josefresco.com</text>
+</svg>

@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Pi Backups: Cloud Sync with rclone and Backblaze B2 for True Offsite Redundancy</title>
+      <link>https://josefresco.com/blog/pi-backups-rclone-cloud-sync.html</link>
+      <description>How pi-backups adds a cloud_sync() shell function that calls rclone copy to push each GPG-encrypted archive to a Backblaze B2 bucket immediately after the local backup completes. Covers why same-building rsync isn't true offsite redundancy, why rclone beats provider-native CLIs for portability, the B2 setup steps, the cloud_sync() implementation with --checksum verification and automatic retention pruning, bandwidth throttling with --bwlimit timetable syntax, the verify-cloud.sh restore test script, Telegram notifications for cloud events, and the migration path from the Telegram alerts version.</description>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-rclone-cloud-sync.html</guid>
+    </item>
 
     <item>
       <title>Family Dashboard CalDAV Deep Dive: Shared Calendars, PROPFIND Discovery, and the Three-Request Chain</title>
