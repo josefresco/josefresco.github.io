@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 21 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Pi Backups: Scripted Restore Drills and Disaster Recovery Testing</title>
+      <link>https://josefresco.com/blog/pi-backups-restore-drill.html</link>
+      <description>How the pi-backups July 2026 update adds restore-drill.sh — a script that downloads the most recent encrypted archive from the backup destination, decrypts it with the stored GPG passphrase, extracts it to a temporary directory, and runs four verification checks: file count vs. baseline, total size vs. minimum, presence of sentinel files, and a corrupt-entry scan. Reports pass or fail via Telegram using the existing tg_notify() function, then deletes the temp directory. A calibration mode sets baseline values automatically, and a monthly cron entry on the 1st of each month provides hands-off proof every 30 days that a real restore would succeed.</description>
+      <pubDate>Mon, 21 Jul 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-restore-drill.html</guid>
+    </item>
 
     <item>
       <title>COLEwebdev.org: GitHub Pages Deployment and Building a Project Cost Estimator in React Without npm</title>
