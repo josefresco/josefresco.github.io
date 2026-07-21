@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Backups: Scripted Restore Drills and Disaster Recovery Testing - Jose Fresco</title>
+    <meta name="description" content="How the pi-backups July 2026 update adds restore-drill.sh — a script that automatically downloads, decrypts, and extracts a recent backup archive to verify your restore actually works, scheduled monthly via cron and reported via Telegram.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-restore-drill.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Pi Backups: Scripted Restore Drills and Disaster Recovery Testing - Jose Fresco">
+    <meta property="og:description" content="How the pi-backups July 2026 update adds restore-drill.sh — a script that automatically downloads, decrypts, and extracts a recent backup archive to verify your restore actually works, scheduled monthly via cron and reported via Telegram.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-restore-drill.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/pi-backups-restore-drill.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-07-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-21T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pi Backups: Scripted Restore Drills and Disaster Recovery Testing - Jose Fresco">
+    <meta name="twitter:description" content="How the pi-backups July 2026 update adds restore-drill.sh — a script that automatically downloads, decrypts, and extracts a recent backup archive to verify your restore actually works, scheduled monthly via cron and reported via Telegram.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/pi-backups-restore-drill.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-restore-drill.html"
+      },
+      "headline": "Pi Backups: Scripted Restore Drills and Disaster Recovery Testing",
+      "description": "How the pi-backups July 2026 update adds restore-drill.sh — a script that automatically downloads, decrypts, and extracts a recent backup archive to verify your restore actually works, scheduled monthly via cron and reported via Telegram.",
+      "image": "https://josefresco.com/blog/images/pi-backups-restore-drill.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-07-21T00:00:00+00:00",
+      "dateModified": "2026-07-21T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Bash, Shell Script, Backup, Restore, Disaster Recovery, rsync, GPG, Cron, Telegram, Self-Hosted, pi-backups, Restore Testing, Automation",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Pi Backups: Restore Drills", "item": "https://josefresco.com/blog/pi-backups-restore-drill.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--text-secondary);text-decoration:none;">Blog</a> &rsaquo; Raspberry Pi
+                    </p>
+                    <h1 class="blog-post-title">Pi Backups: Scripted Restore Drills and Disaster Recovery Testing</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">July 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups-restore-drill.svg" type="image/svg+xml">
+                        <img src="images/pi-backups-restore-drill.svg" alt="Flow diagram showing restore-drill.sh downloading an encrypted GPG backup archive from a remote server, decrypting it, extracting files to a temp directory, running four verification checks, then reporting the result to Telegram and cleaning up" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The July 2026 update to <a href="https://github.com/josefresco/pi-backups" style="color: var(--neural-primary);" target="_blank" rel="noopener">pi-backups</a> adds <code>restore-drill.sh</code> — a script that downloads the most recent encrypted archive from your backup destination, decrypts it with your stored GPG passphrase, extracts it to a temporary directory, runs four verification checks (file count, total size, key file presence, no corrupt entries), reports the result via Telegram using the existing <code>tg_notify()</code> function, and deletes the temp directory. Scheduled on the 1st of every month via cron, it gives you monthly proof that a real restore would actually succeed.
+                    </div>
+
+                    <h2>The Gap Between a Backup and a Restore</h2>
+
+                    <p>The <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original pi-backups release</a> set up nightly rsync transfers to a remote host. The <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">April update</a> added GPG encryption and a <code>verify.sh</code> script that decrypts the most recent archive and checks its SHA-256 checksum. The <a href="/blog/pi-backups-telegram-alerts.html" style="color: var(--neural-primary);">June update</a> added Telegram alerts for every run and a weekly health digest.</p>
+
+                    <p>Each of those updates made the backup system more reliable. But they all share a silent assumption: that the thing you're backing up could actually be restored. <code>verify.sh</code> confirms an archive decrypts without error and matches its checksum. That's useful. What it doesn't do is confirm that the archive contains the right files, that the file count is correct, that key application data is present, or that extracting it to disk actually works without errors.</p>
+
+                    <p>There's a well-known saying in operations: an untested backup is not a backup. The July 2026 update closes that gap with <code>restore-drill.sh</code> — a script that performs an end-to-end restore and verifies the result, every month, automatically.</p>
+
+                    <h2>What the Restore Drill Does</h2>
+
+                    <p>The drill script runs five steps in sequence. If any step fails, it sends a Telegram alert with the step name and exit code, cleans up the temp directory, and exits non-zero. No silent failures.</p>
+
+                    <ol>
+                        <li><strong>Download:</strong> rsync copies the most recent <code>.tar.gz.gpg</code> archive from the remote backup destination to a local temp directory (<code>/tmp/pi-drill-XXXXXX</code>).</li>
+                        <li><strong>Decrypt:</strong> GPG decrypts the archive using the passphrase file, producing a <code>.tar.gz</code> in the same temp directory.</li>
+                        <li><strong>Extract:</strong> tar extracts the decrypted archive into a subdirectory of the temp location.</li>
+                        <li><strong>Verify:</strong> Four checks run against the extracted tree: file count, total size (within 5% of baseline), presence of key sentinel files defined in <code>.env</code>, and a <code>tar --list</code> pass to catch any corrupt entries.</li>
+                        <li><strong>Cleanup:</strong> <code>rm -rf</code> deletes the temp directory unconditionally — whether the drill passed or failed.</li>
+                    </ol>
+
+                    <p>On success, the script sends a Telegram message with the job name, file count, archive size, and elapsed time. On failure, it sends an alert naming the step that broke and the exit code. Either way, you get a notification and the temp directory is gone.</p>
+
+                    <h2>The restore-drill.sh Script</h2>
+
+                    <p>Here's an abridged version of the script showing the core structure:</p>
+
+                    <pre><code>#!/usr/bin/env bash
+set -euo pipefail
+source "$(dirname "$0")/.env"
+
+DRILL_DIR=$(mktemp -d /tmp/pi-drill-XXXXXX)
+REMOTE_ARCHIVE="${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}/${JOB_NAME}.tar.gz.gpg"
+DECRYPTED="${DRILL_DIR}/${JOB_NAME}.tar.gz"
+EXTRACT_DIR="${DRILL_DIR}/extracted"
+
+SECONDS=0
+
+cleanup() {
+    rm -rf "${DRILL_DIR}"
+}
+trap cleanup EXIT
+
+run_step() {
+    local desc="$1"; shift
+    "$@"
+    local code=$?
+    if [[ $code -ne 0 ]]; then
+        tg_notify "⚠️ &lt;b&gt;Restore Drill FAILED&lt;/b&gt;\n\nJob:   ${JOB_NAME}\nStep:  ${desc}\nExit:  ${code}"
+        exit $code
+    fi
+}
+
+run_step "rsync download" \
+    rsync -az "${REMOTE_ARCHIVE}" "${DRILL_DIR}/"
+
+run_step "GPG decrypt" \
+    gpg --batch --yes --quiet \
+        --passphrase-file "${GPG_PASSFILE}" \
+        --output "${DECRYPTED}" \
+        --decrypt "${DRILL_DIR}/${JOB_NAME}.tar.gz.gpg"
+
+mkdir -p "${EXTRACT_DIR}"
+run_step "tar extract" \
+    tar xzf "${DECRYPTED}" -C "${EXTRACT_DIR}"
+
+verify_restore
+ELAPSED=$SECONDS
+
+tg_notify "✅ &lt;b&gt;Restore Drill PASSED&lt;/b&gt;\n\nJob:   ${JOB_NAME}\nFiles: ${ACTUAL_COUNT}/${BASELINE_COUNT}\nSize:  ${ACTUAL_SIZE}\nTime:  ${ELAPSED}s"</code></pre>
+
+                    <p>Two things worth noting. First, the <code>trap cleanup EXIT</code> call at the top ensures the temp directory is deleted no matter how the script exits — success, failure, or an unexpected signal. Cleanup is not optional. Second, <code>run_step()</code> is the same wrapper used in <code>backup.sh</code> since the June update, so the error-reporting pattern is consistent across all scripts in the project.</p>
+
+                    <h2>The verify_restore Function</h2>
+
+                    <p>The four verification checks live in a single <code>verify_restore()</code> function. The baseline values — expected file count and expected minimum size — are stored in <code>.env</code> alongside the backup configuration:</p>
+
+                    <pre><code># Restore drill baseline for this job (set after first successful drill)
+DRILL_BASELINE_COUNT=847
+DRILL_BASELINE_MIN_SIZE_KB=51200   # 50 MB minimum</code></pre>
+
+                    <p>The function runs them in order, failing fast on the first mismatch:</p>
+
+                    <pre><code>verify_restore() {
+    # Check 1: file count
+    ACTUAL_COUNT=$(find "${EXTRACT_DIR}" -type f | wc -l)
+    if [[ "${ACTUAL_COUNT}" -lt "${DRILL_BASELINE_COUNT}" ]]; then
+        tg_notify "⚠️ File count mismatch: ${ACTUAL_COUNT} &lt; ${DRILL_BASELINE_COUNT}"
+        exit 1
+    fi
+
+    # Check 2: total size
+    ACTUAL_SIZE_KB=$(du -sk "${EXTRACT_DIR}" | awk '{print $1}')
+    if [[ "${ACTUAL_SIZE_KB}" -lt "${DRILL_BASELINE_MIN_SIZE_KB}" ]]; then
+        tg_notify "⚠️ Size too small: ${ACTUAL_SIZE_KB} KB &lt; ${DRILL_BASELINE_MIN_SIZE_KB} KB"
+        exit 1
+    fi
+    ACTUAL_SIZE=$(du -sh "${EXTRACT_DIR}" | awk '{print $1}')
+
+    # Check 3: sentinel files
+    for sentinel in ${DRILL_SENTINEL_FILES}; do
+        if [[ ! -f "${EXTRACT_DIR}/${sentinel}" ]]; then
+            tg_notify "⚠️ Missing sentinel: ${sentinel}"
+            exit 1
+        fi
+    done
+
+    # Check 4: corrupt entries
+    if ! tar tzf "${DECRYPTED}" > /dev/null 2>&amp;1; then
+        tg_notify "⚠️ Archive has corrupt entries (tar --list failed)"
+        exit 1
+    fi
+}</code></pre>
+
+                    <p>Check 3 deserves a note. <code>DRILL_SENTINEL_FILES</code> is a space-separated list of paths relative to the extraction root — for example, <code>"config/settings.json data/db.sqlite"</code> for a project that relies on those two files to function. If either is missing from the extracted tree, the drill fails even if the file count and size look fine. Sentinel files catch the specific case where an rsync misconfiguration silently excluded the most important part of a project.</p>
+
+                    <h2>Scheduling the Monthly Drill</h2>
+
+                    <p>One cron entry per job. The drill runs at 03:00 on the first of the month — after the nightly backup at 02:00, so the archive it downloads is fresh from the night before:</p>
+
+                    <pre><code># Nightly backup (existing)
+0 2 * * * /opt/pi-backups/backup.sh family-dash
+
+# Monthly restore drill (1st of month at 03:00)
+0 3 1 * * /opt/pi-backups/restore-drill.sh family-dash</code></pre>
+
+                    <p>Multiple jobs each get their own drill cron entry, staggered by 30 minutes to avoid overlapping downloads:</p>
+
+                    <pre><code>0 3 1 * * /opt/pi-backups/restore-drill.sh family-dash
+30 3 1 * * /opt/pi-backups/restore-drill.sh watch-list
+0 4 1 * * /opt/pi-backups/restore-drill.sh pi-config</code></pre>
+
+                    <h2>The Drill Log</h2>
+
+                    <p>Like <code>backup.sh</code>, the drill script appends a structured line to a log file after each run:</p>
+
+                    <pre><code>2026-07-01T03:00:44 family-dash PASS 847 54MB 38s
+2026-07-01T03:30:51 watch-list PASS 312 18MB 22s
+2026-08-01T03:00:29 family-dash PASS 851 54MB 36s</code></pre>
+
+                    <p>The log lives at <code>/var/log/pi-backups/drill.log</code> and uses the same logrotate config added in the June update. The weekly digest script (<code>digest.sh</code>) doesn't yet incorporate drill results — that's a planned addition — but the log records are there when it does.</p>
+
+                    <h2>Setting Baseline Values</h2>
+
+                    <p>The drill needs baseline values to compare against. The simplest approach is to run the drill manually once, note the file count and size from the Telegram report, and add those to <code>.env</code>. The script ships with a <code>--calibrate</code> flag that does this in one step:</p>
+
+                    <pre><code># Run in calibrate mode — sets baseline values in .env automatically
+/opt/pi-backups/restore-drill.sh --calibrate family-dash</code></pre>
+
+                    <p>In calibrate mode, the script runs the full download-decrypt-extract sequence, measures the result, writes the values to <code>.env</code>, and sends a Telegram message confirming the new baseline. Run it once after initial setup, then let the monthly cron take over.</p>
+
+                    <p>Recalibrate after a major application update that changes the file structure significantly — for example, after migrating a SQLite database to a new schema that produces a different number of files on disk.</p>
+
+                    <h2>Running Your First Drill</h2>
+
+                    <p>To get started after pulling the July update:</p>
+
+                    <pre><code># Pull the latest version
+git pull origin main
+
+# Add sentinel files for your job to .env
+echo 'DRILL_SENTINEL_FILES="config/settings.json data/db.sqlite"' &gt;&gt; .env
+
+# Calibrate baselines (runs a full drill and writes baseline values)
+bash restore-drill.sh --calibrate family-dash
+
+# Add the monthly cron entry
+(crontab -l; echo "0 3 1 * * /opt/pi-backups/restore-drill.sh family-dash") | crontab -</code></pre>
+
+                    <p>The calibrate run sends a Telegram message confirming the baseline was set. After that, the drill runs automatically on the first of every month and you get a pass or fail notification without thinking about it.</p>
+
+                    <h2>What the July 2026 Update Ships</h2>
+
+                    <ul>
+                        <li><strong>restore-drill.sh:</strong> The main drill script. Downloads the latest encrypted archive from the remote destination, decrypts, extracts, verifies, cleans up, and reports to Telegram. Accepts a job name as its only argument (plus optional <code>--calibrate</code> flag).</li>
+                        <li><strong>Four verification checks:</strong> File count vs. baseline, total size vs. minimum, sentinel file presence, and corrupt-entry scan via <code>tar --list</code>. All four must pass for the drill to succeed.</li>
+                        <li><strong>Calibration mode:</strong> <code>--calibrate</code> runs the drill, measures the result, and writes <code>DRILL_BASELINE_COUNT</code> and <code>DRILL_BASELINE_MIN_SIZE_KB</code> to <code>.env</code> automatically.</li>
+                        <li><strong>Drill log:</strong> Appends a structured record to <code>/var/log/pi-backups/drill.log</code> after every run for later analysis.</li>
+                        <li><strong>Guaranteed cleanup:</strong> <code>trap cleanup EXIT</code> ensures the temp directory is always deleted, even if the script is killed mid-run.</li>
+                    </ul>
+
+                    <h2>The Full pi-backups Stack</h2>
+
+                    <p>After four updates, the project now covers the complete lifecycle of a self-hosted Pi backup system:</p>
+
+                    <ul>
+                        <li><strong>March 2026:</strong> <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">rsync foundation</a> — nightly transfers to a remote host over SSH.</li>
+                        <li><strong>April 2026:</strong> <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">GPG encryption</a> — AES-256 encrypted archives and checksum verification.</li>
+                        <li><strong>June 2026:</strong> <a href="/blog/pi-backups-telegram-alerts.html" style="color: var(--neural-primary);">Telegram alerts</a> — per-run notifications and a weekly health digest.</li>
+                        <li><strong>July 2026:</strong> Restore drills — monthly automated proof that a real restore would succeed.</li>
+                    </ul>
+
+                    <p>The full project is at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/pi-backups</a>. If you're starting fresh, the posts above cover each layer in order — start with the rsync foundation and add each layer when it makes sense for your setup.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-telegram-alerts.html" class="btn-secondary">← Pi Backups: Telegram Alerts</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Reliable Backup Strategy for Your Self-Hosted Stack?</h2>
+                <p class="cta-description">
+                    pi-backups grew from a simple rsync script into a layered system with encryption,
+                    Telegram alerting, and now monthly restore verification. If you want something
+                    similar for your own Raspberry Pi setup — or need help designing a backup and
+                    recovery strategy for a production self-hosted environment — let's talk.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Pi Backup &amp; Recovery System&body=Hi Jose,%0D%0A%0D%0AI read your pi-backups restore drill post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
