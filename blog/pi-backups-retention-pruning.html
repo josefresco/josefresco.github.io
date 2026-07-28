@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Backups: Retention Policies and Automated Pruning - Jose Fresco</title>
+    <meta name="description" content="How the pi-backups July 2026 update adds prune.sh — a script that enforces daily, weekly, and monthly retention tiers on your remote backup archives, automatically deletes what's expired, and reports freed space via Telegram.">
+    <link rel="canonical" href="https://josefresco.com/blog/pi-backups-retention-pruning.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Pi Backups: Retention Policies and Automated Pruning - Jose Fresco">
+    <meta property="og:description" content="How the pi-backups July 2026 update adds prune.sh — a script that enforces daily, weekly, and monthly retention tiers on your remote backup archives, automatically deletes what's expired, and reports freed space via Telegram.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/pi-backups-retention-pruning.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/pi-backups-retention-pruning.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-07-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-28T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+    <meta property="article:tag" content="Raspberry Pi">
+    <meta property="article:tag" content="Backup">
+    <meta property="article:tag" content="Bash">
+    <meta property="article:tag" content="Shell Script">
+    <meta property="article:tag" content="Self-Hosted">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pi Backups: Retention Policies and Automated Pruning - Jose Fresco">
+    <meta name="twitter:description" content="How the pi-backups July 2026 update adds prune.sh — a script that enforces daily, weekly, and monthly retention tiers on your remote backup archives, automatically deletes what's expired, and reports freed space via Telegram.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/pi-backups-retention-pruning.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/pi-backups-retention-pruning.html"
+      },
+      "headline": "Pi Backups: Retention Policies and Automated Pruning",
+      "description": "How the pi-backups July 2026 update adds prune.sh — a script that enforces daily, weekly, and monthly retention tiers on your remote backup archives, automatically deletes what's expired, and reports freed space via Telegram.",
+      "image": "https://josefresco.com/blog/images/pi-backups-retention-pruning.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-07-28T00:00:00+00:00",
+      "dateModified": "2026-07-28T00:00:00+00:00",
+      "keywords": "Raspberry Pi, Bash, Shell Script, Backup, Retention Policy, Pruning, rsync, GPG, Cron, Telegram, Self-Hosted, pi-backups, Storage Management, Automation",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Pi Backups: Retention Policies and Automated Pruning", "item": "https://josefresco.com/blog/pi-backups-retention-pruning.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--text-secondary);text-decoration:none;">Blog</a> &rsaquo; Raspberry Pi
+                    </p>
+                    <h1 class="blog-post-title">Pi Backups: Retention Policies and Automated Pruning</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">July 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/pi-backups-retention-pruning.svg" type="image/svg+xml">
+                        <img src="images/pi-backups-retention-pruning.svg" alt="Diagram showing pi-backups retention policy tiers: daily archives kept for 7 days, weekly for 4 weeks, monthly for 6 months, with prune.sh deleting expired archives and reporting freed space via Telegram" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> The latest update to <a href="https://github.com/josefresco/pi-backups" style="color: var(--neural-primary);" target="_blank" rel="noopener">pi-backups</a> adds <code>prune.sh</code> — a script that lists every archive in your remote backup directory, classifies each one as daily, weekly, or monthly using its timestamp, deletes anything outside your configured retention windows, reports the freed space via Telegram using the existing <code>tg_notify()</code> function, and appends a structured record to <code>/var/log/pi-backups/prune.log</code>. Configure three numbers in <code>.env</code> (<code>PRUNE_KEEP_DAILY</code>, <code>PRUNE_KEEP_WEEKLY</code>, <code>PRUNE_KEEP_MONTHLY</code>) and add a single weekly cron entry. From that point on, your remote backup directory stays within a predictable storage budget without you thinking about it.
+                    </div>
+
+                    <h2>The Storage Problem That Grows Quietly</h2>
+
+                    <p>The <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">original pi-backups release</a> transferred a nightly archive to a remote host over SSH. The <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">April update</a> added GPG encryption. The <a href="/blog/pi-backups-telegram-alerts.html" style="color: var(--neural-primary);">June update</a> added Telegram alerts and a weekly health digest. The <a href="/blog/pi-backups-restore-drill.html" style="color: var(--neural-primary);">July 21st update</a> added monthly restore drills to prove a recovery would actually work.</p>
+
+                    <p>Each of those updates made the system more robust. But none of them touched the remote directory where archives accumulate. A nightly backup job producing a 50 MB archive generates roughly 1.5 GB per month, 18 GB per year, per job. Run two or three jobs and that's 50 GB or more sitting on a remote host, most of it redundant — you don't need 180 daily snapshots of the same data to be safe, and keeping them isn't free.</p>
+
+                    <p>The solution is a retention policy: keep enough archives to give you meaningful recovery options at different time horizons, and automatically delete everything beyond that.</p>
+
+                    <h2>The Grandfather-Father-Son Model</h2>
+
+                    <p>The retention scheme in <code>prune.sh</code> is a variant of the classic grandfather-father-son (GFS) rotation used by enterprise backup systems for decades. The idea is to keep archives at three different granularities:</p>
+
+                    <ul>
+                        <li><strong>Daily (son):</strong> The most recent N daily archives. For most self-hosted Pi applications, 7 days is enough to catch a misconfiguration or accidental deletion you didn't notice immediately.</li>
+                        <li><strong>Weekly (father):</strong> One archive per week, kept for W weeks. This is the middle tier — useful for recovering from a problem that wasn't caught within the first week (a slow data corruption, a bug that landed two Wednesdays ago).</li>
+                        <li><strong>Monthly (grandfather):</strong> One archive per month, kept for M months. The long-term safety net. Useful for recovering from something that only became apparent months later — a silent schema migration that mangled data you rarely touched.</li>
+                    </ul>
+
+                    <p>The GFS model gives you 7 + 4 + 6 = 17 recovery points for a family-dash-scale job instead of 180. The storage footprint drops from 9 GB per month (if you never prune) to roughly 850 MB total (capped, stable forever).</p>
+
+                    <h2>Archive Naming Convention</h2>
+
+                    <p>For the classification logic to work, archives need timestamps in their filenames. The <code>backup.sh</code> script in pi-backups already produces archives named with an ISO 8601 date:</p>
+
+                    <pre><code>family-dash.2026-07-27.tar.gz.gpg
+family-dash.2026-07-26.tar.gz.gpg
+family-dash.2026-07-20.tar.gz.gpg
+family-dash.2026-07-13.tar.gz.gpg
+family-dash.2026-06-30.tar.gz.gpg
+...</code></pre>
+
+                    <p><code>prune.sh</code> parses the <code>YYYY-MM-DD</code> segment from each filename and uses it to determine which retention tier the archive belongs to. No <code>stat</code> calls, no filesystem metadata — just the filename, which means the classification works correctly even if an archive was rsynced to a new destination where timestamps were reset.</p>
+
+                    <h2>The prune.sh Script</h2>
+
+                    <p>Here's an abridged version of the script showing the core logic:</p>
+
+                    <pre><code>#!/usr/bin/env bash
+set -euo pipefail
+source "$(dirname "$0")/.env"
+
+JOB_NAME="${1:?Usage: prune.sh &lt;job-name&gt;}"
+REMOTE_DIR="${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+
+# --- Collect all archives for this job ---
+mapfile -t ALL_ARCHIVES &lt; &lt;(
+    ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+        "ls ${REMOTE_PATH}/${JOB_NAME}.*.tar.gz.gpg 2>/dev/null" \
+    | sort -r
+)
+
+[[ ${#ALL_ARCHIVES[@]} -eq 0 ]] && { echo "No archives found."; exit 0; }
+
+# --- Classify each archive ---
+TODAY=$(date +%s)
+declare -a KEEP=()
+declare -a PRUNE=()
+
+DAILY_COUNT=0
+declare -A WEEKLY_SEEN   # key = year-weeknum
+declare -A MONTHLY_SEEN  # key = year-month
+
+for archive in "${ALL_ARCHIVES[@]}"; do
+    # Extract date from filename: jobname.YYYY-MM-DD.tar.gz.gpg
+    date_str=$(basename "${archive}" | grep -oP '\d{4}-\d{2}-\d{2}')
+    archive_epoch=$(date -d "${date_str}" +%s 2>/dev/null) || continue
+
+    age_days=$(( (TODAY - archive_epoch) / 86400 ))
+    week_key=$(date -d "${date_str}" +%G-%V)   # ISO year + week number
+    month_key=$(date -d "${date_str}" +%Y-%m)
+
+    keep=false
+
+    # Tier 1: daily — keep the N most recent
+    if [[ ${DAILY_COUNT} -lt ${PRUNE_KEEP_DAILY} ]]; then
+        keep=true
+        (( DAILY_COUNT++ ))
+    # Tier 2: weekly — keep one per week for W weeks
+    elif [[ -z "${WEEKLY_SEEN[${week_key}]+x}" ]] \
+         && [[ ${#WEEKLY_SEEN[@]} -lt ${PRUNE_KEEP_WEEKLY} ]]; then
+        keep=true
+        WEEKLY_SEEN["${week_key}"]=1
+    # Tier 3: monthly — keep one per month for M months
+    elif [[ -z "${MONTHLY_SEEN[${month_key}]+x}" ]] \
+         && [[ ${#MONTHLY_SEEN[@]} -lt ${PRUNE_KEEP_MONTHLY} ]]; then
+        keep=true
+        MONTHLY_SEEN["${month_key}"]=1
+    fi
+
+    if $keep; then
+        KEEP+=("${archive}")
+    else
+        PRUNE+=("${archive}")
+    fi
+done</code></pre>
+
+                    <p>The loop iterates archives from newest to oldest (the <code>sort -r</code> above) and fills the daily bucket first, then the weekly bucket, then the monthly bucket. An archive can only land in one tier. Anything that doesn't fit in any tier goes into <code>PRUNE</code>.</p>
+
+                    <h2>Deleting Expired Archives</h2>
+
+                    <p>Once the classification pass is complete, the deletion step is a single SSH call:</p>
+
+                    <pre><code># --- Delete pruned archives ---
+PRUNED_COUNT=0
+PRUNED_SIZE_KB=0
+
+if [[ ${#PRUNE[@]} -gt 0 ]]; then
+    for archive in "${PRUNE[@]}"; do
+        # Measure size before deleting
+        size_kb=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" \
+            "du -k \"${archive}\" | awk '{print \$1}'")
+        PRUNED_SIZE_KB=$(( PRUNED_SIZE_KB + size_kb ))
+
+        ssh "${REMOTE_USER}@${REMOTE_HOST}" "rm -f \"${archive}\""
+        (( PRUNED_COUNT++ ))
+    done
+fi
+
+PRUNED_SIZE=$(( PRUNED_SIZE_KB / 1024 )) # in MB</code></pre>
+
+                    <p>Each archive is measured before deletion so the Telegram report can show how much space was freed. The <code>rm -f</code> flag suppresses errors on already-absent files — this makes the script idempotent, so running it twice in a row is safe.</p>
+
+                    <h2>Reporting and Logging</h2>
+
+                    <p>After deletion, two things happen: a Telegram notification via the existing <code>tg_notify()</code> function from the June update, and a log entry appended to <code>/var/log/pi-backups/prune.log</code>:</p>
+
+                    <pre><code># --- Notify ---
+if [[ ${PRUNED_COUNT} -gt 0 ]]; then
+    tg_notify "🗑️ &lt;b&gt;Prune complete&lt;/b&gt;
+
+Job:     ${JOB_NAME}
+Removed: ${PRUNED_COUNT} archive(s)
+Freed:   ${PRUNED_SIZE} MB
+Kept:    ${#KEEP[@]} archive(s)
+Policy:  daily×${PRUNE_KEEP_DAILY} weekly×${PRUNE_KEEP_WEEKLY} monthly×${PRUNE_KEEP_MONTHLY}"
+else
+    tg_notify "✅ &lt;b&gt;Prune: nothing to remove&lt;/b&gt;
+
+Job:   ${JOB_NAME}
+Kept:  ${#KEEP[@]} archive(s) (within policy)"
+fi
+
+# --- Log ---
+echo "$(date -Iseconds) ${JOB_NAME} pruned=${PRUNED_COUNT} freed=${PRUNED_SIZE}MB kept=${#KEEP[@]}" \
+    &gt;&gt; /var/log/pi-backups/prune.log</code></pre>
+
+                    <p>If there's nothing to prune — which will be the case for the first few weeks after enabling it — the script sends a clean "nothing to remove" confirmation rather than going silent. Silence from an automated script is often indistinguishable from a crash, so an explicit "ran and found nothing" message is worth the character count.</p>
+
+                    <h2>Configuring Retention in .env</h2>
+
+                    <p>Three new variables control the retention windows. Add them to the existing <code>.env</code> file for each job:</p>
+
+                    <pre><code># Retention policy (add to .env for each job)
+PRUNE_KEEP_DAILY=7      # Keep this many daily archives
+PRUNE_KEEP_WEEKLY=4     # Keep one archive per week, this many weeks back
+PRUNE_KEEP_MONTHLY=6    # Keep one archive per month, this many months back</code></pre>
+
+                    <p>The defaults above give you 7 daily recovery points, 4 weekly points, and 6 monthly points. For a small application like family-dash at ~50 MB per archive, that's roughly 850 MB total storage on the remote host — stable forever, not growing each day.</p>
+
+                    <p>If your backups are larger or your storage is more constrained, reduce the windows. If you need more granular weekly recovery for a high-change application, increase <code>PRUNE_KEEP_WEEKLY</code>. The numbers are intentionally separate so you can tune each tier independently.</p>
+
+                    <h2>How Weekly and Monthly Archives Are Selected</h2>
+
+                    <p>The weekly tier keeps one archive per ISO week number. So if you have archives from July 21, July 22, and July 23 (all in week 30), only the July 23 archive survives as the week-30 representative — the others expire once they fall outside the daily window. The archive that "wins" is always the most recent within that week, because the loop iterates newest-first.</p>
+
+                    <p>The monthly tier works the same way: one archive per calendar month, newest-first. The archive from July 31 wins over July 30 for the July monthly slot. This means month-end archives tend to be selected naturally, without any special cron timing.</p>
+
+                    <p>One edge case worth knowing: if you ran backup.sh multiple times in a day and have multiple archives with the same date, they're treated as the same day for retention purposes. Only the first one encountered (newest by file listing sort) fills the daily slot; duplicates are pruned. This shouldn't come up in normal operation but it's useful to know if you ever ran a manual backup mid-day.</p>
+
+                    <h2>Scheduling Prune Runs</h2>
+
+                    <p>Pruning once a week after the nightly backup is enough. A Saturday run is a reasonable default — it catches the full prior week of dailies and confirms the weekly retention tier is populated:</p>
+
+                    <pre><code># Existing: nightly backup at 02:00
+0 2 * * * /opt/pi-backups/backup.sh family-dash
+
+# New: weekly prune on Saturday at 03:00 (after backup completes)
+0 3 * * 6 /opt/pi-backups/prune.sh family-dash</code></pre>
+
+                    <p>Multiple jobs get separate prune entries, staggered to avoid concurrent SSH connections to the same remote host:</p>
+
+                    <pre><code>0 3 * * 6 /opt/pi-backups/prune.sh family-dash
+30 3 * * 6 /opt/pi-backups/prune.sh watch-list
+0 4 * * 6 /opt/pi-backups/prune.sh pi-config</code></pre>
+
+                    <p>You can run prune more frequently without harm — the idempotent deletion means running it daily would just confirm nothing to remove most days, with actual deletions only happening after the daily window is full (after day 7). Weekly is the practical choice because it keeps the Telegram notifications meaningful rather than becoming background noise.</p>
+
+                    <h2>Running Your First Prune</h2>
+
+                    <p>Pull the update, add the retention variables to <code>.env</code>, then run a dry pass before committing to the cron:</p>
+
+                    <pre><code># Pull the latest version
+git pull origin main
+
+# Add retention config to .env
+cat &gt;&gt; .env &lt;&lt;'EOF'
+PRUNE_KEEP_DAILY=7
+PRUNE_KEEP_WEEKLY=4
+PRUNE_KEEP_MONTHLY=6
+EOF
+
+# Dry run — preview what would be pruned (prints keep/prune lists, no deletions)
+bash prune.sh --dry-run family-dash
+
+# If the output looks right, run for real
+bash prune.sh family-dash
+
+# Add the weekly cron
+(crontab -l; echo "0 3 * * 6 /opt/pi-backups/prune.sh family-dash") | crontab -</code></pre>
+
+                    <p>The <code>--dry-run</code> flag prints the full keep list and prune list without touching anything on the remote host. Review what the first run would delete before letting it proceed — especially important if you have archives going back months that you want to verify are being classified correctly.</p>
+
+                    <h2>Storage Projection: Before and After</h2>
+
+                    <p>The difference between "never prune" and "GFS retention" becomes significant quickly. For a family-dash backup job producing a 54 MB archive nightly:</p>
+
+                    <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem;">
+                        <thead>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                <th style="padding:0.6rem 0.5rem;text-align:left;color:var(--neural-primary);">Scenario</th>
+                                <th style="padding:0.6rem 0.5rem;text-align:right;color:var(--neural-primary);">After 1 month</th>
+                                <th style="padding:0.6rem 0.5rem;text-align:right;color:var(--neural-primary);">After 6 months</th>
+                                <th style="padding:0.6rem 0.5rem;text-align:right;color:var(--neural-primary);">After 1 year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                                <td style="padding:0.5rem;color:var(--text-secondary);">No pruning</td>
+                                <td style="padding:0.5rem;text-align:right;color:var(--text-secondary);">1.6 GB</td>
+                                <td style="padding:0.5rem;text-align:right;color:var(--text-secondary);">9.7 GB</td>
+                                <td style="padding:0.5rem;text-align:right;color:var(--text-secondary);">19.3 GB</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.5rem;color:var(--text-secondary);">GFS retention (7/4/6)</td>
+                                <td style="padding:0.5rem;text-align:right;color:#00d4ff;">~500 MB</td>
+                                <td style="padding:0.5rem;text-align:right;color:#00d4ff;">~850 MB</td>
+                                <td style="padding:0.5rem;text-align:right;color:#00d4ff;">~850 MB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>After the monthly tier fills up (6 months in), storage stabilizes at the maximum window size and stays there. You're not paying for storage you can't use — the oldest monthly archive rotates out as a new one comes in.</p>
+
+                    <h2>Interaction with the Weekly Digest</h2>
+
+                    <p>The <code>digest.sh</code> script added in the June update sends a weekly summary of all backup runs. Starting with this update, the digest also reads from <code>prune.log</code> and includes a pruning section in the weekly report:</p>
+
+                    <pre><code>📊 &lt;b&gt;Weekly Backup Digest&lt;/b&gt;
+
+Period: Mon Jul 21 – Sun Jul 27
+
+Backups (7 runs):
+  ✅ family-dash: 7/7 succeeded · avg 38s · avg 54 MB
+  ✅ watch-list:  7/7 succeeded · avg 22s · avg 18 MB
+
+Prune (1 run, Sat Jul 26):
+  family-dash: removed 6 archives, freed 312 MB
+  watch-list:  removed 4 archives, freed 68 MB
+
+Restore drill: next on Aug 1</code></pre>
+
+                    <p>The digest integration means you get the pruning summary as part of the weekly report you were already reading, rather than as a separate Saturday notification buried in your Telegram history.</p>
+
+                    <h2>What This Update Ships</h2>
+
+                    <ul>
+                        <li><strong>prune.sh:</strong> The main pruning script. Lists remote archives via SSH, classifies each as daily/weekly/monthly using the filename timestamp, deletes expired archives, reports freed space via Telegram, and logs to <code>/var/log/pi-backups/prune.log</code>. Accepts <code>--dry-run</code> to preview without deleting.</li>
+                        <li><strong>Three retention tiers:</strong> Daily (keep N most recent), weekly (keep one per week for W weeks), monthly (keep one per month for M months). All three are configurable in <code>.env</code>.</li>
+                        <li><strong>Idempotent deletion:</strong> <code>rm -f</code> makes double-runs safe. Running prune twice never deletes more than the first run did.</li>
+                        <li><strong>digest.sh integration:</strong> The weekly digest now includes a pruning section pulled from <code>prune.log</code>, so you see backup health and storage management in a single weekly report.</li>
+                        <li><strong>Dry-run mode:</strong> Pass <code>--dry-run</code> to see exactly which archives would be kept and which would be deleted before your first live run.</li>
+                    </ul>
+
+                    <h2>The Full pi-backups Stack</h2>
+
+                    <p>After five updates, pi-backups covers the complete lifecycle of a self-hosted Pi backup system — from the initial transfer to long-term storage management:</p>
+
+                    <ul>
+                        <li><strong>March 2026:</strong> <a href="/blog/pi-backups-raspberry-pi.html" style="color: var(--neural-primary);">rsync foundation</a> — nightly transfers to a remote host over SSH.</li>
+                        <li><strong>April 2026:</strong> <a href="/blog/pi-backups-encryption.html" style="color: var(--neural-primary);">GPG encryption</a> — AES-256 encrypted archives and checksum verification.</li>
+                        <li><strong>June 2026:</strong> <a href="/blog/pi-backups-telegram-alerts.html" style="color: var(--neural-primary);">Telegram alerts</a> — per-run notifications and a weekly health digest.</li>
+                        <li><strong>July 21, 2026:</strong> <a href="/blog/pi-backups-restore-drill.html" style="color: var(--neural-primary);">Restore drills</a> — monthly automated proof that a real restore would succeed.</li>
+                        <li><strong>July 28, 2026:</strong> Retention policies — GFS pruning that keeps storage bounded and stable forever.</li>
+                    </ul>
+
+                    <p>The full project is at <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/pi-backups</a>. If you're starting fresh, begin with the rsync foundation and layer each addition when it becomes relevant to your setup.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-restore-drill.html" class="btn-secondary">← Pi Backups: Restore Drills</a>
+                    <a href="https://github.com/josefresco/pi-backups" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need a Robust Backup Strategy for Your Self-Hosted Stack?</h2>
+                <p class="cta-description">
+                    pi-backups grew from a simple rsync script into a layered system with encryption,
+                    Telegram alerting, monthly restore verification, and now automated retention management.
+                    If you want something similar for your own Raspberry Pi setup — or need help designing
+                    a backup and recovery strategy for a production self-hosted environment — let's talk.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Pi Backup Strategy&body=Hi Jose,%0D%0A%0D%0AI read your pi-backups retention post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
