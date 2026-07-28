@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img" aria-label="Diagram showing pi-backups retention policy: daily archives kept for 7 days, weekly for 4 weeks, monthly for 6 months, with prune.sh removing expired archives and reporting via Telegram">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#12141f"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#00a8cc"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#6025c4"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00d4ff"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#00d4ff" stroke-width="0.5">
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="360" x2="900" y2="360"/>
+    <line x1="150" y1="0" x2="150" y2="480"/>
+    <line x1="300" y1="0" x2="300" y2="480"/>
+    <line x1="450" y1="0" x2="450" y2="480"/>
+    <line x1="600" y1="0" x2="600" y2="480"/>
+    <line x1="750" y1="0" x2="750" y2="480"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="17" font-weight="700" fill="#ffffff">pi-backups: Retention Policies &amp; Automated Pruning</text>
+  <text x="450" y="56" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="11" fill="#94a3b8">prune.sh · Daily × 7 · Weekly × 4 · Monthly × 6</text>
+
+  <!-- ─────── SECTION: Remote backup dir (timeline of archives) ─────── -->
+  <text x="30" y="95" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="600" fill="#94a3b8" letter-spacing="1">REMOTE BACKUP DIRECTORY</text>
+
+  <!-- Archive boxes: 14 total — 7 recent (kept daily), 4 older weekly, 3 older monthly, some pruned -->
+  <!-- We'll show a timeline row with labeled boxes -->
+
+  <!-- Day labels -->
+  <text x="30" y="117" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">30d ago</text>
+  <text x="855" y="117" text-anchor="end" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">today</text>
+
+  <!-- Timeline axis -->
+  <line x1="30" y1="122" x2="870" y2="122" stroke="#1e2535" stroke-width="1.5"/>
+
+  <!-- Pruned archives (red, old) — 6 boxes at left -->
+  <!-- box helper: x y w=50 h=32 -->
+  <!-- Pruned: days 30, 25, 22, 20, 18, 16 -->
+  <g opacity="0.6">
+    <rect x="30"  y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="54"  y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-30</text>
+
+    <rect x="84"  y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="108" y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-25</text>
+
+    <rect x="138" y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="162" y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-22</text>
+
+    <rect x="192" y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="216" y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-20</text>
+
+    <rect x="246" y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="270" y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-18</text>
+
+    <rect x="300" y="126" width="48" height="30" rx="4" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+    <text x="324" y="146" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#ef4444">d-16</text>
+  </g>
+
+  <!-- Monthly kept (amber) — 2 boxes -->
+  <rect x="358" y="126" width="48" height="30" rx="4" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="382" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="600" fill="#f59e0b">d-28</text>
+  <text x="382" y="153" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" fill="#f59e0b">monthly</text>
+
+  <!-- Weekly kept (purple) — 3 boxes -->
+  <rect x="470" y="126" width="48" height="30" rx="4" fill="rgba(124,58,237,0.2)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="494" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="600" fill="#a78bfa">d-14</text>
+  <text x="494" y="153" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" fill="#a78bfa">weekly</text>
+
+  <rect x="524" y="126" width="48" height="30" rx="4" fill="rgba(124,58,237,0.2)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="548" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="600" fill="#a78bfa">d-7</text>
+  <text x="548" y="153" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" fill="#a78bfa">weekly</text>
+
+  <!-- Daily kept (cyan) — 7 boxes -->
+  <rect x="630" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="647" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-6</text>
+
+  <rect x="669" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="686" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-5</text>
+
+  <rect x="708" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="725" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-4</text>
+
+  <rect x="747" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="764" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-3</text>
+
+  <rect x="786" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="803" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-2</text>
+
+  <rect x="825" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="842" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#00d4ff">d-1</text>
+
+  <!-- "today" box (brightest) -->
+  <rect x="855" y="122" width="34" height="38" rx="4" fill="rgba(0,212,255,0.3)" stroke="#00d4ff" stroke-width="2" filter="url(#glow)"/>
+  <text x="872" y="143" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="700" fill="#00d4ff">now</text>
+
+  <!-- Legend for archive boxes -->
+  <rect x="30"  y="174" width="10" height="10" rx="2" fill="rgba(239,68,68,0.3)" stroke="#ef4444" stroke-width="1"/>
+  <text x="44"  y="183" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#94a3b8">Pruned (expired)</text>
+  <rect x="145" y="174" width="10" height="10" rx="2" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="159" y="183" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#94a3b8">Monthly (keep 6)</text>
+  <rect x="270" y="174" width="10" height="10" rx="2" fill="rgba(124,58,237,0.2)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="284" y="183" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#94a3b8">Weekly (keep 4)</text>
+  <rect x="390" y="174" width="10" height="10" rx="2" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="404" y="183" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#94a3b8">Daily (keep 7)</text>
+
+  <!-- ─────── FLOW: prune.sh box ─────── -->
+  <rect x="345" y="218" width="210" height="68" rx="10" fill="rgba(26,29,41,0.95)" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="450" y="238" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="13" font-weight="700" fill="#00d4ff">prune.sh</text>
+  <text x="450" y="254" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">1. list remote archives via SSH</text>
+  <text x="450" y="268" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">2. classify daily / weekly / monthly</text>
+  <text x="450" y="282" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">3. delete expired · report · log</text>
+
+  <!-- Arrow from timeline into prune.sh -->
+  <line x1="450" y1="196" x2="450" y2="216" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowCyan)"/>
+
+  <!-- ─────── THREE TIERS below prune.sh ─────── -->
+  <!-- Daily tier -->
+  <rect x="50" y="322" width="180" height="70" rx="8" fill="rgba(0,212,255,0.07)" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="140" y="343" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="12" font-weight="700" fill="#00d4ff">Daily</text>
+  <text x="140" y="360" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">Keep last 7 archives</text>
+  <text x="140" y="376" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#64748b">PRUNE_KEEP_DAILY=7</text>
+  <text x="140" y="388" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">≈ 350 MB @ 50 MB/backup</text>
+
+  <!-- Weekly tier -->
+  <rect x="360" y="322" width="180" height="70" rx="8" fill="rgba(124,58,237,0.1)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="450" y="343" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="12" font-weight="700" fill="#a78bfa">Weekly</text>
+  <text x="450" y="360" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">Keep last 4 Sunday archives</text>
+  <text x="450" y="376" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#64748b">PRUNE_KEEP_WEEKLY=4</text>
+  <text x="450" y="388" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">≈ 200 MB additional</text>
+
+  <!-- Monthly tier -->
+  <rect x="670" y="322" width="180" height="70" rx="8" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="760" y="343" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="12" font-weight="700" fill="#f59e0b">Monthly</text>
+  <text x="760" y="360" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#94a3b8">Keep last 6 month-end archives</text>
+  <text x="760" y="376" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" fill="#64748b">PRUNE_KEEP_MONTHLY=6</text>
+  <text x="760" y="388" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">≈ 300 MB long-term safety net</text>
+
+  <!-- Arrows from prune.sh down to each tier -->
+  <path d="M420,288 L140,320" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowCyan)"/>
+  <line x1="450" y1="288" x2="450" y2="320" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowAmber)"/>
+  <path d="M480,288 L760,320" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowAmber)"/>
+
+  <!-- ─────── Bottom row: Telegram + prune.log ─────── -->
+  <!-- Telegram box -->
+  <rect x="140" y="420" width="200" height="42" rx="8" fill="rgba(26,29,41,0.9)" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="240" y="437" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="600" fill="#a78bfa">Telegram Notification</text>
+  <text x="240" y="452" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">pruned 8 archives, freed 412 MB</text>
+
+  <!-- prune.log box -->
+  <rect x="560" y="420" width="200" height="42" rx="8" fill="rgba(26,29,41,0.9)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="660" y="437" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="600" fill="#f59e0b">/var/log/pi-backups/prune.log</text>
+  <text x="660" y="452" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">structured record per run</text>
+
+  <!-- Arrows from prune.sh down to telegram and log -->
+  <path d="M390,288 L240,418" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowAmber)"/>
+  <path d="M510,288 L660,418" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrowAmber)"/>
+
+  <!-- Top-right: "max storage" badge -->
+  <rect x="690" y="210" width="180" height="60" rx="8" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+  <text x="780" y="230" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="600" fill="#00d4ff">Max storage (per job)</text>
+  <text x="780" y="248" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff">~850 MB</text>
+  <text x="780" y="263" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="9" fill="#64748b">vs. unbounded without pruning</text>
+</svg>

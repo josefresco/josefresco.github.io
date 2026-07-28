@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Pi Backups: Retention Policies and Automated Pruning</title>
+      <link>https://josefresco.com/blog/pi-backups-retention-pruning.html</link>
+      <description>How the pi-backups update adds prune.sh — a script that enforces daily, weekly, and monthly retention tiers on remote backup archives using a grandfather-father-son rotation scheme. Classifies each archive by filename timestamp, deletes expired ones via SSH, reports freed space via Telegram using the existing tg_notify() function, and appends a structured record to /var/log/pi-backups/prune.log. Three variables in .env control the retention windows (PRUNE_KEEP_DAILY, PRUNE_KEEP_WEEKLY, PRUNE_KEEP_MONTHLY). A --dry-run flag previews what would be deleted before committing. Storage caps at roughly 850 MB per job and stays there indefinitely instead of growing by 50 MB every night.</description>
+      <pubDate>Mon, 28 Jul 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/pi-backups-retention-pruning.html</guid>
+    </item>
 
     <item>
       <title>Pi Backups: Scripted Restore Drills and Disaster Recovery Testing</title>
