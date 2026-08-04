@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Diagram showing Divi SpeedWorks plugin removing redundant CSS and scripts to improve Divi 4 page load performance">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a1d29;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff4444;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+
+  <!-- Ambient glow spots -->
+  <circle cx="150" cy="225" r="180" fill="#7c3aed" opacity="0.06"/>
+  <circle cx="650" cy="100" r="150" fill="#00d4ff" opacity="0.05"/>
+  <circle cx="580" cy="370" r="120" fill="#00ff88" opacity="0.04"/>
+
+  <!-- Title area -->
+  <text x="400" y="42" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="url(#accentGrad)" text-anchor="middle">Divi SpeedWorks</text>
+  <text x="400" y="62" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Lightweight Performance Plugin for Divi 4</text>
+
+  <!-- ====== LEFT PANEL: Before ====== -->
+  <rect x="30" y="82" width="220" height="320" rx="12" fill="rgba(26,29,41,0.9)" stroke="rgba(255,68,68,0.4)" stroke-width="1.5"/>
+  <rect x="30" y="82" width="220" height="36" rx="12" fill="rgba(255,68,68,0.15)"/>
+  <rect x="30" y="106" width="220" height="12" rx="0" fill="rgba(255,68,68,0.15)"/>
+  <text x="140" y="105" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#ff6b6b" text-anchor="middle">WITHOUT PLUGIN</text>
+
+  <!-- Asset rows - BAD (red X) -->
+  <!-- Row labels -->
+  <g font-family="Inter, sans-serif" font-size="9.5" fill="#94a3b8">
+    <text x="56" y="143">wp-block-library.css</text>
+    <text x="56" y="165">wp-block-library-theme.css</text>
+    <text x="56" y="187">global-styles.css</text>
+    <text x="56" y="209">classic-theme-styles.css</text>
+    <text x="56" y="231">dc_enqueue_styles (dupe)</text>
+    <text x="56" y="253">wp_enqueue_global_styles</text>
+    <text x="56" y="275">et-core-common.js</text>
+  </g>
+
+  <!-- Red filled bars showing loaded assets -->
+  <rect x="46" y="132" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="154" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="176" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="198" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="220" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="242" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+  <rect x="46" y="264" width="194" height="14" rx="3" fill="rgba(255,68,68,0.25)" stroke="rgba(255,68,68,0.5)" stroke-width="1"/>
+
+  <!-- CLS indicator - bad -->
+  <rect x="46" y="290" width="194" height="28" rx="5" fill="rgba(255,68,68,0.15)" stroke="rgba(255,68,68,0.4)" stroke-width="1"/>
+  <text x="143" y="303" font-family="Inter, sans-serif" font-size="9" fill="#ff6b6b" text-anchor="middle" font-weight="600">Theme Builder CSS → &lt;body&gt;</text>
+  <text x="143" y="314" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8" text-anchor="middle">Causes Layout Shift (CLS)</text>
+
+  <!-- Score indicator -->
+  <rect x="46" y="332" width="194" height="56" rx="6" fill="rgba(255,68,68,0.1)"/>
+  <text x="143" y="350" font-family="Inter, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">PAGE WEIGHT</text>
+  <text x="143" y="374" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#ff4444" text-anchor="middle" filter="url(#glow)">Heavy</text>
+
+  <!-- ====== MIDDLE: Plugin arrow / process ====== -->
+  <!-- Plugin box -->
+  <rect x="286" y="142" width="228" height="166" rx="14" fill="rgba(26,29,41,0.95)" stroke="url(#accentGrad)" stroke-width="2"/>
+  <rect x="286" y="142" width="228" height="36" rx="14" fill="rgba(0,212,255,0.1)"/>
+  <rect x="286" y="164" width="228" height="14" rx="0" fill="rgba(0,212,255,0.1)"/>
+
+  <text x="400" y="165" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#00d4ff" text-anchor="middle" filter="url(#glow)">⚡ DIVI SPEEDWORKS</text>
+
+  <!-- Plugin tiers -->
+  <text x="302" y="196" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#7c3aed">TIER 1 — Built-in Fixes</text>
+  <text x="302" y="211" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Remove 4 unused style sheets</text>
+  <text x="302" y="224" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Remove 2 redundant actions</text>
+  <text x="302" y="237" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Dequeue frontend builder script</text>
+  <text x="302" y="250" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Apply 6 Divi perf settings</text>
+
+  <line x1="302" y1="260" x2="498" y2="260" stroke="rgba(124,58,237,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <text x="302" y="275" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#7c3aed">TIER 2 — Per-site Enqueues</text>
+  <text x="302" y="290" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Custom dequeue via site-config.php</text>
+  <text x="302" y="303" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8">Admin toggle per fix</text>
+
+  <!-- CLS fix pill -->
+  <rect x="302" y="152" width="0" height="0" rx="0"/>
+
+  <!-- Arrows left → plugin -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00d4ff"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#00ff88"/>
+    </marker>
+  </defs>
+  <line x1="250" y1="220" x2="284" y2="220" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowBlue)" opacity="0.7"/>
+  <text x="267" y="215" font-family="Inter, sans-serif" font-size="7.5" fill="#00d4ff" text-anchor="middle" opacity="0.8">intercept</text>
+
+  <!-- Arrow plugin → right -->
+  <line x1="516" y1="220" x2="544" y2="220" stroke="#00ff88" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="530" y="215" font-family="Inter, sans-serif" font-size="7.5" fill="#00ff88" text-anchor="middle">optimized</text>
+
+  <!-- CLS fix box below plugin -->
+  <rect x="310" y="318" width="180" height="52" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+  <text x="400" y="335" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#00d4ff" text-anchor="middle">CLS FIX (Output Buffering)</text>
+  <text x="400" y="349" font-family="Inter, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Regex extracts Theme Builder styles</text>
+  <text x="400" y="362" font-family="Inter, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Reinjects before &lt;/head&gt; → no shift</text>
+  <!-- Arrow from plugin down to cls -->
+  <line x1="400" y1="310" x2="400" y2="316" stroke="#00d4ff" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+
+  <!-- ====== RIGHT PANEL: After ====== -->
+  <rect x="550" y="82" width="220" height="320" rx="12" fill="rgba(26,29,41,0.9)" stroke="rgba(0,255,136,0.4)" stroke-width="1.5"/>
+  <rect x="550" y="82" width="220" height="36" rx="12" fill="rgba(0,255,136,0.1)"/>
+  <rect x="550" y="106" width="220" height="12" rx="0" fill="rgba(0,255,136,0.1)"/>
+  <text x="660" y="105" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#00ff88" text-anchor="middle">WITH PLUGIN</text>
+
+  <!-- Asset rows - GOOD (green check) -->
+  <g font-family="Inter, sans-serif" font-size="9.5" fill="#94a3b8">
+    <text x="576" y="143">wp-block-library.css</text>
+    <text x="576" y="165">wp-block-library-theme.css</text>
+    <text x="576" y="187">global-styles.css</text>
+    <text x="576" y="209">classic-theme-styles.css</text>
+    <text x="576" y="231">dc_enqueue_styles (dupe)</text>
+    <text x="576" y="253">wp_enqueue_global_styles</text>
+    <text x="576" y="275">et-core-common.js</text>
+  </g>
+
+  <!-- Strikethrough bars - removed assets -->
+  <rect x="566" y="132" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="139" x2="760" y2="139" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="154" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="161" x2="760" y2="161" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="176" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="183" x2="760" y2="183" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="198" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="205" x2="760" y2="205" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="220" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="227" x2="760" y2="227" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="242" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="249" x2="760" y2="249" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+  <rect x="566" y="264" width="194" height="14" rx="3" fill="rgba(0,255,136,0.06)" stroke="rgba(0,255,136,0.2)" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="566" y1="271" x2="760" y2="271" stroke="rgba(255,68,68,0.6)" stroke-width="1"/>
+
+  <!-- CLS indicator - good -->
+  <rect x="566" y="290" width="194" height="28" rx="5" fill="rgba(0,255,136,0.1)" stroke="rgba(0,255,136,0.4)" stroke-width="1"/>
+  <text x="663" y="303" font-family="Inter, sans-serif" font-size="9" fill="#00ff88" text-anchor="middle" font-weight="600">Theme Builder CSS → &lt;head&gt;</text>
+  <text x="663" y="314" font-family="Inter, sans-serif" font-size="8.5" fill="#94a3b8" text-anchor="middle">Zero Layout Shift (CLS = 0)</text>
+
+  <!-- Score indicator -->
+  <rect x="566" y="332" width="194" height="56" rx="6" fill="rgba(0,255,136,0.08)"/>
+  <text x="663" y="350" font-family="Inter, sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">PAGE WEIGHT</text>
+  <text x="663" y="374" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#00ff88" text-anchor="middle" filter="url(#softglow)">Lean</text>
+
+  <!-- Bottom label -->
+  <text x="400" y="422" font-family="Inter, sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Activate → Settings → Divi SpeedWorks · github.com/josefresco/divi-speed-works</text>
+</svg>

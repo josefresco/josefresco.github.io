@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 04 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax</title>
+      <link>https://josefresco.com/blog/divi-speedworks.html</link>
+      <description>How Divi SpeedWorks removes four unused Gutenberg stylesheets, two redundant WordPress actions, and a builder-only script from Divi 4 frontend pages — and fixes Cumulative Layout Shift caused by Divi's Theme Builder injecting inline styles into the page body instead of the head. The CLS fix uses PHP output buffering to extract and reinjest those style blocks before &lt;/head&gt;, eliminating the reflow that drives CLS scores above zero on virtually every Theme Builder site. Tier 2 adds a site-config.php file for registering per-site custom dequeues. All fixes are individually toggleable from WP Admin → Settings → Divi SpeedWorks.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/divi-speedworks.html</guid>
+    </item>
 
     <item>
       <title>Pi Backups: Retention Policies and Automated Pruning</title>

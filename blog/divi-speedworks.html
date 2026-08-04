@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax - Jose Fresco</title>
+    <meta name="description" content="How Divi SpeedWorks removes Divi 4's redundant CSS, unused Gutenberg assets, and duplicate enqueues — and fixes Cumulative Layout Shift caused by Theme Builder injecting styles into the page body instead of the head.">
+    <link rel="canonical" href="https://josefresco.com/blog/divi-speedworks.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax - Jose Fresco">
+    <meta property="og:description" content="How Divi SpeedWorks removes Divi 4's redundant CSS, unused Gutenberg assets, and duplicate enqueues — and fixes Cumulative Layout Shift caused by Theme Builder injecting styles into the page body instead of the head.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/divi-speedworks.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/divi-speedworks.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-08-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-04T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="WordPress">
+    <meta property="article:tag" content="WordPress">
+    <meta property="article:tag" content="Divi">
+    <meta property="article:tag" content="Performance">
+    <meta property="article:tag" content="PHP">
+    <meta property="article:tag" content="Speed Optimization">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax - Jose Fresco">
+    <meta name="twitter:description" content="How Divi SpeedWorks removes Divi 4's redundant CSS, unused Gutenberg assets, and duplicate enqueues — and fixes Cumulative Layout Shift caused by Theme Builder injecting styles into the page body.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/divi-speedworks.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/divi-speedworks.html"
+      },
+      "headline": "Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax",
+      "description": "How Divi SpeedWorks removes Divi 4's redundant CSS, unused Gutenberg assets, and duplicate enqueues — and fixes Cumulative Layout Shift caused by Theme Builder injecting styles into the page body instead of the head.",
+      "image": "https://josefresco.com/blog/images/divi-speedworks.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-08-04T00:00:00+00:00",
+      "dateModified": "2026-08-04T00:00:00+00:00",
+      "keywords": "WordPress, Divi, Divi 4, Performance, PHP, Speed Optimization, CLS, Cumulative Layout Shift, Gutenberg, Enqueue, Theme Builder, Core Web Vitals, wp_dequeue_style, Plugin",
+      "articleSection": "WordPress",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax", "item": "https://josefresco.com/blog/divi-speedworks.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--text-secondary);text-decoration:none;">Blog</a> &rsaquo; WordPress
+                    </p>
+                    <h1 class="blog-post-title">Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">August 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/divi-speedworks.svg" type="image/svg+xml">
+                        <img src="images/divi-speedworks.svg" alt="Diagram showing Divi SpeedWorks removing redundant CSS and scripts from a Divi 4 site, turning a heavy page into a lean one with zero layout shift" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/divi-speed-works" style="color: var(--neural-primary);" target="_blank" rel="noopener">Divi SpeedWorks</a> is a lightweight WordPress plugin that fixes the performance overhead Divi 4 carries by default — dequeuing four unused Gutenberg stylesheets, removing two redundant WordPress actions, and stripping a builder-only script from frontend page loads. A separate CLS fix intercepts page output with an output buffer, extracts Divi Theme Builder's inline style blocks from the body, and reinjects them before <code>&lt;/head&gt;</code> so they load before first paint. All fixes toggle individually in <strong>WP Admin → Settings → Divi SpeedWorks</strong>, and a Tier 2 system lets you add site-specific custom dequeues through a config file.
+                    </div>
+
+                    <h2>The Problem With Divi Out of the Box</h2>
+
+                    <p>Divi is one of the most popular WordPress themes — and for good reason. The visual builder is powerful, the Theme Builder gives you global header, footer, and template control, and the page-building experience is genuinely fast once you know your way around it.</p>
+
+                    <p>But what Divi ships by default is a different story. Activate Divi on a fresh WordPress install and your frontend page loads carry a set of assets that don't belong there: Gutenberg block editor stylesheets (you're not using Gutenberg), WordPress core global styles (overridden by Divi anyway), duplicate CSS enqueues from child theme hooks, and an admin-only Divi builder script that fires on every public page for no reason.</p>
+
+                    <p>None of these are catastrophic individually. But they compound. A PageSpeed Insights run on a typical Divi 4 site will flag render-blocking resources, unused CSS, and a Cumulative Layout Shift score above zero — all attributable to how Divi's enqueue stack interacts with WordPress core. These are fixable problems, and fixing them doesn't require a managed performance suite or a CDN subscription. It requires knowing which hooks to call and which styles to dequeue.</p>
+
+                    <p>Divi SpeedWorks packages those fixes into a plugin that activates clean and requires no configuration for the common case.</p>
+
+                    <h2>The Two-Tier Architecture</h2>
+
+                    <p>The plugin is organized into two tiers that reflect two different categories of performance fix:</p>
+
+                    <p><strong>Tier 1</strong> contains hardcoded optimizations that are safe across every Divi 4 installation. These are fixes for things Divi does wrong by default — shipping assets that have no business being on a Divi-powered frontend. Tier 1 runs automatically when the plugin is active, without reading a config file or checking site-specific state.</p>
+
+                    <p><strong>Tier 2</strong> handles per-site enqueue cleanup. Every WordPress site accumulates plugin scripts and stylesheets that load globally but aren't needed on every page — a contact form plugin loading its validation JS on a blog post, a gallery plugin loading lightbox CSS on the homepage. Tier 2 gives you a structured way to register those dequeues once, in a config file, and have them applied automatically on every frontend request.</p>
+
+                    <p>The CLS fix sits outside both tiers. It's a separate class (<code>DSW_CLS_Fix</code>) that uses output buffering to address a specific Divi Theme Builder behavior. Because it touches the entire HTML output rather than the enqueue stack, it's architecturally distinct from the dequeue-based fixes in Tiers 1 and 2.</p>
+
+                    <h2>Tier 1: The Seven Built-in Fixes</h2>
+
+                    <p>The <code>DSW_Built_In_Fixes</code> class defines nine optimizations (with some targeting the same resource via multiple hooks). Here's what each one removes and why it shouldn't be there:</p>
+
+                    <h3>1. Remove <code>dc_enqueue_styles</code></h3>
+
+                    <p>Some Divi child themes call <code>dc_enqueue_styles()</code> in their <code>functions.php</code> to enqueue the parent theme's stylesheet alongside a child stylesheet. This is a common pattern from the pre-Divi-4 era, but in Divi 4, it causes the parent theme CSS to load twice — once via Divi's own enqueue and once via the child theme's explicit call. The fix removes the <code>dc_enqueue_styles</code> action entirely, letting Divi handle its own stylesheet loading.</p>
+
+                    <h3>2. Remove <code>wp_enqueue_global_styles</code></h3>
+
+                    <p>WordPress core outputs a <code>&lt;style&gt;</code> block of "global styles" tied to the block editor's design system — custom color palettes, spacing presets, typography settings. On a Divi site, these global styles serve no purpose because Divi manages all of that through its own options system. The fix removes <code>wp_enqueue_global_styles</code> from both <code>wp_enqueue_scripts</code> and <code>wp_footer</code>, which is where WordPress sneaks a fallback copy in on some theme configurations.</p>
+
+                    <h3>3–6. Dequeue Gutenberg Stylesheets</h3>
+
+                    <p>Activating WordPress core ships four block-editor stylesheets that load on every page, even when you've never touched the block editor:</p>
+
+                    <ul>
+                        <li><code>wp-block-library</code> — Base block styles for paragraphs, images, headings, etc.</li>
+                        <li><code>wp-block-library-theme</code> — Theme-specific block style variants</li>
+                        <li><code>global-styles</code> — The computed stylesheet from the site editor's global styles panel</li>
+                        <li><code>classic-theme-styles</code> — Fallback styles WordPress adds when the active theme doesn't declare block support</li>
+                    </ul>
+
+                    <p>Divi 4 doesn't use any of these. Its own builder output replaces them entirely. The plugin dequeues and deregisters all four on <code>wp_enqueue_scripts</code> at priority 100, after WordPress has finished registering them.</p>
+
+                    <h3>7. Dequeue <code>et-core-common</code></h3>
+
+                    <p><code>et-core-common</code> is Elegant Themes' shared JavaScript library — it powers inline editing, drag-and-drop builder controls, and other visual editing features. None of those are needed on a public-facing frontend page. Divi enqueues it everywhere by default rather than gating it to admin or builder contexts. The plugin dequeues it on <code>wp_enqueue_scripts</code> so it never loads on frontend page requests.</p>
+
+                    <p>Each of these seven fixes is individually toggleable from the settings page. If one causes a conflict on a specific site — an unusual child theme that actually depends on <code>dc_enqueue_styles</code>, for example — you can disable that fix without rolling back the others.</p>
+
+                    <h2>How the Built-in Fixes Are Applied</h2>
+
+                    <p>The implementation in <code>DSW_Built_In_Fixes</code> is straightforward. The class defines a <code>FIXES</code> constant that maps each fix identifier to its type (<code>remove_action</code>, <code>dequeue_style</code>, or <code>dequeue_script</code>) and its WordPress hook target:</p>
+
+                    <pre><code>const FIXES = [
+    'dc_enqueue_styles'           => ['type' => 'remove_action', 'hook' => 'wp_head'],
+    'wp_enqueue_global_styles'    => ['type' => 'remove_action', 'hook' => 'wp_enqueue_scripts'],
+    'wp-block-library'            => ['type' => 'dequeue_style'],
+    'wp-block-library-theme'      => ['type' => 'dequeue_style'],
+    'global-styles'               => ['type' => 'dequeue_style'],
+    'classic-theme-styles'        => ['type' => 'dequeue_style'],
+    'et-core-common'              => ['type' => 'dequeue_script'],
+];</code></pre>
+
+                    <p>On initialization, the class iterates the FIXES array, checks whether each fix is enabled via the <code>dsw_built_in_fix_overrides</code> database option, and either calls <code>remove_action()</code> or hooks a <code>wp_dequeue_style()</code> / <code>wp_dequeue_script()</code> call at the right priority. The <code>is_enabled()</code> check defaults to true for every fix — opt-out rather than opt-in.</p>
+
+                    <h2>The CLS Fix: Output Buffering to Move Styles to &lt;head&gt;</h2>
+
+                    <p>The CLS fix addresses a specific behavior in Divi's Theme Builder. When you create a global page template, header, or footer in the Theme Builder, Divi injects the template's module CSS as an inline <code>&lt;style&gt;</code> block directly into the page body — not the <code>&lt;head&gt;</code>. It looks like this in the rendered HTML:</p>
+
+                    <pre><code>&lt;body&gt;
+  &lt;!-- page content begins... --&gt;
+  &lt;style id="et-builder-module-design-header-cached-inline-styles"&gt;
+    /* theme builder template CSS */
+    .et_pb_section { ... }
+    .et_pb_row { ... }
+  &lt;/style&gt;
+  &lt;!-- more content... --&gt;
+&lt;/body&gt;</code></pre>
+
+                    <p>The browser sees the page structure before it sees the styles that govern that structure. Under normal network conditions this might not be noticeable. Under throttled conditions — a mobile network, a slow connection, or just a server under load — the browser renders content with default styles first, then reflows when the inline stylesheet arrives. That reflow is Cumulative Layout Shift. It's not hypothetical; it shows up as a non-zero CLS score in PageSpeed Insights on virtually every Divi Theme Builder site.</p>
+
+                    <h3>How the Fix Works</h3>
+
+                    <p>The <code>DSW_CLS_Fix</code> class uses PHP output buffering to intercept the complete HTML response before it's sent to the browser:</p>
+
+                    <pre><code>add_action('template_redirect', function() {
+    ob_start([$this, 'process_output']);
+}, 1);  // Priority 1 — starts before Divi outputs anything</code></pre>
+
+                    <p>The <code>process_output()</code> callback receives the complete HTML string as its argument. It runs a <code>preg_match_all()</code> to find all <code>&lt;style&gt;</code> blocks whose IDs match the Divi Theme Builder pattern:</p>
+
+                    <pre><code>preg_match_all(
+    '/<style[^>]+id="et-builder-module-design-[^"]*-cached-inline-styles"[^>]*>.*?<\/style>/si',
+    $html,
+    $matches
+);</code></pre>
+
+                    <p>The regex captures both the standard variant (<code>et-builder-module-design-*-cached-inline-styles</code>) and any deferred variants Divi might generate. Each matched block is removed from its original location in the body using <code>str_replace()</code>, then all captured blocks are concatenated and injected immediately before <code>&lt;/head&gt;</code>:</p>
+
+                    <pre><code>$injected_styles = implode("\n", $matches[0]);
+$html = str_replace('</head>', $injected_styles . "\n</head>", $html);
+return $html;</code></pre>
+
+                    <p>The result: the browser receives all layout-critical CSS in <code>&lt;head&gt;</code> before parsing the body. It can compute the correct layout on the first pass without any reflow. CLS drops to zero.</p>
+
+                    <h3>Guards and Safety Checks</h3>
+
+                    <p>The CLS fix has three automatic disablement conditions:</p>
+
+                    <ul>
+                        <li><strong>Admin context:</strong> The fix skips <code>is_admin()</code> requests. Running output buffering in the admin would interfere with the Divi builder's own live editor output.</li>
+                        <li><strong>REST API requests:</strong> Buffering REST responses would corrupt JSON output. The fix checks <code>defined('REST_REQUEST')</code> and exits early.</li>
+                        <li><strong>Manual override:</strong> Setting <code>dsw_disable_cls_fix</code> to <code>'yes'</code> in the database disables the buffer entirely, reachable via the settings page toggle.</li>
+                    </ul>
+
+                    <h2>Tier 2: Per-Site Custom Dequeues</h2>
+
+                    <p>Every WordPress site accumulates its own specific set of unnecessary global assets. A booking plugin loads its calendar stylesheet on the homepage. A forms plugin loads its conditional logic JavaScript on posts. A slider plugin loads its library on pages that don't have sliders.</p>
+
+                    <p>Divi SpeedWorks handles this through <code>site-config.php</code>, a configuration file that the plugin reads to register site-specific dequeues. You add entries there once and they're applied on every frontend page load from that point on:</p>
+
+                    <pre><code>return [
+    'dequeue_styles' => [
+        'woocommerce-general',       // WooCommerce styles on non-shop pages
+        'yoast-seo-frontend',        // Yoast SEO frontend CSS
+        'contact-form-7',            // CF7 styles on pages without forms
+    ],
+    'dequeue_scripts' => [
+        'wc-cart-fragments',         // WooCommerce cart fragments AJAX (if not using cart)
+        'jquery-blockui',
+    ],
+];</code></pre>
+
+                    <p>The <code>DSW_Enqueue_Fixes</code> class reads this config and hooks the dequeues at <code>wp_enqueue_scripts</code> priority 999, after all plugins have finished their own enqueue calls. If a specific script or style isn't registered on a given page, the dequeue call is a no-op — it won't throw an error for an asset that wasn't present to begin with.</p>
+
+                    <p>This system gives you the benefits of a per-site performance audit without having to remember which plugin added which asset or which hook to target — you define the list once and the plugin handles it on every load.</p>
+
+                    <h2>The Admin Settings Interface</h2>
+
+                    <p>All of the plugin's toggles are accessible from <strong>WP Admin → Settings → Divi SpeedWorks</strong>. The page is intentionally minimal — a set of checkboxes, one per Tier 1 fix, plus a toggle for the CLS fix. Each checkbox maps directly to a value in the <code>dsw_built_in_fix_overrides</code> option.</p>
+
+                    <p>The admin panel is registered through <code>DSW_Admin</code>, which adds a submenu page under Settings and handles option saves via the standard WordPress Settings API. No custom REST endpoints, no AJAX handlers — just the settings form pattern that WordPress has supported since version 2.0.</p>
+
+                    <p>The settings page also shows your current Divi version and PHP version in a small environment block at the bottom, so you can confirm the plugin's minimum requirements are met without leaving the page.</p>
+
+                    <h2>Divi Performance Settings Applied at Activation</h2>
+
+                    <p>On activation, Divi SpeedWorks writes six Divi-native performance settings into the <code>et_divi</code> options array via <code>DSW_Divi</code>. These are settings that Elegant Themes provides but doesn't enable by default:</p>
+
+                    <ul>
+                        <li><strong>Static CSS generation:</strong> Pre-generates the compiled Divi stylesheet as a static file instead of computing it on each request.</li>
+                        <li><strong>Critical CSS:</strong> Enables Divi's above-the-fold CSS extraction.</li>
+                        <li><strong>Deferred JS:</strong> Moves non-critical Divi scripts below the fold.</li>
+                        <li><strong>Dynamic CSS:</strong> Loads only the module-specific CSS for modules actually used on each page.</li>
+                        <li><strong>Lazy loading images:</strong> Adds the native <code>loading="lazy"</code> attribute to images below the fold.</li>
+                        <li><strong>Limit post revisions:</strong> Reduces database bloat from the Divi builder's aggressive auto-save behavior.</li>
+                    </ul>
+
+                    <p>These settings are written once at activation and don't run on every page load. If you've already configured Divi performance settings manually, the plugin will write its defaults on first activation — you can adjust any of them afterward through the normal Divi Theme Options panel.</p>
+
+                    <h2>What the Plugin Does Not Do</h2>
+
+                    <p>Divi SpeedWorks is intentionally scoped to what can be fixed universally, without knowing anything about a specific site's content or traffic patterns. It does not:</p>
+
+                    <ul>
+                        <li>Cache pages or serve cached HTML</li>
+                        <li>Minify or concatenate CSS and JavaScript</li>
+                        <li>Configure CDN delivery or asset prefetching</li>
+                        <li>Optimize images beyond enabling Divi's native lazy loading flag</li>
+                        <li>Manage database cleanup or revision limits beyond the initial activation write</li>
+                    </ul>
+
+                    <p>For those tasks, a dedicated caching plugin (WP Rocket, W3 Total Cache, LiteSpeed Cache) handles them better than any general plugin can. Divi SpeedWorks is not a replacement for those tools — it's the set of Divi-specific fixes those tools don't know to apply.</p>
+
+                    <h2>Installation</h2>
+
+                    <p>The plugin is a standard WordPress plugin. No Composer, no build step:</p>
+
+                    <pre><code># Download the plugin
+git clone https://github.com/josefresco/divi-speed-works.git
+
+# Copy to your WordPress plugins directory
+cp -r divi-speed-works /path/to/wp-content/plugins/
+
+# Or zip it and upload via WP Admin → Plugins → Add New → Upload Plugin</code></pre>
+
+                    <p>After activation, visit <strong>Settings → Divi SpeedWorks</strong> to review the enabled fixes. The defaults are safe for any standard Divi 4 installation with no child theme overrides — if you're running a custom child theme, check whether it relies on <code>dc_enqueue_styles()</code> before leaving that fix enabled.</p>
+
+                    <p>For Tier 2 dequeues, edit <code>site-config.php</code> in the plugin directory to add site-specific scripts and styles you want to remove. The format is a PHP array return as shown in the configuration section above.</p>
+
+                    <h2>Who This Is For</h2>
+
+                    <p>If you're managing a Divi 4 site and running into PageSpeed Insights flags for unused CSS, render-blocking resources, or a CLS score above zero — and you'd rather fix those with a targeted plugin than a general-purpose performance suite — Divi SpeedWorks gives you the Divi-specific fixes in one place.</p>
+
+                    <p>It's also useful as a reference if you're writing your own Divi performance customizations. The <code>DSW_Built_In_Fixes</code> class documents exactly which handles to dequeue and at which priority. The <code>DSW_CLS_Fix</code> class demonstrates the output buffering pattern for intercepting and rewriting page HTML before it's sent — a technique that applies beyond CLS fixes to any scenario where you need to transform the final HTML response in PHP.</p>
+
+                    <p>The full project is at <a href="https://github.com/josefresco/divi-speed-works" target="_blank" rel="noopener" style="color: var(--neural-primary);">github.com/josefresco/divi-speed-works</a>. Version 1.1.0 requires WordPress 5.6+, PHP 7.4+, and Divi 4.x.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/pi-backups-retention-pruning.html" class="btn-secondary">← Pi Backups: Retention Pruning</a>
+                    <a href="https://github.com/josefresco/divi-speed-works" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Need Divi Performance Work Done Right?</h2>
+                <p class="cta-description">
+                    Divi SpeedWorks started as a personal toolkit for recurring Divi performance audits — a way to
+                    apply the same tested fixes across multiple client sites without re-deriving them each time.
+                    If you need Divi optimization for a production site, a custom WordPress plugin, or help
+                    identifying what's slowing your site down, let's talk.
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:josefresco@gmail.com?subject=Divi Performance&body=Hi Jose,%0D%0A%0D%0AI read your Divi SpeedWorks post and have a project in mind.%0D%0A%0D%0AProject details:%0D%0A%0D%0ABest regards," class="btn-cta">
+                        Start a Project
+                    </a>
+                    <a href="/projects" class="btn-secondary">View More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
