@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>COLEwebdev.org: Adding AI-Powered SEO and Speed Audits to a No-Build React App</title>
+      <link>https://josefresco.com/blog/colewebdev-ai-seo-speed-audits.html</link>
+      <description>How COLEwebdev.org's July–August 2026 update adds AI SEO audits that ingest live Google Analytics and Search Console data before generating recommendations, and a platform-agnostic AI speed audit covering WordPress, e-commerce, and custom-built sites. Also covers five new service pages targeting content gap keywords, a bulk SEO pass across 70 pages correcting titles, descriptions, and schema, and expanded cross-linking between town and industry pages. All changes ship through the existing zero-npm, no-build React 18 architecture — no CI pipeline, no bundler, no build step.</description>
+      <pubDate>Tue, 11 Aug 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/colewebdev-ai-seo-speed-audits.html</guid>
+    </item>
 
     <item>
       <title>Divi SpeedWorks: A WordPress Plugin That Fixes Divi 4's Hidden Performance Tax</title>
