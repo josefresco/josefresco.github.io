@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall</title>
+      <link>https://josefresco.com/blog/family-dash-v334.html</link>
+      <description>How Family Dashboard v3.34 enlarges the weather summary text and removes the AI-generated commentary line — and what six months of daily use on a wall-mounted iPad teaches about readability, service worker reliability, CalDAV calendar discovery, and building software for a physical space rather than a browser tab.</description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/family-dash-v334.html</guid>
+    </item>
 
     <item>
       <title>COLEwebdev.org: Adding AI-Powered SEO and Speed Audits to a No-Build React App</title>

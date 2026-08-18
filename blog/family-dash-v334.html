@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall - Jose Fresco</title>
+    <meta name="description" content="How Family Dashboard v3.34 enlarges weather summary text and removes the AI commentary line — and what six months of daily use on a wall-mounted iPad teaches you about readability, service worker reliability, and building software for a real room.">
+    <link rel="canonical" href="https://josefresco.com/blog/family-dash-v334.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall - Jose Fresco">
+    <meta property="og:description" content="How Family Dashboard v3.34 enlarges weather summary text and removes the AI commentary line — and what six months of daily use on a wall-mounted iPad teaches you about readability, service workers, and building for a real room.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/family-dash-v334.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/family-dash-v334.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-18T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="Raspberry Pi">
+    <meta property="article:tag" content="Raspberry Pi">
+    <meta property="article:tag" content="Family Dashboard">
+    <meta property="article:tag" content="JavaScript">
+    <meta property="article:tag" content="Self-Hosted">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="PWA">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall - Jose Fresco">
+    <meta name="twitter:description" content="How Family Dashboard v3.34 enlarges weather summary text and removes the AI commentary line — plus lessons from six months of daily use on a wall-mounted iPad.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/family-dash-v334.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/family-dash-v334.html"
+      },
+      "headline": "Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall",
+      "description": "How Family Dashboard v3.34 enlarges weather summary text and removes the AI commentary line — and what six months of daily use on a wall-mounted iPad teaches you about readability, service worker reliability, and building software for a real room.",
+      "image": "https://josefresco.com/blog/images/family-dash-v334.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-08-18T00:00:00+00:00",
+      "dateModified": "2026-08-18T00:00:00+00:00",
+      "keywords": "Family Dashboard, Raspberry Pi, Node.js, Express, weather display, PWA, service worker, self-hosted, CalDAV, JavaScript, wall display, readability, OpenWeatherMap",
+      "articleSection": "Raspberry Pi",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall", "item": "https://josefresco.com/blog/family-dash-v334.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--text-secondary);text-decoration:none;">Blog</a> &rsaquo; Raspberry Pi
+                    </p>
+                    <h1 class="blog-post-title">Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">Raspberry Pi</span>
+                        <span class="blog-date">August 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/family-dash-v334.svg" type="image/svg+xml">
+                        <img src="images/family-dash-v334.svg" alt="Family Dashboard v3.34 running on a wall-mounted iPad showing enlarged weather summary text and calendar events from three CalDAV calendars" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> Family Dashboard v3.34 makes two focused changes to the weather display — weather summary text is larger, and the AI-generated commentary line is removed. That's it. After six months of the dashboard running on a Raspberry Pi and displaying on an older iPad mounted to the kitchen wall, those two lines of code have more daily impact than almost anything else that shipped since v3.30. This post covers the change itself, why it matters at arm's length from across a room, and what six months of production use has revealed about the architecture. The full repo is at <a href="https://github.com/josefresco/family-dash" style="color: var(--neural-primary);" target="_blank" rel="noopener">github.com/josefresco/family-dash</a>.
+                    </div>
+
+                    <h2>Six Months Is Long Enough to Learn What Matters</h2>
+
+                    <p>Family Dashboard moved from Vercel to a Raspberry Pi in April 2026. At the time, the motivation was latency: an Express server running on the local network could proxy OpenWeatherMap and CalDAV requests without the cold-start delay that Vercel introduced on an older iPad that rarely reloaded the page. The move worked — initial load time dropped noticeably, and the service worker cache kept the display stable through Pi reboots.</p>
+
+                    <p>What the move also did was make the dashboard's shortcomings more visible. When a web app lives in a browser tab that you open occasionally, display quality is a background concern. When it lives on a wall in the room where your family starts and ends every day, every rough edge becomes obvious. Six months of that kind of exposure surfaces a different class of bugs than six months of developer testing.</p>
+
+                    <p>The list of things that surfaced was long: events from shared Google Calendar invitations not appearing (fixed in May with CalDAV collection discovery), the wind direction panel showing a static default instead of live data when the forecast endpoint returned wind data on a different object path (fixed in June), the weather summary text generating a trailing commentary sentence that added filler where there should have been negative space.</p>
+
+                    <p>v3.34 addresses the last one.</p>
+
+                    <h2>What the Update Actually Changed</h2>
+
+                    <p>The July 10 commit is two changes bundled into one PR. Both touch the weather summary display rendered at the bottom of the weather panel:</p>
+
+                    <p><strong>The commentary line was dropped.</strong> The weather narrative engine — which converts raw OpenWeatherMap data into a short prose summary — had been appending a second sentence after the forecast description. The intent was to add personality: something like "A good day to leave the windows open" following a more clinical "Comfortable and breezy through the afternoon." In practice, the second sentence read as noise. The first sentence delivered the information. The second sentence restated the implication without adding anything that a person couldn't infer themselves. Cutting it made the panel quieter without making it less useful.</p>
+
+                    <p><strong>The summary text is now larger.</strong> The CSS font size for the weather summary block was bumped upward. The exact increment matters less than the reason for it: the previous size was chosen at a desk. The actual reading distance is from the kitchen counter, or the doorway, or across the table. At those distances, the difference between a 12px and a 15px font is the difference between squinting and reading at a glance.</p>
+
+                    <p>Neither change required a server-side modification. The weather narrative runs in Node.js on the Pi, but the font size is a client-side CSS value, and the commentary sentence was appended by a string concatenation that the server sent to the client in the weather response JSON. Removing it was a one-line deletion in the server's weather handler, and increasing the font size was a one-line change in the dashboard's stylesheet.</p>
+
+                    <h2>Why the Commentary Line Existed in the First Place</h2>
+
+                    <p>The original narrative engine was designed to make the weather panel feel less like a data readout and more like something a person wrote. That goal is reasonable for a family display — it should feel approachable, not clinical. The implementation followed a template pattern: a primary sentence describes current conditions and the near-term forecast, and a secondary sentence offers an observation or recommendation based on the data.</p>
+
+                    <p>The secondary sentence was generated from a lookup table that matched condition codes to phrases. High humidity + rising temperature in the afternoon might produce "Might feel muggy by midday." Clear skies with low wind produced "Good drying day if you have laundry." Overcast with a chance of evening showers generated "Leave an umbrella in the car."</p>
+
+                    <p>These phrases passed the desk test. Reading them while building the feature, they felt useful and personable. Reading them from across the kitchen six months later, they felt like filler. The useful information was always in the first sentence. The second sentence was the weather narrative equivalent of a landing page that says "Empowering your business to succeed" — technically coherent, zero information density.</p>
+
+                    <p>The decision to cut it was made at the wall, not at the desk. That distinction is worth noting: the same judgment call that produced the wrong answer in a development environment produced the right answer when evaluated in the deployment environment. Software for physical spaces needs to be reviewed from where the users actually stand.</p>
+
+                    <h2>Font Size as a First-Class UX Decision</h2>
+
+                    <p>The weather summary text increase is the less dramatic of the two changes, but it's the one with more lasting implications. Font size on a wall display is not a styling detail — it's the primary interface between the software and the person who needs to know whether to bring a jacket.</p>
+
+                    <p>The previous size worked at the desk because screens at desk distance are close. The same text at three or four meters looks fine in a screenshot but requires leaning forward in the real environment. A display that requires leaning forward is a display that will eventually be ignored in favor of asking someone, checking a phone, or just going outside and finding out.</p>
+
+                    <p>The readable threshold for the weather summary on this specific iPad, at this specific mounting height and room distance, turned out to be around 15-16px. The previous value was 12px. Three to four pixels is not a meaningful change in a CSS stylesheet. Three to four pixels at reading distance from across a kitchen is whether the panel communicates in a glance or requires active effort.</p>
+
+                    <p>The broader principle is that responsive design frameworks optimize for viewport width — they adjust layout for different screen sizes but typically keep font sizes constant once a breakpoint is satisfied. A wall display is a use case those breakpoint systems don't model. The screen is large, so the layout breakpoint gives a desktop layout, but the reading distance is far, so the font size that works for desktop browsing is too small. Handling that gap requires thinking about the deployment environment independently of the viewport dimensions.</p>
+
+                    <h2>The CalDAV Foundation Underneath</h2>
+
+                    <p>The weather changes in v3.34 are cosmetic in the best sense — they improve the daily experience without touching the underlying data pipeline. That pipeline has seen more structural work in the past two months than in all previous versions combined, and it's worth briefly recapping what the June update added because it's what makes the calendar panel on the right side of the dashboard reliably useful.</p>
+
+                    <p>Before May 2026, the calendar integration fetched events from a single CalDAV URL — the primary calendar URL stored in the environment file. This worked for events created by the account owner. It missed every event that came from a shared or invited calendar, because Google Calendar's CalDAV interface stores those in separate collection URLs that have to be discovered through a three-step PROPFIND chain rather than fetched directly.</p>
+
+                    <p>The May update implemented that chain: a PROPFIND request to <code>/</code> discovers the current-user-principal URL, a second PROPFIND against that URL finds the calendar-home-set, and a third PROPFIND with <code>Depth: 1</code> against the calendar-home-set enumerates all calendar collections including shared ones. The server filters those collections for VEVENT support and fetches events from each, deduplicating by UID to prevent the same event from appearing twice if it shows up in multiple collections.</p>
+
+                    <p>The result is that the dashboard now shows the complete picture of what the family has on — not just the events one person added to their own calendar. That's the functional threshold where a family dashboard becomes genuinely useful rather than just a nice-looking clock with some appointments on it.</p>
+
+                    <h2>What Six Months of Production Has Revealed</h2>
+
+                    <p>Beyond the specific bugs that were fixed, running the dashboard continuously for six months has produced a set of observations that are harder to articulate as individual issues:</p>
+
+                    <p><strong>The service worker is load-bearing.</strong> The Pi reboots occasionally — for system updates, for power interruptions, for the occasional SD card filesystem check. Every time it does, the iPad is no longer connected to the Express server. Before the service worker was added in v3.32, a Pi reboot meant a broken dashboard until someone noticed and reloaded manually. With the service worker caching the last known state, a Pi reboot shows stale data for a few minutes rather than a broken page. Stale weather is a minor inconvenience. A broken dashboard that needs manual intervention is a reliability failure that erodes trust in the whole system.</p>
+
+                    <p><strong>The refresh interval matters more than it seemed.</strong> The dashboard polls the Pi server for updated weather and calendar data on an interval. Setting that interval involves a tradeoff: more frequent polls keep the data fresh but generate more network activity and more API requests against the OpenWeatherMap quota. Less frequent polls are cheaper but let the weather display age visibly. Six months of watching the display has clarified the acceptable staleness threshold: weather data that's 15 minutes old reads as current at a glance, because weather doesn't change noticeably in 15 minutes. Calendar data that's 5 minutes old is acceptable because calendar events don't change minute-to-minute. The two panels have different acceptable staleness, and the refresh intervals reflect that.</p>
+
+                    <p><strong>The iPad's age is a real constraint.</strong> The display runs on an older iPad that was chosen specifically because it was available and could be dedicated to the dashboard. Its CPU is slower than current hardware, and JavaScript that runs imperceptibly on a development machine can produce visible jank on the iPad. This has shaped two decisions that might seem overcautious on faster hardware: the dashboard avoids CSS animations beyond simple transitions, and weather narrative generation runs entirely on the server and arrives as pre-computed text rather than being assembled in the browser. Both choices eliminate processing that the iPad doesn't need to do and that a server can do more cheaply.</p>
+
+                    <h2>What Stays the Same</h2>
+
+                    <p>v3.34 changes two things and touches nothing else. The architecture that has been in place since the Raspberry Pi migration — Express server, environment-variable credential storage, CalDAV proxy, OpenWeatherMap integration, service worker cache — is unchanged. The dashboard still runs as a Node.js process, still serves a single HTML page with vanilla JavaScript, and still has zero npm dependencies beyond what's needed for the HTTP server and CalDAV requests.</p>
+
+                    <p>That stability is intentional. A family dashboard that requires maintenance has a hidden cost paid in the time it takes to notice something is wrong, diagnose it, and fix it. The versions that have shipped since April have each addressed a real problem observed in production — a missing calendar event, a wind direction panel defaulting to north, a font too small to read from across the room. None of them required changes to the fundamental architecture because the fundamental architecture has been correct from the start.</p>
+
+                    <p>The next version will probably address something else that the wall reveals. That's the development model for a project like this: observe the deployment environment, fix what breaks the daily experience, leave working things alone.</p>
+                </div>
+
+                <div class="blog-navigation">
+                    <a href="/blog/family-dash-caldav-collection-discovery.html" class="btn-secondary">← CalDAV Collection Discovery</a>
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-primary">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Want a Dashboard Like This for Your Home?</h2>
+                <p class="cta-description">
+                    Family Dashboard is open source — clone it, self-host it on a Raspberry Pi, and
+                    point it at your own Google Calendar and weather location. If you need help adapting
+                    it for your setup, or want something custom-built for your home or business,
+                    get in touch.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/josefresco/family-dash" target="_blank" rel="noopener" class="btn-cta">
+                        View on GitHub
+                    </a>
+                    <a href="/contact" class="btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>
