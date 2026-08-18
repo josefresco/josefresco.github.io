@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Family Dashboard v3.34 running on a wall-mounted iPad showing weather and calendar panels">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0f1a"/>
+      <stop offset="100%" stop-color="#1a1d2e"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2235"/>
+      <stop offset="100%" stop-color="#161929"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6c63ff"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="ipad-frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d2f3e"/>
+      <stop offset="100%" stop-color="#1e202e"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Neural nodes (decorative) -->
+  <circle cx="100" cy="80" r="3" fill="#6c63ff" opacity="0.4"/>
+  <circle cx="1100" cy="550" r="3" fill="#6c63ff" opacity="0.4"/>
+  <circle cx="150" cy="500" r="2" fill="#a78bfa" opacity="0.3"/>
+  <circle cx="1050" cy="100" r="2" fill="#a78bfa" opacity="0.3"/>
+  <line x1="100" y1="80" x2="150" y2="500" stroke="#6c63ff" stroke-opacity="0.1" stroke-width="1"/>
+  <line x1="1050" y1="100" x2="1100" y2="550" stroke="#a78bfa" stroke-opacity="0.1" stroke-width="1"/>
+
+  <!-- iPad frame (wall-mounted look) -->
+  <g filter="url(#soft-shadow)">
+    <rect x="280" y="55" width="640" height="520" rx="28" ry="28" fill="url(#ipad-frame)" stroke="#3a3d52" stroke-width="2"/>
+    <!-- Screen bezel -->
+    <rect x="296" y="71" width="608" height="488" rx="6" ry="6" fill="#0d0f1a"/>
+    <!-- Home button area -->
+    <circle cx="600" cy="555" r="14" fill="#2d2f3e" stroke="#3a3d52" stroke-width="1.5"/>
+    <circle cx="600" cy="555" r="8" fill="none" stroke="#3a3d52" stroke-width="1.5"/>
+  </g>
+
+  <!-- Dashboard screen content -->
+  <!-- Header bar -->
+  <rect x="296" y="71" width="608" height="44" fill="#13152a"/>
+  <text x="340" y="99" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#a78bfa" letter-spacing="2">FAMILY DASH  v3.34</text>
+  <text x="808" y="99" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="end">Mon, Aug 18</text>
+
+  <!-- Weather panel (left side of screen) -->
+  <rect x="306" y="125" width="282" height="220" rx="10" ry="10" fill="url(#panel)" stroke="#2d3048" stroke-width="1"/>
+  <!-- Panel label -->
+  <text x="325" y="150" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1.5">WEATHER</text>
+  <!-- Big temperature -->
+  <text x="380" y="210" font-family="system-ui, sans-serif" font-size="58" font-weight="300" fill="#f9fafb" text-anchor="middle">72°</text>
+  <!-- Condition text -->
+  <text x="380" y="235" font-family="system-ui, sans-serif" font-size="13" fill="#9ca3af" text-anchor="middle">Partly Cloudy</text>
+  <!-- Wind direction compass -->
+  <g transform="translate(380, 290)">
+    <circle r="22" fill="none" stroke="#2d3048" stroke-width="1.5"/>
+    <circle r="22" fill="none" stroke="#6c63ff" stroke-width="1.5" stroke-dasharray="138" stroke-dashoffset="100" opacity="0.6"/>
+    <text y="-26" font-family="system-ui, sans-serif" font-size="8" fill="#6b7280" text-anchor="middle">N</text>
+    <text y="34" font-family="system-ui, sans-serif" font-size="8" fill="#6b7280" text-anchor="middle">S</text>
+    <text x="-28" y="4" font-family="system-ui, sans-serif" font-size="8" fill="#6b7280" text-anchor="middle">W</text>
+    <text x="28" y="4" font-family="system-ui, sans-serif" font-size="8" fill="#6b7280" text-anchor="middle">E</text>
+    <!-- Arrow pointing SSW -->
+    <line x1="0" y1="0" x2="-8" y2="16" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="4" y2="-15" stroke="#6c63ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+    <circle r="3" fill="#6c63ff"/>
+  </g>
+  <!-- Wind label -->
+  <text x="440" y="305" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">SW  12 mph</text>
+
+  <!-- Weather summary text panel (v3.34: larger text, no commentary) -->
+  <rect x="306" y="356" width="282" height="88" rx="8" ry="8" fill="#ffffff" fill-opacity="0.06"/>
+  <!-- v3.34 highlight: LARGER text -->
+  <text x="447" y="374" font-family="system-ui, sans-serif" font-size="8" fill="#6c63ff" text-anchor="middle" letter-spacing="1">v3.34 · LARGER SUMMARY TEXT</text>
+  <text x="320" y="393" font-family="system-ui, sans-serif" font-size="13" fill="#e5e7eb">A comfortable afternoon ahead.</text>
+  <text x="320" y="412" font-family="system-ui, sans-serif" font-size="13" fill="#e5e7eb">Winds ease by evening. Low 58°</text>
+  <text x="320" y="430" font-family="system-ui, sans-serif" font-size="13" fill="#9ca3af">tonight — leave windows open.</text>
+
+  <!-- Calendar panel (right side) -->
+  <rect x="606" y="125" width="288" height="320" rx="10" ry="10" fill="url(#panel)" stroke="#2d3048" stroke-width="1"/>
+  <text x="625" y="150" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280" font-weight="600" letter-spacing="1.5">CALENDAR</text>
+
+  <!-- Calendar events -->
+  <rect x="616" y="160" width="268" height="42" rx="6" ry="6" fill="#6c63ff" fill-opacity="0.15"/>
+  <rect x="616" y="160" width="3" height="42" rx="1" fill="#6c63ff"/>
+  <text x="626" y="178" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#e5e7eb">Soccer Practice</text>
+  <text x="626" y="195" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">4:30 PM · Millway Fields</text>
+
+  <rect x="616" y="210" width="268" height="42" rx="6" ry="6" fill="#a78bfa" fill-opacity="0.12"/>
+  <rect x="616" y="210" width="3" height="42" rx="1" fill="#a78bfa"/>
+  <text x="626" y="228" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#e5e7eb">Family Dinner</text>
+  <text x="626" y="245" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">6:30 PM · Home</text>
+
+  <rect x="616" y="260" width="268" height="42" rx="6" ry="6" fill="#34d399" fill-opacity="0.12"/>
+  <rect x="616" y="260" width="3" height="42" rx="1" fill="#34d399"/>
+  <text x="626" y="278" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#e5e7eb">Dentist — Emma</text>
+  <text x="626" y="295" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">Tomorrow 10:00 AM</text>
+
+  <rect x="616" y="310" width="268" height="42" rx="6" ry="6" fill="#f59e0b" fill-opacity="0.12"/>
+  <rect x="616" y="310" width="3" height="42" rx="1" fill="#f59e0b"/>
+  <text x="626" y="328" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#e5e7eb">School Concert</text>
+  <text x="626" y="345" font-family="system-ui, sans-serif" font-size="10" fill="#9ca3af">Aug 22 · 7:00 PM</text>
+
+  <!-- CalDAV badge -->
+  <rect x="616" y="360" width="120" height="22" rx="4" ry="4" fill="#6c63ff" fill-opacity="0.2"/>
+  <text x="626" y="375" font-family="system-ui, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">CalDAV · 3 calendars</text>
+
+  <!-- Raspberry Pi status bar (bottom of screen) -->
+  <rect x="296" y="455" width="608" height="36" fill="#0d0f1a"/>
+  <circle cx="316" cy="473" r="4" fill="#34d399"/>
+  <text x="328" y="477" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280">Pi Online</text>
+  <text x="430" y="477" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280">Service Worker: Active</text>
+  <text x="640" y="477" font-family="system-ui, sans-serif" font-size="10" fill="#6b7280" text-anchor="end">Last sync 2 min ago</text>
+  <!-- Signal bars -->
+  <rect x="650" y="466" width="4" height="12" rx="1" fill="#6c63ff" opacity="0.9"/>
+  <rect x="658" y="462" width="4" height="16" rx="1" fill="#6c63ff" opacity="0.9"/>
+  <rect x="666" y="458" width="4" height="20" rx="1" fill="#6c63ff" opacity="0.9"/>
+  <rect x="674" y="468" width="4" height="10" rx="1" fill="#3a3d52"/>
+  <!-- Battery -->
+  <rect x="688" y="465" width="18" height="10" rx="2" ry="2" fill="none" stroke="#6b7280" stroke-width="1.2"/>
+  <rect x="706" y="468" width="2" height="4" rx="1" fill="#6b7280"/>
+  <rect x="690" y="467" width="11" height="6" rx="1" fill="#34d399"/>
+
+  <!-- Labels outside iPad -->
+  <!-- Left label: Weather panel -->
+  <line x1="274" y1="240" x2="200" y2="240" stroke="#6c63ff" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="200" cy="240" r="3" fill="#6c63ff" opacity="0.6"/>
+  <text x="190" y="196" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="end">Enlarged summary</text>
+  <text x="190" y="213" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="end">text — v3.34</text>
+  <text x="190" y="232" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="end">readability fix</text>
+
+  <!-- Right label: Calendar CalDAV -->
+  <line x1="900" y1="370" x2="970" y2="370" stroke="#a78bfa" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="970" cy="370" r="3" fill="#a78bfa" opacity="0.6"/>
+  <text x="980" y="357" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280">CalDAV collection</text>
+  <text x="980" y="374" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280">discovery — shared</text>
+  <text x="980" y="391" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280">calendar events</text>
+
+  <!-- Bottom label: Pi + service worker -->
+  <line x1="520" y1="540" x2="520" y2="580" stroke="#34d399" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="520" y="600" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Raspberry Pi · Express · Service Worker cache</text>
+
+  <!-- Title block -->
+  <text x="600" y="35" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#e5e7eb" text-anchor="middle" letter-spacing="0.5">Family Dashboard v3.34 · Six Months on the Kitchen Wall</text>
+</svg>
