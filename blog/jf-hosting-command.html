@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP - Jose Fresco</title>
+    <meta name="description" content="How jf-hosting-command wraps the WP Engine and PressWP REST APIs behind a single command interface — so one command lists, flushes, and backs up WordPress sites on either host.">
+    <link rel="canonical" href="https://josefresco.com/blog/jf-hosting-command.html">
+    <link rel="alternate" type="application/rss+xml" title="Jose Fresco Blog RSS" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+
+    <!-- Resource Hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//github.com">
+    <link rel="preload" href="../script.js" as="script">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP - Jose Fresco">
+    <meta property="og:description" content="How jf-hosting-command wraps the WP Engine and PressWP REST APIs behind a single command interface — so one command lists, flushes, and backs up WordPress sites on either host.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://josefresco.com/blog/jf-hosting-command.html">
+    <meta property="og:image" content="https://josefresco.com/blog/images/jf-hosting-command.svg">
+    <meta property="og:site_name" content="Jose Fresco">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-08-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-08-25T00:00:00+00:00">
+    <meta property="article:author" content="https://josefresco.com/">
+    <meta property="article:section" content="WordPress">
+    <meta property="article:tag" content="WordPress">
+    <meta property="article:tag" content="WP Engine">
+    <meta property="article:tag" content="PressWP">
+    <meta property="article:tag" content="CLI">
+    <meta property="article:tag" content="Node.js">
+    <meta property="article:tag" content="JavaScript">
+    <meta property="article:tag" content="API Integration">
+    <meta property="article:tag" content="DevOps">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP - Jose Fresco">
+    <meta name="twitter:description" content="How jf-hosting-command wraps the WP Engine and PressWP REST APIs behind a single command interface — so one command lists, flushes, and backs up WordPress sites on either host.">
+    <meta name="twitter:image" content="https://josefresco.com/blog/images/jf-hosting-command.svg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://josefresco.com/blog/jf-hosting-command.html"
+      },
+      "headline": "JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP",
+      "description": "How jf-hosting-command wraps the WP Engine and PressWP REST APIs behind a single command interface — so one command lists, flushes, and backs up WordPress sites on either host.",
+      "image": "https://josefresco.com/blog/images/jf-hosting-command.svg",
+      "author": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Jose Fresco",
+        "url": "https://josefresco.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://josefresco.com/favicon.ico"
+        }
+      },
+      "datePublished": "2026-08-25T00:00:00+00:00",
+      "dateModified": "2026-08-25T00:00:00+00:00",
+      "keywords": "WordPress, WP Engine, PressWP, CLI, Node.js, JavaScript, API Integration, DevOps, Command Line, Site Management, Cache, Backup, Hosting",
+      "articleSection": "WordPress",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://josefresco.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://josefresco.com/blog/"},
+        {"@type": "ListItem", "position": 3, "name": "JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP", "item": "https://josefresco.com/blog/jf-hosting-command.html"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="neural-bg">
+        <div class="neural-nodes"></div>
+    </div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="nav-logo">JF</span>
+                    <span class="nav-name">Jose Fresco</span>
+                </a>
+            </div>
+            <div class="nav-menu-toggle" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="/about" class="nav-link">About</a>
+                <a href="/projects" class="nav-link">Projects</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/skills" class="nav-link">Skills</a>
+                <a href="/ai-tools" class="nav-link">AI Tools</a>
+                <a href="/now" class="nav-link">Now</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="btn-cta btn-cta-nav">Hire Me</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-header">
+                    <p class="breadcrumb" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.75rem;">
+                        <a href="/blog" style="color:var(--text-secondary);text-decoration:none;">Blog</a> &rsaquo; WordPress
+                    </p>
+                    <h1 class="blog-post-title">JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-category">WordPress</span>
+                        <span class="blog-date">August 2026</span>
+                    </div>
+                </div>
+
+                <div class="blog-post-image">
+                    <picture>
+                        <source srcset="images/jf-hosting-command.svg" type="image/svg+xml">
+                        <img src="images/jf-hosting-command.svg" alt="Diagram showing JF Hosting Command as a unified Node.js CLI bridging the WP Engine API and PressWP API to manage WordPress sites" class="blog-hero-image">
+                    </picture>
+                </div>
+
+                <div class="blog-post-content">
+                    <div class="tldr" style="background: rgba(26, 29, 41, 0.8); padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--neural-primary); color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">TL;DR:</strong> <a href="https://github.com/josefresco/jf-hosting-command" style="color: var(--neural-primary);" target="_blank" rel="noopener">jf-hosting-command</a> is a Node.js CLI that puts WP Engine and PressWP site management behind a single command surface. <code>jf-host sites list</code> pulls installs from both platforms and prints them in one table. <code>jf-host cache flush --site example.com</code> detects which provider hosts that site and fires the correct API call. A JSON config file in your home directory stores both sets of credentials; a provider router dispatches every command to the right API client at runtime.
+                    </div>
+
+                    <h2>The Problem With Managing Multiple WordPress Hosts</h2>
+
+                    <p>The WordPress hosting market has fragmented significantly over the last few years. Managed WordPress hosting is good — it takes server maintenance off your plate, provides staging environments, and gives you a CDN-backed cache layer out of the box. But when you manage sites for multiple clients, or when a single client's portfolio spans more than one hosting provider, the fragmentation becomes a daily friction point.</p>
+
+                    <p>WP Engine has a web dashboard, an API, and its own CLI. PressWP has a web dashboard and an API. Each has its own authentication model, its own API shape, its own vocabulary for the same concepts (WP Engine calls them "installs," PressWP calls them "sites"), and its own rate limits. Context-switching between two browser tabs to flush a cache or check a backup is a small but persistent annoyance that compounds across a week of WordPress work.</p>
+
+                    <p>The obvious answer is a single command-line tool that knows about both. <code>jf-hosting-command</code> is that tool.</p>
+
+                    <h2>What Came Before: wpe-central-command</h2>
+
+                    <p>Earlier this year I wrote about <a href="/blog/wpe-central-command.html" style="color: var(--neural-primary);">wpe-central-command</a> — a web-based fleet dashboard for WP Engine sites — and the <a href="/blog/wpe-central-command-helper.html" style="color: var(--neural-primary);">companion PHP plugin</a> that fills the gaps in WP Engine's API with site-level data. That project solved the multi-site visibility problem for WP Engine specifically: one browser tab, all your WP Engine installs, health status at a glance.</p>
+
+                    <p>But wpe-central-command is a dashboard, not a command tool. You open it in a browser and click buttons. It doesn't help when you're already in a terminal working on a deploy and you need to flush a cache. And it's WP Engine only — when a client's site sits on PressWP, you're back to a second browser tab.</p>
+
+                    <p><code>jf-hosting-command</code> started as a companion to wpe-central-command and ended up as its own project with a broader scope.</p>
+
+                    <h2>Architecture: A Provider Router in Front of Two API Clients</h2>
+
+                    <p>The core design decision is straightforward: every user-facing command routes through a dispatcher that reads the site's provider from the config file and delegates to the appropriate API client. The two clients — <code>WPEClient</code> for WP Engine and <code>PressWPClient</code> for PressWP — implement the same interface but talk to different APIs.</p>
+
+                    <p>This means the CLI surface is provider-agnostic. You don't run <code>jf-host wpe cache flush</code> or <code>jf-host pwp cache flush</code>. You run <code>jf-host cache flush --site example.com</code> and the router handles the rest. The site-to-provider mapping lives in your local config file.</p>
+
+                    <p>The config file at <code>~/.jf-hosting-command.json</code> holds two things: provider credentials and a site registry that maps domain names to their hosting provider:</p>
+
+                    <pre><code>{
+  "providers": {
+    "wpe": {
+      "token": "your-wpe-bearer-token"
+    },
+    "pwp": {
+      "key": "your-presswp-api-key"
+    }
+  },
+  "sites": {
+    "client-a.com": { "provider": "wpe", "install": "clientainstall" },
+    "ecommerce-co.com": { "provider": "pwp", "siteId": "site_abc123" },
+    "agency-blog.com": { "provider": "wpe", "install": "agencyblog" },
+    "saas-landing.com": { "provider": "pwp", "siteId": "site_xyz789" }
+  }
+}</code></pre>
+
+                    <p>The <code>install</code> key for WP Engine sites is the install name used in API paths. The <code>siteId</code> for PressWP is the site's platform identifier. Both are populated automatically when you run <code>jf-host sites sync</code>, which fetches all installs from both providers and writes the site registry.</p>
+
+                    <h2>The CLI Layer: Commander.js with Subcommands</h2>
+
+                    <p>The CLI is built with <a href="https://github.com/tj/commander.js" style="color: var(--neural-primary);" target="_blank" rel="noopener">Commander.js</a>, which makes it straightforward to define nested subcommands and share option definitions across them. The top-level command is <code>jf-host</code>. Subcommands organize the action space:</p>
+
+                    <pre><code>jf-host sites list              # list all sites from both providers
+jf-host sites sync              # re-fetch site registry from APIs
+jf-host cache flush             # flush cache for a site
+jf-host backup create           # trigger a backup
+jf-host backup list             # list recent backups
+jf-host env list                # list environments (prod/staging/dev)
+jf-host env switch              # switch active environment
+jf-host status                  # check provider API connectivity</code></pre>
+
+                    <p>Each subcommand accepts a <code>--site &lt;domain&gt;</code> option for site-specific operations. The <code>--provider &lt;wpe|pwp&gt;</code> flag lets you scope a command to one provider when you don't need both (for example, <code>jf-host sites list --provider wpe</code> to see only WP Engine installs).</p>
+
+                    <h2>WPEClient: Wrapping the WP Engine v1 API</h2>
+
+                    <p>The WP Engine API (<code>api.wpengineapi.com/v1</code>) uses HTTP Basic authentication with an API username and password pair encoded as a Bearer token. <code>WPEClient</code> wraps the endpoints the tool needs behind async methods:</p>
+
+                    <pre><code>class WPEClient {
+  constructor(token) {
+    this.baseUrl = 'https://api.wpengineapi.com/v1';
+    this.headers = {
+      'Authorization': `Basic ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  async listInstalls() {
+    return this._get('/installs?limit=100');
+  }
+
+  async purgeCache(installName) {
+    return this._post(`/installs/${installName}/purge_cache`);
+  }
+
+  async listBackups(installName) {
+    return this._get(`/installs/${installName}/backups`);
+  }
+
+  async createBackup(installName, description) {
+    return this._post(`/installs/${installName}/backups`, {
+      description: description || 'jf-hosting-command backup'
+    });
+  }
+
+  async listEnvironments(installName) {
+    return this._get(`/installs?site=${installName}`);
+  }
+
+  async _get(path) { /* shared fetch wrapper */ }
+  async _post(path, body) { /* shared fetch wrapper */ }
+}</code></pre>
+
+                    <p>One quirk of the WP Engine API is that "environments" (production, staging, development) are separate installs in the same account, linked by a shared site name. <code>jf-host env list --site client-a.com</code> fetches all installs and filters to the ones whose site name matches, returning the three environment variants with their status and PHP version.</p>
+
+                    <h2>PressWPClient: A Different API Shape</h2>
+
+                    <p>PressWP's API uses an API key sent as an <code>X-API-Key</code> header rather than Basic auth. The endpoint paths and resource vocabulary are also different — where WP Engine uses "installs," PressWP uses "sites," and what WP Engine calls "purge_cache" PressWP calls "clear-cache." <code>PressWPClient</code> maps the same interface to PressWP's conventions:</p>
+
+                    <pre><code>class PressWPClient {
+  constructor(apiKey) {
+    this.baseUrl = 'https://my.presswp.com/api/v2';
+    this.headers = {
+      'X-API-Key': apiKey,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  async listInstalls() {
+    const { sites } = await this._get('/sites');
+    // Normalize to same shape as WPEClient.listInstalls()
+    return sites.map(s => ({
+      id: s.id,
+      name: s.domain,
+      status: s.status,
+      php_version: s.phpVersion,
+      provider: 'pwp'
+    }));
+  }
+
+  async purgeCache(siteId) {
+    return this._post(`/sites/${siteId}/clear-cache`);
+  }
+
+  async listBackups(siteId) {
+    return this._get(`/sites/${siteId}/backups`);
+  }
+
+  async createBackup(siteId, description) {
+    return this._post(`/sites/${siteId}/backups`, { label: description });
+  }
+
+  async listEnvironments(siteId) {
+    return this._get(`/sites/${siteId}/environments`);
+  }
+}</code></pre>
+
+                    <p>The normalization in <code>listInstalls()</code> is important: both clients return objects that share the same shape, which means the <code>sites list</code> command can merge and display them in a single table without knowing which provider produced each row.</p>
+
+                    <h2>The Provider Router</h2>
+
+                    <p>The dispatcher reads the site entry from the config and instantiates the right client on demand. It's not complex — it's a switch on the provider string — but keeping it explicit means the routing logic is in one place rather than scattered through every command handler:</p>
+
+                    <pre><code>function getClientForSite(domain, config) {
+  const entry = config.sites[domain];
+  if (!entry) {
+    throw new Error(`Unknown site: ${domain}. Run "jf-host sites sync" to register it.`);
+  }
+
+  if (entry.provider === 'wpe') {
+    return {
+      client: new WPEClient(config.providers.wpe.token),
+      siteRef: entry.install,
+      provider: 'wpe'
+    };
+  }
+
+  if (entry.provider === 'pwp') {
+    return {
+      client: new PressWPClient(config.providers.pwp.key),
+      siteRef: entry.siteId,
+      provider: 'pwp'
+    };
+  }
+
+  throw new Error(`Unknown provider: ${entry.provider}`);
+}</code></pre>
+
+                    <p>Each command handler calls <code>getClientForSite()</code>, destructures the client and siteRef, and calls the relevant method. The handler doesn't care which provider it's talking to — it just calls <code>client.purgeCache(siteRef)</code> and formats the response.</p>
+
+                    <h2>sites list: Merging Two Providers Into One Table</h2>
+
+                    <p>The <code>sites list</code> command is the one I use most. It fires requests to both providers in parallel using <code>Promise.all</code>, merges the results, and prints a table sorted alphabetically by domain:</p>
+
+                    <pre><code>async function listSites(options, config) {
+  const fetchers = [];
+
+  if (!options.provider || options.provider === 'wpe') {
+    const wpe = new WPEClient(config.providers.wpe.token);
+    fetchers.push(wpe.listInstalls());
+  }
+
+  if (!options.provider || options.provider === 'pwp') {
+    const pwp = new PressWPClient(config.providers.pwp.key);
+    fetchers.push(pwp.listInstalls());
+  }
+
+  const results = await Promise.all(fetchers);
+  const sites = results.flat().sort((a, b) => a.name.localeCompare(b.name));
+
+  // Print table
+  console.log(formatTable(sites, ['name', 'status', 'php_version', 'provider']));
+}</code></pre>
+
+                    <p>The output looks like this in a terminal that supports color:</p>
+
+                    <pre><code>SITE                  STATUS   PHP    PROVIDER
+─────────────────────────────────────────────
+agency-blog.com       active   8.2    wpe
+client-a.com          active   8.1    wpe
+client-b.com          active   8.2    wpe
+ecommerce-co.com      active   8.3    pwp
+saas-landing.com      active   8.2    pwp
+staging-test.com      active   8.0    pwp</code></pre>
+
+                    <p>The provider column uses color — purple for WP Engine, cyan for PressWP — so at a glance you can see the mix without parsing the text.</p>
+
+                    <h2>Cache Flushing Across Providers</h2>
+
+                    <p>Cache flushes are where the unified interface pays off most clearly. On WP Engine, purging the cache is a <code>POST /installs/:name/purge_cache</code> request that returns immediately — the purge is asynchronous on WP Engine's side, but the API call acknowledges instantly. On PressWP, it's <code>POST /sites/:id/clear-cache</code> and similarly fast.</p>
+
+                    <p>From the command line, both look identical:</p>
+
+                    <pre><code># WP Engine site
+$ jf-host cache flush --site client-a.com
+Provider: WP Engine (install: clientainstall)
+✓ Cache purged (1.2s)
+
+# PressWP site
+$ jf-host cache flush --site saas-landing.com
+Provider: PressWP (site: site_xyz789)
+✓ Cache purged (0.9s)</code></pre>
+
+                    <p>You can also flush all sites on one provider at once:</p>
+
+                    <pre><code>$ jf-host cache flush --provider wpe
+Flushing cache for 4 WP Engine sites...
+✓ agency-blog.com (1.1s)
+✓ client-a.com (0.8s)
+✓ client-b.com (1.3s)
+✓ client-c.com (0.9s)</code></pre>
+
+                    <p>The bulk flush uses <code>Promise.all</code> across the site list so all four requests fire in parallel rather than sequentially.</p>
+
+                    <h2>Backups</h2>
+
+                    <p>Both hosting providers support on-demand backups through their APIs, though the behavior differs. WP Engine backups are labeled checkpoints that appear in the WP Engine dashboard alongside scheduled backups. PressWP backups behave the same way. The <code>backup create</code> command triggers whichever the site's provider supports:</p>
+
+                    <pre><code>$ jf-host backup create --site ecommerce-co.com
+Provider: PressWP (site: site_abc123)
+✓ Backup queued — label: "jf-hosting-command 2026-08-25"
+
+$ jf-host backup list --site ecommerce-co.com
+ID              DATE                  SIZE    STATUS
+──────────────────────────────────────────────────
+bkp_0041        2026-08-25 09:14      2.3 GB  complete
+bkp_0040        2026-08-24 09:10      2.2 GB  complete
+bkp_0039        2026-08-23 09:09      2.2 GB  complete</code></pre>
+
+                    <h2>Setup and Configuration</h2>
+
+                    <p>Installation is a global npm install from the repo:</p>
+
+                    <pre><code>git clone https://github.com/josefresco/jf-hosting-command.git
+cd jf-hosting-command
+npm install
+npm link</code></pre>
+
+                    <p>After that, <code>jf-host</code> is available globally. The first-run setup is a guided <code>jf-host init</code> command that prompts for both sets of API credentials and writes <code>~/.jf-hosting-command.json</code>. Once credentials are stored, <code>jf-host sites sync</code> populates the site registry by calling both provider APIs:</p>
+
+                    <pre><code>$ jf-host sites sync
+Fetching WP Engine installs...  ✓ 4 installs
+Fetching PressWP sites...       ✓ 3 sites
+Registry updated: 7 sites total
+Config written to ~/.jf-hosting-command.json</code></pre>
+
+                    <p>From that point the site-to-provider mapping is local and offline — you're not hitting an API every time you run a command that specifies a site name. Only the commands that actually operate on a site make API calls.</p>
+
+                    <h2>Error Handling and API Failures</h2>
+
+                    <p>Both API clients include retry logic for transient network errors and surface provider-specific error messages rather than generic HTTP failures. A 401 from either provider prints an actionable message pointing at the credential that needs refreshing:</p>
+
+                    <pre><code>$ jf-host sites list
+Error: WP Engine authentication failed (401)
+→ Check providers.wpe.token in ~/.jf-hosting-command.json
+  Generate a new token at: my.wpengine.com/api_access</code></pre>
+
+                    <p>Rate limiting is handled with automatic backoff. WP Engine's v1 API enforces a request rate limit per account; if a bulk operation hits it, the client waits for the <code>Retry-After</code> header value before retrying. PressWP's API has similar behavior for its own limits.</p>
+
+                    <h2>What It Replaced</h2>
+
+                    <p>Before this tool, managing a mixed-provider WordPress portfolio meant:</p>
+
+                    <ul>
+                        <li>Opening my.wpengine.com, navigating to the right install, clicking "Flush Cache"</li>
+                        <li>Opening my.presswp.com, navigating to the right site, clicking "Clear Cache"</li>
+                        <li>Manually checking both dashboards to see backup status</li>
+                        <li>Switching between two API docs when writing any automation</li>
+                    </ul>
+
+                    <p>Now it's <code>jf-host cache flush --site example.com</code> regardless of who hosts it, and <code>jf-host sites list</code> when I need to see the whole picture in one place.</p>
+
+                    <p>The <a href="/blog/wpe-central-command.html" style="color: var(--neural-primary);">wpe-central-command dashboard</a> is still useful for the at-a-glance view in a browser — it shows health indicators and plugin counts that the CLI doesn't display. But for operational tasks in a terminal context, <code>jf-hosting-command</code> is the daily driver.</p>
+
+                    <h2>What's Next</h2>
+
+                    <p>A few things I want to add when I have time:</p>
+
+                    <ul>
+                        <li><strong>Deploy triggering:</strong> Both providers support some form of deployment or environment promotion (pushing staging to production). Exposing that as <code>jf-host env deploy --site example.com --from staging</code> would be genuinely useful.</li>
+                        <li><strong>Plugin and theme audit:</strong> wpe-central-command-helper already pulls plugin data from WP Engine sites via a companion plugin. Piping that data through the CLI — <code>jf-host plugins outdated --provider wpe</code> — would let me spot sites with stale plugins from the terminal without opening a browser.</li>
+                        <li><strong>Third provider support:</strong> The adapter pattern makes adding a new provider relatively low friction. If a client ends up on Kinsta or Flywheel, adding a <code>KinstaClient</code> or <code>FlywheelClient</code> is a matter of implementing the same five methods and adding a provider key to the router.</li>
+                    </ul>
+
+                    <p>The full source is on GitHub: <a href="https://github.com/josefresco/jf-hosting-command" style="color: var(--neural-primary);" target="_blank" rel="noopener">josefresco/jf-hosting-command</a>.</p>
+
+                    <div class="post-nav" style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                        <a href="/blog/family-dash-v334.html" style="color: var(--neural-primary); text-decoration: none; font-size: 0.9rem;">&larr; Family Dashboard v3.34</a>
+                        <a href="/blog/" style="color: var(--neural-primary); text-decoration: none; font-size: 0.9rem;">All Posts &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Jose Fresco. Built with modern web technologies.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/josefresco" target="_blank" rel="noopener">GitHub</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/feed.xml">RSS Feed</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../global-header.js" defer></script>
+    <script src="../script.js" defer></script>
+</body>
+</html>

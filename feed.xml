@@ -5,8 +5,16 @@
     <link>https://josefresco.com/blog/</link>
     <description>Insights and reflections on building web applications, browser extensions, and automation tools</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://josefresco.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>JF Hosting Command: A Unified CLI for Managing WordPress Sites Across WP Engine and PressWP</title>
+      <link>https://josefresco.com/blog/jf-hosting-command.html</link>
+      <description>How jf-hosting-command wraps the WP Engine and PressWP REST APIs behind a single command surface — jf-host sites list pulls installs from both platforms into one table, jf-host cache flush detects which provider hosts the site and fires the correct API call, and jf-host backup create triggers a checkpoint on whichever platform the site lives on. A provider router dispatches every command to either WPEClient or PressWPClient at runtime based on a local JSON config file. Bulk operations use Promise.all to fire in parallel. Also covers the normalization layer that gives both API clients the same response shape, the retry-on-rate-limit logic for both providers, and the sites sync command that auto-populates the site-to-provider registry from live API data.</description>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
+      <guid>https://josefresco.com/blog/jf-hosting-command.html</guid>
+    </item>
 
     <item>
       <title>Family Dashboard v3.34: Weather Readability and Six Months on the Kitchen Wall</title>
