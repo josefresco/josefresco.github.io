@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480" role="img" aria-label="Diagram showing JF Hosting Command as a unified JavaScript CLI bridging the WP Engine API and PressWP API to manage WordPress sites">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0f"/>
+      <stop offset="100%" style="stop-color:#1a1d29"/>
+    </linearGradient>
+    <linearGradient id="cliGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="wpeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="presswpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#0891b2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" fill="url(#bg)" rx="12"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="360" x2="900" y2="360"/>
+    <line x1="225" y1="0" x2="225" y2="480"/>
+    <line x1="450" y1="0" x2="450" y2="480"/>
+    <line x1="675" y1="0" x2="675" y2="480"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="38" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">JF Hosting Command</text>
+  <text x="450" y="58" font-family="'Inter', 'Segoe UI', sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">Unified WordPress site management across WP Engine and PressWP</text>
+
+  <!-- === Left: Terminal CLI === -->
+  <rect x="30" y="80" width="250" height="310" rx="10" fill="rgba(26,29,41,0.9)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+  <!-- Terminal header bar -->
+  <rect x="30" y="80" width="250" height="32" rx="10" fill="rgba(0,212,255,0.15)"/>
+  <rect x="30" y="96" width="250" height="16" fill="rgba(0,212,255,0.15)"/>
+  <circle cx="50" cy="96" r="5" fill="#ff5f57"/>
+  <circle cx="66" cy="96" r="5" fill="#febc2e"/>
+  <circle cx="82" cy="96" r="5" fill="#28c840"/>
+  <text x="155" y="100" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">jf-hosting-command</text>
+
+  <!-- Terminal content -->
+  <text x="46" y="130" font-family="'Courier New', monospace" font-size="10" fill="#00d4ff">$</text>
+  <text x="57" y="130" font-family="'Courier New', monospace" font-size="10" fill="#ffffff">jf-host sites list</text>
+  <text x="46" y="148" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8">Fetching all sites...</text>
+
+  <!-- Site rows -->
+  <text x="46" y="168" font-family="'Courier New', monospace" font-size="9" fill="#28c840">●</text>
+  <text x="58" y="168" font-family="'Courier New', monospace" font-size="9" fill="#ffffff">client-a.com</text>
+  <text x="175" y="168" font-family="'Courier New', monospace" font-size="8" fill="#7c3aed">wpe</text>
+
+  <text x="46" y="182" font-family="'Courier New', monospace" font-size="9" fill="#28c840">●</text>
+  <text x="58" y="182" font-family="'Courier New', monospace" font-size="9" fill="#ffffff">ecommerce-co.com</text>
+  <text x="175" y="182" font-family="'Courier New', monospace" font-size="8" fill="#00d4ff">pwp</text>
+
+  <text x="46" y="196" font-family="'Courier New', monospace" font-size="9" fill="#28c840">●</text>
+  <text x="58" y="196" font-family="'Courier New', monospace" font-size="9" fill="#ffffff">agency-blog.com</text>
+  <text x="175" y="196" font-family="'Courier New', monospace" font-size="8" fill="#7c3aed">wpe</text>
+
+  <text x="46" y="210" font-family="'Courier New', monospace" font-size="9" fill="#28c840">●</text>
+  <text x="58" y="210" font-family="'Courier New', monospace" font-size="9" fill="#ffffff">saas-landing.com</text>
+  <text x="175" y="210" font-family="'Courier New', monospace" font-size="8" fill="#00d4ff">pwp</text>
+
+  <line x1="46" y1="220" x2="264" y2="220" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <text x="46" y="238" font-family="'Courier New', monospace" font-size="10" fill="#00d4ff">$</text>
+  <text x="57" y="238" font-family="'Courier New', monospace" font-size="10" fill="#ffffff">jf-host cache flush \</text>
+  <text x="57" y="250" font-family="'Courier New', monospace" font-size="10" fill="#ffffff">  --site client-a.com</text>
+  <text x="46" y="266" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8">Provider: WP Engine</text>
+  <text x="46" y="279" font-family="'Courier New', monospace" font-size="9" fill="#28c840">✓ Cache purged (1.2s)</text>
+
+  <line x1="46" y1="289" x2="264" y2="289" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <text x="46" y="307" font-family="'Courier New', monospace" font-size="10" fill="#00d4ff">$</text>
+  <text x="57" y="307" font-family="'Courier New', monospace" font-size="10" fill="#ffffff">jf-host backup create \</text>
+  <text x="57" y="319" font-family="'Courier New', monospace" font-size="10" fill="#ffffff">  --site saas-landing.com</text>
+  <text x="46" y="335" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8">Provider: PressWP</text>
+  <text x="46" y="348" font-family="'Courier New', monospace" font-size="9" fill="#28c840">✓ Backup queued</text>
+
+  <text x="46" y="373" font-family="'Courier New', monospace" font-size="10" fill="#00d4ff">$ <tspan fill="#94a3b8">█</tspan></text>
+
+  <!-- CLI Label -->
+  <text x="155" y="406" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#00d4ff" text-anchor="middle" filter="url(#glow)">CLI Interface</text>
+  <text x="155" y="420" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Node.js · Commander.js</text>
+
+  <!-- === Center: Router/Dispatcher === -->
+  <rect x="340" y="160" width="220" height="140" rx="12" fill="rgba(26,29,41,0.95)" stroke="rgba(124,58,237,0.5)" stroke-width="2"/>
+
+  <!-- Gradient top bar -->
+  <rect x="340" y="160" width="220" height="4" rx="12" fill="url(#cliGrad)"/>
+  <rect x="340" y="164" width="220" height="2" fill="url(#cliGrad)" opacity="0.3"/>
+
+  <text x="450" y="188" font-family="'Inter', sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">Provider Router</text>
+  <text x="450" y="203" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">jf-hosting-command core</text>
+
+  <line x1="360" y1="212" x2="540" y2="212" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Router logic -->
+  <text x="370" y="228" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8">site.provider ===</text>
+  <text x="370" y="241" font-family="'Courier New', monospace" font-size="9" fill="#7c3aed">  'wpe'</text>
+  <text x="415" y="241" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8"> → WPEClient</text>
+  <text x="370" y="254" font-family="'Courier New', monospace" font-size="9" fill="#00d4ff">  'pwp'</text>
+  <text x="415" y="254" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8"> → PressWPClient</text>
+
+  <line x1="360" y1="264" x2="540" y2="264" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <text x="370" y="279" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">Unified command surface:</text>
+  <text x="370" y="291" font-family="'Courier New', monospace" font-size="9" fill="#f59e0b">sites list · cache flush</text>
+  <text x="370" y="303" font-family="'Courier New', monospace" font-size="9" fill="#f59e0b">backup create · env switch</text>
+
+  <!-- === Right column: Two API blocks === -->
+
+  <!-- WP Engine API -->
+  <rect x="630" y="90" width="240" height="170" rx="10" fill="rgba(26,29,41,0.9)" stroke="rgba(124,58,237,0.4)" stroke-width="1.5"/>
+  <rect x="630" y="90" width="240" height="3" rx="10" fill="url(#wpeGrad)"/>
+
+  <text x="750" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">WP Engine API</text>
+  <text x="750" y="130" font-family="'Inter', sans-serif" font-size="9" fill="#7c3aed" text-anchor="middle">api.wpengineapi.com/v1</text>
+
+  <line x1="648" y1="140" x2="852" y2="140" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <text x="648" y="157" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="157" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">GET /installs</text>
+  <text x="648" y="172" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="172" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">POST /installs/:id/purge_cache</text>
+  <text x="648" y="187" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="187" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">GET /installs/:id/backups</text>
+  <text x="648" y="202" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="202" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">GET /accounts/:id/sites</text>
+  <text x="648" y="217" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="217" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">POST /installs/:id/backup</text>
+
+  <text x="648" y="246" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">Auth: Bearer token in .env</text>
+
+  <!-- PressWP API -->
+  <rect x="630" y="285" width="240" height="170" rx="10" fill="rgba(26,29,41,0.9)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+  <rect x="630" y="285" width="240" height="3" rx="10" fill="url(#presswpGrad)"/>
+
+  <text x="750" y="310" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">PressWP API</text>
+  <text x="750" y="325" font-family="'Inter', sans-serif" font-size="9" fill="#00d4ff" text-anchor="middle">my.presswp.com/api/v2</text>
+
+  <line x1="648" y1="335" x2="852" y2="335" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <text x="648" y="352" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="352" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">GET /sites</text>
+  <text x="648" y="367" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="367" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">POST /sites/:id/clear-cache</text>
+  <text x="648" y="382" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="382" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">GET /sites/:id/environments</text>
+  <text x="648" y="397" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="397" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">POST /sites/:id/backups</text>
+  <text x="648" y="412" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">●</text>
+  <text x="660" y="412" font-family="'Inter', sans-serif" font-size="9" fill="#ffffff">POST /sites/:id/deploy</text>
+
+  <text x="648" y="441" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">Auth: API key header in .env</text>
+
+  <!-- === Arrows: CLI → Router === -->
+  <line x1="280" y1="230" x2="336" y2="230" stroke="#00d4ff" stroke-width="2" opacity="0.7"/>
+  <polygon points="336,226 344,230 336,234" fill="#00d4ff" opacity="0.7"/>
+
+  <!-- === Arrows: Router → WPE === -->
+  <line x1="560" y1="200" x2="626" y2="175" stroke="#7c3aed" stroke-width="2" opacity="0.7"/>
+  <polygon points="622,171 630,175 622,179" fill="#7c3aed" opacity="0.7"/>
+
+  <!-- === Arrows: Router → PressWP === -->
+  <line x1="560" y1="260" x2="626" y2="360" stroke="#00d4ff" stroke-width="2" opacity="0.7"/>
+  <polygon points="622,356 630,360 622,364" fill="#00d4ff" opacity="0.7"/>
+
+  <!-- Config file note -->
+  <rect x="340" y="328" width="220" height="60" rx="8" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+  <text x="450" y="346" font-family="'Courier New', monospace" font-size="9" fill="#f59e0b" text-anchor="middle">~/.jf-hosting-command.json</text>
+  <text x="360" y="361" font-family="'Courier New', monospace" font-size="8" fill="#94a3b8">{ "providers": {</text>
+  <text x="360" y="373" font-family="'Courier New', monospace" font-size="8" fill="#94a3b8">    "wpe": { "token": "..." },</text>
+  <text x="360" y="385" font-family="'Courier New', monospace" font-size="8" fill="#94a3b8">    "pwp": { "key": "..." } } }</text>
+
+  <!-- Bottom labels for API boxes -->
+  <text x="750" y="468" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#94a3b8" text-anchor="middle">REST API Adapters</text>
+
+  <!-- Glow dots on connections -->
+  <circle cx="280" cy="230" r="3" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="344" cy="230" r="3" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="560" cy="200" r="3" fill="#7c3aed" filter="url(#glow)"/>
+  <circle cx="560" cy="260" r="3" fill="#00d4ff" filter="url(#glow)"/>
+</svg>
